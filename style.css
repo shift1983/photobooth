@@ -1,0 +1,48 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #111;
+    color: white;
+
+    font-family: Arial, sans-serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 100vh;
+
+    text-align: center;
+}
+
+main {
+    padding: 2rem;
+}
+
+button {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+#cameraContainer {
+
+    margin-top: 20px;
+
+    display: flex;
+    justify-content: center;
+}
+
+#video {
+
+    width: 100%;
+    max-width: 1000px;
+
+    border-radius: 12px;
+
+    transform: scaleX(-1);
+
+    background: black;
+}

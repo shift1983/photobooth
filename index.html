@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Photobooth</title>
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+
+    <meta name="theme-color" content="#111111">
+</head>
+<body>
+
+<main>
+
+    <h1>📸 Photobooth</h1>
+
+    <button id="fullscreenBtn">
+        Vollbild aktivieren
+    </button>
+
+    <button id="cameraBtn">
+        Kamera starten
+    </button>
+
+    <div id="cameraContainer">
+
+        <video
+            id="video"
+            autoplay
+            playsinline
+            muted>
+        </video>
+
+    </div>
+
+</main>
+	<script src="app.js"></script>
+</body>
+</html>
