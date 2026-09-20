@@ -1,5 +1,3 @@
-alert("app.js geladen");
-
 let wakeLock = null;
 
 async function requestWakeLock() {
@@ -58,10 +56,6 @@ const video =
     document.getElementById("video");
 
 async function startCamera() {
-
-    alert("Secure Context: " + window.isSecureContext);
-
-    alert("mediaDevices vorhanden: " + !!navigator.mediaDevices);
 
     try {
 
