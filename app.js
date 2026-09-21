@@ -128,6 +128,9 @@ const eventTitle =
 const themeButtons =
     document.querySelectorAll(".themeBtn");
 
+const photoCountInfo =
+    document.getElementById("photoCountInfo");
+
 async function startCamera() {
 
     try {
@@ -293,6 +296,10 @@ themeButtons.forEach(button => {
             settings.photoCount =
                 themes[selectedTheme]
                     .defaultPhotoCount;
+
+            photoCountInfo.textContent =
+                "Fotos pro Serie: " +
+                    settings.photoCount;
 
             eventTitle.value =
                 themes[selectedTheme]
