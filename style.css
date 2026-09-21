@@ -100,5 +100,23 @@ button {
 
     pointer-events: none;
 
+#photoActions {
+
+    display: none;
+
+    margin-top: 20px;
+
+    gap: 10px;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+}
+
+#photoActions button {
+
+    min-width: 140px;
+}
+
     z-index: 2000;
 }
