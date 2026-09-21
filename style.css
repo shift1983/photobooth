@@ -68,3 +68,40 @@ button {
 
     box-shadow: 0 0 15px rgba(0,0,0,0.3);
 }
+
+#countdown {
+
+    position: fixed;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    font-size: 8rem;
+
+    font-weight: bold;
+
+    color: white;
+
+    text-shadow: 0 0 20px black;
+
+    display: none;
+
+    z-index: 9999;
+}
+
+#flash {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: white;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 9998;
+}
