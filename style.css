@@ -181,3 +181,12 @@ body.business {
             #141e30
         );
 }
+
+#photoCountInfo {
+
+    font-size: 1.2rem;
+
+    margin-bottom: 20px;
+
+    text-align: center;
+}
