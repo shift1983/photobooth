@@ -73,6 +73,18 @@ const flashOverlay =
 const shutterSound =
     new Audio("sounds/shutter.mp3");
 
+const photoActions =
+    document.getElementById("photoActions");
+
+const saveBtn =
+    document.getElementById("saveBtn");
+
+const retakeBtn =
+    document.getElementById("retakeBtn");
+
+const nextBtn =
+    document.getElementById("nextBtn");
+
 async function startCamera() {
 
     try {
@@ -167,15 +179,58 @@ async function capturePhoto() {
         canvas.toDataURL(
             "image/jpeg",
             0.95
-        );
+    );
 
     preview.src = imageData;
 
     preview.style.display =
         "block";
+    photoActions.style.display =
+    "flex";
 }
 
 captureBtn.addEventListener(
     "click",
     capturePhoto
+);
+
+retakeBtn.addEventListener(
+    "click",
+    () => {
+
+        preview.style.display =
+            "none";
+
+        photoActions.style.display =
+            "none";
+    }
+);
+
+saveBtn.addEventListener(
+    "click",
+    () => {
+
+        const link =
+            document.createElement("a");
+
+        link.href =
+            preview.src;
+
+        link.download =
+            "photobooth-" +
+            Date.now() +
+            ".jpg";
+
+        link.click();
+    }
+);
+
+nextBtn.addEventListener(
+    "click",
+    () => {
+
+        alert(
+            "Mehrfachaufnahme folgt im nächsten Modul."
+        );
+    }
 );
