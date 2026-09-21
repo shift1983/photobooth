@@ -151,3 +151,33 @@ button {
 
     margin-bottom: 20px;
 }
+
+body.birthday {
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffb347,
+            #ff5f6d
+        );
+}
+
+body.wedding {
+
+    background:
+        linear-gradient(
+            135deg,
+            #f5f5f5,
+            #e7d3ff
+        );
+}
+
+body.business {
+
+    background:
+        linear-gradient(
+            135deg,
+            #243b55,
+            #141e30
+        );
+}
