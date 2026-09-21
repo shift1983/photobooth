@@ -70,6 +70,9 @@ const countdownOverlay =
 const flashOverlay =
     document.getElementById("flashOverlay");
 
+const shutterSound =
+    new Audio("sounds/shutter.mp3");
+
 async function startCamera() {
 
     try {
@@ -132,6 +135,17 @@ async function capturePhoto() {
 
     flashEffect();
 
+    try {
+
+    shutterSound.currentTime = 0;
+
+    await shutterSound.play();
+
+    } catch (err) {
+
+    console.log("Ton konnte nicht abgespielt werden");
+}
+    
     const context =
         canvas.getContext("2d");
 
