@@ -98,7 +98,30 @@ cameraBtn.addEventListener(
     startCamera
 );
 
-function capturePhoto() {
+async function capturePhoto() {
+
+    for (let i = 5; i >= 1; i--) {
+
+        countdown.textContent = i;
+
+        countdown.style.display = "block";
+
+        await new Promise(resolve =>
+            setTimeout(resolve, 1000)
+        );
+    }
+
+    countdown.style.display = "none";
+
+    flash.style.opacity = "1";
+
+    setTimeout(() => {
+
+        flash.style.opacity = "0";
+
+    }, 150);
+
+    shutterSound.play();
 
     const context =
         canvas.getContext("2d");
@@ -118,15 +141,26 @@ function capturePhoto() {
     );
 
     const imageData =
-        canvas.toDataURL("image/jpeg", 0.95);
+        canvas.toDataURL(
+            "image/jpeg",
+            0.95
+        );
 
     preview.src = imageData;
 
-    preview.style.display =
-        "block";
+    preview.style.display = "block";
 }
 
 captureBtn.addEventListener(
     "click",
     capturePhoto
 );
+
+    const countdown =
+    document.getElementById("countdown");
+
+    const flash =
+    document.getElementById("flash");
+
+    const shutterSound =
+    document.getElementById("shutterSound");
