@@ -69,32 +69,29 @@ button {
     box-shadow: 0 0 15px rgba(0,0,0,0.3);
 }
 
-#countdown {
+#countdownOverlay {
 
     position: fixed;
+    inset: 0;
 
-    top: 50%;
-    left: 50%;
+    display: none;
 
-    transform: translate(-50%, -50%);
+    justify-content: center;
+    align-items: center;
 
-    font-size: 8rem;
-
+    font-size: 12rem;
     font-weight: bold;
 
     color: white;
 
-    text-shadow: 0 0 20px black;
+    background: rgba(0,0,0,0.4);
 
-    display: none;
-
-    z-index: 9999;
+    z-index: 1000;
 }
 
-#flash {
+#flashOverlay {
 
     position: fixed;
-
     inset: 0;
 
     background: white;
@@ -103,5 +100,5 @@ button {
 
     pointer-events: none;
 
-    z-index: 9998;
+    z-index: 2000;
 }
