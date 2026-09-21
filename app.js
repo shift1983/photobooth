@@ -122,6 +122,12 @@ const retakeBtn =
 const nextBtn =
     document.getElementById("nextBtn");
 
+const eventTitle =
+    document.getElementById("eventTitle");
+
+const themeButtons =
+    document.querySelectorAll(".themeBtn");
+
 async function startCamera() {
 
     try {
@@ -271,3 +277,29 @@ nextBtn.addEventListener(
         );
     }
 );
+
+themeButtons.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            const selectedTheme =
+                button.dataset.theme;
+
+            settings.theme =
+                selectedTheme;
+
+            settings.photoCount =
+                themes[selectedTheme]
+                    .defaultPhotoCount;
+
+            eventTitle.value =
+                themes[selectedTheme]
+                    .title;
+
+            document.body.className =
+                selectedTheme;
+        }
+    );
+});
