@@ -64,6 +64,12 @@ const canvas =
 const preview =
     document.getElementById("photoPreview");
 
+const countdownOverlay =
+    document.getElementById("countdownOverlay");
+
+const flashOverlay =
+    document.getElementById("flashOverlay");
+
 async function startCamera() {
 
     try {
@@ -98,30 +104,33 @@ cameraBtn.addEventListener(
     startCamera
 );
 
+function flashEffect() {
+
+    flashOverlay.style.opacity = "1";
+
+    setTimeout(() => {
+
+        flashOverlay.style.opacity = "0";
+
+    }, 120);
+}
+
 async function capturePhoto() {
 
-    for (let i = 5; i >= 1; i--) {
+    countdownOverlay.style.display = "flex";
 
-        countdown.textContent = i;
+    for (let i = 3; i > 0; i--) {
 
-        countdown.style.display = "block";
+        countdownOverlay.textContent = i;
 
         await new Promise(resolve =>
             setTimeout(resolve, 1000)
         );
     }
 
-    countdown.style.display = "none";
+    countdownOverlay.style.display = "none";
 
-    flash.style.opacity = "1";
-
-    setTimeout(() => {
-
-        flash.style.opacity = "0";
-
-    }, 150);
-
-    shutterSound.play();
+    flashEffect();
 
     const context =
         canvas.getContext("2d");
@@ -148,19 +157,11 @@ async function capturePhoto() {
 
     preview.src = imageData;
 
-    preview.style.display = "block";
+    preview.style.display =
+        "block";
 }
 
 captureBtn.addEventListener(
     "click",
     capturePhoto
 );
-
-    const countdown =
-    document.getElementById("countdown");
-
-    const flash =
-    document.getElementById("flash");
-
-    const shutterSound =
-    document.getElementById("shutterSound");
