@@ -1,3 +1,40 @@
+const settings = {
+
+    theme: null,
+
+    photoCount: 4,
+
+    countdown: 3,
+
+    flashEnabled: true,
+
+    soundEnabled: true
+};
+
+const themes = {
+
+    birthday: {
+
+        title: "Geburtstag",
+
+        defaultPhotoCount: 4
+    },
+
+    wedding: {
+
+        title: "Hochzeit",
+
+        defaultPhotoCount: 3
+    },
+
+    business: {
+
+        title: "Firmenfeier",
+
+        defaultPhotoCount: 4
+    }
+};
+
 let wakeLock = null;
 
 async function requestWakeLock() {
