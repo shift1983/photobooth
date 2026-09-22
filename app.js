@@ -137,6 +137,9 @@ const themeButtons =
 const photoCountInfo =
     document.getElementById("photoCountInfo");
 
+const seriesProgress =
+    document.getElementById("seriesProgress");
+
 async function startCamera() {
 
     try {
@@ -333,11 +336,6 @@ nextBtn.addEventListener(
 );
 
 function updateSeriesDisplay() {
-
-    const seriesProgress =
-        document.getElementById(
-            "seriesProgress"
-        );
 
     seriesProgress.textContent =
         "Foto " +
