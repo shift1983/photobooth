@@ -256,7 +256,9 @@ async function capturePhoto() {
 
 retakeBtn.addEventListener(
     "click",
-    () => {
+    async () => {
+
+        retakeBtn.disabled = true;
 
         currentPhoto = null;
 
@@ -267,6 +269,10 @@ retakeBtn.addEventListener(
             "none";
 
         captureBtn.disabled = false;
+
+        await capturePhoto();
+
+        retakeBtn.disabled = false;
     }
 );
 
