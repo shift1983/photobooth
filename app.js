@@ -191,13 +191,7 @@ async function capturePhoto() {
 
     for (let i = 3; i > 0; i--) {
 
-        countdownOverlay.textContent =
-    "Foto " +
-    currentPhotoIndex +
-    " von " +
-    settings.photoCount +
-    "\n\n" +
-    i;
+    countdownOverlay.textContent = i;
 
         await new Promise(resolve =>
             setTimeout(resolve, 1000)
