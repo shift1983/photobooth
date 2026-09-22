@@ -35,6 +35,12 @@ const themes = {
     }
 };
 
+let capturedPhotos = [];
+
+let currentPhotoIndex = 1;
+
+let currentPhoto = null;
+
 let wakeLock = null;
 
 async function requestWakeLock() {
@@ -222,21 +228,26 @@ async function capturePhoto() {
     );
 
     const imageData =
-        canvas.toDataURL(
-            "image/jpeg",
-            0.95
-    );
+    canvas.toDataURL(
+        "image/jpeg",
+        0.95
+);
+
+    currentPhoto = imageData;
 
     preview.src = imageData;
 
     preview.style.display =
         "block";
+
     photoActions.style.display =
-    "flex";
+        "flex";
+
+    captureBtn.disabled = true;
 }
 
-captureBtn.addEventListener(
-    "click",
+    captureBtn.addEventListener(
+        "click",
     capturePhoto
 );
 
@@ -244,11 +255,15 @@ retakeBtn.addEventListener(
     "click",
     () => {
 
+        currentPhoto = null;
+
         preview.style.display =
             "none";
 
         photoActions.style.display =
             "none";
+
+        captureBtn.disabled = false;
     }
 );
 
@@ -275,11 +290,61 @@ nextBtn.addEventListener(
     "click",
     () => {
 
-        alert(
-            "Mehrfachaufnahme folgt im nächsten Modul."
+        if (!currentPhoto) {
+
+            return;
+        }
+
+        capturedPhotos.push(
+            currentPhoto
         );
+
+        currentPhoto = null;
+
+        if (
+            currentPhotoIndex <
+            settings.photoCount
+        ) {
+
+            currentPhotoIndex++;
+
+            updateSeriesDisplay();
+
+            preview.style.display =
+                "none";
+
+            photoActions.style.display =
+                "none";
+
+            captureBtn.disabled =
+                false;
+
+        } else {
+
+            alert(
+                "Fotoserie abgeschlossen!"
+            );
+
+            console.log(
+                capturedPhotos
+            );
+        }
     }
 );
+
+function updateSeriesDisplay() {
+
+    const seriesProgress =
+        document.getElementById(
+            "seriesProgress"
+        );
+
+    seriesProgress.textContent =
+        "Foto " +
+        currentPhotoIndex +
+        " von " +
+        settings.photoCount;
+}
 
 themeButtons.forEach(button => {
 
@@ -296,6 +361,14 @@ themeButtons.forEach(button => {
             settings.photoCount =
                 themes[selectedTheme]
                     .defaultPhotoCount;
+
+            capturedPhotos = [];
+
+            currentPhotoIndex = 1;
+
+            currentPhoto = null;
+
+        updateSeriesDisplay();
 
             photoCountInfo.textContent =
                 "Fotos pro Serie: " +
