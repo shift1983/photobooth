@@ -190,3 +190,14 @@ body.business {
 
     text-align: center;
 }
+
+#seriesProgress {
+
+    font-size: 1rem;
+
+    font-weight: bold;
+
+    text-align: center;
+
+    margin-bottom: 10px;
+}
