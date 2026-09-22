@@ -366,11 +366,11 @@ themeButtons.forEach(button => {
 
             currentPhoto = null;
 
-        updateSeriesDisplay();
+            updateSeriesDisplay();
 
             photoCountInfo.textContent =
                 "Fotos pro Serie: " +
-                    settings.photoCount;
+                settings.photoCount;
 
             eventTitle.value =
                 themes[selectedTheme]
@@ -378,6 +378,15 @@ themeButtons.forEach(button => {
 
             document.body.className =
                 selectedTheme;
+
+            preview.style.display =
+                "none";
+
+            photoActions.style.display =
+                "none";
+
+            captureBtn.disabled =
+                false;
         }
     );
 });
