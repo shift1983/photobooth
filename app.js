@@ -191,7 +191,13 @@ async function capturePhoto() {
 
     for (let i = 3; i > 0; i--) {
 
-        countdownOverlay.textContent = i;
+        countdownOverlay.textContent =
+    "Foto " +
+    currentPhotoIndex +
+    " von " +
+    settings.photoCount +
+    "\n\n" +
+    i;
 
         await new Promise(resolve =>
             setTimeout(resolve, 1000)
@@ -297,7 +303,7 @@ saveBtn.addEventListener(
 
 nextBtn.addEventListener(
     "click",
-    () => {
+    async () => {
 
         if (!currentPhoto) {
 
@@ -310,27 +316,25 @@ nextBtn.addEventListener(
 
         currentPhoto = null;
 
-    if (
-        currentPhotoIndex <
-        settings.photoCount
-    ) {
+        if (
+            currentPhotoIndex <
+            settings.photoCount
+        ) {
 
-        currentPhotoIndex++;
+            currentPhotoIndex++;
 
-        updateSeriesDisplay();
+            updateSeriesDisplay();
 
-        preview.style.display =
-            "none";
+            preview.style.display =
+                "none";
 
-        photoActions.style.display =
-            "none";
+            photoActions.style.display =
+                "none";
 
-        captureBtn.disabled =
-            false;
+            captureBtn.disabled =
+                false;
 
-        capturePhoto();
-
-}
+            await capturePhoto();
 
         } else {
 
