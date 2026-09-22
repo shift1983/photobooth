@@ -310,23 +310,27 @@ nextBtn.addEventListener(
 
         currentPhoto = null;
 
-        if (
-            currentPhotoIndex <
-            settings.photoCount
-        ) {
+    if (
+        currentPhotoIndex <
+        settings.photoCount
+    ) {
 
-            currentPhotoIndex++;
+        currentPhotoIndex++;
 
-            updateSeriesDisplay();
+        updateSeriesDisplay();
 
-            preview.style.display =
-                "none";
+        preview.style.display =
+            "none";
 
-            photoActions.style.display =
-                "none";
+        photoActions.style.display =
+            "none";
 
-            captureBtn.disabled =
-                false;
+        captureBtn.disabled =
+            false;
+
+        capturePhoto();
+
+}
 
         } else {
 
