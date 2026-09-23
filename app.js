@@ -168,6 +168,9 @@ const themeButtons =
 const designButtons =
     document.querySelectorAll(".designBtn");
 
+const photoCountButtons =
+    document.querySelectorAll(".photoCountBtn");
+
 const photoCountInfo =
     document.getElementById("photoCountInfo");
 
@@ -252,6 +255,105 @@ function updateActiveDesignButton() {
         }
     });
 }
+
+function updateActivePhotoCountButton() {
+
+    photoCountButtons.forEach(button => {
+
+        const count =
+            Number(button.dataset.count);
+
+        if (
+            count ===
+            settings.photoCount
+        ) {
+
+            button.classList.add("active");
+
+        } else {
+
+            button.classList.remove("active");
+        }
+    });
+}
+
+photoCountButtons.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            const newPhotoCount =
+                Number(
+                    button.dataset.count
+                );
+
+            if (
+                newPhotoCount !== 3 &&
+                newPhotoCount !== 4
+            ) {
+                return;
+            }
+
+            settings.photoCount =
+                newPhotoCount;
+
+            // Neue Serie vorbereiten
+            capturedPhotos = [];
+            currentPhoto = null;
+            currentPhotoIndex = 1;
+
+            // Anzeigen aktualisieren
+            photoCountInfo.textContent =
+                "Fotos pro Serie: " +
+                settings.photoCount;
+
+            updateSeriesDisplay();
+
+            updateActivePhotoCountButton();
+
+            // Passende Designs neu filtern
+            updateDesignSelection();
+
+            // Alte Vorschauen entfernen
+            preview.style.display =
+                "none";
+
+            collagePreview.style.display =
+                "none";
+
+            // Kamera wieder anzeigen
+            document.getElementById(
+                "cameraContainer"
+            ).style.display = "block";
+
+            captureBtn.style.display =
+                "inline-block";
+
+            captureBtn.disabled =
+                false;
+
+            // Aktionsbuttons zurücksetzen
+            photoActions.style.display =
+                "none";
+
+            retakeBtn.style.display =
+                "inline-block";
+
+            nextBtn.style.display =
+                "inline-block";
+
+            saveBtn.style.display =
+                "inline-block";
+
+            saveBtn.textContent =
+                "💾 Speichern";
+
+            newSeriesBtn.style.display =
+                "none";
+        }
+    );
+});
 
 async function startCamera() {
 
@@ -725,7 +827,8 @@ themeButtons.forEach(button => {
             settings.photoCount =
                 themes[selectedTheme]
                     .defaultPhotoCount;
-
+            
+            updateActivePhotoCountButton();
             updateDesignSelection();
 
             capturedPhotos = [];
