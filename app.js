@@ -50,7 +50,7 @@ const cardDesigns = {
     birthdayParty: {
         name: "Party",
         theme: "birthday",
-        photoCounts: [3, 4],
+        photoCounts: [4],
         backgroundColor: "#ffe8f2",
         textColor: "#7a1748"
     }
