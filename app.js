@@ -805,8 +805,12 @@ nextBtn.addEventListener(
     saveBtn.textContent =
         "💾 Fotokarte speichern";
 
-      newSeriesBtn.style.display =
+     newSeriesBtn.style.display =
         "inline-block";
+    
+    captureBtn.style.display =
+        "none";
+            
 }
     }
 );
