@@ -255,3 +255,54 @@ body.business {
     transform: scale(1.05);
     font-weight: bold;
 }
+
+#logoArea {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+#appLogo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: default;
+}
+
+#adminOverlay {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.85);
+
+    z-index: 5000;
+
+    align-items: center;
+    justify-content: center;
+}
+
+#adminPanel {
+    width: min(700px, 90%);
+    max-height: 90vh;
+    overflow-y: auto;
+
+    background: #ffffff;
+    color: #222222;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    text-align: center;
+}
+
+#adminPanel h2 {
+    margin-top: 0;
+}
+
+#closeAdminBtn {
+    margin-top: 20px;
+}
