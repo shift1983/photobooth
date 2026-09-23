@@ -1,38 +1,28 @@
 const settings = {
 
     theme: null,
-
     photoCount: 4,
-
     cardDesign: "birthdayConfetti",
-
     countdown: 3,
-
     flashEnabled: true,
-
     soundEnabled: true
+    eventTitle: "Photobooth",
 };
 
 const themes = {
 
     birthday: {
-
         title: "Geburtstag",
-
         defaultPhotoCount: 3
     },
 
     wedding: {
-
         title: "Hochzeit",
-
         defaultPhotoCount: 3
     },
 
     business: {
-
         title: "Firmenfeier",
-
         defaultPhotoCount: 4
     }
 };
@@ -150,8 +140,11 @@ const nextBtn =
 const newSeriesBtn =
     document.getElementById("newSeriesBtn");
 
-const eventTitle =
-    document.getElementById("eventTitle");
+const eventTitleDisplay =
+    document.getElementById("eventTitleDisplay");
+
+const eventTitleInput =
+    document.getElementById("eventTitleInput");
 
 const themeButtons =
     document.querySelectorAll(".themeBtn");
@@ -365,6 +358,7 @@ const savedSettings = {
     countdown: settings.countdown,
     flashEnabled: settings.flashEnabled,
     soundEnabled: settings.soundEnabled
+    eventTitle: settings.eventTitle
 };
 
     localStorage.setItem(
@@ -444,6 +438,14 @@ if (
     settings.soundEnabled =
         savedSettings.soundEnabled;
 }
+
+if (
+    typeof savedSettings.eventTitle === "string" &&
+    savedSettings.eventTitle.trim() !== ""
+) {
+    settings.eventTitle =
+        savedSettings.eventTitle;
+}
         
     } catch (error) {
 
@@ -453,6 +455,8 @@ if (
         );
     }
 }
+
+
 
 photoCountButtons.forEach(button => {
 
@@ -851,9 +855,9 @@ async function generateCollage() {
         "center";
 
     ctx.fillText(
-        eventTitle.value,
-        collageCanvas.width / 2,
-        70
+    settings.eventTitle,
+    collageCanvas.width / 2,
+    70
 );
 
     const images = [];
@@ -1239,6 +1243,18 @@ soundEnabledCheckbox.addEventListener(
     }
 );
 
+eventTitleInput.addEventListener(
+    "input",
+    () => {
+
+        settings.eventTitle =
+            eventTitleInput.value;
+
+        eventTitleDisplay.textContent =
+            settings.eventTitle;
+    }
+);
+
 function checkAdminPin() {
 
     if (
@@ -1306,6 +1322,12 @@ function initializeApp() {
 
     loadSettings();
 
+    eventTitleInput.value =
+        settings.eventTitle;
+
+    eventTitleDisplay.textContent =
+        settings.eventTitle;
+
     countdownSelect.value =
         String(settings.countdown);
 
@@ -1319,9 +1341,6 @@ function initializeApp() {
         settings.theme &&
         themes[settings.theme]
     ) {
-
-        eventTitle.value =
-            themes[settings.theme].title;
 
         document.body.className =
             settings.theme;
