@@ -48,7 +48,15 @@ button {
 }
 
 #captureBtn {
+    display: none;
     margin-top: 10px;
+}
+
+#startBoothBtn {
+    margin-top: 15px;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
 #photoCanvas {
