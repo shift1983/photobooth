@@ -391,3 +391,21 @@ body.business {
     transform: scale(1.05);
     font-weight: bold;
 }
+
+.adminSettingRow {
+    margin: 15px 0;
+    font-size: 1.1rem;
+}
+
+.adminSettingRow select {
+    margin-left: 10px;
+    padding: 8px 12px;
+    font-size: 1rem;
+}
+
+.adminSettingRow input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
