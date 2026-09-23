@@ -338,6 +338,24 @@ function updateActivePhotoCountButton() {
     });
 }
 
+function updateActiveThemeButton() {
+
+    themeButtons.forEach(button => {
+
+        if (
+            button.dataset.theme ===
+            settings.theme
+        ) {
+
+            button.classList.add("active");
+
+        } else {
+
+            button.classList.remove("active");
+        }
+    });
+}
+
 function saveSettings() {
 
     const savedSettings = {
@@ -954,6 +972,7 @@ themeButtons.forEach(button => {
 
             settings.theme =
                 selectedTheme;
+            updateActiveThemeButton();
 
             settings.photoCount =
                 themes[selectedTheme]
@@ -1236,6 +1255,8 @@ function initializeApp() {
     currentPhotoIndex = 1;
 
     updateSeriesDisplay();
+
+    updateActiveThemeButton();
 
     updateActivePhotoCountButton();
 
