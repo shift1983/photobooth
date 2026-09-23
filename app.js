@@ -399,6 +399,20 @@ async function generateCollage() {
         collageCanvas.height
     );
 
+    ctx.fillStyle = "#000000";
+
+    ctx.font =
+        "bold 50px Arial";
+
+    ctx.textAlign =
+        "center";
+
+    ctx.fillText(
+        eventTitle.value,
+        collageCanvas.width / 2,
+        70
+);
+
     const images = [];
 
     for (const photo of capturedPhotos) {
@@ -417,10 +431,11 @@ async function generateCollage() {
 
     const positions = [
 
-        { x: 20,  y: 20,  w: 560, h: 360 },
-        { x: 620, y: 20,  w: 560, h: 360 },
-        { x: 20,  y: 420, w: 560, h: 360 },
-        { x: 620, y: 420, w: 560, h: 360 }
+        { x: 20,  y: 110, w: 560, h: 300 },
+        { x: 620, y: 110, w: 560, h: 300 },
+    
+        { x: 20,  y: 450, w: 560, h: 300 },
+        { x: 620, y: 450, w: 560, h: 300 }
     ];
 
     images.forEach((img, index) => {
@@ -440,6 +455,29 @@ async function generateCollage() {
         }
     });
 
+    const today =
+    new Date();
+
+    const dateString =
+        today.toLocaleDateString(
+        "de-DE"
+    );
+
+    ctx.font =
+        "32px Arial";
+
+    ctx.fillStyle =
+        "#000000";
+
+    ctx.textAlign =
+        "center";
+
+    ctx.fillText(
+        dateString,
+        collageCanvas.width / 2,
+        790
+    );
+    
     collagePreview.src =
         collageCanvas.toDataURL(
             "image/jpeg",
