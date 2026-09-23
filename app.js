@@ -188,7 +188,7 @@ function flashEffect() {
 
         flashOverlay.style.opacity = "0";
 
-    }, 120);
+    }, 500);
 }
 
 async function capturePhoto() {
