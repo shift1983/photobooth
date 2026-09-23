@@ -228,13 +228,19 @@ async function capturePhoto() {
     canvas.height =
         video.videoHeight;
 
+    context.save();
+
+    context.scale(-1, 1);
+
     context.drawImage(
         video,
-        0,
+        -canvas.width,
         0,
         canvas.width,
         canvas.height
-    );
+);
+
+context.restore();
 
     const imageData =
     canvas.toDataURL(
