@@ -675,6 +675,11 @@ async function capturePhoto() {
     captureBtn.disabled = true;
 }
 
+    captureBtn.addEventListener(
+        "click",
+        capturePhoto
+);
+
 retakeBtn.addEventListener(
     "click",
     async () => {
