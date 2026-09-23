@@ -144,17 +144,19 @@ button {
     min-width: 180px;
 }
 
-#eventTitle {
+#eventTitleDisplay {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
 
+#eventTitleInput {
     width: 100%;
-
     max-width: 500px;
 
-    font-size: 2rem;
+    padding: 10px;
 
+    font-size: 1.2rem;
     text-align: center;
-
-    margin-bottom: 20px;
 }
 
 body.birthday {
