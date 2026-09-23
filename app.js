@@ -445,53 +445,102 @@ async function generateCollage() {
             const p =
                 positions[index];
 
-            ctx.drawImage(
-                img,
-                p.x,
-                p.y,
-                p.w,
-                p.h
-            );
-        }
-    });
+    const imageRatio =
+        img.width / img.height;
 
-    const today =
-    new Date();
+    const frameRatio =
+        p.w / p.h;
 
-    const dateString =
-        today.toLocaleDateString(
-        "de-DE"
+    let drawWidth;
+    let drawHeight;
+    let offsetX;
+    let offsetY;
+
+    if (imageRatio > frameRatio) {
+
+        drawHeight = p.h;
+        drawWidth =
+            p.h * imageRatio;
+
+        offsetX =
+            (drawWidth - p.w) / 2;
+
+        offsetY = 0;
+
+    } else {
+
+        drawWidth = p.w;
+        drawHeight =
+            p.w / imageRatio;
+
+        offsetX = 0;
+
+        offsetY =
+            (drawHeight - p.h) / 2;
+    }
+
+    ctx.save();
+
+    ctx.beginPath();
+
+    ctx.rect(
+        p.x,
+        p.y,
+        p.w,
+        p.h
     );
 
-    ctx.font =
-        "32px Arial";
+    ctx.clip();
 
-    ctx.fillStyle =
-        "#000000";
-
-    ctx.textAlign =
-        "center";
-
-    ctx.fillText(
-        dateString,
-        collageCanvas.width / 2,
-        790
+    ctx.drawImage(
+        img,
+        p.x - offsetX,
+        p.y - offsetY,
+        drawWidth,
+        drawHeight
     );
-    
-    collagePreview.src =
-        collageCanvas.toDataURL(
-            "image/jpeg",
-            0.95
+
+    ctx.restore();
+            }
+        });
+
+        const today =
+        new Date();
+
+        const dateString =
+            today.toLocaleDateString(
+            "de-DE"
         );
 
-    collagePreview.style.display =
-        "block";
+        ctx.font =
+            "32px Arial";
 
-    document.getElementById(
-    "cameraContainer"
-    ).style.display = "none";
+        ctx.fillStyle =
+            "#000000";
+
+        ctx.textAlign =
+            "center";
+
+        ctx.fillText(
+            dateString,
+            collageCanvas.width / 2,
+            790
+        );
     
-}
+        collagePreview.src =
+            collageCanvas.toDataURL(
+                "image/jpeg",
+                0.95
+            );
+
+        collagePreview.style.display =
+            "block";
+
+        document.getElementById(
+        "cameraContainer"
+        ).style.display = "none";
+    
+    }
 
 themeButtons.forEach(button => {
 
