@@ -174,6 +174,85 @@ const photoCountInfo =
 const seriesProgress =
     document.getElementById("seriesProgress");
 
+function updateDesignSelection() {
+
+    let firstCompatibleDesign = null;
+
+    designButtons.forEach(button => {
+
+        const designName =
+            button.dataset.design;
+
+        const design =
+            cardDesigns[designName];
+
+        if (!design) {
+            button.style.display = "none";
+            return;
+        }
+
+        const isCompatible =
+            design.theme === settings.theme &&
+            design.photoCounts.includes(
+                settings.photoCount
+            );
+
+        if (isCompatible) {
+
+            button.style.display =
+                "inline-block";
+
+            if (!firstCompatibleDesign) {
+                firstCompatibleDesign =
+                    designName;
+            }
+
+        } else {
+
+            button.style.display =
+                "none";
+
+        }
+    });
+
+    const currentDesign =
+        cardDesigns[settings.cardDesign];
+
+    const currentIsCompatible =
+        currentDesign &&
+        currentDesign.theme === settings.theme &&
+        currentDesign.photoCounts.includes(
+            settings.photoCount
+        );
+
+    if (!currentIsCompatible) {
+
+        settings.cardDesign =
+            firstCompatibleDesign;
+
+    }
+
+    updateActiveDesignButton();
+}
+
+function updateActiveDesignButton() {
+
+    designButtons.forEach(button => {
+
+        if (
+            button.dataset.design ===
+            settings.cardDesign
+        ) {
+
+            button.classList.add("active");
+
+        } else {
+
+            button.classList.remove("active");
+        }
+    });
+}
+
 async function startCamera() {
 
     try {
@@ -647,6 +726,8 @@ themeButtons.forEach(button => {
                 themes[selectedTheme]
                     .defaultPhotoCount;
 
+            updateDesignSelection();
+
             capturedPhotos = [];
 
             currentPhotoIndex = 1;
@@ -783,10 +864,12 @@ designButtons.forEach(button => {
             settings.cardDesign =
                 selectedDesign;
 
+            updateActiveDesignButton();
+
             console.log(
                 "Kartendesign:",
                 design.name
-            );
+    );
         }
     );
 });
