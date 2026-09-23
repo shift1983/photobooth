@@ -591,47 +591,47 @@ async function capturePhoto() {
     countdownOverlay.style.display = "flex";
 
     for (
-    let i = settings.countdown;
-    i > 0;
-    i--
-) {
-
-    countdownOverlay.textContent = i;
+        let i = settings.countdown;
+        i > 0;
+        i--
+    ) {
+        countdownOverlay.textContent = i;
 
         await new Promise(resolve =>
             setTimeout(resolve, 1000)
         );
     }
 
-countdownOverlay.style.display = "none";
+    countdownOverlay.style.display = "none";
 
-if (settings.flashEnabled) {
 
-    flashOverlay.style.opacity = "1";
+    if (settings.flashEnabled) {
 
-    await new Promise(resolve =>
-        setTimeout(resolve, 500)
-    );
+        flashOverlay.style.opacity = "1";
 
-    flashOverlay.style.opacity = "0";
-}
+        await new Promise(resolve =>
+            setTimeout(resolve, 500)
+        );
 
-try {
+        flashOverlay.style.opacity = "0";
+    }
 
-if (settings.soundEnabled) {
 
-    shutterSound.currentTime = 0;
+    if (settings.soundEnabled) {
 
-    shutterSound
-        .play()
-        .catch(error => {
-            console.log(
-                "Auslöseton konnte nicht abgespielt werden.",
-                error
-            );
-        });
-}
-    
+        shutterSound.currentTime = 0;
+
+        shutterSound
+            .play()
+            .catch(error => {
+                console.log(
+                    "Auslöseton konnte nicht abgespielt werden.",
+                    error
+                );
+            });
+    }
+
+
     const context =
         canvas.getContext("2d");
 
@@ -651,15 +651,16 @@ if (settings.soundEnabled) {
         0,
         canvas.width,
         canvas.height
-);
+    );
 
-context.restore();
+    context.restore();
+
 
     const imageData =
-    canvas.toDataURL(
-        "image/jpeg",
-        0.95
-);
+        canvas.toDataURL(
+            "image/jpeg",
+            0.95
+        );
 
     currentPhoto = imageData;
 
@@ -673,11 +674,6 @@ context.restore();
 
     captureBtn.disabled = true;
 }
-
-    captureBtn.addEventListener(
-        "click",
-    capturePhoto
-);
 
 retakeBtn.addEventListener(
     "click",
