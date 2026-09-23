@@ -402,6 +402,9 @@ nextBtn.addEventListener(
 
     saveBtn.textContent =
         "💾 Fotokarte speichern";
+
+      newSeriesBtn.style.display =
+        "inline-block";
 }
     }
 );
@@ -635,32 +638,16 @@ themeButtons.forEach(button => {
 
             document.getElementById(
                 "cameraContainer"
-                ).style.display = "block";
+            ).style.display = "block";
 
             captureBtn.style.display =
                 "inline-block";
 
-            document.getElementById(
-            "cameraContainer"
-            ).style.display = "block";
-
-            captureBtn.style.display =
-            "inline-block";
-
-            collagePreview.style.display =
-            "none";
-            
+            newSeriesBtn.style.display =
+                "none";  
         }
     );
 });
-themeButtons.forEach(button => {
-    button.addEventListener("click", () => {
-
-        // dein bisheriger Code ...
-
-    });
-});   // ← Theme-Block ist hier komplett beendet
-
 
 // Neue Fotoserie
 newSeriesBtn.addEventListener(
