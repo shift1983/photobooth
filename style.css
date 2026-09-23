@@ -217,3 +217,7 @@ body.business {
 
     border-radius: 12px;
 }
+
+#newSeriesBtn {
+    display: none;
+}
