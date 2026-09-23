@@ -95,15 +95,6 @@ async function enableFullscreen() {
     }
 }
 
-document
-    .getElementById("fullscreenBtn")
-    .addEventListener("click", async () => {
-
-        await enableFullscreen();
-
-        await requestWakeLock();
-    });
-
 if ("serviceWorker" in navigator) {
 
     navigator.serviceWorker
@@ -114,8 +105,8 @@ if ("serviceWorker" in navigator) {
         });
 }
 
-const cameraBtn =
-    document.getElementById("cameraBtn");
+const startBoothBtn =
+    document.getElementById("startBoothBtn");
 
 const video =
     document.getElementById("video");
@@ -570,21 +561,23 @@ async function startCamera() {
     }
 }
 
-cameraBtn.addEventListener(
+startBoothBtn.addEventListener(
     "click",
-    startCamera
+    async () => {
+
+        await enableFullscreen();
+
+        await requestWakeLock();
+
+        await startCamera();
+
+        startBoothBtn.style.display =
+            "none";
+
+        captureBtn.style.display =
+            "inline-block";
+    }
 );
-
-// function flashEffect() {
-
-//    flashOverlay.style.opacity = "1";
-
-//    setTimeout(() => {
-
-//        flashOverlay.style.opacity = "0";
-
-//    }, 500);
-// }
 
 async function capturePhoto() {
 
