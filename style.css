@@ -90,7 +90,6 @@ button {
 }
 
 #flashOverlay {
-
     position: fixed;
     inset: 0;
 
@@ -100,8 +99,10 @@ button {
 
     pointer-events: none;
 
-#photoActions {
+    z-index: 2000;
+}
 
+#photoActions {
     display: none;
 
     margin-top: 20px;
@@ -114,11 +115,7 @@ button {
 }
 
 #photoActions button {
-
     min-width: 140px;
-}
-
-    z-index: 2000;
 }
 
 #themeSelection {
