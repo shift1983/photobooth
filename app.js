@@ -436,6 +436,11 @@ async function generateCollage() {
 
     collagePreview.style.display =
         "block";
+
+    document.getElementById(
+    "cameraContainer"
+    ).style.display = "none";
+    
 }
 
 themeButtons.forEach(button => {
