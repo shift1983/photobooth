@@ -186,6 +186,21 @@ const adminOverlay =
 const closeAdminBtn =
     document.getElementById("closeAdminBtn");
 
+const pinOverlay =
+    document.getElementById("pinOverlay");
+
+const adminPinInput =
+    document.getElementById("adminPinInput");
+
+const pinError =
+    document.getElementById("pinError");
+
+const pinCancelBtn =
+    document.getElementById("pinCancelBtn");
+
+const pinOkBtn =
+    document.getElementById("pinOkBtn");
+
 let adminPressTimer = null;
 
 function startAdminPress() {
@@ -212,18 +227,15 @@ function cancelAdminPress() {
 
 function requestAdminAccess() {
 
-    const pin =
-        prompt("Admin-PIN eingeben:");
+    adminPinInput.value = "";
 
-    if (pin === "0714") {
+    pinError.style.display =
+        "none";
 
-        adminOverlay.style.display =
-            "flex";
+    pinOverlay.style.display =
+        "flex";
 
-    } else if (pin !== null) {
-
-        alert("PIN nicht korrekt.");
-    }
+    adminPinInput.focus();
 }
 
 function updateDesignSelection() {
@@ -1063,5 +1075,67 @@ closeAdminBtn.addEventListener(
 
         adminOverlay.style.display =
             "none";
+    }
+);
+function checkAdminPin() {
+
+    if (
+        adminPinInput.value === "0714"
+    ) {
+
+        pinOverlay.style.display =
+            "none";
+
+        adminOverlay.style.display =
+            "flex";
+
+        adminPinInput.value =
+            "";
+
+        pinError.style.display =
+            "none";
+
+    } else {
+
+        adminPinInput.value =
+            "";
+
+        pinError.style.display =
+            "block";
+
+        adminPinInput.focus();
+    }
+}
+
+
+pinOkBtn.addEventListener(
+    "click",
+    checkAdminPin
+);
+
+
+pinCancelBtn.addEventListener(
+    "click",
+    () => {
+
+        pinOverlay.style.display =
+            "none";
+
+        adminPinInput.value =
+            "";
+
+        pinError.style.display =
+            "none";
+    }
+);
+
+adminPinInput.addEventListener(
+    "keydown",
+    event => {
+
+        if (event.key === "Enter") {
+
+            checkAdminPin();
+        }
     }
 );
