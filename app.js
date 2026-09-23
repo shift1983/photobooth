@@ -204,11 +204,17 @@ async function capturePhoto() {
         );
     }
 
-    countdownOverlay.style.display = "none";
+countdownOverlay.style.display = "none";
 
-    flashEffect();
+flashOverlay.style.opacity = "1";
 
-    try {
+await new Promise(resolve =>
+    setTimeout(resolve, 500)
+);
+
+flashOverlay.style.opacity = "0";
+
+try {
 
     shutterSound.currentTime = 0;
 
