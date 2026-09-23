@@ -306,3 +306,58 @@ body.business {
 #closeAdminBtn {
     margin-top: 20px;
 }
+
+#pinOverlay {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.85);
+
+    z-index: 6000;
+
+    align-items: center;
+    justify-content: center;
+}
+
+#pinPanel {
+    width: min(400px, 85%);
+
+    background: #ffffff;
+    color: #222222;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    text-align: center;
+}
+
+#adminPinInput {
+    width: 180px;
+
+    padding: 12px;
+
+    font-size: 2rem;
+    text-align: center;
+
+    margin: 20px 0;
+
+    box-sizing: border-box;
+}
+
+#pinError {
+    display: none;
+
+    color: #c00000;
+    font-weight: bold;
+
+    margin-bottom: 15px;
+}
+
+.pinButtons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
