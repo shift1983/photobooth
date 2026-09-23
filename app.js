@@ -104,6 +104,12 @@ const captureBtn =
 const canvas =
     document.getElementById("photoCanvas");
 
+const collageCanvas =
+    document.getElementById("collageCanvas");
+
+const collagePreview =
+    document.getElementById("collagePreview");
+
 const preview =
     document.getElementById("photoPreview");
 
@@ -332,12 +338,16 @@ nextBtn.addEventListener(
 
         } else {
 
-            alert(
-                "Fotoserie abgeschlossen!"
-            );
+            await generateCollage();
 
-            console.log(
-                capturedPhotos
+            preview.style.display =
+                "none";
+
+            photoActions.style.display =
+                "none";
+
+            alert(
+                "Fotokarte erstellt!"
             );
         }
     }
@@ -350,6 +360,73 @@ function updateSeriesDisplay() {
         currentPhotoIndex +
         " von " +
         settings.photoCount;
+}
+
+async function generateCollage() {
+
+    const ctx =
+        collageCanvas.getContext("2d");
+
+    collageCanvas.width = 1200;
+    collageCanvas.height = 800;
+
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(
+        0,
+        0,
+        collageCanvas.width,
+        collageCanvas.height
+    );
+
+    const images = [];
+
+    for (const photo of capturedPhotos) {
+
+        const img = new Image();
+
+        img.src = photo;
+
+        await new Promise(resolve => {
+
+            img.onload = resolve;
+        });
+
+        images.push(img);
+    }
+
+    const positions = [
+
+        { x: 20,  y: 20,  w: 560, h: 360 },
+        { x: 620, y: 20,  w: 560, h: 360 },
+        { x: 20,  y: 420, w: 560, h: 360 },
+        { x: 620, y: 420, w: 560, h: 360 }
+    ];
+
+    images.forEach((img, index) => {
+
+        if (positions[index]) {
+
+            const p =
+                positions[index];
+
+            ctx.drawImage(
+                img,
+                p.x,
+                p.y,
+                p.w,
+                p.h
+            );
+        }
+    });
+
+    collagePreview.src =
+        collageCanvas.toDataURL(
+            "image/jpeg",
+            0.95
+        );
+
+    collagePreview.style.display =
+        "block";
 }
 
 themeButtons.forEach(button => {
