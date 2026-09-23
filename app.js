@@ -486,6 +486,17 @@ themeButtons.forEach(button => {
 
             captureBtn.disabled =
                 false;
+
+            document.getElementById(
+            "cameraContainer"
+            ).style.display = "block";
+
+            captureBtn.style.display =
+            "inline-block";
+
+            collagePreview.style.display =
+            "none";
+            
         }
     );
 });
