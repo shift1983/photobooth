@@ -4,6 +4,8 @@ const settings = {
 
     photoCount: 4,
 
+    cardDesign: "birthdayConfetti",
+
     countdown: 3,
 
     flashEnabled: true,
@@ -33,6 +35,26 @@ const themes = {
 
         defaultPhotoCount: 4
     }
+};
+
+const cardDesigns = {
+
+    birthdayConfetti: {
+        name: "Konfetti",
+        theme: "birthday",
+        photoCounts: [3, 4],
+        backgroundColor: "#fff4d6",
+        textColor: "#6b3200"
+    },
+
+    birthdayParty: {
+        name: "Party",
+        theme: "birthday",
+        photoCounts: [3, 4],
+        backgroundColor: "#ffe8f2",
+        textColor: "#7a1748"
+    }
+
 };
 
 let capturedPhotos = [];
@@ -142,6 +164,9 @@ const eventTitle =
 
 const themeButtons =
     document.querySelectorAll(".themeBtn");
+
+const designButtons =
+    document.querySelectorAll(".designBtn");
 
 const photoCountInfo =
     document.getElementById("photoCountInfo");
@@ -426,15 +451,25 @@ async function generateCollage() {
     collageCanvas.width = 1200;
     collageCanvas.height = 800;
 
-    ctx.fillStyle = "#ffffff";
+    const design =
+    cardDesigns[settings.cardDesign];
+
+    ctx.fillStyle =
+        design
+            ? design.backgroundColor
+            : "#ffffff";
+
     ctx.fillRect(
         0,
         0,
         collageCanvas.width,
         collageCanvas.height
-    );
-
-    ctx.fillStyle = "#000000";
+);
+    
+    ctx.fillStyle =
+        design
+            ? design.textColor
+            : "#000000";
 
     ctx.font =
         "bold 50px Arial";
@@ -701,3 +736,57 @@ newSeriesBtn.addEventListener(
 
     }
 );
+
+// Design-Auswahl
+
+designButtons.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            const selectedDesign =
+                button.dataset.design;
+
+            const design =
+                cardDesigns[selectedDesign];
+
+            if (!design) {
+                return;
+            }
+
+            if (
+                design.theme !==
+                settings.theme
+            ) {
+
+                alert(
+                    "Dieses Design gehört zu einem anderen Event."
+                );
+
+                return;
+            }
+
+            if (
+                !design.photoCounts.includes(
+                    settings.photoCount
+                )
+            ) {
+
+                alert(
+                    "Dieses Design unterstützt diese Fotoanzahl nicht."
+                );
+
+                return;
+            }
+
+            settings.cardDesign =
+                selectedDesign;
+
+            console.log(
+                "Kartendesign:",
+                design.name
+            );
+        }
+    );
+});
