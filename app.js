@@ -184,15 +184,13 @@ function flashEffect() {
 
     flashOverlay.style.opacity = "1";
 
-    await new Promise(resolve =>
-        setTimeout(resolve, 500)
-    );
+    setTimeout(() => {
 
-    Foto aufnehmen
+        flashOverlay.style.opacity = "0";
 
-    flashOverlay.style.opacity = "0";
+    }, 500);
 }
-);
+
 async function capturePhoto() {
 
     countdownOverlay.style.display = "flex";
