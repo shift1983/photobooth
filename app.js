@@ -177,6 +177,55 @@ const photoCountInfo =
 const seriesProgress =
     document.getElementById("seriesProgress");
 
+const appLogo =
+    document.getElementById("appLogo");
+
+const adminOverlay =
+    document.getElementById("adminOverlay");
+
+const closeAdminBtn =
+    document.getElementById("closeAdminBtn");
+
+let adminPressTimer = null;
+
+function startAdminPress() {
+
+    adminPressTimer =
+        setTimeout(() => {
+
+            requestAdminAccess();
+
+        }, 5000);
+}
+
+function cancelAdminPress() {
+
+    if (adminPressTimer) {
+
+        clearTimeout(
+            adminPressTimer
+        );
+
+        adminPressTimer = null;
+    }
+}
+
+function requestAdminAccess() {
+
+    const pin =
+        prompt("Admin-PIN eingeben:");
+
+    if (pin === "0714") {
+
+        adminOverlay.style.display =
+            "flex";
+
+    } else if (pin !== null) {
+
+        alert("PIN nicht korrekt.");
+    }
+}
+
 function updateDesignSelection() {
 
     let firstCompatibleDesign = null;
@@ -976,3 +1025,43 @@ designButtons.forEach(button => {
         }
     );
 });
+
+appLogo.addEventListener(
+    "mousedown",
+    startAdminPress
+);
+
+appLogo.addEventListener(
+    "mouseup",
+    cancelAdminPress
+);
+
+appLogo.addEventListener(
+    "mouseleave",
+    cancelAdminPress
+);
+
+appLogo.addEventListener(
+    "touchstart",
+    startAdminPress,
+    { passive: true }
+);
+
+appLogo.addEventListener(
+    "touchend",
+    cancelAdminPress
+);
+
+appLogo.addEventListener(
+    "touchcancel",
+    cancelAdminPress
+);
+
+closeAdminBtn.addEventListener(
+    "click",
+    () => {
+
+        adminOverlay.style.display =
+            "none";
+    }
+);
