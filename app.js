@@ -298,11 +298,32 @@ saveBtn.addEventListener(
     "click",
     () => {
 
+        let imageToSave;
+
+        if (
+            collagePreview.style.display === "block" &&
+            collagePreview.src
+        ) {
+
+            imageToSave =
+                collagePreview.src;
+
+        } else {
+
+            imageToSave =
+                preview.src;
+        }
+
+        if (!imageToSave) {
+
+            return;
+        }
+
         const link =
             document.createElement("a");
 
         link.href =
-            preview.src;
+            imageToSave;
 
         link.download =
             "photobooth-" +
@@ -359,18 +380,26 @@ nextBtn.addEventListener(
 
         } else {
 
-            await generateCollage();
+    await generateCollage();
 
-            preview.style.display =
-                "none";
+    preview.style.display =
+        "none";
 
-            photoActions.style.display =
-                "none";
+    photoActions.style.display =
+        "flex";
 
-            alert(
-                "Fotokarte erstellt!"
-            );
-        }
+    retakeBtn.style.display =
+        "none";
+
+    nextBtn.style.display =
+        "none";
+
+    saveBtn.style.display =
+        "inline-block";
+
+    saveBtn.textContent =
+        "💾 Fotokarte speichern";
+}
     }
 );
 
@@ -585,6 +614,28 @@ themeButtons.forEach(button => {
 
             captureBtn.disabled =
                 false;
+
+            retakeBtn.style.display =
+                "inline-block";
+
+            nextBtn.style.display =
+                "inline-block";
+
+            saveBtn.style.display =
+                "inline-block";
+
+            saveBtn.textContent =
+                "💾 Speichern";
+
+            collagePreview.style.display =
+                "none";
+
+            document.getElementById(
+                "cameraContainer"
+                ).style.display = "block";
+
+            captureBtn.style.display =
+                "inline-block";
 
             document.getElementById(
             "cameraContainer"
