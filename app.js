@@ -201,6 +201,15 @@ const pinCancelBtn =
 const pinOkBtn =
     document.getElementById("pinOkBtn");
 
+const countdownSelect =
+    document.getElementById("countdownSelect");
+
+const flashEnabledCheckbox =
+    document.getElementById("flashEnabled");
+
+const soundEnabledCheckbox =
+    document.getElementById("soundEnabled");
+
 let adminPressTimer = null;
 
 function startAdminPress() {
@@ -358,11 +367,14 @@ function updateActiveThemeButton() {
 
 function saveSettings() {
 
-    const savedSettings = {
-        theme: settings.theme,
-        photoCount: settings.photoCount,
-        cardDesign: settings.cardDesign
-    };
+const savedSettings = {
+    theme: settings.theme,
+    photoCount: settings.photoCount,
+    cardDesign: settings.cardDesign,
+    countdown: settings.countdown,
+    flashEnabled: settings.flashEnabled,
+    soundEnabled: settings.soundEnabled
+};
 
     localStorage.setItem(
         "photoboothSettings",
@@ -417,6 +429,31 @@ function loadSettings() {
                 savedSettings.cardDesign;
         }
 
+if (
+    savedSettings.countdown === 3 ||
+    savedSettings.countdown === 5 ||
+    savedSettings.countdown === 10
+) {
+    settings.countdown =
+        savedSettings.countdown;
+}
+
+if (
+    typeof savedSettings.flashEnabled ===
+    "boolean"
+) {
+    settings.flashEnabled =
+        savedSettings.flashEnabled;
+}
+
+if (
+    typeof savedSettings.soundEnabled ===
+    "boolean"
+) {
+    settings.soundEnabled =
+        savedSettings.soundEnabled;
+}
+        
     } catch (error) {
 
         console.error(
@@ -538,22 +575,26 @@ cameraBtn.addEventListener(
     startCamera
 );
 
-function flashEffect() {
+// function flashEffect() {
 
-    flashOverlay.style.opacity = "1";
+//    flashOverlay.style.opacity = "1";
 
-    setTimeout(() => {
+//    setTimeout(() => {
 
-        flashOverlay.style.opacity = "0";
+//        flashOverlay.style.opacity = "0";
 
-    }, 500);
-}
+//    }, 500);
+// }
 
 async function capturePhoto() {
 
     countdownOverlay.style.display = "flex";
 
-    for (let i = 3; i > 0; i--) {
+    for (
+    let i = settings.countdown;
+    i > 0;
+    i--
+) {
 
     countdownOverlay.textContent = i;
 
@@ -564,23 +605,31 @@ async function capturePhoto() {
 
 countdownOverlay.style.display = "none";
 
-flashOverlay.style.opacity = "1";
+if (settings.flashEnabled) {
 
-await new Promise(resolve =>
-    setTimeout(resolve, 500)
-);
+    flashOverlay.style.opacity = "1";
 
-flashOverlay.style.opacity = "0";
+    await new Promise(resolve =>
+        setTimeout(resolve, 500)
+    );
+
+    flashOverlay.style.opacity = "0";
+}
 
 try {
 
+if (settings.soundEnabled) {
+
     shutterSound.currentTime = 0;
 
-    await shutterSound.play();
-
-    } catch (err) {
-
-    console.log("Ton konnte nicht abgespielt werden");
+    shutterSound
+        .play()
+        .catch(error => {
+            console.log(
+                "Auslöseton konnte nicht abgespielt werden.",
+                error
+            );
+        });
 }
     
     const context =
@@ -1169,6 +1218,33 @@ closeAdminBtn.addEventListener(
     }
 );
 
+countdownSelect.addEventListener(
+    "change",
+    () => {
+
+        settings.countdown =
+            Number(countdownSelect.value);
+    }
+);
+
+flashEnabledCheckbox.addEventListener(
+    "change",
+    () => {
+
+        settings.flashEnabled =
+            flashEnabledCheckbox.checked;
+    }
+);
+
+soundEnabledCheckbox.addEventListener(
+    "change",
+    () => {
+
+        settings.soundEnabled =
+            soundEnabledCheckbox.checked;
+    }
+);
+
 function checkAdminPin() {
 
     if (
@@ -1235,6 +1311,15 @@ adminPinInput.addEventListener(
 function initializeApp() {
 
     loadSettings();
+
+    countdownSelect.value =
+        String(settings.countdown);
+
+    flashEnabledCheckbox.checked =
+        settings.flashEnabled;
+
+    soundEnabledCheckbox.checked =
+        settings.soundEnabled;
 
     if (
         settings.theme &&
