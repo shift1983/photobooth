@@ -5,7 +5,7 @@ const settings = {
     cardDesign: "birthdayConfetti",
     countdown: 3,
     flashEnabled: true,
-    soundEnabled: true
+    soundEnabled: true,
     eventTitle: "Photobooth",
 };
 
@@ -357,7 +357,7 @@ const savedSettings = {
     cardDesign: settings.cardDesign,
     countdown: settings.countdown,
     flashEnabled: settings.flashEnabled,
-    soundEnabled: settings.soundEnabled
+    soundEnabled: settings.soundEnabled,
     eventTitle: settings.eventTitle
 };
 
@@ -1039,10 +1039,6 @@ themeButtons.forEach(button => {
             photoCountInfo.textContent =
                 "Fotos pro Serie: " +
                 settings.photoCount;
-
-            eventTitle.value =
-                themes[selectedTheme]
-                    .title;
 
             document.body.className =
                 selectedTheme;
