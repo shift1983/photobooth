@@ -192,7 +192,7 @@ function flashEffect() {
 
     flashOverlay.style.opacity = "0";
 }
-
+);
 async function capturePhoto() {
 
     countdownOverlay.style.display = "flex";
