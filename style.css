@@ -388,3 +388,9 @@ body.business {
     font-size: 1.1rem;
     font-weight: bold;
 }
+
+.themeBtn.active {
+    outline: 4px solid #ffffff;
+    transform: scale(1.05);
+    font-weight: bold;
+}
