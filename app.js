@@ -134,6 +134,9 @@ const retakeBtn =
 const nextBtn =
     document.getElementById("nextBtn");
 
+const newSeriesBtn =
+    document.getElementById("newSeriesBtn");
+
 const eventTitle =
     document.getElementById("eventTitle");
 
@@ -650,3 +653,46 @@ themeButtons.forEach(button => {
         }
     );
 });
+themeButtons.forEach(button => {
+    button.addEventListener("click", () => {
+
+        // dein bisheriger Code ...
+
+    });
+});   // ← Theme-Block ist hier komplett beendet
+
+
+// Neue Fotoserie
+newSeriesBtn.addEventListener(
+    "click",
+    async () => {
+
+        capturedPhotos = [];
+        currentPhoto = null;
+        currentPhotoIndex = 1;
+
+        updateSeriesDisplay();
+
+        preview.style.display = "none";
+        collagePreview.style.display = "none";
+
+        document.getElementById(
+            "cameraContainer"
+        ).style.display = "block";
+
+        captureBtn.style.display = "inline-block";
+        captureBtn.disabled = false;
+
+        retakeBtn.style.display = "inline-block";
+        nextBtn.style.display = "inline-block";
+
+        saveBtn.style.display = "inline-block";
+        saveBtn.textContent = "💾 Speichern";
+
+        newSeriesBtn.style.display = "none";
+
+        photoActions.style.display = "none";
+
+        await capturePhoto();
+    }
+);
