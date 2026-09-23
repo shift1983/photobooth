@@ -238,3 +238,20 @@ body.business {
     transform: scale(1.05);
     font-weight: bold;
 }
+
+#photoCountSelection {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.photoCountBtn {
+    min-width: 150px;
+}
+
+.photoCountBtn.active {
+    outline: 4px solid #ffffff;
+    transform: scale(1.05);
+    font-weight: bold;
+}
