@@ -17,7 +17,7 @@ const themes = {
 
         title: "Geburtstag",
 
-        defaultPhotoCount: 4
+        defaultPhotoCount: 3
     },
 
     wedding: {
@@ -464,14 +464,33 @@ async function generateCollage() {
         images.push(img);
     }
 
-    const positions = [
+    let positions = [];
 
+    if (capturedPhotos.length === 3) {
+
+    // Layout für 3 Fotos:
+    // zwei Fotos oben, ein großes Foto unten
+
+    positions = [
+        { x: 20,  y: 110, w: 560,  h: 300 },
+        { x: 620, y: 110, w: 560,  h: 300 },
+
+        { x: 20,  y: 450, w: 1160, h: 300 }
+    ];
+
+    } else if (capturedPhotos.length === 4) {
+
+    // Layout für 4 Fotos:
+    // klassisches 2x2-Raster
+
+    positions = [
         { x: 20,  y: 110, w: 560, h: 300 },
         { x: 620, y: 110, w: 560, h: 300 },
-    
+
         { x: 20,  y: 450, w: 560, h: 300 },
         { x: 620, y: 450, w: 560, h: 300 }
     ];
+}
 
     images.forEach((img, index) => {
 
@@ -680,6 +699,5 @@ newSeriesBtn.addEventListener(
 
         photoActions.style.display = "none";
 
-        await capturePhoto();
     }
 );
