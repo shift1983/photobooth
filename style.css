@@ -232,3 +232,9 @@ body.business {
 .designBtn {
     min-width: 150px;
 }
+
+.designBtn.active {
+    outline: 4px solid #ffffff;
+    transform: scale(1.05);
+    font-weight: bold;
+}
