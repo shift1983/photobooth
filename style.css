@@ -190,23 +190,16 @@ body.business {
 }
 
 #photoCountInfo {
-
     font-size: 1.2rem;
-
     margin-bottom: 20px;
-
     text-align: center;
 }
 
 #seriesProgress {
-
-    font-size: 1rem;
-
+    font-size: 1.3rem;
     font-weight: bold;
-
     text-align: center;
-
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 #collageCanvas {
@@ -215,13 +208,9 @@ body.business {
 }
 
 #collagePreview {
-
     display: none;
-
     max-width: 90%;
-
     margin-top: 20px;
-
     border-radius: 12px;
 }
 
@@ -418,4 +407,8 @@ body.business {
     height: 22px;
     margin-right: 8px;
     vertical-align: middle;
+}
+
+#photoCountInfo {
+    display: none;
 }
