@@ -316,6 +316,15 @@ nextBtn.addEventListener(
 
         currentPhoto = null;
 
+
+      console.log(
+            "currentPhotoIndex:",
+            currentPhotoIndex,
+            "photoCount:",
+            settings.photoCount
+    );
+
+        
         if (
             currentPhotoIndex <
             settings.photoCount
