@@ -361,3 +361,30 @@ body.business {
     justify-content: center;
     gap: 10px;
 }
+
+.adminSection {
+    margin: 25px 0;
+    padding: 20px;
+
+    border: 1px solid #dddddd;
+    border-radius: 15px;
+
+    background: #f7f7f7;
+}
+
+.adminSection h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+#adminPanel button {
+    margin: 5px;
+}
+
+#closeAdminBtn {
+    margin-top: 25px;
+    padding: 14px 25px;
+
+    font-size: 1.1rem;
+    font-weight: bold;
+}
