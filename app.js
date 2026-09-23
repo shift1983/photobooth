@@ -338,6 +338,76 @@ function updateActivePhotoCountButton() {
     });
 }
 
+function saveSettings() {
+
+    const savedSettings = {
+        theme: settings.theme,
+        photoCount: settings.photoCount,
+        cardDesign: settings.cardDesign
+    };
+
+    localStorage.setItem(
+        "photoboothSettings",
+        JSON.stringify(savedSettings)
+    );
+
+    console.log(
+        "Einstellungen gespeichert",
+        savedSettings
+    );
+}
+
+function loadSettings() {
+
+    const storedSettings =
+        localStorage.getItem(
+            "photoboothSettings"
+        );
+
+    if (!storedSettings) {
+        return;
+    }
+
+    try {
+
+        const savedSettings =
+            JSON.parse(storedSettings);
+
+        if (
+            savedSettings.theme &&
+            themes[savedSettings.theme]
+        ) {
+            settings.theme =
+                savedSettings.theme;
+        }
+
+        if (
+            savedSettings.photoCount === 3 ||
+            savedSettings.photoCount === 4
+        ) {
+            settings.photoCount =
+                savedSettings.photoCount;
+        }
+
+        if (
+            savedSettings.cardDesign &&
+            cardDesigns[
+                savedSettings.cardDesign
+            ]
+        ) {
+            settings.cardDesign =
+                savedSettings.cardDesign;
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Gespeicherte Einstellungen konnten nicht geladen werden.",
+            error
+        );
+    }
+}
+
 photoCountButtons.forEach(button => {
 
     button.addEventListener(
@@ -1073,10 +1143,13 @@ closeAdminBtn.addEventListener(
     "click",
     () => {
 
+        saveSettings();
+
         adminOverlay.style.display =
             "none";
     }
 );
+
 function checkAdminPin() {
 
     if (
@@ -1139,3 +1212,35 @@ adminPinInput.addEventListener(
         }
     }
 );
+
+function initializeApp() {
+
+    loadSettings();
+
+    if (
+        settings.theme &&
+        themes[settings.theme]
+    ) {
+
+        eventTitle.value =
+            themes[settings.theme].title;
+
+        document.body.className =
+            settings.theme;
+    }
+
+    photoCountInfo.textContent =
+        "Fotos pro Serie: " +
+        settings.photoCount;
+
+    currentPhotoIndex = 1;
+
+    updateSeriesDisplay();
+
+    updateActivePhotoCountButton();
+
+    updateDesignSelection();
+}
+
+
+initializeApp();
