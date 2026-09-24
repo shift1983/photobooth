@@ -698,3 +698,7 @@ body.business {
         display: none !important;
     }
 }
+
+#captureBtn {
+    display: none;
+}
