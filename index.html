@@ -81,13 +81,33 @@
 
 	<img id="photoPreview" alt="Vorschau">
 
-	<canvas id="collageCanvas"></canvas>
+<canvas id="collageCanvas"></canvas>
 
-	<img id="collagePreview" alt="Fotokarte">
+<div id="resultArea">
 
-<div id="photoActions">
-    <button id="saveBtn">💾 Speichern</button>
-    <button id="newSeriesBtn">📸 Neue Fotoserie</button>
+    <img
+        id="collagePreview"
+        alt="Fotokarte"
+    >
+
+    <div id="photoActions">
+
+        <button
+            id="saveBtn"
+            class="squareActionBtn">
+            <span class="captureIcon">💾</span>
+            <span class="captureText">Speichern</span>
+        </button>
+
+        <button
+            id="newSeriesBtn"
+            class="squareActionBtn">
+            <span class="captureIcon">📸</span>
+            <span class="captureText">Neue Serie</span>
+        </button>
+
+    </div>
+
 </div>
 
 <div id="pinOverlay">
