@@ -612,48 +612,57 @@ body.business {
 @media print {
 
     @page {
-        size: A6 landscape;
+        size: 148mm 105mm;
         margin: 0;
     }
 
     html,
     body {
-        margin: 0;
-        padding: 0;
-
-        width: 148mm;
-        height: 105mm;
+        margin: 0 !important;
+        padding: 0 !important;
 
         background: white !important;
 
-        overflow: hidden;
+        overflow: hidden !important;
     }
 
     body * {
-        visibility: hidden;
+        display: none !important;
     }
 
-    #collagePreview,
-    #collagePreview * {
-        visibility: visible;
-    }
-
+    #resultArea,
     #collagePreview {
-        position: fixed;
+        display: block !important;
+    }
+
+    #resultArea {
+        position: absolute;
 
         left: 0;
         top: 0;
 
-        width: 148mm;
-        height: 105mm;
+        width: 147mm;
+        height: 104mm;
 
-        max-width: none;
-        max-height: none;
+        margin: 0 !important;
+        padding: 0 !important;
 
-        margin: 0;
+        overflow: hidden;
+    }
+
+    #collagePreview {
+        width: 147mm;
+        height: 104mm;
+
+        max-width: none !important;
+        max-height: none !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
 
         object-fit: contain;
 
         border-radius: 0;
+        box-shadow: none;
     }
 }
