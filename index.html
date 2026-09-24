@@ -49,12 +49,31 @@
             playsinline
             muted>
         </video>
+
+        <img
+            id="photoPreview"
+            alt="Vorschau"
+        >
     </div>
 
-    <button id="captureBtn">
-        <span class="captureIcon">📸</span>
-        <span class="captureText">Aufnehmen</span>
-    </button>
+    <div id="captureControls">
+
+        <button id="captureBtn" class="squareActionBtn">
+            <span class="captureIcon">📸</span>
+            <span class="captureText">Aufnehmen</span>
+        </button>
+
+        <button id="retakeBtn" class="squareActionBtn">
+            <span class="captureIcon">🔄</span>
+            <span class="captureText">Nochmal</span>
+        </button>
+
+        <button id="nextBtn" class="squareActionBtn">
+            <span class="captureIcon">➡️</span>
+            <span class="captureText">Weiter</span>
+        </button>
+
+    </div>
 
 </div>
 
@@ -68,8 +87,6 @@
 
 <div id="photoActions">
     <button id="saveBtn">💾 Speichern</button>
-    <button id="retakeBtn">🔄 Nochmal</button>
-    <button id="nextBtn">➡️ Weiter</button>
     <button id="newSeriesBtn">📸 Neue Fotoserie</button>
 </div>
 
@@ -104,8 +121,6 @@
     </div>
 
 </div>
-	
-// 	Adminbereich
 	
 	<div id="adminOverlay">
 
