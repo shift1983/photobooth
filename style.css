@@ -62,11 +62,13 @@ button {
 }
 
 #photoPreview {
-    width: 1000px;
-    max-width: calc(100vw - 180px);
+    width: auto;
+    height: 78vh;
 
-    height: auto;
-    max-height: 72vh;
+    max-width: calc(100vw - 180px);
+    max-height: 78vh;
+
+    object-fit: contain;
 }
 
 #video {
