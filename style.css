@@ -624,7 +624,7 @@ main {
 /* Foto-Vorschau */
 
 #photoPreview {
-    width: 920px;
+    width: 880px;
     max-width: calc(100vw - 170px);
 
     height: auto;
