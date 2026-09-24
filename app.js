@@ -730,26 +730,35 @@ saveBtn.addEventListener(
     "click",
     () => {
 
-        let imageToSave;
-
-        if (
-            collagePreview.style.display === "block" &&
-            collagePreview.src
-        ) {
-
-            imageToSave =
-                collagePreview.src;
-
-        } else {
-
-            imageToSave =
-                preview.src;
-        }
-
-        if (!imageToSave) {
-
+        if (!collageCanvas) {
             return;
         }
+
+        const now = new Date();
+
+        const year =
+            now.getFullYear();
+
+        const month =
+            String(now.getMonth() + 1).padStart(2, "0");
+
+        const day =
+            String(now.getDate()).padStart(2, "0");
+
+        const hours =
+            String(now.getHours()).padStart(2, "0");
+
+        const minutes =
+            String(now.getMinutes()).padStart(2, "0");
+
+        const fileName =
+            `Photobooth_${year}-${month}-${day}_${hours}-${minutes}.jpg`;
+
+        const imageToSave =
+            collageCanvas.toDataURL(
+                "image/jpeg",
+                0.95
+            );
 
         const link =
             document.createElement("a");
@@ -758,11 +767,13 @@ saveBtn.addEventListener(
             imageToSave;
 
         link.download =
-            "photobooth-" +
-            Date.now() +
-            ".jpg";
+            fileName;
+
+        document.body.appendChild(link);
 
         link.click();
+
+        document.body.removeChild(link);
     }
 );
 
