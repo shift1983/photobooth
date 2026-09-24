@@ -62,7 +62,10 @@ button {
 }
 
 #photoPreview {
-    max-width: 950px;
+    width: 900px;
+    max-width: calc(100vw - 180px);
+
+    height: auto;
     max-height: 72vh;
 }
 
