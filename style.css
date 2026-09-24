@@ -621,38 +621,63 @@ body.business {
         margin: 0 !important;
         padding: 0 !important;
 
+        width: 100% !important;
+        height: 100% !important;
+
         background: white !important;
 
         overflow: hidden !important;
     }
 
+
+    /* Alles zunächst unsichtbar */
+
     body * {
-        display: none !important;
+        visibility: hidden !important;
     }
+
+
+    /* Nur Ergebnisbereich und Fotokarte sichtbar */
 
     #resultArea,
+    #resultArea *,
     #collagePreview {
-        display: block !important;
+        visibility: visible !important;
     }
 
+
+    /* Ergebnisbereich direkt auf die Druckseite legen */
+
     #resultArea {
-        position: absolute;
+        display: block !important;
 
-        left: 0;
-        top: 0;
+        position: absolute !important;
 
-        width: 147mm;
-        height: 104mm;
+        left: 0 !important;
+        top: 0 !important;
+
+        width: 147mm !important;
+        height: 104mm !important;
 
         margin: 0 !important;
         padding: 0 !important;
 
-        overflow: hidden;
+        overflow: hidden !important;
     }
 
+
+    /* Nur die Fotokarte drucken */
+
     #collagePreview {
-        width: 147mm;
-        height: 104mm;
+        display: block !important;
+
+        position: absolute !important;
+
+        left: 0 !important;
+        top: 0 !important;
+
+        width: 147mm !important;
+        height: 104mm !important;
 
         max-width: none !important;
         max-height: none !important;
@@ -660,9 +685,16 @@ body.business {
         margin: 0 !important;
         padding: 0 !important;
 
-        object-fit: contain;
+        object-fit: contain !important;
 
-        border-radius: 0;
-        box-shadow: none;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+    }
+
+
+    /* Buttons sicher ausblenden */
+
+    #photoActions {
+        display: none !important;
     }
 }
