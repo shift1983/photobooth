@@ -663,13 +663,20 @@ async function capturePhoto() {
 
     preview.src = imageData;
 
-    preview.style.display =
-        "block";
+video.style.display =
+    "none";
 
-    photoActions.style.display =
-        "flex";
+preview.style.display =
+    "block";
 
-    captureBtn.disabled = true;
+captureBtn.style.display =
+    "none";
+
+retakeBtn.style.display =
+    "inline-block";
+
+nextBtn.style.display =
+    "inline-block";
 }
 
     captureBtn.addEventListener(
@@ -688,14 +695,25 @@ retakeBtn.addEventListener(
         preview.style.display =
             "none";
 
-        photoActions.style.display =
+        video.style.display =
+            "block";
+
+        retakeBtn.style.display =
             "none";
 
-        captureBtn.disabled = false;
+        nextBtn.style.display =
+            "none";
+
+        captureBtn.style.display =
+            "inline-block";
+
+        captureBtn.disabled =
+            false;
 
         await capturePhoto();
 
-        retakeBtn.disabled = false;
+        retakeBtn.disabled =
+            false;
     }
 );
 
@@ -772,16 +790,25 @@ nextBtn.addEventListener(
 
             updateSeriesDisplay();
 
-            preview.style.display =
-                "none";
+preview.style.display =
+    "none";
 
-            photoActions.style.display =
-                "none";
+video.style.display =
+    "block";
 
-            captureBtn.disabled =
-                false;
+retakeBtn.style.display =
+    "none";
 
-            await capturePhoto();
+nextBtn.style.display =
+    "none";
+
+captureBtn.style.display =
+    "inline-block";
+
+captureBtn.disabled =
+    false;
+
+await capturePhoto();
 
         } else {
 
