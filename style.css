@@ -478,3 +478,45 @@ body.business {
 #newSeriesBtn {
     font-weight: bold;
 }
+
+#resultArea {
+    display: none;
+
+    width: 100%;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 20px;
+
+    margin-top: 20px;
+}
+
+#collagePreview {
+    display: block;
+
+    width: auto;
+    max-width: min(900px, 75vw);
+    max-height: 72vh;
+
+    margin: 0;
+
+    border-radius: 12px;
+}
+
+#resultArea #photoActions {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+    margin: 0;
+}
+
+#resultArea .squareActionBtn {
+    width: 150px;
+    height: 150px;
+
+    flex-shrink: 0;
+}
