@@ -206,6 +206,12 @@ const restoreFullscreenBtn =
 const printBtn =
     document.getElementById("printBtn");
 
+const restartCameraBtn =
+    document.getElementById("restartCameraBtn");
+
+const resetBoothBtn =
+    document.getElementById("resetBoothBtn");
+
 let adminPressTimer = null;
 
 function startAdminPress() {
@@ -696,6 +702,22 @@ nextBtn.style.display =
         capturePhoto
 );
 
+restartCameraBtn.addEventListener(
+    "click",
+    async () => {
+
+        await restartCamera();
+    }
+);
+
+resetBoothBtn.addEventListener(
+    "click",
+    () => {
+
+        resetPhotoBooth();
+    }
+);
+
 retakeBtn.addEventListener(
     "click",
     async () => {
@@ -881,6 +903,39 @@ nextBtn.addEventListener(
 }
     }
 );
+
+    // Neustart der Kamera
+
+async function restartCamera() {
+
+    try {
+
+        if (video.srcObject) {
+
+            const tracks =
+                video.srcObject.getTracks();
+
+            tracks.forEach(
+                track => track.stop()
+            );
+
+            video.srcObject = null;
+        }
+
+        await startCamera();
+
+    } catch (error) {
+
+        console.error(
+            "Kamera konnte nicht neu gestartet werden:",
+            error
+        );
+
+        alert(
+            "Die Kamera konnte nicht neu gestartet werden."
+        );
+    }
+}
 
 function updateSeriesDisplay() {
 
@@ -1152,6 +1207,66 @@ themeButtons.forEach(button => {
 });
 
 // Neue Fotoserie
+async function resetPhotoBooth() {
+
+    capturedPhotos = [];
+    currentPhoto = null;
+    currentPhotoIndex = 1;
+
+    updateSeriesDisplay();
+
+    resultArea.style.display =
+        "none";
+
+    captureArea.style.display =
+        "flex";
+
+    eventTitleDisplay.style.display =
+        "block";
+
+    seriesProgress.style.display =
+        "block";
+
+    video.style.display =
+        "block";
+
+    preview.style.display =
+        "none";
+
+    collagePreview.style.display =
+        "none";
+
+    document.getElementById(
+        "cameraContainer"
+    ).style.display =
+        "flex";
+
+    captureBtn.style.display =
+        "inline-block";
+
+    captureBtn.disabled =
+        false;
+
+    retakeBtn.style.display =
+        "none";
+
+    nextBtn.style.display =
+        "none";
+
+    saveBtn.style.display =
+        "none";
+
+    printBtn.style.display =
+        "none";
+
+    newSeriesBtn.style.display =
+        "none";
+
+    photoActions.style.display =
+        "none";
+}
+
+
 newSeriesBtn.addEventListener(
     "click",
     async () => {
@@ -1161,62 +1276,8 @@ newSeriesBtn.addEventListener(
         }
 
         await requestWakeLock();
-        
-        capturedPhotos = [];
-        currentPhoto = null;
-        currentPhotoIndex = 1;
 
-        updateSeriesDisplay();
-
-        resultArea.style.display =
-            "none";
-
-        captureArea.style.display =
-            "flex";
-
-        eventTitleDisplay.style.display =
-            "block";
-
-        seriesProgress.style.display =
-            "block";
-
-        video.style.display =
-            "block";
-
-        preview.style.display =
-            "none";
-
-        collagePreview.style.display =
-            "none";
-
-        video.style.display =
-            "block";
-
-        document.getElementById(
-            "cameraContainer"
-        ).style.display =
-            "flex";
-
-        captureBtn.style.display =
-            "inline-block";
-
-        captureBtn.disabled =
-            false;
-
-        retakeBtn.style.display =
-            "none";
-
-        nextBtn.style.display =
-            "none";
-
-        saveBtn.style.display =
-            "none";
-
-        newSeriesBtn.style.display =
-            "none";
-
-        photoActions.style.display =
-            "none";
+        resetPhotoBooth();
     }
 );
 
