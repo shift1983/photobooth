@@ -520,3 +520,171 @@ body.business {
 
     flex-shrink: 0;
 }
+
+/* ===== Gastansicht für Tablet / Querformat ===== */
+
+body {
+    min-height: 100dvh;
+    overflow: hidden;
+}
+
+main {
+    width: 100%;
+    max-width: 1400px;
+
+    height: 100dvh;
+
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    margin: 0 auto;
+}
+
+
+/* Titel etwas kompakter */
+
+#eventTitleDisplay {
+    margin-top: 0;
+    margin-bottom: 8px;
+
+    font-size: 2rem;
+}
+
+
+/* Foto 1 von 4 */
+
+#seriesProgress {
+    margin-bottom: 10px;
+}
+
+
+/* Kamera / Vorschau + Bedienung */
+
+#captureArea {
+    width: 100%;
+
+    flex: 1;
+
+    min-height: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 20px;
+
+    margin-top: 5px;
+}
+
+
+#cameraContainer {
+    flex: 1;
+
+    min-width: 0;
+    min-height: 0;
+
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+
+/* Kamera und Foto-Vorschau nutzen denselben Platz */
+
+#video,
+#photoPreview {
+    width: auto;
+    max-width: 100%;
+
+    height: auto;
+    max-height: 68vh;
+
+    object-fit: contain;
+
+    border-radius: 12px;
+}
+
+
+/* rechte Button-Spalte */
+
+#captureControls {
+    width: 150px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    gap: 15px;
+}
+
+
+/* Alle großen Gast-Buttons gleich */
+
+.squareActionBtn {
+    width: 150px;
+    height: 150px;
+
+    padding: 12px;
+
+    flex-shrink: 0;
+
+    border-radius: 20px;
+}
+
+
+/* ===== Fertige Fotokarte ===== */
+
+#resultArea {
+    width: 100%;
+
+    flex: 1;
+
+    min-height: 0;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 20px;
+
+    margin: 0;
+}
+
+
+#collagePreview {
+    width: auto;
+    max-width: calc(100% - 190px);
+
+    height: auto;
+    max-height: 82vh;
+
+    object-fit: contain;
+
+    margin: 0;
+
+    border-radius: 12px;
+}
+
+
+#resultArea #photoActions {
+    width: 150px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    margin: 0;
+}
