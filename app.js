@@ -1085,17 +1085,20 @@ themeButtons.forEach(button => {
             captureBtn.disabled =
                 false;
 
-            retakeBtn.style.display =
+            captureBtn.style.display =
                 "inline-block";
+
+            retakeBtn.style.display =
+                "none";
 
             nextBtn.style.display =
-                "inline-block";
+                "none";
 
             saveBtn.style.display =
-                "inline-block";
+                "none";
 
-            saveBtn.textContent =
-                "💾 Speichern";
+            photoActions.style.display =
+                "none";
 
             collagePreview.style.display =
                 "none";
