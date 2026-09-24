@@ -45,30 +45,39 @@ button {
 
     display: flex;
     justify-content: flex-end;
-
-    margin-top: 0;
 }
 
-#video {
+#video,
+#photoPreview {
     width: 100%;
     max-width: 900px;
 
     border-radius: 12px;
+}
 
+#video {
     transform: scaleX(-1);
-
     background: black;
 }
 
-#captureBtn {
+#photoPreview {
     display: none;
+}
 
+#captureControls {
+    display: flex;
+    flex-direction: column;
+
+    gap: 15px;
+
+    flex-shrink: 0;
+}
+
+.squareActionBtn {
     width: 150px;
     height: 150px;
 
     padding: 15px;
-
-    flex-shrink: 0;
 
     border-radius: 20px;
 
@@ -76,7 +85,7 @@ button {
     font-weight: bold;
 }
 
-#captureBtn .captureIcon {
+.squareActionBtn .captureIcon {
     display: block;
 
     font-size: 2.5rem;
@@ -84,8 +93,13 @@ button {
     margin-bottom: 8px;
 }
 
-#captureBtn .captureText {
+.squareActionBtn .captureText {
     display: block;
+}
+
+#retakeBtn,
+#nextBtn {
+    display: none;
 }
 
 #startBoothBtn {
