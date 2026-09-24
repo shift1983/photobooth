@@ -1156,6 +1156,12 @@ newSeriesBtn.addEventListener(
     "click",
     async () => {
 
+        if (!document.fullscreenElement) {
+            await enableFullscreen();
+        }
+
+        await requestWakeLock();
+        
         capturedPhotos = [];
         currentPhoto = null;
         currentPhotoIndex = 1;
