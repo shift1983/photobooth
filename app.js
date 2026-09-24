@@ -194,6 +194,12 @@ const flashEnabledCheckbox =
 const soundEnabledCheckbox =
     document.getElementById("soundEnabled");
 
+const captureArea =
+    document.getElementById("captureArea");
+
+const resultArea =
+    document.getElementById("resultArea");
+
 let adminPressTimer = null;
 
 function startAdminPress() {
@@ -790,35 +796,11 @@ nextBtn.addEventListener(
 
             updateSeriesDisplay();
 
-preview.style.display =
-    "none";
-
-video.style.display =
-    "block";
-
-retakeBtn.style.display =
-    "none";
-
-nextBtn.style.display =
-    "none";
-
-captureBtn.style.display =
-    "inline-block";
-
-captureBtn.disabled =
-    false;
-
-await capturePhoto();
-
-        } else {
-
-    await generateCollage();
-
     preview.style.display =
         "none";
 
-    photoActions.style.display =
-        "flex";
+    video.style.display =
+        "block";
 
     retakeBtn.style.display =
         "none";
@@ -826,18 +808,41 @@ await capturePhoto();
     nextBtn.style.display =
         "none";
 
+    captureBtn.style.display =
+        "inline-block";
+
+    captureBtn.disabled =
+        false;
+
+    await capturePhoto();
+
+} else {
+
+    await generateCollage();
+
+    preview.style.display =
+        "none";
+
+    captureArea.style.display =
+        "none";
+
+    eventTitleDisplay.style.display =
+        "none";
+
+    seriesProgress.style.display =
+        "none";
+
+    resultArea.style.display =
+        "flex";
+
+    photoActions.style.display =
+        "flex";
+
     saveBtn.style.display =
         "inline-block";
 
-    saveBtn.textContent =
-        "💾 Fotokarte speichern";
-
-     newSeriesBtn.style.display =
+    newSeriesBtn.style.display =
         "inline-block";
-    
-    captureBtn.style.display =
-        "none";
-            
 }
     }
 );
@@ -1033,9 +1038,6 @@ async function generateCollage() {
         collagePreview.style.display =
             "block";
 
-        document.getElementById(
-        "cameraContainer"
-        ).style.display = "none";
     
     }
 
@@ -1121,6 +1123,21 @@ newSeriesBtn.addEventListener(
         currentPhotoIndex = 1;
 
         updateSeriesDisplay();
+
+        resultArea.style.display =
+            "none";
+
+        captureArea.style.display =
+            "flex";
+
+        eventTitleDisplay.style.display =
+            "block";
+
+        seriesProgress.style.display =
+            "block";
+
+        video.style.display =
+            "block";
 
         preview.style.display =
             "none";
