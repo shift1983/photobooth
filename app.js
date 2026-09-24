@@ -525,18 +525,18 @@ photoCountButtons.forEach(button => {
                 "none";
 
             retakeBtn.style.display =
-                "inline-block";
+                "none";
 
             nextBtn.style.display =
-                "inline-block";
+                "none";
 
             saveBtn.style.display =
-                "inline-block";
-
-            saveBtn.textContent =
-                "💾 Speichern";
+                "none";
 
             newSeriesBtn.style.display =
+                "none";
+
+            photoActions.style.display =
                 "none";
         }
     );
