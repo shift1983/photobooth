@@ -877,29 +877,24 @@ nextBtn.addEventListener(
 
     await generateCollage();
 
-    preview.style.display =
-        "none";
+    preview.style.display = "none";
 
-    captureArea.style.display =
-        "none";
+    captureArea.style.display = "none";
 
-    eventTitleDisplay.style.display =
-        "none";
+    eventTitleDisplay.style.display = "none";
 
-    seriesProgress.style.display =
-        "none";
+    seriesProgress.style.display = "none";
 
-    resultArea.style.display =
-        "flex";
+    resultArea.style.display = "flex";
 
-    photoActions.style.display =
-        "flex";
+    photoActions.style.display = "flex";
 
-    saveBtn.style.display =
-        "inline-block";
+    saveBtn.style.display = "inline-block";
 
-    newSeriesBtn.style.display =
-        "inline-block";
+    printBtn.style.display = "inline-block";
+            
+    newSeriesBtn.style.display = "inline-block";
+
 }
     }
 );
