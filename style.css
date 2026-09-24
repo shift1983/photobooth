@@ -594,7 +594,9 @@ main {
 }
 
 #cameraContainer {
-    width: min(900px, calc(100vw - 220px));
+    width: auto;
+
+    max-width: calc(100vw - 170px);
 
     display: flex;
     justify-content: center;
@@ -604,15 +606,29 @@ main {
 }
 
 
-/* Kamera und Foto-Vorschau nutzen denselben Platz */
+/* Live-Kamera */
 
-#video,
-#photoPreview {
-    width: 100%;
-    max-width: auto;
+#video {
+    width: 820px;
+    max-width: calc(100vw - 170px);
 
     height: auto;
     max-height: 68vh;
+
+    border-radius: 12px;
+
+    transform: scaleX(-1);
+}
+
+
+/* Foto-Vorschau */
+
+#photoPreview {
+    width: 920px;
+    max-width: calc(100vw - 170px);
+
+    height: auto;
+    max-height: 74vh;
 
     object-fit: contain;
 
