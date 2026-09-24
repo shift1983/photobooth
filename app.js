@@ -203,6 +203,9 @@ const resultArea =
 const restoreFullscreenBtn =
     document.getElementById("restoreFullscreenBtn");
 
+const printBtn =
+    document.getElementById("printBtn");
+
 let adminPressTimer = null;
 
 function startAdminPress() {
@@ -784,6 +787,14 @@ restoreFullscreenBtn.addEventListener(
         await enableFullscreen();
 
         await requestWakeLock();
+    }
+);
+
+printBtn.addEventListener(
+    "click",
+    () => {
+
+        window.print();
     }
 );
 
