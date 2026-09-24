@@ -608,3 +608,52 @@ body.business {
 
     gap: 10px;
 }
+
+@media print {
+
+    @page {
+        size: A6 landscape;
+        margin: 0;
+    }
+
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+
+        width: 148mm;
+        height: 105mm;
+
+        background: white !important;
+
+        overflow: hidden;
+    }
+
+    body * {
+        visibility: hidden;
+    }
+
+    #collagePreview,
+    #collagePreview * {
+        visibility: visible;
+    }
+
+    #collagePreview {
+        position: fixed;
+
+        left: 0;
+        top: 0;
+
+        width: 148mm;
+        height: 105mm;
+
+        max-width: none;
+        max-height: none;
+
+        margin: 0;
+
+        object-fit: contain;
+
+        border-radius: 0;
+    }
+}
