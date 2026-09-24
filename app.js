@@ -200,6 +200,9 @@ const captureArea =
 const resultArea =
     document.getElementById("resultArea");
 
+const restoreFullscreenBtn =
+    document.getElementById("restoreFullscreenBtn");
+
 let adminPressTimer = null;
 
 function startAdminPress() {
@@ -760,6 +763,16 @@ saveBtn.addEventListener(
             ".jpg";
 
         link.click();
+    }
+);
+
+restoreFullscreenBtn.addEventListener(
+    "click",
+    async () => {
+
+        await enableFullscreen();
+
+        await requestWakeLock();
     }
 );
 
