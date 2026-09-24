@@ -62,7 +62,7 @@ button {
 }
 
 #photoPreview {
-    width: 900px;
+    width: 1000px;
     max-width: calc(100vw - 180px);
 
     height: auto;
