@@ -512,7 +512,7 @@ photoCountButtons.forEach(button => {
             // Kamera wieder anzeigen
             document.getElementById(
                 "cameraContainer"
-            ).style.display = "block";
+            ).style.display = "flex";
 
             captureBtn.style.display =
                 "inline-block";
@@ -1105,7 +1105,7 @@ themeButtons.forEach(button => {
 
             document.getElementById(
                 "cameraContainer"
-            ).style.display = "block";
+            ).style.display = "flex";
 
             captureBtn.style.display =
                 "inline-block";
