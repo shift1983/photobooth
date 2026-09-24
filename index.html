@@ -40,20 +40,23 @@
   	  📸 Photobooth starten
 	</button>
 
-	<button id="captureBtn">
-    📸 Foto aufnehmen
-	</button>
+<div id="captureArea">
 
     <div id="cameraContainer">
-
         <video
             id="video"
             autoplay
             playsinline
             muted>
         </video>
-
     </div>
+
+    <button id="captureBtn">
+        <span class="captureIcon">📸</span>
+        <span class="captureText">Aufnehmen</span>
+    </button>
+
+</div>
 
 	<canvas id="photoCanvas"></canvas>
 
