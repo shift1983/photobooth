@@ -63,10 +63,10 @@ button {
 
 #photoPreview {
     width: auto;
-    height: 78vh;
+    height: 74vh;
 
     max-width: calc(100vw - 180px);
-    max-height: 78vh;
+    max-height: 74vh;
 
     object-fit: contain;
 }
