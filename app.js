@@ -1122,26 +1122,40 @@ newSeriesBtn.addEventListener(
 
         updateSeriesDisplay();
 
-        preview.style.display = "none";
-        collagePreview.style.display = "none";
+        preview.style.display =
+            "none";
+
+        collagePreview.style.display =
+            "none";
+
+        video.style.display =
+            "block";
 
         document.getElementById(
             "cameraContainer"
-        ).style.display = "block";
+        ).style.display =
+            "flex";
 
-        captureBtn.style.display = "inline-block";
-        captureBtn.disabled = false;
+        captureBtn.style.display =
+            "inline-block";
 
-        retakeBtn.style.display = "inline-block";
-        nextBtn.style.display = "inline-block";
+        captureBtn.disabled =
+            false;
 
-        saveBtn.style.display = "inline-block";
-        saveBtn.textContent = "💾 Speichern";
+        retakeBtn.style.display =
+            "none";
 
-        newSeriesBtn.style.display = "none";
+        nextBtn.style.display =
+            "none";
 
-        photoActions.style.display = "none";
+        saveBtn.style.display =
+            "none";
 
+        newSeriesBtn.style.display =
+            "none";
+
+        photoActions.style.display =
+            "none";
     }
 );
 
