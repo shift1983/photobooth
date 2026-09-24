@@ -61,6 +61,11 @@ button {
     border-radius: 12px;
 }
 
+#photoPreview {
+    max-width: 880px;
+    max-height: 72vh;
+}
+
 #video {
     transform: scaleX(-1);
     background: black;
