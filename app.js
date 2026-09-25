@@ -457,14 +457,10 @@ function loadSettings() {
                 savedSettings.theme;
         }
 
-        if (
-            savedSettings.photoCount === 2 ||
-            savedSettings.photoCount === 3 ||
-            savedSettings.photoCount === 4
-        ) {
-            settings.photoCount =
-                savedSettings.photoCount;
-        }
+if ([2, 3, 4].includes(savedSettings.photoCount)) {
+    settings.photoCount =
+        savedSettings.photoCount;
+}
 
         if (
             savedSettings.cardDesign &&
