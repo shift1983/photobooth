@@ -1181,11 +1181,11 @@ function drawConfettiDecoration(
 
     // vereinzelte Ballons
 const balloons = [
-    { x: 90,  y: 115, color: design.accentColor },
-    { x: 600, y: 95,  color: design.accentColor4 },
-    { x: 1110, y: 125, color: design.accentColor2 },
+    { x: 90,  y: 85, color: design.accentColor },
+    { x: 600, y: 300,  color: design.accentColor4 },
+    { x: 1110, y: 95, color: design.accentColor2 },
     { x: 145, y: 630, color: design.accentColor3 },
-    { x: 1055, y: 610, color: design.accentColor4 }
+    { x: 1055, y: 610, color: design.accentColor5 }
 ];
 
     balloons.forEach(balloon => {
