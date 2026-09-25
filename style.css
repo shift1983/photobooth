@@ -46,6 +46,96 @@ button {
     cursor: pointer;
 }
 
+/* =========================
+   STARTSEITE
+   ========================= */
+
+#startScreen {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 28px;
+}
+
+#startLogo {
+    width: min(900px, 82vw);
+    max-height: 48vh;
+
+    object-fit: contain;
+
+    user-select: none;
+    -webkit-user-select: none;
+
+    cursor: default;
+}
+
+#startBoothBtn {
+    min-width: 300px;
+
+    padding: 18px 34px;
+
+    font-size: 1.35rem;
+    font-weight: bold;
+
+    border-radius: 18px;
+
+    border: 0;
+
+    box-shadow:
+        0 10px 28px
+        rgba(0, 0, 0, 0.22);
+}
+
+
+/* =========================
+   PHOTOBOOTH-ANSICHT
+   ========================= */
+
+#boothScreen {
+    width: 100%;
+    height: 100%;
+
+    display: none;
+
+    position: relative;
+}
+
+
+/* kleines Logo oben rechts */
+
+#logoArea {
+    position: absolute;
+
+    top: 10px;
+    right: 18px;
+
+    z-index: 100;
+
+    margin: 0;
+
+    display: flex;
+
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+#appLogo {
+    width: 90px;
+    height: 90px;
+
+    object-fit: contain;
+
+    user-select: none;
+    -webkit-user-select: none;
+
+    cursor: default;
+}
 
 /* =========================
    GASTANSICHT
@@ -210,15 +300,6 @@ button {
 #retakeBtn,
 #nextBtn {
     display: none;
-}
-
-#startBoothBtn {
-    margin-top: 15px;
-
-    padding: 1rem 2rem;
-
-    font-size: 1.2rem;
-    font-weight: bold;
 }
 
 
@@ -462,23 +543,7 @@ body.business {
    LOGO
    ========================= */
 
-#logoArea {
-    display: flex;
 
-    justify-content: center;
-
-    margin-bottom: 15px;
-}
-
-#appLogo {
-    font-size: 1.5rem;
-    font-weight: bold;
-
-    user-select: none;
-    -webkit-user-select: none;
-
-    cursor: default;
-}
 
 
 /* =========================
