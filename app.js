@@ -32,7 +32,7 @@ const cardDesigns = {
     birthdayConfetti: {
         name: "Konfetti",
         theme: "birthday",
-        photoCounts: [3, 4],
+        photoCounts: [2, 3, 4],
 
         backgroundColor: "#fff7e8",
         textColor: "#6b3200",
@@ -60,7 +60,7 @@ const cardDesigns = {
 birthdayParty: {
     name: "Party",
     theme: "birthday",
-    photoCounts: [4],
+    photoCounts: [2, 3, 4],
 
     backgroundColor: "#34124d",
     textColor: "#ffffff",
@@ -1790,9 +1790,26 @@ fillRoundedRect(
         images.push(img);
     }
 
-    let positions = [];
+let positions = [];
 
-if (capturedPhotos.length === 3) {
+if (capturedPhotos.length === 2) {
+
+    positions = [
+        {
+            x: 70,
+            y: 165,
+            w: 500,
+            h: 500
+        },
+        {
+            x: 630,
+            y: 165,
+            w: 500,
+            h: 500
+        }
+    ];
+
+} else if (capturedPhotos.length === 3) {
 
     positions = [
         {
