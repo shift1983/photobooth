@@ -1252,37 +1252,67 @@ function drawPhotoFrame(
     const innerH =
         frame.h - border * 2;
 
-    const imageRatio =
-        img.width / img.height;
+const imageRatio =
+    img.width / img.height;
 
-    const frameRatio =
-        innerW / innerH;
+const frameRatio =
+    innerW / innerH;
 
-    let drawWidth;
-    let drawHeight;
-    let offsetX;
-    let offsetY;
+let containWidth;
+let containHeight;
 
-    if (imageRatio > frameRatio) {
+let coverWidth;
+let coverHeight;
 
-        drawHeight = innerH;
-        drawWidth =
-            innerH * imageRatio;
+if (imageRatio > frameRatio) {
 
-        offsetX =
-            (drawWidth - innerW) / 2;
-        offsetY = 0;
+    // CONTAIN
+    containWidth = innerW;
+    containHeight =
+        innerW / imageRatio;
 
-    } else {
+    // COVER
+    coverHeight = innerH;
+    coverWidth =
+        innerH * imageRatio;
 
-        drawWidth = innerW;
-        drawHeight =
-            innerW / imageRatio;
+} else {
 
-        offsetX = 0;
-        offsetY =
-            (drawHeight - innerH) / 2;
-    }
+    // CONTAIN
+    containHeight = innerH;
+    containWidth =
+        innerH * imageRatio;
+
+    // COVER
+    coverWidth = innerW;
+    coverHeight =
+        innerW / imageRatio;
+}
+
+/*
+    cropStrength:
+    0   = kein Cropping (contain)
+    1   = volles Cropping (cover)
+
+    0.35 ist ein guter Mittelweg
+*/
+const cropStrength = 0.35;
+
+const drawWidth =
+    containWidth +
+    (coverWidth - containWidth) *
+    cropStrength;
+
+const drawHeight =
+    containHeight +
+    (coverHeight - containHeight) *
+    cropStrength;
+
+const offsetX =
+    (innerW - drawWidth) / 2;
+
+const offsetY =
+    (innerH - drawHeight) / 2;
 
     ctx.save();
 
@@ -1299,8 +1329,8 @@ function drawPhotoFrame(
 
     ctx.drawImage(
         img,
-        innerX - offsetX,
-        innerY - offsetY,
+        innerX + offsetX,
+        innerY + offsetY,
         drawWidth,
         drawHeight
     );
