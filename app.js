@@ -44,8 +44,11 @@ const cardDesigns = {
         accentColor3: "#7e57c2",
         accentColor4: "#4db6ac",
 
-        dateBgColor: "#ffffff",
-        dateTextColor: "#6b3200"
+        dateBgColor: "rgba(255,255,255,0.85)",
+        dateTextColor: "#6b3200",
+
+        titleFont:
+            "bold 52px 'Comic Sans MS', 'Marker Felt', cursive"
     },
 
     birthdayParty: {
@@ -63,8 +66,11 @@ const cardDesigns = {
         accentColor3: "#59d8ff",
         accentColor4: "#7df58a",
 
-        dateBgColor: "#ffffff",
-        dateTextColor: "#34124d"
+        dateBgColor: "rgba(255,255,255,0.9)",
+        dateTextColor: "#34124d",
+
+        titleFont:
+            "bold 50px 'Comic Sans MS', 'Marker Felt', cursive"
     }
 
 };
@@ -1068,7 +1074,8 @@ function drawConfettiDecoration(
         design.accentColor4
     ];
 
-    for (let i = 0; i < 90; i++) {
+    // Mehr Konfetti
+    for (let i = 0; i < 160; i++) {
 
         const x =
             Math.random() * canvasWidth;
@@ -1077,7 +1084,7 @@ function drawConfettiDecoration(
             Math.random() * canvasHeight;
 
         const size =
-            8 + Math.random() * 12;
+            6 + Math.random() * 12;
 
         const color =
             confettiColors[
@@ -1102,23 +1109,26 @@ function drawConfettiDecoration(
         ctx.restore();
     }
 
-    for (let i = 0; i < 20; i++) {
+    // zusätzliche Punkte
+    for (let i = 0; i < 35; i++) {
 
         const x =
-            40 + Math.random() *
-            (canvasWidth - 80);
+            30 + Math.random() *
+            (canvasWidth - 60);
 
         const y =
-            110 + Math.random() * 70;
+            100 + Math.random() *
+            (canvasHeight - 180);
 
         ctx.beginPath();
         ctx.arc(
             x,
             y,
-            6 + Math.random() * 8,
+            5 + Math.random() * 7,
             0,
             Math.PI * 2
         );
+
         ctx.fillStyle =
             confettiColors[
                 Math.floor(
@@ -1126,8 +1136,113 @@ function drawConfettiDecoration(
                     confettiColors.length
                 )
             ];
+
         ctx.fill();
     }
+
+    // ein paar Luftschlangen
+    for (let i = 0; i < 10; i++) {
+
+        const startX =
+            60 + Math.random() *
+            (canvasWidth - 120);
+
+        const startY =
+            90 + Math.random() *
+            (canvasHeight - 180);
+
+        const color =
+            confettiColors[
+                Math.floor(
+                    Math.random() *
+                    confettiColors.length
+                )
+            ];
+
+        ctx.save();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(startX, startY);
+
+        for (let j = 1; j <= 4; j++) {
+
+            ctx.quadraticCurveTo(
+                startX + j * 12,
+                startY + (j % 2 === 0 ? 18 : -18),
+                startX + j * 20,
+                startY + j * 14
+            );
+        }
+
+        ctx.stroke();
+        ctx.restore();
+    }
+
+    // vereinzelte Ballons
+    const balloons = [
+        { x: 95, y: 150, color: design.accentColor },
+        { x: 1080, y: 175, color: design.accentColor2 },
+        { x: 120, y: 660, color: design.accentColor3 }
+    ];
+
+    balloons.forEach(balloon => {
+
+        // Schnur
+        ctx.save();
+        ctx.strokeStyle = "rgba(120,120,120,0.7)";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(balloon.x, balloon.y + 34);
+        ctx.quadraticCurveTo(
+            balloon.x - 8,
+            balloon.y + 58,
+            balloon.x + 6,
+            balloon.y + 92
+        );
+        ctx.stroke();
+        ctx.restore();
+
+        // Ballon
+        ctx.save();
+        ctx.beginPath();
+        ctx.ellipse(
+            balloon.x,
+            balloon.y,
+            24,
+            30,
+            0,
+            0,
+            Math.PI * 2
+        );
+        ctx.fillStyle = balloon.color;
+        ctx.fill();
+
+        // kleine Spitze
+        ctx.beginPath();
+        ctx.moveTo(balloon.x - 6, balloon.y + 28);
+        ctx.lineTo(balloon.x + 6, balloon.y + 28);
+        ctx.lineTo(balloon.x, balloon.y + 38);
+        ctx.closePath();
+        ctx.fillStyle = balloon.color;
+        ctx.fill();
+
+        // Lichtreflex
+        ctx.beginPath();
+        ctx.ellipse(
+            balloon.x - 8,
+            balloon.y - 10,
+            5,
+            8,
+            0.3,
+            0,
+            Math.PI * 2
+        );
+        ctx.fillStyle = "rgba(255,255,255,0.45)";
+        ctx.fill();
+
+        ctx.restore();
+    });
 }
 
 function drawPartyDecoration(
@@ -1365,12 +1480,23 @@ async function generateCollage() {
     // Titel-Banner
     fillRoundedRect(
         ctx,
-        160,
-        25,
-        880,
-        70,
-        28,
-        "rgba(255,255,255,0.85)"
+        150,
+        20,
+        900,
+        78,
+        32,
+        "rgba(255,255,255,0.88)"
+    );
+
+    strokeRoundedRect(
+        ctx,
+        150,
+        20,
+        900,
+        78,
+        32,
+        "rgba(255,255,255,0.95)",
+        2
     );
 
     ctx.fillStyle =
@@ -1379,7 +1505,9 @@ async function generateCollage() {
             : "#000000";
 
     ctx.font =
-        "bold 46px Arial";
+    design && design.titleFont
+            ? design.titleFont
+            : "bold 46px Arial";
 
     ctx.textAlign =
         "center";
@@ -1498,11 +1626,11 @@ if (capturedPhotos.length === 3) {
 
     fillRoundedRect(
         ctx,
-        455,
-        722,
-        290,
-        46,
-        22,
+        920,
+        730,
+        210,
+        38,
+        18,
         design.dateBgColor
     );
 
@@ -1510,17 +1638,18 @@ if (capturedPhotos.length === 3) {
         design.dateTextColor;
 
     ctx.font =
-        "28px Arial";
+        "22px Arial";
 
     ctx.textAlign =
         "center";
+
     ctx.textBaseline =
         "middle";
 
     ctx.fillText(
         dateString,
-        collageCanvas.width / 2,
-        745
+        1025,
+        749
     );
 
     collagePreview.src =
