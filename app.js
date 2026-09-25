@@ -136,15 +136,7 @@ businessClean: {
     titleFont:
         "bold 46px Arial, sans-serif"
 }
-    
-    dateBgColor: "rgba(255,255,255,0.9)",
-    dateTextColor: "#34124d",
 
-    titleBgColor: "rgba(35, 10, 55, 0.78)",
-
-    titleFont:
-        "bold 50px 'Comic Sans MS', 'Marker Felt', cursive"
-}
 
 };
 
