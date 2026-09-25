@@ -1218,7 +1218,7 @@ function drawPhotoFrame(
     img,
     frame
 ) {
-    const border = 14;
+    const border = 9;
     const radius = 22;
 
     // Rahmen
@@ -1301,8 +1301,8 @@ if (imageRatio > frameRatio) {
 
     ctx.drawImage(
         img,
-        innerX + offsetX,
-        innerY + offsetY,
+        innerX - offsetX,
+        innerY - offsetY,
         drawWidth,
         drawHeight
     );
