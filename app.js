@@ -156,6 +156,7 @@ let currentPhoto = null;
 
 let wakeLock = null;
 
+
 async function requestWakeLock() {
 
     try {
@@ -163,9 +164,13 @@ async function requestWakeLock() {
         if ("wakeLock" in navigator) {
 
             wakeLock =
-                await navigator.wakeLock.request("screen");
+                await navigator.wakeLock.request(
+                    "screen"
+                );
 
-            console.log("Wake Lock aktiv");
+            console.log(
+                "Wake Lock aktiv"
+            );
         }
 
     } catch (err) {
@@ -174,11 +179,13 @@ async function requestWakeLock() {
     }
 }
 
+
 async function enableFullscreen() {
 
     try {
 
-        await document.documentElement.requestFullscreen();
+        await document.documentElement
+            .requestFullscreen();
 
     } catch (err) {
 
@@ -186,140 +193,238 @@ async function enableFullscreen() {
     }
 }
 
+
 if ("serviceWorker" in navigator) {
 
     navigator.serviceWorker
-        .register("service-worker.js")
+        .register(
+            "service-worker.js"
+        )
         .then(() => {
 
-            console.log("Service Worker aktiv");
+            console.log(
+                "Service Worker aktiv"
+            );
         });
 }
 
+
+/* =========================
+   DOM-ELEMENTE
+========================= */
+
 const startBoothBtn =
-    document.getElementById("startBoothBtn");
+    document.getElementById(
+        "startBoothBtn"
+    );
 
 const video =
-    document.getElementById("video");
+    document.getElementById(
+        "video"
+    );
 
 const captureBtn =
-    document.getElementById("captureBtn");
+    document.getElementById(
+        "captureBtn"
+    );
 
 const canvas =
-    document.getElementById("photoCanvas");
+    document.getElementById(
+        "photoCanvas"
+    );
 
 const collageCanvas =
-    document.getElementById("collageCanvas");
+    document.getElementById(
+        "collageCanvas"
+    );
 
 const collagePreview =
-    document.getElementById("collagePreview");
+    document.getElementById(
+        "collagePreview"
+    );
 
 const preview =
-    document.getElementById("photoPreview");
+    document.getElementById(
+        "photoPreview"
+    );
 
 const countdownOverlay =
-    document.getElementById("countdownOverlay");
+    document.getElementById(
+        "countdownOverlay"
+    );
 
 const flashOverlay =
-    document.getElementById("flashOverlay");
+    document.getElementById(
+        "flashOverlay"
+    );
 
 const shutterSound =
-    new Audio("sounds/shutter.mp3");
+    new Audio(
+        "sounds/shutter.mp3"
+    );
 
 const photoActions =
-    document.getElementById("photoActions");
+    document.getElementById(
+        "photoActions"
+    );
 
 const saveBtn =
-    document.getElementById("saveBtn");
+    document.getElementById(
+        "saveBtn"
+    );
 
 const retakeBtn =
-    document.getElementById("retakeBtn");
+    document.getElementById(
+        "retakeBtn"
+    );
 
 const nextBtn =
-    document.getElementById("nextBtn");
+    document.getElementById(
+        "nextBtn"
+    );
 
 const newSeriesBtn =
-    document.getElementById("newSeriesBtn");
+    document.getElementById(
+        "newSeriesBtn"
+    );
 
 const eventTitleDisplay =
-    document.getElementById("eventTitleDisplay");
+    document.getElementById(
+        "eventTitleDisplay"
+    );
 
 const eventTitleInput =
-    document.getElementById("eventTitleInput");
+    document.getElementById(
+        "eventTitleInput"
+    );
 
 const themeButtons =
-    document.querySelectorAll(".themeBtn");
+    document.querySelectorAll(
+        ".themeBtn"
+    );
 
 const designButtons =
-    document.querySelectorAll(".designBtn");
+    document.querySelectorAll(
+        ".designBtn"
+    );
 
 const photoCountButtons =
-    document.querySelectorAll(".photoCountBtn");
+    document.querySelectorAll(
+        ".photoCountBtn"
+    );
 
 const photoCountInfo =
-    document.getElementById("photoCountInfo");
+    document.getElementById(
+        "photoCountInfo"
+    );
 
 const seriesProgress =
-    document.getElementById("seriesProgress");
+    document.getElementById(
+        "seriesProgress"
+    );
 
 const appLogo =
-    document.getElementById("appLogo");
+    document.getElementById(
+        "appLogo"
+    );
 
 const adminOverlay =
-    document.getElementById("adminOverlay");
+    document.getElementById(
+        "adminOverlay"
+    );
 
 const closeAdminBtn =
-    document.getElementById("closeAdminBtn");
+    document.getElementById(
+        "closeAdminBtn"
+    );
 
 const pinOverlay =
-    document.getElementById("pinOverlay");
+    document.getElementById(
+        "pinOverlay"
+    );
 
 const adminPinInput =
-    document.getElementById("adminPinInput");
+    document.getElementById(
+        "adminPinInput"
+    );
 
 const pinError =
-    document.getElementById("pinError");
+    document.getElementById(
+        "pinError"
+    );
 
 const pinCancelBtn =
-    document.getElementById("pinCancelBtn");
+    document.getElementById(
+        "pinCancelBtn"
+    );
 
 const pinOkBtn =
-    document.getElementById("pinOkBtn");
+    document.getElementById(
+        "pinOkBtn"
+    );
 
 const countdownSelect =
-    document.getElementById("countdownSelect");
+    document.getElementById(
+        "countdownSelect"
+    );
 
 const flashEnabledCheckbox =
-    document.getElementById("flashEnabled");
+    document.getElementById(
+        "flashEnabled"
+    );
 
 const soundEnabledCheckbox =
-    document.getElementById("soundEnabled");
+    document.getElementById(
+        "soundEnabled"
+    );
 
 const captureArea =
-    document.getElementById("captureArea");
+    document.getElementById(
+        "captureArea"
+    );
 
 const resultArea =
-    document.getElementById("resultArea");
+    document.getElementById(
+        "resultArea"
+    );
 
 const restoreFullscreenBtn =
-    document.getElementById("restoreFullscreenBtn");
+    document.getElementById(
+        "restoreFullscreenBtn"
+    );
 
 const printBtn =
-    document.getElementById("printBtn");
+    document.getElementById(
+        "printBtn"
+    );
 
 const restartCameraBtn =
-    document.getElementById("restartCameraBtn");
+    document.getElementById(
+        "restartCameraBtn"
+    );
 
 const resetBoothBtn =
-    document.getElementById("resetBoothBtn");
+    document.getElementById(
+        "resetBoothBtn"
+    );
 
 const guestPhotoCountSelection =
-    document.getElementById("guestPhotoCountSelection");
+    document.getElementById(
+        "guestPhotoCountSelection"
+    );
 
 const guestPhotoCountButtons =
-    document.querySelectorAll(".guestPhotoCountBtn");
+    document.querySelectorAll(
+        ".guestPhotoCountBtn"
+    );
+
+
+/* =========================
+   ADMIN
+========================= */
 
 let adminPressTimer = null;
+
 
 function startAdminPress() {
 
@@ -330,6 +435,7 @@ function startAdminPress() {
 
         }, 5000);
 }
+
 
 function cancelAdminPress() {
 
@@ -342,6 +448,7 @@ function cancelAdminPress() {
         adminPressTimer = null;
     }
 }
+
 
 function requestAdminAccess() {
 
@@ -356,123 +463,162 @@ function requestAdminAccess() {
     adminPinInput.focus();
 }
 
+
+/* =========================
+   DESIGN-AUSWAHL
+========================= */
+
 function updateDesignSelection() {
 
-    let firstCompatibleDesign = null;
+    const compatibleDesigns =
+        Object.entries(
+            cardDesigns
+        ).filter(
+            ([designName, design]) => {
 
-    designButtons.forEach(button => {
-
-        const designName =
-            button.dataset.design;
-
-        const design =
-            cardDesigns[designName];
-
-        if (!design) {
-            button.style.display = "none";
-            return;
-        }
-
-        const isCompatible =
-            design.theme === settings.theme &&
-            design.photoCounts.includes(
-                settings.photoCount
-            );
-
-        if (isCompatible) {
-
-            button.style.display =
-                "inline-block";
-
-            if (!firstCompatibleDesign) {
-                firstCompatibleDesign =
-                    designName;
+                return (
+                    design.theme ===
+                        settings.theme &&
+                    design.photoCounts
+                        .includes(
+                            settings.photoCount
+                        )
+                );
             }
-
-        } else {
-
-            button.style.display =
-                "none";
-
-        }
-    });
+        );
 
     const currentDesign =
-        cardDesigns[settings.cardDesign];
+        cardDesigns[
+            settings.cardDesign
+        ];
 
     const currentIsCompatible =
         currentDesign &&
-        currentDesign.theme === settings.theme &&
-        currentDesign.photoCounts.includes(
-            settings.photoCount
-        );
+        currentDesign.theme ===
+            settings.theme &&
+        currentDesign.photoCounts
+            .includes(
+                settings.photoCount
+            );
 
     if (!currentIsCompatible) {
 
         settings.cardDesign =
-            firstCompatibleDesign;
-
+            compatibleDesigns.length > 0
+                ? compatibleDesigns[0][0]
+                : null;
     }
+
+    designButtons.forEach(
+        button => {
+
+            const designName =
+                button.dataset.design;
+
+            const design =
+                cardDesigns[
+                    designName
+                ];
+
+            const isCompatible =
+                design &&
+                design.theme ===
+                    settings.theme &&
+                design.photoCounts
+                    .includes(
+                        settings.photoCount
+                    );
+
+            button.style.display =
+                isCompatible
+                    ? "inline-block"
+                    : "none";
+        }
+    );
 
     updateActiveDesignButton();
 }
 
+
 function updateActiveDesignButton() {
 
-    designButtons.forEach(button => {
+    designButtons.forEach(
+        button => {
 
-        if (
-            button.dataset.design ===
-            settings.cardDesign
-        ) {
+            if (
+                button.dataset.design ===
+                settings.cardDesign
+            ) {
 
-            button.classList.add("active");
+                button.classList.add(
+                    "active"
+                );
 
-        } else {
+            } else {
 
-            button.classList.remove("active");
+                button.classList.remove(
+                    "active"
+                );
+            }
         }
-    });
+    );
 }
+
 
 function updateActivePhotoCountButton() {
 
-    photoCountButtons.forEach(button => {
+    photoCountButtons.forEach(
+        button => {
 
-        const count =
-            Number(button.dataset.count);
+            const count =
+                Number(
+                    button.dataset.count
+                );
 
-        if (
-            count ===
-            settings.photoCount
-        ) {
+            if (
+                count ===
+                settings.photoCount
+            ) {
 
-            button.classList.add("active");
+                button.classList.add(
+                    "active"
+                );
 
-        } else {
+            } else {
 
-            button.classList.remove("active");
+                button.classList.remove(
+                    "active"
+                );
+            }
         }
-    });
+    );
 }
+
 
 function updateActiveThemeButton() {
 
-    themeButtons.forEach(button => {
+    themeButtons.forEach(
+        button => {
 
-        if (
-            button.dataset.theme ===
-            settings.theme
-        ) {
+            if (
+                button.dataset.theme ===
+                settings.theme
+            ) {
 
-            button.classList.add("active");
+                button.classList.add(
+                    "active"
+                );
 
-        } else {
+            } else {
 
-            button.classList.remove("active");
+                button.classList.remove(
+                    "active"
+                );
+            }
         }
-    });
+    );
 }
+
 
 function updateGuestPhotoCountButtons() {
 
@@ -503,21 +649,42 @@ function updateGuestPhotoCountButtons() {
     );
 }
 
+
+/* =========================
+   EINSTELLUNGEN SPEICHERN
+========================= */
+
 function saveSettings() {
 
-const savedSettings = {
-    theme: settings.theme,
-    photoCount: settings.photoCount,
-    cardDesign: settings.cardDesign,
-    countdown: settings.countdown,
-    flashEnabled: settings.flashEnabled,
-    soundEnabled: settings.soundEnabled,
-    eventTitle: settings.eventTitle
-};
+    const savedSettings = {
+
+        theme:
+            settings.theme,
+
+        photoCount:
+            settings.photoCount,
+
+        cardDesign:
+            settings.cardDesign,
+
+        countdown:
+            settings.countdown,
+
+        flashEnabled:
+            settings.flashEnabled,
+
+        soundEnabled:
+            settings.soundEnabled,
+
+        eventTitle:
+            settings.eventTitle
+    };
 
     localStorage.setItem(
         "photoboothSettings",
-        JSON.stringify(savedSettings)
+        JSON.stringify(
+            savedSettings
+        )
     );
 
     console.log(
@@ -525,6 +692,7 @@ const savedSettings = {
         savedSettings
     );
 }
+
 
 function loadSettings() {
 
@@ -540,20 +708,32 @@ function loadSettings() {
     try {
 
         const savedSettings =
-            JSON.parse(storedSettings);
+            JSON.parse(
+                storedSettings
+            );
 
         if (
             savedSettings.theme &&
-            themes[savedSettings.theme]
+            themes[
+                savedSettings.theme
+            ]
         ) {
+
             settings.theme =
                 savedSettings.theme;
         }
 
-if ([2, 3, 4].includes(savedSettings.photoCount)) {
-    settings.photoCount =
-        savedSettings.photoCount;
-}
+
+        if (
+            [2, 3, 4].includes(
+                savedSettings.photoCount
+            )
+        ) {
+
+            settings.photoCount =
+                savedSettings.photoCount;
+        }
+
 
         if (
             savedSettings.cardDesign &&
@@ -561,43 +741,58 @@ if ([2, 3, 4].includes(savedSettings.photoCount)) {
                 savedSettings.cardDesign
             ]
         ) {
+
             settings.cardDesign =
                 savedSettings.cardDesign;
         }
 
-if (
-    savedSettings.countdown === 3 ||
-    savedSettings.countdown === 5 ||
-    savedSettings.countdown === 10
-) {
-    settings.countdown =
-        savedSettings.countdown;
-}
 
-if (
-    typeof savedSettings.flashEnabled ===
-    "boolean"
-) {
-    settings.flashEnabled =
-        savedSettings.flashEnabled;
-}
+        if (
+            savedSettings.countdown === 3 ||
+            savedSettings.countdown === 5 ||
+            savedSettings.countdown === 10
+        ) {
 
-if (
-    typeof savedSettings.soundEnabled ===
-    "boolean"
-) {
-    settings.soundEnabled =
-        savedSettings.soundEnabled;
-}
+            settings.countdown =
+                savedSettings.countdown;
+        }
 
-if (
-    typeof savedSettings.eventTitle === "string" &&
-    savedSettings.eventTitle.trim() !== ""
-) {
-    settings.eventTitle =
-        savedSettings.eventTitle;
-}
-        
+
+        if (
+            typeof savedSettings
+                .flashEnabled ===
+            "boolean"
+        ) {
+
+            settings.flashEnabled =
+                savedSettings.flashEnabled;
+        }
+
+
+        if (
+            typeof savedSettings
+                .soundEnabled ===
+            "boolean"
+        ) {
+
+            settings.soundEnabled =
+                savedSettings.soundEnabled;
+        }
+
+
+        if (
+            typeof savedSettings
+                .eventTitle ===
+                "string" &&
+            savedSettings
+                .eventTitle
+                .trim() !== ""
+        ) {
+
+            settings.eventTitle =
+                savedSettings.eventTitle;
+        }
+
     } catch (error) {
 
         console.error(
@@ -608,97 +803,136 @@ if (
 }
 
 
+/* =========================
+   ADMIN FOTOANZAHL
+========================= */
 
-photoCountButtons.forEach(button => {
+photoCountButtons.forEach(
+    button => {
 
-    button.addEventListener(
-        "click",
-        () => {
+        button.addEventListener(
+            "click",
+            () => {
 
-            const newPhotoCount =
-                Number(
-                    button.dataset.count
-                );
+                const newPhotoCount =
+                    Number(
+                        button.dataset.count
+                    );
 
-            if (![2, 3, 4].includes(newPhotoCount)) {
-                return;
+                if (
+                    ![2, 3, 4]
+                        .includes(
+                            newPhotoCount
+                        )
+                ) {
+                    return;
+                }
+
+                settings.photoCount =
+                    newPhotoCount;
+
+                capturedPhotos = [];
+                currentPhoto = null;
+                currentPhotoIndex = 1;
+
+                photoCountInfo
+                    .textContent =
+                    "Fotos pro Serie: " +
+                    settings.photoCount;
+
+                updateSeriesDisplay();
+
+                updateActivePhotoCountButton();
+
+                updateGuestPhotoCountButtons();
+
+                updateDesignSelection();
+
+                preview.style.display =
+                    "none";
+
+                collagePreview
+                    .style.display =
+                    "none";
+
+                document
+                    .getElementById(
+                        "cameraContainer"
+                    )
+                    .style.display =
+                    "flex";
+
+                video.style.display =
+                    "block";
+
+                captureArea.style.display =
+                    "flex";
+
+                resultArea.style.display =
+                    "none";
+
+                captureBtn.style.display =
+                    "inline-block";
+
+                captureBtn.disabled =
+                    false;
+
+                photoActions.style.display =
+                    "none";
+
+                retakeBtn.style.display =
+                    "none";
+
+                nextBtn.style.display =
+                    "none";
+
+                saveBtn.style.display =
+                    "none";
+
+                printBtn.style.display =
+                    "none";
+
+                newSeriesBtn.style.display =
+                    "none";
             }
+        );
+    }
+);
 
-            settings.photoCount =
-                newPhotoCount;
 
-            // Neue Serie vorbereiten
-            capturedPhotos = [];
-            currentPhoto = null;
-            currentPhotoIndex = 1;
-
-            // Anzeigen aktualisieren
-            photoCountInfo.textContent =
-                "Fotos pro Serie: " +
-                settings.photoCount;
-
-            updateSeriesDisplay();
-
-            updateActivePhotoCountButton();
-
-            // Passende Designs neu filtern
-            updateDesignSelection();
-
-            // Alte Vorschauen entfernen
-            preview.style.display =
-                "none";
-
-            collagePreview.style.display =
-                "none";
-
-            // Kamera wieder anzeigen
-            document.getElementById(
-                "cameraContainer"
-            ).style.display = "flex";
-
-            captureBtn.style.display =
-                "inline-block";
-
-            captureBtn.disabled =
-                false;
-
-            // Aktionsbuttons zurücksetzen
-            photoActions.style.display =
-                "none";
-
-            retakeBtn.style.display =
-                "none";
-
-            nextBtn.style.display =
-                "none";
-
-            saveBtn.style.display =
-                "none";
-
-            newSeriesBtn.style.display =
-                "none";
-
-            photoActions.style.display =
-                "none";
-        }
-    );
-});
+/* =========================
+   KAMERA
+========================= */
 
 async function startCamera() {
 
     try {
 
         const stream =
-            await navigator.mediaDevices.getUserMedia({
+            await navigator
+                .mediaDevices
+                .getUserMedia({
 
-                video: {
-                    facingMode: "user"
-                },
+                    video: {
+                        facingMode:
+                            "user"
+                    },
 
-                audio: false
-            });
+                    audio: false
+                });
 
-        video.srcObject = stream;
+        video.srcObject =
+            stream;
+
+        video.style.display =
+            "block";
+
+        document
+            .getElementById(
+                "cameraContainer"
+            )
+            .style.display =
+            "flex";
 
     } catch (error) {
 
@@ -709,9 +943,12 @@ async function startCamera() {
             error.message
         );
 
-        console.error(error);
+        console.error(
+            error
+        );
     }
 }
+
 
 startBoothBtn.addEventListener(
     "click",
@@ -723,65 +960,103 @@ startBoothBtn.addEventListener(
 
         await startCamera();
 
-        startBoothBtn.style.display =
+        startBoothBtn
+            .style.display =
             "none";
 
-        captureBtn.style.display =
+        captureBtn
+            .style.display =
             "inline-block";
     }
 );
 
+
+/* =========================
+   FOTO AUFNEHMEN
+========================= */
+
 async function capturePhoto() {
 
-    guestPhotoCountSelection.style.display =
+    guestPhotoCountSelection
+        .style.display =
         "none";
-    
-    countdownOverlay.style.display = "flex";
+
+    countdownOverlay
+        .style.display =
+        "flex";
 
     for (
-        let i = settings.countdown;
+        let i =
+            settings.countdown;
         i > 0;
         i--
     ) {
-        countdownOverlay.textContent = i;
 
-        await new Promise(resolve =>
-            setTimeout(resolve, 1000)
+        countdownOverlay
+            .textContent =
+            i;
+
+        await new Promise(
+            resolve =>
+                setTimeout(
+                    resolve,
+                    1000
+                )
         );
     }
 
-    countdownOverlay.style.display = "none";
+    countdownOverlay
+        .style.display =
+        "none";
 
 
-    if (settings.flashEnabled) {
+    if (
+        settings.flashEnabled
+    ) {
 
-        flashOverlay.style.opacity = "1";
+        flashOverlay
+            .style.opacity =
+            "1";
 
-        await new Promise(resolve =>
-            setTimeout(resolve, 500)
+        await new Promise(
+            resolve =>
+                setTimeout(
+                    resolve,
+                    500
+                )
         );
 
-        flashOverlay.style.opacity = "0";
+        flashOverlay
+            .style.opacity =
+            "0";
     }
 
 
-    if (settings.soundEnabled) {
+    if (
+        settings.soundEnabled
+    ) {
 
-        shutterSound.currentTime = 0;
+        shutterSound.currentTime =
+            0;
 
         shutterSound
             .play()
-            .catch(error => {
-                console.log(
-                    "Auslöseton konnte nicht abgespielt werden.",
-                    error
-                );
-            });
+            .catch(
+                error => {
+
+                    console.log(
+                        "Auslöseton konnte nicht abgespielt werden.",
+                        error
+                    );
+                }
+            );
     }
 
 
     const context =
-        canvas.getContext("2d");
+        canvas.getContext(
+            "2d"
+        );
 
     canvas.width =
         video.videoWidth;
@@ -791,7 +1066,10 @@ async function capturePhoto() {
 
     context.save();
 
-    context.scale(-1, 1);
+    context.scale(
+        -1,
+        1
+    );
 
     context.drawImage(
         video,
@@ -810,30 +1088,38 @@ async function capturePhoto() {
             0.95
         );
 
-    currentPhoto = imageData;
+    currentPhoto =
+        imageData;
 
-    preview.src = imageData;
+    preview.src =
+        imageData;
 
-video.style.display =
-    "none";
+    video.style.display =
+        "none";
 
-preview.style.display =
-    "block";
+    preview.style.display =
+        "block";
 
-captureBtn.style.display =
-    "none";
+    captureBtn.style.display =
+        "none";
 
-retakeBtn.style.display =
-    "inline-block";
+    retakeBtn.style.display =
+        "inline-block";
 
-nextBtn.style.display =
-    "inline-block";
+    nextBtn.style.display =
+        "inline-block";
 }
 
-    captureBtn.addEventListener(
-        "click",
-        capturePhoto
+
+captureBtn.addEventListener(
+    "click",
+    capturePhoto
 );
+
+
+/* =========================
+   KAMERA NEUSTART
+========================= */
 
 restartCameraBtn.addEventListener(
     "click",
@@ -843,6 +1129,7 @@ restartCameraBtn.addEventListener(
     }
 );
 
+
 resetBoothBtn.addEventListener(
     "click",
     () => {
@@ -851,13 +1138,20 @@ resetBoothBtn.addEventListener(
     }
 );
 
+
+/* =========================
+   NOCHMAL
+========================= */
+
 retakeBtn.addEventListener(
     "click",
     async () => {
 
-        retakeBtn.disabled = true;
+        retakeBtn.disabled =
+            true;
 
-        currentPhoto = null;
+        currentPhoto =
+            null;
 
         preview.style.display =
             "none";
@@ -884,6 +1178,11 @@ retakeBtn.addEventListener(
     }
 );
 
+
+/* =========================
+   SPEICHERN
+========================= */
+
 saveBtn.addEventListener(
     "click",
     () => {
@@ -892,22 +1191,43 @@ saveBtn.addEventListener(
             return;
         }
 
-        const now = new Date();
+        const now =
+            new Date();
 
         const year =
             now.getFullYear();
 
         const month =
-            String(now.getMonth() + 1).padStart(2, "0");
+            String(
+                now.getMonth() + 1
+            ).padStart(
+                2,
+                "0"
+            );
 
         const day =
-            String(now.getDate()).padStart(2, "0");
+            String(
+                now.getDate()
+            ).padStart(
+                2,
+                "0"
+            );
 
         const hours =
-            String(now.getHours()).padStart(2, "0");
+            String(
+                now.getHours()
+            ).padStart(
+                2,
+                "0"
+            );
 
         const minutes =
-            String(now.getMinutes()).padStart(2, "0");
+            String(
+                now.getMinutes()
+            ).padStart(
+                2,
+                "0"
+            );
 
         const fileName =
             `Photobooth_${year}-${month}-${day}_${hours}-${minutes}.jpg`;
@@ -919,7 +1239,9 @@ saveBtn.addEventListener(
             );
 
         const link =
-            document.createElement("a");
+            document.createElement(
+                "a"
+            );
 
         link.href =
             imageToSave;
@@ -927,23 +1249,40 @@ saveBtn.addEventListener(
         link.download =
             fileName;
 
-        document.body.appendChild(link);
+        document.body
+            .appendChild(
+                link
+            );
 
         link.click();
 
-        document.body.removeChild(link);
+        document.body
+            .removeChild(
+                link
+            );
     }
 );
 
-restoreFullscreenBtn.addEventListener(
-    "click",
-    async () => {
 
-        await enableFullscreen();
+/* =========================
+   FULLSCREEN
+========================= */
 
-        await requestWakeLock();
-    }
-);
+restoreFullscreenBtn
+    .addEventListener(
+        "click",
+        async () => {
+
+            await enableFullscreen();
+
+            await requestWakeLock();
+        }
+    );
+
+
+/* =========================
+   DRUCKEN
+========================= */
 
 printBtn.addEventListener(
     "click",
@@ -953,12 +1292,15 @@ printBtn.addEventListener(
     }
 );
 
+/* =========================
+   WEITER / NÄCHSTES FOTO
+========================= */
+
 nextBtn.addEventListener(
     "click",
     async () => {
 
         if (!currentPhoto) {
-
             return;
         }
 
@@ -966,17 +1308,16 @@ nextBtn.addEventListener(
             currentPhoto
         );
 
-        currentPhoto = null;
+        currentPhoto =
+            null;
 
-
-      console.log(
+        console.log(
             "currentPhotoIndex:",
             currentPhotoIndex,
             "photoCount:",
             settings.photoCount
-    );
+        );
 
-        
         if (
             currentPhotoIndex <
             settings.photoCount
@@ -986,51 +1327,66 @@ nextBtn.addEventListener(
 
             updateSeriesDisplay();
 
-    preview.style.display =
-        "none";
+            preview.style.display =
+                "none";
 
-    video.style.display =
-        "block";
+            video.style.display =
+                "block";
 
-    retakeBtn.style.display =
-        "none";
+            retakeBtn.style.display =
+                "none";
 
-    nextBtn.style.display =
-        "none";
+            nextBtn.style.display =
+                "none";
 
-    captureBtn.style.display =
-        "inline-block";
+            captureBtn.style.display =
+                "inline-block";
 
-    captureBtn.disabled =
-        false;
+            captureBtn.disabled =
+                false;
 
-    await capturePhoto();
+            await capturePhoto();
 
-} else {
+        } else {
 
-    await generateCollage();
+            await generateCollage();
 
-    preview.style.display = "none";
+            preview.style.display =
+                "none";
 
-    captureArea.style.display = "none";
+            captureArea.style.display =
+                "none";
 
-    eventTitleDisplay.style.display = "none";
+            eventTitleDisplay
+                .style.display =
+                "none";
 
-    seriesProgress.style.display = "none";
+            seriesProgress
+                .style.display =
+                "none";
 
-    resultArea.style.display = "flex";
+            resultArea.style.display =
+                "flex";
 
-    photoActions.style.display = "flex";
+            photoActions.style.display =
+                "flex";
 
-    saveBtn.style.display = "inline-block";
+            saveBtn.style.display =
+                "inline-block";
 
-    printBtn.style.display = "inline-block";
-            
-    newSeriesBtn.style.display = "inline-block";
+            printBtn.style.display =
+                "inline-block";
 
-}
+            newSeriesBtn.style.display =
+                "inline-block";
+        }
     }
 );
+
+
+/* =========================
+   GAST FOTOANZAHL
+========================= */
 
 guestPhotoCountButtons.forEach(
     button => {
@@ -1045,9 +1401,10 @@ guestPhotoCountButtons.forEach(
                     );
 
                 if (
-                    ![2, 3, 4].includes(
-                        newPhotoCount
-                    )
+                    ![2, 3, 4]
+                        .includes(
+                            newPhotoCount
+                        )
                 ) {
                     return;
                 }
@@ -1063,28 +1420,43 @@ guestPhotoCountButtons.forEach(
 
                 updateGuestPhotoCountButtons();
 
+                updateActivePhotoCountButton();
+
                 updateDesignSelection();
+
+                photoCountInfo
+                    .textContent =
+                    "Fotos pro Serie: " +
+                    settings.photoCount;
             }
         );
     }
 );
 
-    // Neustart der Kamera
+
+/* =========================
+   KAMERA NEUSTARTEN
+========================= */
 
 async function restartCamera() {
 
     try {
 
-        if (video.srcObject) {
+        if (
+            video.srcObject
+        ) {
 
             const tracks =
-                video.srcObject.getTracks();
+                video.srcObject
+                    .getTracks();
 
             tracks.forEach(
-                track => track.stop()
+                track =>
+                    track.stop()
             );
 
-            video.srcObject = null;
+            video.srcObject =
+                null;
         }
 
         await startCamera();
@@ -1102,6 +1474,11 @@ async function restartCamera() {
     }
 }
 
+
+/* =========================
+   FORTSCHRITT
+========================= */
+
 function updateSeriesDisplay() {
 
     seriesProgress.textContent =
@@ -1111,6 +1488,11 @@ function updateSeriesDisplay() {
         settings.photoCount;
 }
 
+
+/* =========================
+   ROUNDED RECT
+========================= */
+
 function drawRoundedRect(
     ctx,
     x,
@@ -1119,41 +1501,65 @@ function drawRoundedRect(
     height,
     radius
 ) {
+
     ctx.beginPath();
-    ctx.moveTo(x + radius, y);
-    ctx.lineTo(x + width - radius, y);
+
+    ctx.moveTo(
+        x + radius,
+        y
+    );
+
+    ctx.lineTo(
+        x + width - radius,
+        y
+    );
+
     ctx.quadraticCurveTo(
         x + width,
         y,
         x + width,
         y + radius
     );
+
     ctx.lineTo(
         x + width,
         y + height - radius
     );
+
     ctx.quadraticCurveTo(
         x + width,
         y + height,
         x + width - radius,
         y + height
     );
-    ctx.lineTo(x + radius, y + height);
+
+    ctx.lineTo(
+        x + radius,
+        y + height
+    );
+
     ctx.quadraticCurveTo(
         x,
         y + height,
         x,
         y + height - radius
     );
-    ctx.lineTo(x, y + radius);
+
+    ctx.lineTo(
+        x,
+        y + radius
+    );
+
     ctx.quadraticCurveTo(
         x,
         y,
         x + radius,
         y
     );
+
     ctx.closePath();
 }
+
 
 function fillRoundedRect(
     ctx,
@@ -1164,7 +1570,9 @@ function fillRoundedRect(
     radius,
     color
 ) {
+
     ctx.save();
+
     drawRoundedRect(
         ctx,
         x,
@@ -1173,10 +1581,15 @@ function fillRoundedRect(
         height,
         radius
     );
-    ctx.fillStyle = color;
+
+    ctx.fillStyle =
+        color;
+
     ctx.fill();
+
     ctx.restore();
 }
+
 
 function strokeRoundedRect(
     ctx,
@@ -1188,7 +1601,9 @@ function strokeRoundedRect(
     color,
     lineWidth = 4
 ) {
+
     ctx.save();
+
     drawRoundedRect(
         ctx,
         x,
@@ -1197,11 +1612,22 @@ function strokeRoundedRect(
         height,
         radius
     );
-    ctx.strokeStyle = color;
-    ctx.lineWidth = lineWidth;
+
+    ctx.strokeStyle =
+        color;
+
+    ctx.lineWidth =
+        lineWidth;
+
     ctx.stroke();
+
     ctx.restore();
 }
+
+
+/* =========================
+   KONFETTI DESIGN
+========================= */
 
 function drawConfettiDecoration(
     ctx,
@@ -1209,21 +1635,29 @@ function drawConfettiDecoration(
     canvasHeight,
     design
 ) {
-    
-const confettiColors =
-    design.accentColors;
 
-    // Mehr Konfetti
-    for (let i = 0; i < 160; i++) {
+    const confettiColors =
+        design.accentColors;
+
+
+    for (
+        let i = 0;
+        i < 160;
+        i++
+    ) {
 
         const x =
-            Math.random() * canvasWidth;
+            Math.random() *
+            canvasWidth;
 
         const y =
-            Math.random() * canvasHeight;
+            Math.random() *
+            canvasHeight;
 
         const size =
-            6 + Math.random() * 12;
+            6 +
+            Math.random() *
+            12;
 
         const color =
             confettiColors[
@@ -1234,10 +1668,20 @@ const confettiColors =
             ];
 
         ctx.save();
-        ctx.translate(x, y);
-        ctx.rotate(Math.random() * Math.PI);
 
-        ctx.fillStyle = color;
+        ctx.translate(
+            x,
+            y
+        );
+
+        ctx.rotate(
+            Math.random() *
+            Math.PI
+        );
+
+        ctx.fillStyle =
+            color;
+
         ctx.fillRect(
             -size / 2,
             -size / 4,
@@ -1248,22 +1692,37 @@ const confettiColors =
         ctx.restore();
     }
 
-    // zusätzliche Punkte
-    for (let i = 0; i < 35; i++) {
+
+    for (
+        let i = 0;
+        i < 35;
+        i++
+    ) {
 
         const x =
-            30 + Math.random() *
-            (canvasWidth - 60);
+            30 +
+            Math.random() *
+            (
+                canvasWidth -
+                60
+            );
 
         const y =
-            100 + Math.random() *
-            (canvasHeight - 180);
+            100 +
+            Math.random() *
+            (
+                canvasHeight -
+                180
+            );
 
         ctx.beginPath();
+
         ctx.arc(
             x,
             y,
-            5 + Math.random() * 7,
+            5 +
+            Math.random() *
+            7,
             0,
             Math.PI * 2
         );
@@ -1279,16 +1738,28 @@ const confettiColors =
         ctx.fill();
     }
 
-    // ein paar Luftschlangen
-    for (let i = 0; i < 10; i++) {
+
+    for (
+        let i = 0;
+        i < 10;
+        i++
+    ) {
 
         const startX =
-            60 + Math.random() *
-            (canvasWidth - 120);
+            60 +
+            Math.random() *
+            (
+                canvasWidth -
+                120
+            );
 
         const startY =
-            90 + Math.random() *
-            (canvasHeight - 180);
+            90 +
+            Math.random() *
+            (
+                canvasHeight -
+                180
+            );
 
         const color =
             confettiColors[
@@ -1299,92 +1770,211 @@ const confettiColors =
             ];
 
         ctx.save();
-        ctx.strokeStyle = color;
-        ctx.lineWidth = 4;
-        ctx.beginPath();
-        ctx.moveTo(startX, startY);
 
-        for (let j = 1; j <= 4; j++) {
+        ctx.strokeStyle =
+            color;
+
+        ctx.lineWidth =
+            4;
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            startX,
+            startY
+        );
+
+        for (
+            let j = 1;
+            j <= 4;
+            j++
+        ) {
 
             ctx.quadraticCurveTo(
-                startX + j * 12,
-                startY + (j % 2 === 0 ? 18 : -18),
-                startX + j * 20,
-                startY + j * 14
+                startX +
+                    j * 12,
+
+                startY +
+                    (
+                        j % 2 === 0
+                            ? 18
+                            : -18
+                    ),
+
+                startX +
+                    j * 20,
+
+                startY +
+                    j * 14
             );
         }
 
         ctx.stroke();
+
         ctx.restore();
     }
 
-    // vereinzelte Ballons
-const balloons = [
-    { x: 90,  y: 80, color: design.accentColors[0] },
-    { x: 600, y: 375,  color: design.accentColors[4] },
-    { x: 1110, y: 95, color: design.accentColors[1] },
-    { x: 145, y: 550, color: design.accentColors[2] },
-    { x: 1055, y: 590, color: design.accentColors[5] }
-];
 
-    balloons.forEach(balloon => {
+    const balloons = [
 
-        // Schnur
-        ctx.save();
-        ctx.strokeStyle = "rgba(120,120,120,0.7)";
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(balloon.x, balloon.y + 34);
-        ctx.quadraticCurveTo(
-            balloon.x - 8,
-            balloon.y + 58,
-            balloon.x + 6,
-            balloon.y + 92
-        );
-        ctx.stroke();
-        ctx.restore();
+        {
+            x: 90,
+            y: 80,
+            color:
+                design.accentColors[0]
+        },
 
-        // Ballon
-        ctx.save();
-        ctx.beginPath();
-        ctx.ellipse(
-            balloon.x,
-            balloon.y,
-            24,
-            30,
-            0,
-            0,
-            Math.PI * 2
-        );
-        ctx.fillStyle = balloon.color;
-        ctx.fill();
+        {
+            x: 600,
+            y: 375,
+            color:
+                design.accentColors[4]
+        },
 
-        // kleine Spitze
-        ctx.beginPath();
-        ctx.moveTo(balloon.x - 6, balloon.y + 28);
-        ctx.lineTo(balloon.x + 6, balloon.y + 28);
-        ctx.lineTo(balloon.x, balloon.y + 38);
-        ctx.closePath();
-        ctx.fillStyle = balloon.color;
-        ctx.fill();
+        {
+            x: 1110,
+            y: 95,
+            color:
+                design.accentColors[1]
+        },
 
-        // Lichtreflex
-        ctx.beginPath();
-        ctx.ellipse(
-            balloon.x - 8,
-            balloon.y - 10,
-            5,
-            8,
-            0.3,
-            0,
-            Math.PI * 2
-        );
-        ctx.fillStyle = "rgba(255,255,255,0.45)";
-        ctx.fill();
+        {
+            x: 145,
+            y: 550,
+            color:
+                design.accentColors[2]
+        },
 
-        ctx.restore();
-    });
+        {
+            x: 1055,
+            y: 590,
+            color:
+                design.accentColors[5]
+        }
+    ];
+
+
+    balloons.forEach(
+        balloon => {
+
+            ctx.save();
+
+            ctx.strokeStyle =
+                "rgba(120,120,120,0.7)";
+
+            ctx.lineWidth =
+                2;
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+                balloon.x,
+                balloon.y +
+                    34
+            );
+
+            ctx.quadraticCurveTo(
+                balloon.x -
+                    8,
+
+                balloon.y +
+                    58,
+
+                balloon.x +
+                    6,
+
+                balloon.y +
+                    92
+            );
+
+            ctx.stroke();
+
+            ctx.restore();
+
+
+            ctx.save();
+
+            ctx.beginPath();
+
+            ctx.ellipse(
+                balloon.x,
+                balloon.y,
+                24,
+                30,
+                0,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle =
+                balloon.color;
+
+            ctx.fill();
+
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+                balloon.x -
+                    6,
+
+                balloon.y +
+                    28
+            );
+
+            ctx.lineTo(
+                balloon.x +
+                    6,
+
+                balloon.y +
+                    28
+            );
+
+            ctx.lineTo(
+                balloon.x,
+
+                balloon.y +
+                    38
+            );
+
+            ctx.closePath();
+
+            ctx.fillStyle =
+                balloon.color;
+
+            ctx.fill();
+
+
+            ctx.beginPath();
+
+            ctx.ellipse(
+                balloon.x -
+                    8,
+
+                balloon.y -
+                    10,
+
+                5,
+                8,
+                0.3,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle =
+                "rgba(255,255,255,0.45)";
+
+            ctx.fill();
+
+            ctx.restore();
+        }
+    );
 }
+
+
+/* =========================
+   PARTY DESIGN
+========================= */
 
 function drawPartyDecoration(
     ctx,
@@ -1392,24 +1982,29 @@ function drawPartyDecoration(
     canvasHeight,
     design
 ) {
+
     const colors =
         design.accentColors;
 
-    /*
-        Große halbtransparente Farbkreise
-        im Hintergrund
-    */
 
-    for (let i = 0; i < 18; i++) {
+    for (
+        let i = 0;
+        i < 18;
+        i++
+    ) {
 
         const x =
-            Math.random() * canvasWidth;
+            Math.random() *
+            canvasWidth;
 
         const y =
-            Math.random() * canvasHeight;
+            Math.random() *
+            canvasHeight;
 
         const radius =
-            25 + Math.random() * 55;
+            25 +
+            Math.random() *
+            55;
 
         const color =
             colors[
@@ -1421,7 +2016,8 @@ function drawPartyDecoration(
 
         ctx.save();
 
-        ctx.globalAlpha = 0.12;
+        ctx.globalAlpha =
+            0.12;
 
         ctx.beginPath();
 
@@ -1433,7 +2029,8 @@ function drawPartyDecoration(
             Math.PI * 2
         );
 
-        ctx.fillStyle = color;
+        ctx.fillStyle =
+            color;
 
         ctx.fill();
 
@@ -1441,20 +2038,23 @@ function drawPartyDecoration(
     }
 
 
-    /*
-        Wimpelkette oben
-    */
+    const startX =
+        60;
 
-    const startX = 60;
-    const endX = canvasWidth - 60;
-    const topY = 105;
+    const endX =
+        canvasWidth -
+        60;
+
+    const topY =
+        105;
 
     ctx.save();
 
     ctx.strokeStyle =
         "rgba(255,255,255,0.65)";
 
-    ctx.lineWidth = 3;
+    ctx.lineWidth =
+        3;
 
     ctx.beginPath();
 
@@ -1472,11 +2072,17 @@ function drawPartyDecoration(
 
     ctx.stroke();
 
-    const pennantCount = 11;
+
+    const pennantCount =
+        11;
 
     const spacing =
-        (endX - startX) /
+        (
+            endX -
+            startX
+        ) /
         pennantCount;
+
 
     for (
         let i = 0;
@@ -1486,13 +2092,15 @@ function drawPartyDecoration(
 
         const px =
             startX +
-            i * spacing +
+            i *
+            spacing +
             spacing / 2;
 
         const py =
             topY +
             8 +
-            Math.sin(i) * 5;
+            Math.sin(i) *
+            5;
 
         ctx.beginPath();
 
@@ -1525,25 +2133,32 @@ function drawPartyDecoration(
     ctx.restore();
 
 
-    /*
-        Kleine Funkelsterne
-    */
-
-    for (let i = 0; i < 35; i++) {
+    for (
+        let i = 0;
+        i < 35;
+        i++
+    ) {
 
         const x =
             40 +
             Math.random() *
-            (canvasWidth - 80);
+            (
+                canvasWidth -
+                80
+            );
 
         const y =
             120 +
             Math.random() *
-            (canvasHeight - 180);
+            (
+                canvasHeight -
+                180
+            );
 
         const size =
             4 +
-            Math.random() * 8;
+            Math.random() *
+            8;
 
         const color =
             colors[
@@ -1563,7 +2178,8 @@ function drawPartyDecoration(
         ctx.strokeStyle =
             color;
 
-        ctx.lineWidth = 3;
+        ctx.lineWidth =
+            3;
 
         ctx.beginPath();
 
@@ -1593,32 +2209,37 @@ function drawPartyDecoration(
     }
 
 
-    /*
-        Luftschlangen
-    */
-
     const streamers = [
+
         {
             x: 70,
             y: 210,
-            color: colors[0]
+            color:
+                colors[0]
         },
+
         {
             x: 1120,
             y: 230,
-            color: colors[2]
+            color:
+                colors[2]
         },
+
         {
             x: 90,
             y: 620,
-            color: colors[4]
+            color:
+                colors[4]
         },
+
         {
             x: 1090,
             y: 610,
-            color: colors[1]
+            color:
+                colors[1]
         }
     ];
+
 
     streamers.forEach(
         streamer => {
@@ -1628,7 +2249,8 @@ function drawPartyDecoration(
             ctx.strokeStyle =
                 streamer.color;
 
-            ctx.lineWidth = 5;
+            ctx.lineWidth =
+                5;
 
             ctx.beginPath();
 
@@ -1646,20 +2268,20 @@ function drawPartyDecoration(
                 ctx.quadraticCurveTo(
 
                     streamer.x +
-                    i * 10,
+                        i * 10,
 
                     streamer.y +
-                    (
-                        i % 2 === 0
-                            ? 22
-                            : -22
-                    ),
+                        (
+                            i % 2 === 0
+                                ? 22
+                                : -22
+                        ),
 
                     streamer.x +
-                    i * 20,
+                        i * 20,
 
                     streamer.y +
-                    i * 16
+                        i * 16
                 );
             }
 
@@ -1670,26 +2292,40 @@ function drawPartyDecoration(
     );
 }
 
+
+/* =========================
+   HOCHZEIT DESIGN
+========================= */
+
 function drawWeddingDecoration(
     ctx,
     canvasWidth,
     canvasHeight,
     design
 ) {
+
     const colors =
         design.accentColors;
 
-    // Dezente transparente Kreise
-    for (let i = 0; i < 18; i++) {
+
+    for (
+        let i = 0;
+        i < 18;
+        i++
+    ) {
 
         const x =
-            Math.random() * canvasWidth;
+            Math.random() *
+            canvasWidth;
 
         const y =
-            Math.random() * canvasHeight;
+            Math.random() *
+            canvasHeight;
 
         const radius =
-            20 + Math.random() * 45;
+            20 +
+            Math.random() *
+            45;
 
         ctx.save();
 
@@ -1720,19 +2356,45 @@ function drawWeddingDecoration(
     }
 
 
-    // Kleine florale Punkte links oben
     const flowers = [
-        { x: 75, y: 90 },
-        { x: 110, y: 115 },
-        { x: 90, y: 145 },
 
-        { x: 1125, y: 90 },
-        { x: 1090, y: 115 },
-        { x: 1110, y: 145 }
+        {
+            x: 75,
+            y: 90
+        },
+
+        {
+            x: 110,
+            y: 115
+        },
+
+        {
+            x: 90,
+            y: 145
+        },
+
+        {
+            x: 1125,
+            y: 90
+        },
+
+        {
+            x: 1090,
+            y: 115
+        },
+
+        {
+            x: 1110,
+            y: 145
+        }
     ];
 
+
     flowers.forEach(
-        (flower, index) => {
+        (
+            flower,
+            index
+        ) => {
 
             ctx.save();
 
@@ -1751,17 +2413,23 @@ function drawWeddingDecoration(
                 const angle =
                     petal *
                     (
-                        Math.PI * 2 / 5
+                        Math.PI *
+                        2 /
+                        5
                     );
 
                 const px =
                     flower.x +
-                    Math.cos(angle) *
+                    Math.cos(
+                        angle
+                    ) *
                     11;
 
                 const py =
                     flower.y +
-                    Math.sin(angle) *
+                    Math.sin(
+                        angle
+                    ) *
                     11;
 
                 ctx.beginPath();
@@ -1797,13 +2465,13 @@ function drawWeddingDecoration(
     );
 
 
-    // Dezente geschwungene Linien
     ctx.save();
 
     ctx.strokeStyle =
         "rgba(180,150,170,0.35)";
 
-    ctx.lineWidth = 3;
+    ctx.lineWidth =
+        3;
 
     ctx.beginPath();
 
@@ -1821,17 +2489,21 @@ function drawWeddingDecoration(
 
     ctx.stroke();
 
+
     ctx.beginPath();
 
     ctx.moveTo(
-        canvasWidth - 40,
+        canvasWidth -
+        40,
         700
     );
 
     ctx.quadraticCurveTo(
-        canvasWidth - 200,
+        canvasWidth -
+        200,
         640,
-        canvasWidth - 330,
+        canvasWidth -
+        330,
         730
     );
 
@@ -1840,17 +2512,27 @@ function drawWeddingDecoration(
     ctx.restore();
 }
 
+
+/* =========================
+   BUSINESS DESIGN
+========================= */
+
 function drawBusinessDecoration(
     ctx,
     canvasWidth,
     canvasHeight,
     design
 ) {
+
     const colors =
         design.accentColors;
 
-    // Dezente geometrische Flächen
-    for (let i = 0; i < 12; i++) {
+
+    for (
+        let i = 0;
+        i < 12;
+        i++
+    ) {
 
         const x =
             Math.random() *
@@ -1862,7 +2544,8 @@ function drawBusinessDecoration(
 
         const size =
             30 +
-            Math.random() * 70;
+            Math.random() *
+            70;
 
         ctx.save();
 
@@ -1898,7 +2581,6 @@ function drawBusinessDecoration(
     }
 
 
-    // Linien oben/unten
     ctx.save();
 
     ctx.strokeStyle =
@@ -1907,7 +2589,8 @@ function drawBusinessDecoration(
     ctx.globalAlpha =
         0.55;
 
-    ctx.lineWidth = 4;
+    ctx.lineWidth =
+        4;
 
     ctx.beginPath();
 
@@ -1922,6 +2605,7 @@ function drawBusinessDecoration(
     );
 
     ctx.stroke();
+
 
     ctx.beginPath();
 
@@ -1940,18 +2624,27 @@ function drawBusinessDecoration(
     ctx.restore();
 
 
-    // Kleine Akzentpunkte
-    for (let i = 0; i < 20; i++) {
+    for (
+        let i = 0;
+        i < 20;
+        i++
+    ) {
 
         const x =
             50 +
             Math.random() *
-            (canvasWidth - 100);
+            (
+                canvasWidth -
+                100
+            );
 
         const y =
             130 +
             Math.random() *
-            (canvasHeight - 260);
+            (
+                canvasHeight -
+                260
+            );
 
         ctx.beginPath();
 
@@ -1973,15 +2666,24 @@ function drawBusinessDecoration(
     }
 }
 
+
+/* =========================
+   FOTO-RAHMEN
+========================= */
+
 function drawPhotoFrame(
     ctx,
     img,
     frame
 ) {
-    const border = 9;
-    const radius = 22;
 
-    // Rahmen
+    const border =
+        9;
+
+    const radius =
+        22;
+
+
     fillRoundedRect(
         ctx,
         frame.x,
@@ -1991,6 +2693,7 @@ function drawPhotoFrame(
         radius,
         frame.frameColor
     );
+
 
     strokeRoundedRect(
         ctx,
@@ -2003,50 +2706,84 @@ function drawPhotoFrame(
         4
     );
 
+
     const innerX =
-        frame.x + border;
+        frame.x +
+        border;
+
     const innerY =
-        frame.y + border;
+        frame.y +
+        border;
+
     const innerW =
-        frame.w - border * 2;
+        frame.w -
+        border * 2;
+
     const innerH =
-        frame.h - border * 2;
+        frame.h -
+        border * 2;
 
-const imageRatio =
-    img.width / img.height;
 
-const frameRatio =
-    innerW / innerH;
+    const imageRatio =
+        img.width /
+        img.height;
 
-let drawWidth;
-let drawHeight;
-let offsetX;
-let offsetY;
+    const frameRatio =
+        innerW /
+        innerH;
 
-if (imageRatio > frameRatio) {
 
-    drawHeight = innerH;
-    drawWidth =
-        innerH * imageRatio;
+    let drawWidth;
+    let drawHeight;
+    let offsetX;
+    let offsetY;
 
-    offsetX =
-        (drawWidth - innerW) / 2;
 
-    offsetY = 0;
+    if (
+        imageRatio >
+        frameRatio
+    ) {
 
-} else {
+        drawHeight =
+            innerH;
 
-    drawWidth = innerW;
-    drawHeight =
-        innerW / imageRatio;
+        drawWidth =
+            innerH *
+            imageRatio;
 
-    offsetX = 0;
+        offsetX =
+            (
+                drawWidth -
+                innerW
+            ) /
+            2;
 
-    offsetY =
-        (drawHeight - innerH) / 2;
-}
+        offsetY =
+            0;
+
+    } else {
+
+        drawWidth =
+            innerW;
+
+        drawHeight =
+            innerW /
+            imageRatio;
+
+        offsetX =
+            0;
+
+        offsetY =
+            (
+                drawHeight -
+                innerH
+            ) /
+            2;
+    }
+
 
     ctx.save();
+
 
     drawRoundedRect(
         ctx,
@@ -2059,27 +2796,68 @@ if (imageRatio > frameRatio) {
 
     ctx.clip();
 
+
     ctx.drawImage(
         img,
-        innerX - offsetX,
-        innerY - offsetY,
+        innerX -
+            offsetX,
+        innerY -
+            offsetY,
         drawWidth,
         drawHeight
     );
 
+
     ctx.restore();
 }
+
+/* =========================
+   COLLAGE ERSTELLEN
+========================= */
 
 async function generateCollage() {
 
     const ctx =
-        collageCanvas.getContext("2d");
+        collageCanvas.getContext(
+            "2d"
+        );
 
-    collageCanvas.width = 1200;
-    collageCanvas.height = 800;
+    collageCanvas.width =
+        1200;
+
+    collageCanvas.height =
+        800;
+
 
     const design =
-        cardDesigns[settings.cardDesign];
+        cardDesigns[
+            settings.cardDesign
+        ];
+
+
+    if (!design) {
+
+        console.error(
+            "Kein Kartendesign gefunden.",
+            {
+                theme:
+                    settings.theme,
+
+                photoCount:
+                    settings.photoCount,
+
+                cardDesign:
+                    settings.cardDesign
+            }
+        );
+
+        alert(
+            "Für diese Kombination wurde kein Kartendesign gefunden."
+        );
+
+        return;
+    }
+
 
     ctx.clearRect(
         0,
@@ -2088,180 +2866,200 @@ async function generateCollage() {
         collageCanvas.height
     );
 
-if (
-    settings.cardDesign ===
-    "birthdayParty"
-) {
 
-    const gradient =
-        ctx.createLinearGradient(
+    /* =========================
+       HINTERGRUND
+    ========================= */
+
+    if (
+        settings.cardDesign ===
+        "birthdayParty"
+    ) {
+
+        const gradient =
+            ctx.createLinearGradient(
+                0,
+                0,
+                collageCanvas.width,
+                collageCanvas.height
+            );
+
+        gradient.addColorStop(
             0,
-            0,
-            collageCanvas.width,
-            collageCanvas.height
+            "#241038"
         );
 
-    gradient.addColorStop(
-        0,
-        "#241038"
-    );
-
-    gradient.addColorStop(
-        0.5,
-        "#552060"
-    );
-
-    gradient.addColorStop(
-        1,
-        "#18102f"
-    );
-
-    ctx.fillStyle =
-        gradient;
-
-} else if (
-    settings.cardDesign ===
-    "weddingElegant"
-) {
-
-    const gradient =
-        ctx.createLinearGradient(
-            0,
-            0,
-            collageCanvas.width,
-            collageCanvas.height
+        gradient.addColorStop(
+            0.5,
+            "#552060"
         );
 
-    gradient.addColorStop(
-        0,
-        "#fffaf7"
-    );
-
-    gradient.addColorStop(
-        0.5,
-        "#f4e8ee"
-    );
-
-    gradient.addColorStop(
-        1,
-        "#eee6f2"
-    );
-
-    ctx.fillStyle =
-        gradient;
-
-} else if (
-    settings.cardDesign ===
-    "businessClean"
-) {
-
-    const gradient =
-        ctx.createLinearGradient(
-            0,
-            0,
-            collageCanvas.width,
-            collageCanvas.height
+        gradient.addColorStop(
+            1,
+            "#18102f"
         );
 
-    gradient.addColorStop(
+        ctx.fillStyle =
+            gradient;
+
+
+    } else if (
+        settings.cardDesign ===
+        "weddingElegant"
+    ) {
+
+        const gradient =
+            ctx.createLinearGradient(
+                0,
+                0,
+                collageCanvas.width,
+                collageCanvas.height
+            );
+
+        gradient.addColorStop(
+            0,
+            "#fffaf7"
+        );
+
+        gradient.addColorStop(
+            0.5,
+            "#f4e8ee"
+        );
+
+        gradient.addColorStop(
+            1,
+            "#eee6f2"
+        );
+
+        ctx.fillStyle =
+            gradient;
+
+
+    } else if (
+        settings.cardDesign ===
+        "businessClean"
+    ) {
+
+        const gradient =
+            ctx.createLinearGradient(
+                0,
+                0,
+                collageCanvas.width,
+                collageCanvas.height
+            );
+
+        gradient.addColorStop(
+            0,
+            "#12202e"
+        );
+
+        gradient.addColorStop(
+            0.55,
+            "#243b50"
+        );
+
+        gradient.addColorStop(
+            1,
+            "#111d29"
+        );
+
+        ctx.fillStyle =
+            gradient;
+
+
+    } else {
+
+        ctx.fillStyle =
+            design.backgroundColor ||
+            "#ffffff";
+    }
+
+
+    ctx.fillRect(
         0,
-        "#12202e"
-    );
-
-    gradient.addColorStop(
-        0.55,
-        "#243b50"
-    );
-
-    gradient.addColorStop(
-        1,
-        "#111d29"
-    );
-
-    ctx.fillStyle =
-        gradient;
-
-} else {
-
-    ctx.fillStyle =
-        design
-            ? design.backgroundColor
-            : "#ffffff";
-}
-
-ctx.fillRect(
-    0,
-    0,
-    collageCanvas.width,
-    collageCanvas.height
-);
-
-    // Hintergrund-Deko je nach Design
-if (
-    settings.cardDesign ===
-    "birthdayConfetti"
-) {
-
-    drawConfettiDecoration(
-        ctx,
+        0,
         collageCanvas.width,
-        collageCanvas.height,
-        design
+        collageCanvas.height
     );
 
-} else if (
-    settings.cardDesign ===
-    "birthdayParty"
-) {
 
-    drawPartyDecoration(
+    /* =========================
+       DEKORATION
+    ========================= */
+
+    if (
+        settings.cardDesign ===
+        "birthdayConfetti"
+    ) {
+
+        drawConfettiDecoration(
+            ctx,
+            collageCanvas.width,
+            collageCanvas.height,
+            design
+        );
+
+
+    } else if (
+        settings.cardDesign ===
+        "birthdayParty"
+    ) {
+
+        drawPartyDecoration(
+            ctx,
+            collageCanvas.width,
+            collageCanvas.height,
+            design
+        );
+
+
+    } else if (
+        settings.cardDesign ===
+        "weddingElegant"
+    ) {
+
+        drawWeddingDecoration(
+            ctx,
+            collageCanvas.width,
+            collageCanvas.height,
+            design
+        );
+
+
+    } else if (
+        settings.cardDesign ===
+        "businessClean"
+    ) {
+
+        drawBusinessDecoration(
+            ctx,
+            collageCanvas.width,
+            collageCanvas.height,
+            design
+        );
+    }
+
+
+    /* =========================
+       TITEL-BANNER
+    ========================= */
+
+    const titleBackground =
+        design.titleBgColor
+            ? design.titleBgColor
+            : "rgba(255,255,255,0.88)";
+
+
+    fillRoundedRect(
         ctx,
-        collageCanvas.width,
-        collageCanvas.height,
-        design
+        150,
+        20,
+        900,
+        78,
+        32,
+        titleBackground
     );
 
-} else if (
-    settings.cardDesign ===
-    "weddingElegant"
-) {
-
-    drawWeddingDecoration(
-        ctx,
-        collageCanvas.width,
-        collageCanvas.height,
-        design
-    );
-
-} else if (
-    settings.cardDesign ===
-    "businessClean"
-) {
-
-    drawBusinessDecoration(
-        ctx,
-        collageCanvas.width,
-        collageCanvas.height,
-        design
-    );
-}
-
-    // Titel-Banner
-const titleBackground =
-    design &&
-    design.titleBgColor
-        ? design.titleBgColor
-        : "rgba(255,255,255,0.88)";
-
-fillRoundedRect(
-    ctx,
-    150,
-    20,
-    900,
-    78,
-    32,
-    titleBackground
-);
 
     strokeRoundedRect(
         ctx,
@@ -2274,15 +3072,16 @@ fillRoundedRect(
         2
     );
 
+
     ctx.fillStyle =
-        design
-            ? design.textColor
-            : "#000000";
+        design.textColor ||
+        "#000000";
+
 
     ctx.font =
-    design && design.titleFont
-            ? design.titleFont
-            : "bold 46px Arial";
+        design.titleFont ||
+        "bold 46px Arial";
+
 
     ctx.textAlign =
         "center";
@@ -2290,131 +3089,216 @@ fillRoundedRect(
     ctx.textBaseline =
         "middle";
 
+
     ctx.fillText(
         settings.eventTitle,
         collageCanvas.width / 2,
         60
     );
 
+
+    /* =========================
+       FOTOS LADEN
+    ========================= */
+
     const images = [];
 
-    for (const photo of capturedPhotos) {
 
-        const img = new Image();
-        img.src = photo;
+    for (
+        const photo of
+        capturedPhotos
+    ) {
 
-        await new Promise(resolve => {
-            img.onload = resolve;
-        });
+        const img =
+            new Image();
 
-        images.push(img);
-    }
+        img.src =
+            photo;
 
-let positions = [];
 
-if (capturedPhotos.length === 2) {
+        await new Promise(
+            (
+                resolve,
+                reject
+            ) => {
 
-    positions = [
-        {
-            x: 40,
-            y: 250,
-            w: 555,
-            h: 430
-        },
-        {
-            x: 620,
-            y: 185,
-            w: 555,
-            h: 430
-        }
-    ];
+                img.onload =
+                    resolve;
 
-} else if (capturedPhotos.length === 3) {
-
-    positions = [
-        {
-            x: 70,
-            y: 145,
-            w: 500,
-            h: 275
-        },
-        {
-            x: 630,
-            y: 145,
-            w: 500,
-            h: 275
-        },
-        {
-            x: 220,
-            y: 440,
-            w: 760,
-            h: 275
-        }
-    ];
-
-} else if (
-    capturedPhotos.length === 4
-) {
-
-    positions = [
-        {
-            x: 70,
-            y: 145,
-            w: 500,
-            h: 275
-        },
-        {
-            x: 630,
-            y: 145,
-            w: 500,
-            h: 275
-        },
-        {
-            x: 70,
-            y: 440,
-            w: 500,
-            h: 275
-        },
-        {
-            x: 630,
-            y: 440,
-            w: 500,
-            h: 275
-        }
-    ];
-}
-    
-    images.forEach((img, index) => {
-
-        if (!positions[index]) {
-            return;
-        }
-
-        const p = positions[index];
-
-        drawPhotoFrame(
-            ctx,
-            img,
-            {
-                x: p.x,
-                y: p.y,
-                w: p.w,
-                h: p.h,
-                frameColor:
-                    design.frameColor,
-                frameBorderColor:
-                    design.frameBorderColor
+                img.onerror =
+                    reject;
             }
         );
-    });
+
+
+        images.push(
+            img
+        );
+    }
+
+
+    /* =========================
+       FOTO-POSITIONEN
+    ========================= */
+
+    let positions = [];
+
+
+    if (
+        capturedPhotos.length ===
+        2
+    ) {
+
+        positions = [
+
+            {
+                x: 40,
+                y: 250,
+                w: 555,
+                h: 430
+            },
+
+            {
+                x: 620,
+                y: 185,
+                w: 555,
+                h: 430
+            }
+
+        ];
+
+
+    } else if (
+        capturedPhotos.length ===
+        3
+    ) {
+
+        positions = [
+
+            {
+                x: 70,
+                y: 145,
+                w: 500,
+                h: 275
+            },
+
+            {
+                x: 630,
+                y: 145,
+                w: 500,
+                h: 275
+            },
+
+            {
+                x: 220,
+                y: 440,
+                w: 760,
+                h: 275
+            }
+
+        ];
+
+
+    } else if (
+        capturedPhotos.length ===
+        4
+    ) {
+
+        positions = [
+
+            {
+                x: 70,
+                y: 145,
+                w: 500,
+                h: 275
+            },
+
+            {
+                x: 630,
+                y: 145,
+                w: 500,
+                h: 275
+            },
+
+            {
+                x: 70,
+                y: 440,
+                w: 500,
+                h: 275
+            },
+
+            {
+                x: 630,
+                y: 440,
+                w: 500,
+                h: 275
+            }
+
+        ];
+    }
+
+
+    /* =========================
+       FOTOS ZEICHNEN
+    ========================= */
+
+    images.forEach(
+        (
+            img,
+            index
+        ) => {
+
+            if (
+                !positions[index]
+            ) {
+                return;
+            }
+
+
+            const p =
+                positions[index];
+
+
+            drawPhotoFrame(
+                ctx,
+                img,
+                {
+                    x:
+                        p.x,
+
+                    y:
+                        p.y,
+
+                    w:
+                        p.w,
+
+                    h:
+                        p.h,
+
+                    frameColor:
+                        design.frameColor,
+
+                    frameBorderColor:
+                        design.frameBorderColor
+                }
+            );
+        }
+    );
+
+
+    /* =========================
+       DATUM
+    ========================= */
 
     const today =
         new Date();
+
 
     const dateString =
         today.toLocaleDateString(
             "de-DE"
         );
+
 
     fillRoundedRect(
         ctx,
@@ -2426,11 +3310,14 @@ if (capturedPhotos.length === 2) {
         design.dateBgColor
     );
 
+
     ctx.fillStyle =
         design.dateTextColor;
 
+
     ctx.font =
         "22px Arial";
+
 
     ctx.textAlign =
         "center";
@@ -2438,11 +3325,17 @@ if (capturedPhotos.length === 2) {
     ctx.textBaseline =
         "middle";
 
+
     ctx.fillText(
         dateString,
         1025,
         749
     );
+
+
+    /* =========================
+       VORSCHAU
+    ========================= */
 
     collagePreview.src =
         collageCanvas.toDataURL(
@@ -2450,119 +3343,151 @@ if (capturedPhotos.length === 2) {
             0.95
         );
 
+
     collagePreview.style.display =
         "block";
 }
 
-themeButtons.forEach(button => {
 
-    button.addEventListener(
-        "click",
-        () => {
+/* =========================
+   THEMEN-AUSWAHL
+========================= */
 
-            const selectedTheme =
-                button.dataset.theme;
+themeButtons.forEach(
+    button => {
 
-            settings.theme =
-                selectedTheme;
-            updateActiveThemeButton();
+        button.addEventListener(
+            "click",
+            () => {
 
-            settings.photoCount =
-                themes[selectedTheme]
-                    .defaultPhotoCount;
-            
-            updateActivePhotoCountButton();
-            updateDesignSelection();
+                const selectedTheme =
+                    button.dataset.theme;
 
-            capturedPhotos = [];
 
-            currentPhotoIndex = 1;
+                if (
+                    !themes[
+                        selectedTheme
+                    ]
+                ) {
+                    return;
+                }
 
-            currentPhoto = null;
 
-            updateSeriesDisplay();
+                settings.theme =
+                    selectedTheme;
 
-            photoCountInfo.textContent =
-                "Fotos pro Serie: " +
-                settings.photoCount;
 
-            document.body.className =
-                selectedTheme;
+                document.body.className =
+                    selectedTheme;
 
-            preview.style.display =
-                "none";
 
-            photoActions.style.display =
-                "none";
+                updateActiveThemeButton();
 
-            captureBtn.disabled =
-                false;
 
-            captureBtn.style.display =
-                "inline-block";
+                /*
+                    WICHTIG:
+                    Fotoanzahl bleibt erhalten.
 
-            retakeBtn.style.display =
-                "none";
+                    Wir setzen hier NICHT mehr
+                    defaultPhotoCount.
+                */
 
-            nextBtn.style.display =
-                "none";
+                updateActivePhotoCountButton();
 
-            saveBtn.style.display =
-                "none";
+                updateGuestPhotoCountButtons();
 
-            photoActions.style.display =
-                "none";
 
-            collagePreview.style.display =
-                "none";
+                /*
+                    Passendes Kartendesign
+                    für das neue Thema bestimmen
+                */
 
-            document.getElementById(
-                "cameraContainer"
-            ).style.display = "flex";
+                updateDesignSelection();
 
-            captureBtn.style.display =
-                "inline-block";
 
-            newSeriesBtn.style.display =
-                "none";  
-        }
-    );
-});
+                /*
+                    Serie / Oberfläche
+                    zurücksetzen
+                */
 
-// Neue Fotoserie
+                resetPhotoBooth();
+
+
+                photoCountInfo.textContent =
+                    "Fotos pro Serie: " +
+                    settings.photoCount;
+
+
+                console.log(
+                    "Thema:",
+                    settings.theme,
+                    "Fotos:",
+                    settings.photoCount,
+                    "Design:",
+                    settings.cardDesign
+                );
+            }
+        );
+    }
+);
+
+
+/* =========================
+   NEUE FOTOSERIE / RESET
+========================= */
+
 async function resetPhotoBooth() {
 
     capturedPhotos = [];
-    currentPhoto = null;
-    currentPhotoIndex = 1;
+
+    currentPhoto =
+        null;
+
+    currentPhotoIndex =
+        1;
+
 
     updateSeriesDisplay();
+
 
     resultArea.style.display =
         "none";
 
+
     captureArea.style.display =
         "flex";
 
-    eventTitleDisplay.style.display =
+
+    eventTitleDisplay
+        .style.display =
         "block";
 
-    seriesProgress.style.display =
+
+    seriesProgress
+        .style.display =
         "block";
+
 
     video.style.display =
         "block";
 
+
     preview.style.display =
         "none";
 
-    collagePreview.style.display =
+
+    collagePreview
+        .style.display =
         "none";
 
-    document.getElementById(
-        "cameraContainer"
-    ).style.display =
+
+    document
+        .getElementById(
+            "cameraContainer"
+        )
+        .style.display =
         "flex";
+
 
     captureBtn.style.display =
         "inline-block";
@@ -2570,132 +3495,189 @@ async function resetPhotoBooth() {
     captureBtn.disabled =
         false;
 
+
     retakeBtn.style.display =
         "none";
+
 
     nextBtn.style.display =
         "none";
 
+
     saveBtn.style.display =
         "none";
+
 
     printBtn.style.display =
         "none";
 
+
     newSeriesBtn.style.display =
         "none";
+
 
     photoActions.style.display =
         "none";
 
-    guestPhotoCountSelection.style.display =
+
+    guestPhotoCountSelection
+        .style.display =
         "flex";
 
+
     updateGuestPhotoCountButtons();
-    
+
+    updateActivePhotoCountButton();
 }
 
+
+/* =========================
+   BUTTON: NEUE SERIE
+========================= */
 
 newSeriesBtn.addEventListener(
     "click",
     async () => {
 
-        if (!document.fullscreenElement) {
+        if (
+            !document.fullscreenElement
+        ) {
+
             await enableFullscreen();
         }
 
+
         await requestWakeLock();
+
 
         resetPhotoBooth();
     }
 );
 
-// Design-Auswahl
 
-designButtons.forEach(button => {
+/* =========================
+   DESIGN BUTTONS
+========================= */
 
-    button.addEventListener(
-        "click",
-        () => {
+designButtons.forEach(
+    button => {
 
-            const selectedDesign =
-                button.dataset.design;
+        button.addEventListener(
+            "click",
+            () => {
 
-            const design =
-                cardDesigns[selectedDesign];
+                const selectedDesign =
+                    button.dataset.design;
 
-            if (!design) {
-                return;
-            }
 
-            if (
-                design.theme !==
-                settings.theme
-            ) {
+                const design =
+                    cardDesigns[
+                        selectedDesign
+                    ];
 
-                alert(
-                    "Dieses Design gehört zu einem anderen Event."
+
+                if (!design) {
+
+                    console.error(
+                        "Unbekanntes Design:",
+                        selectedDesign
+                    );
+
+                    return;
+                }
+
+
+                if (
+                    design.theme !==
+                    settings.theme
+                ) {
+
+                    alert(
+                        "Dieses Design gehört zu einem anderen Event."
+                    );
+
+                    return;
+                }
+
+
+                if (
+                    !design.photoCounts
+                        .includes(
+                            settings.photoCount
+                        )
+                ) {
+
+                    alert(
+                        "Dieses Design unterstützt diese Fotoanzahl nicht."
+                    );
+
+                    return;
+                }
+
+
+                settings.cardDesign =
+                    selectedDesign;
+
+
+                updateActiveDesignButton();
+
+
+                console.log(
+                    "Kartendesign:",
+                    design.name
                 );
-
-                return;
             }
+        );
+    }
+);
 
-            if (
-                !design.photoCounts.includes(
-                    settings.photoCount
-                )
-            ) {
 
-                alert(
-                    "Dieses Design unterstützt diese Fotoanzahl nicht."
-                );
-
-                return;
-            }
-
-            settings.cardDesign =
-                selectedDesign;
-
-            updateActiveDesignButton();
-
-            console.log(
-                "Kartendesign:",
-                design.name
-    );
-        }
-    );
-});
+/* =========================
+   ADMIN LOGO LANGDRUCK
+========================= */
 
 appLogo.addEventListener(
     "mousedown",
     startAdminPress
 );
 
+
 appLogo.addEventListener(
     "mouseup",
     cancelAdminPress
 );
+
 
 appLogo.addEventListener(
     "mouseleave",
     cancelAdminPress
 );
 
+
 appLogo.addEventListener(
     "touchstart",
     startAdminPress,
-    { passive: true }
+    {
+        passive: true
+    }
 );
+
 
 appLogo.addEventListener(
     "touchend",
     cancelAdminPress
 );
 
+
 appLogo.addEventListener(
     "touchcancel",
     cancelAdminPress
 );
+
+
+/* =========================
+   ADMIN SCHLIESSEN
+========================= */
 
 closeAdminBtn.addEventListener(
     "click",
@@ -2703,37 +3685,83 @@ closeAdminBtn.addEventListener(
 
         saveSettings();
 
+
         adminOverlay.style.display =
             "none";
+
+
+        /*
+            Anzeigen nochmal
+            synchronisieren
+        */
+
+        updateActiveThemeButton();
+
+        updateActivePhotoCountButton();
+
+        updateGuestPhotoCountButtons();
+
+        updateDesignSelection();
+
+
+        photoCountInfo.textContent =
+            "Fotos pro Serie: " +
+            settings.photoCount;
     }
 );
+
+
+/* =========================
+   COUNTDOWN
+========================= */
 
 countdownSelect.addEventListener(
     "change",
     () => {
 
         settings.countdown =
-            Number(countdownSelect.value);
+            Number(
+                countdownSelect.value
+            );
     }
 );
 
-flashEnabledCheckbox.addEventListener(
-    "change",
-    () => {
 
-        settings.flashEnabled =
-            flashEnabledCheckbox.checked;
-    }
-);
+/* =========================
+   BLITZ
+========================= */
 
-soundEnabledCheckbox.addEventListener(
-    "change",
-    () => {
+flashEnabledCheckbox
+    .addEventListener(
+        "change",
+        () => {
 
-        settings.soundEnabled =
-            soundEnabledCheckbox.checked;
-    }
-);
+            settings.flashEnabled =
+                flashEnabledCheckbox
+                    .checked;
+        }
+    );
+
+
+/* =========================
+   SOUND
+========================= */
+
+soundEnabledCheckbox
+    .addEventListener(
+        "change",
+        () => {
+
+            settings.soundEnabled =
+                soundEnabledCheckbox
+                    .checked;
+        }
+    );
+
+
+/* =========================
+   EVENT-TITEL
+========================= */
 
 eventTitleInput.addEventListener(
     "input",
@@ -2742,47 +3770,98 @@ eventTitleInput.addEventListener(
         settings.eventTitle =
             eventTitleInput.value;
 
+
         eventTitleDisplay.textContent =
             settings.eventTitle;
     }
 );
 
+
+/* =========================
+   ADMIN PIN
+========================= */
+
 function checkAdminPin() {
 
     if (
-        adminPinInput.value === "0714"
+        adminPinInput.value ===
+        "0714"
     ) {
 
         pinOverlay.style.display =
             "none";
 
+
         adminOverlay.style.display =
             "flex";
+
 
         adminPinInput.value =
             "";
 
+
         pinError.style.display =
             "none";
+
+
+        /*
+            Admin-Anzeige immer
+            auf aktuellen Zustand bringen
+        */
+
+        updateActiveThemeButton();
+
+        updateActivePhotoCountButton();
+
+        updateActiveDesignButton();
+
+
+        countdownSelect.value =
+            String(
+                settings.countdown
+            );
+
+
+        flashEnabledCheckbox.checked =
+            settings.flashEnabled;
+
+
+        soundEnabledCheckbox.checked =
+            settings.soundEnabled;
+
+
+        eventTitleInput.value =
+            settings.eventTitle;
+
 
     } else {
 
         adminPinInput.value =
             "";
 
+
         pinError.style.display =
             "block";
+
 
         adminPinInput.focus();
     }
 }
 
 
+/* =========================
+   PIN OK
+========================= */
+
 pinOkBtn.addEventListener(
     "click",
     checkAdminPin
 );
 
+
+/* =========================
+   PIN ABBRECHEN
+========================= */
 
 pinCancelBtn.addEventListener(
     "click",
@@ -2791,58 +3870,106 @@ pinCancelBtn.addEventListener(
         pinOverlay.style.display =
             "none";
 
+
         adminPinInput.value =
             "";
+
 
         pinError.style.display =
             "none";
     }
 );
 
+
+/* =========================
+   ENTER BEI PIN
+========================= */
+
 adminPinInput.addEventListener(
     "keydown",
     event => {
 
-        if (event.key === "Enter") {
+        if (
+            event.key ===
+            "Enter"
+        ) {
 
             checkAdminPin();
         }
     }
 );
 
+
+/* =========================
+   APP INITIALISIEREN
+========================= */
+
 function initializeApp() {
 
     loadSettings();
 
+
+    /*
+        Falls noch kein Thema
+        gespeichert wurde:
+        Geburtstag als Startwert
+    */
+
+    if (
+        !settings.theme ||
+        !themes[
+            settings.theme
+        ]
+    ) {
+
+        settings.theme =
+            "birthday";
+    }
+
+
+    document.body.className =
+        settings.theme;
+
+
     eventTitleInput.value =
         settings.eventTitle;
+
 
     eventTitleDisplay.textContent =
         settings.eventTitle;
 
+
     countdownSelect.value =
-        String(settings.countdown);
+        String(
+            settings.countdown
+        );
+
 
     flashEnabledCheckbox.checked =
         settings.flashEnabled;
 
+
     soundEnabledCheckbox.checked =
         settings.soundEnabled;
 
-    if (
-        settings.theme &&
-        themes[settings.theme]
-    ) {
-
-        document.body.className =
-            settings.theme;
-    }
 
     photoCountInfo.textContent =
         "Fotos pro Serie: " +
         settings.photoCount;
 
-    currentPhotoIndex = 1;
+
+    currentPhotoIndex =
+        1;
+
+
+    /*
+        Ganz wichtig:
+        zuerst passendes Design
+        bestimmen.
+    */
+
+    updateDesignSelection();
+
 
     updateSeriesDisplay();
 
@@ -2850,10 +3977,29 @@ function initializeApp() {
 
     updateActivePhotoCountButton();
 
-    updateDesignSelection();
-
     updateGuestPhotoCountButtons();
+
+    updateActiveDesignButton();
+
+
+    console.log(
+        "Photobooth initialisiert:",
+        {
+            theme:
+                settings.theme,
+
+            photoCount:
+                settings.photoCount,
+
+            cardDesign:
+                settings.cardDesign
+        }
+    );
 }
 
+
+/* =========================
+   START
+========================= */
 
 initializeApp();
