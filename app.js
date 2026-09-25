@@ -1252,43 +1252,39 @@ function drawPhotoFrame(
     const innerH =
         frame.h - border * 2;
 
-const containScale =
-    Math.min(
-        innerW / img.width,
-        innerH / img.height
-    );
+const imageRatio =
+    img.width / img.height;
 
-const coverScale =
-    Math.max(
-        innerW / img.width,
-        innerH / img.height
-    );
+const frameRatio =
+    innerW / innerH;
 
-/*
-    cropStrength:
-    0   = komplett sichtbar (contain)
-    1   = voll gefüllt (cover)
+let drawWidth;
+let drawHeight;
+let offsetX;
+let offsetY;
 
-    0.75 = leichtes bis mittleres Cropping
-*/
-const cropStrength = 0.85;
+if (imageRatio > frameRatio) {
 
-const finalScale =
-    containScale +
-    (coverScale - containScale) *
-    cropStrength;
+    drawHeight = innerH;
+    drawWidth =
+        innerH * imageRatio;
 
-const drawWidth =
-    img.width * finalScale;
+    offsetX =
+        (drawWidth - innerW) / 2;
 
-const drawHeight =
-    img.height * finalScale;
+    offsetY = 0;
 
-const offsetX =
-    (innerW - drawWidth) / 2;
+} else {
 
-const offsetY =
-    (innerH - drawHeight) / 2;
+    drawWidth = innerW;
+    drawHeight =
+        innerW / imageRatio;
+
+    offsetX = 0;
+
+    offsetY =
+        (drawHeight - innerH) / 2;
+}
 
     ctx.save();
 
@@ -1413,61 +1409,61 @@ async function generateCollage() {
 
     let positions = [];
 
-    if (capturedPhotos.length === 3) {
+if (capturedPhotos.length === 3) {
 
-        positions = [
-            {
-                x: 50,
-                y: 145,
-                w: 530,
-                h: 255
-            },
-            {
-                x: 620,
-                y: 145,
-                w: 530,
-                h: 255
-            },
-            {
-                x: 180,
-                y: 430,
-                w: 840,
-                h: 255
-            }
-        ];
+    positions = [
+        {
+            x: 70,
+            y: 145,
+            w: 500,
+            h: 275
+        },
+        {
+            x: 630,
+            y: 145,
+            w: 500,
+            h: 275
+        },
+        {
+            x: 220,
+            y: 440,
+            w: 760,
+            h: 275
+        }
+    ];
 
-    } else if (
-        capturedPhotos.length === 4
-    ) {
+} else if (
+    capturedPhotos.length === 4
+) {
 
-        positions = [
-            {
-                x: 50,
-                y: 145,
-                w: 530,
-                h: 255
-            },
-            {
-                x: 620,
-                y: 145,
-                w: 530,
-                h: 255
-            },
-            {
-                x: 50,
-                y: 430,
-                w: 530,
-                h: 255
-            },
-            {
-                x: 620,
-                y: 430,
-                w: 530,
-                h: 255
-            }
-        ];
-    }
-
+    positions = [
+        {
+            x: 70,
+            y: 145,
+            w: 500,
+            h: 275
+        },
+        {
+            x: 630,
+            y: 145,
+            w: 500,
+            h: 275
+        },
+        {
+            x: 70,
+            y: 440,
+            w: 500,
+            h: 275
+        },
+        {
+            x: 630,
+            y: 440,
+            w: 500,
+            h: 275
+        }
+    ];
+}
+    
     images.forEach((img, index) => {
 
         if (!positions[index]) {
