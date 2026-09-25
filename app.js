@@ -1791,14 +1791,14 @@ if (capturedPhotos.length === 2) {
     positions = [
         {
             x: 40,
-            y: 210,
-            w: 540,
+            y: 250,
+            w: 555,
             h: 430
         },
         {
             x: 620,
             y: 185,
-            w: 540,
+            w: 555,
             h: 430
         }
     ];
