@@ -3022,6 +3022,70 @@ function drawWeddingFloralDecoration(
 }
 
 /* =========================
+   RING-MOTIV HOCHZEIT
+========================= */
+
+function drawWeddingRingMotif(
+    ctx,
+    centerX,
+    centerY,
+    scale = 1
+) {
+
+    ctx.save();
+
+    ctx.lineWidth =
+        3 * scale;
+
+    ctx.strokeStyle =
+        "rgba(207,174,120,0.9)";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        centerX - 16 * scale,
+        centerY,
+        18 * scale,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.stroke();
+
+
+    ctx.beginPath();
+
+    ctx.arc(
+        centerX + 10 * scale,
+        centerY,
+        18 * scale,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.stroke();
+
+
+    ctx.fillStyle =
+        "rgba(255,255,255,0.95)";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        centerX + 22 * scale,
+        centerY - 16 * scale,
+        4 * scale,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+
+    ctx.restore();
+}
+
+/* =========================
    BUSINESS DESIGN
 ========================= */
 
@@ -3593,57 +3657,128 @@ async function generateCollage() {
        TITEL-BANNER
     ========================= */
 
-    const titleBackground =
-        design.titleBgColor
-            ? design.titleBgColor
-            : "rgba(255,255,255,0.88)";
+let titleX = 150;
+let titleY = 20;
+let titleW = 900;
+let titleH = 78;
+let titleRadius = 32;
+
+const titleBackground =
+    design.titleBgColor
+        ? design.titleBgColor
+        : "rgba(255,255,255,0.88)";
+
+let titleBorderColor =
+    "rgba(255,255,255,0.95)";
+
+let titleBorderWidth =
+    2;
 
 
-    fillRoundedRect(
+// Sonderstil nur für Wedding Floral
+if (
+    settings.cardDesign ===
+    "weddingFloral"
+) {
+
+    titleX = 190;
+    titleY = 22;
+    titleW = 820;
+    titleH = 74;
+    titleRadius = 34;
+
+    titleBorderColor =
+        "rgba(207,174,120,0.55)";
+
+    titleBorderWidth =
+        1.5;
+}
+
+
+fillRoundedRect(
+    ctx,
+    titleX,
+    titleY,
+    titleW,
+    titleH,
+    titleRadius,
+    titleBackground
+);
+
+
+strokeRoundedRect(
+    ctx,
+    titleX,
+    titleY,
+    titleW,
+    titleH,
+    titleRadius,
+    titleBorderColor,
+    titleBorderWidth
+);
+
+
+ctx.fillStyle =
+    design.textColor ||
+    "#000000";
+
+ctx.font =
+    design.titleFont ||
+    "bold 46px Arial";
+
+ctx.textAlign =
+    "center";
+
+ctx.textBaseline =
+    "middle";
+
+ctx.fillText(
+    settings.eventTitle,
+    collageCanvas.width / 2,
+    titleY + titleH / 2
+);
+
+
+// zusätzliche Veredelung nur für Wedding Floral
+if (
+    settings.cardDesign ===
+    "weddingFloral"
+) {
+
+    // feine Goldlinie unter dem Titel
+    ctx.save();
+
+    ctx.strokeStyle =
+        "rgba(207,174,120,0.55)";
+
+    ctx.lineWidth =
+        1.5;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        titleX + 90,
+        titleY + titleH + 12
+    );
+
+    ctx.lineTo(
+        titleX + titleW - 90,
+        titleY + titleH + 12
+    );
+
+    ctx.stroke();
+
+    ctx.restore();
+
+
+    // Ring-Motiv
+    drawWeddingRingMotif(
         ctx,
-        150,
-        20,
-        900,
-        78,
-        32,
-        titleBackground
+        titleX + titleW - 95,
+        titleY + titleH / 2 + 1,
+        0.85
     );
-
-
-    strokeRoundedRect(
-        ctx,
-        150,
-        20,
-        900,
-        78,
-        32,
-        "rgba(255,255,255,0.95)",
-        2
-    );
-
-
-    ctx.fillStyle =
-        design.textColor ||
-        "#000000";
-
-
-    ctx.font =
-        design.titleFont ||
-        "bold 46px Arial";
-
-
-    ctx.textAlign =
-        "center";
-
-    ctx.textBaseline =
-        "middle";
-
-
-    ctx.fillText(
-        settings.eventTitle,
-        collageCanvas.width / 2,
-        60
-    );
+}
 
 
     /* =========================
