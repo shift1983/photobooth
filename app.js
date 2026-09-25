@@ -79,6 +79,64 @@ birthdayParty: {
         "#ff80ab"
     ],
 
+weddingElegant: {
+    name: "Elegant",
+    theme: "wedding",
+    photoCounts: [2, 3, 4],
+
+    backgroundColor: "#f8f4f1",
+    textColor: "#6b5964",
+
+    frameColor: "#ffffff",
+    frameBorderColor: "#d8c6d3",
+
+    accentColors: [
+        "#d8b4c6",
+        "#ead7df",
+        "#c9b6cf",
+        "#f1e6df",
+        "#b8c8bd",
+        "#e7d6c9"
+    ],
+
+    dateBgColor: "rgba(255,255,255,0.88)",
+    dateTextColor: "#6b5964",
+
+    titleBgColor: "rgba(255,255,255,0.72)",
+
+    titleFont:
+        "italic 52px Georgia, 'Times New Roman', serif"
+},
+
+businessClean: {
+    name: "Clean",
+    theme: "business",
+    photoCounts: [2, 3, 4],
+
+    backgroundColor: "#172331",
+    textColor: "#ffffff",
+
+    frameColor: "#ffffff",
+    frameBorderColor: "#86a5bd",
+
+    accentColors: [
+        "#4f88b5",
+        "#79a6c7",
+        "#8dc6c3",
+        "#a8bdd0",
+        "#d4e2ec",
+        "#5f7f99"
+    ],
+
+    dateBgColor: "rgba(255,255,255,0.92)",
+    dateTextColor: "#172331",
+
+    titleBgColor: "rgba(11,25,39,0.82)",
+
+    titleFont:
+        "bold 46px Arial, sans-serif"
+}
+    
     dateBgColor: "rgba(255,255,255,0.9)",
     dateTextColor: "#34124d",
 
@@ -1612,6 +1670,309 @@ function drawPartyDecoration(
     );
 }
 
+function drawWeddingDecoration(
+    ctx,
+    canvasWidth,
+    canvasHeight,
+    design
+) {
+    const colors =
+        design.accentColors;
+
+    // Dezente transparente Kreise
+    for (let i = 0; i < 18; i++) {
+
+        const x =
+            Math.random() * canvasWidth;
+
+        const y =
+            Math.random() * canvasHeight;
+
+        const radius =
+            20 + Math.random() * 45;
+
+        ctx.save();
+
+        ctx.globalAlpha =
+            0.10;
+
+        ctx.beginPath();
+
+        ctx.arc(
+            x,
+            y,
+            radius,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle =
+            colors[
+                Math.floor(
+                    Math.random() *
+                    colors.length
+                )
+            ];
+
+        ctx.fill();
+
+        ctx.restore();
+    }
+
+
+    // Kleine florale Punkte links oben
+    const flowers = [
+        { x: 75, y: 90 },
+        { x: 110, y: 115 },
+        { x: 90, y: 145 },
+
+        { x: 1125, y: 90 },
+        { x: 1090, y: 115 },
+        { x: 1110, y: 145 }
+    ];
+
+    flowers.forEach(
+        (flower, index) => {
+
+            ctx.save();
+
+            ctx.fillStyle =
+                colors[
+                    index %
+                    colors.length
+                ];
+
+            for (
+                let petal = 0;
+                petal < 5;
+                petal++
+            ) {
+
+                const angle =
+                    petal *
+                    (
+                        Math.PI * 2 / 5
+                    );
+
+                const px =
+                    flower.x +
+                    Math.cos(angle) *
+                    11;
+
+                const py =
+                    flower.y +
+                    Math.sin(angle) *
+                    11;
+
+                ctx.beginPath();
+
+                ctx.arc(
+                    px,
+                    py,
+                    7,
+                    0,
+                    Math.PI * 2
+                );
+
+                ctx.fill();
+            }
+
+            ctx.fillStyle =
+                "#ffffff";
+
+            ctx.beginPath();
+
+            ctx.arc(
+                flower.x,
+                flower.y,
+                5,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fill();
+
+            ctx.restore();
+        }
+    );
+
+
+    // Dezente geschwungene Linien
+    ctx.save();
+
+    ctx.strokeStyle =
+        "rgba(180,150,170,0.35)";
+
+    ctx.lineWidth = 3;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        40,
+        700
+    );
+
+    ctx.quadraticCurveTo(
+        200,
+        640,
+        330,
+        730
+    );
+
+    ctx.stroke();
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        canvasWidth - 40,
+        700
+    );
+
+    ctx.quadraticCurveTo(
+        canvasWidth - 200,
+        640,
+        canvasWidth - 330,
+        730
+    );
+
+    ctx.stroke();
+
+    ctx.restore();
+}
+
+function drawBusinessDecoration(
+    ctx,
+    canvasWidth,
+    canvasHeight,
+    design
+) {
+    const colors =
+        design.accentColors;
+
+    // Dezente geometrische Flächen
+    for (let i = 0; i < 12; i++) {
+
+        const x =
+            Math.random() *
+            canvasWidth;
+
+        const y =
+            Math.random() *
+            canvasHeight;
+
+        const size =
+            30 +
+            Math.random() * 70;
+
+        ctx.save();
+
+        ctx.globalAlpha =
+            0.10;
+
+        ctx.translate(
+            x,
+            y
+        );
+
+        ctx.rotate(
+            Math.random() *
+            Math.PI
+        );
+
+        ctx.fillStyle =
+            colors[
+                Math.floor(
+                    Math.random() *
+                    colors.length
+                )
+            ];
+
+        ctx.fillRect(
+            -size / 2,
+            -size / 2,
+            size,
+            size
+        );
+
+        ctx.restore();
+    }
+
+
+    // Linien oben/unten
+    ctx.save();
+
+    ctx.strokeStyle =
+        colors[1];
+
+    ctx.globalAlpha =
+        0.55;
+
+    ctx.lineWidth = 4;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        50,
+        115
+    );
+
+    ctx.lineTo(
+        1150,
+        115
+    );
+
+    ctx.stroke();
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        50,
+        700
+    );
+
+    ctx.lineTo(
+        1150,
+        700
+    );
+
+    ctx.stroke();
+
+    ctx.restore();
+
+
+    // Kleine Akzentpunkte
+    for (let i = 0; i < 20; i++) {
+
+        const x =
+            50 +
+            Math.random() *
+            (canvasWidth - 100);
+
+        const y =
+            130 +
+            Math.random() *
+            (canvasHeight - 260);
+
+        ctx.beginPath();
+
+        ctx.arc(
+            x,
+            y,
+            4,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle =
+            colors[
+                i %
+                colors.length
+            ];
+
+        ctx.fill();
+    }
+}
+
 function drawPhotoFrame(
     ctx,
     img,
@@ -1758,6 +2119,68 @@ if (
     ctx.fillStyle =
         gradient;
 
+} else if (
+    settings.cardDesign ===
+    "weddingElegant"
+) {
+
+    const gradient =
+        ctx.createLinearGradient(
+            0,
+            0,
+            collageCanvas.width,
+            collageCanvas.height
+        );
+
+    gradient.addColorStop(
+        0,
+        "#fffaf7"
+    );
+
+    gradient.addColorStop(
+        0.5,
+        "#f4e8ee"
+    );
+
+    gradient.addColorStop(
+        1,
+        "#eee6f2"
+    );
+
+    ctx.fillStyle =
+        gradient;
+
+} else if (
+    settings.cardDesign ===
+    "businessClean"
+) {
+
+    const gradient =
+        ctx.createLinearGradient(
+            0,
+            0,
+            collageCanvas.width,
+            collageCanvas.height
+        );
+
+    gradient.addColorStop(
+        0,
+        "#12202e"
+    );
+
+    gradient.addColorStop(
+        0.55,
+        "#243b50"
+    );
+
+    gradient.addColorStop(
+        1,
+        "#111d29"
+    );
+
+    ctx.fillStyle =
+        gradient;
+
 } else {
 
     ctx.fillStyle =
@@ -1774,31 +2197,59 @@ ctx.fillRect(
 );
 
     // Hintergrund-Deko je nach Design
-    if (settings.cardDesign === "birthdayConfetti") {
+if (
+    settings.cardDesign ===
+    "birthdayConfetti"
+) {
 
-        drawConfettiDecoration(
-            ctx,
-            collageCanvas.width,
-            collageCanvas.height,
-            design
-        );
+    drawConfettiDecoration(
+        ctx,
+        collageCanvas.width,
+        collageCanvas.height,
+        design
+    );
 
-    } else if (
-        settings.cardDesign === "birthdayParty"
-    ) {
+} else if (
+    settings.cardDesign ===
+    "birthdayParty"
+) {
 
-        drawPartyDecoration(
-            ctx,
-            collageCanvas.width,
-            collageCanvas.height,
-            design
-        );
-    }
+    drawPartyDecoration(
+        ctx,
+        collageCanvas.width,
+        collageCanvas.height,
+        design
+    );
+
+} else if (
+    settings.cardDesign ===
+    "weddingElegant"
+) {
+
+    drawWeddingDecoration(
+        ctx,
+        collageCanvas.width,
+        collageCanvas.height,
+        design
+    );
+
+} else if (
+    settings.cardDesign ===
+    "businessClean"
+) {
+
+    drawBusinessDecoration(
+        ctx,
+        collageCanvas.width,
+        collageCanvas.height,
+        design
+    );
+}
 
     // Titel-Banner
 const titleBackground =
-    settings.cardDesign ===
-    "birthdayParty"
+    design &&
+    design.titleBgColor
         ? design.titleBgColor
         : "rgba(255,255,255,0.88)";
 
