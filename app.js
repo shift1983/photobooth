@@ -1252,61 +1252,37 @@ function drawPhotoFrame(
     const innerH =
         frame.h - border * 2;
 
-const imageRatio =
-    img.width / img.height;
+const containScale =
+    Math.min(
+        innerW / img.width,
+        innerH / img.height
+    );
 
-const frameRatio =
-    innerW / innerH;
-
-let containWidth;
-let containHeight;
-
-let coverWidth;
-let coverHeight;
-
-if (imageRatio > frameRatio) {
-
-    // CONTAIN
-    containWidth = innerW;
-    containHeight =
-        innerW / imageRatio;
-
-    // COVER
-    coverHeight = innerH;
-    coverWidth =
-        innerH * imageRatio;
-
-} else {
-
-    // CONTAIN
-    containHeight = innerH;
-    containWidth =
-        innerH * imageRatio;
-
-    // COVER
-    coverWidth = innerW;
-    coverHeight =
-        innerW / imageRatio;
-}
+const coverScale =
+    Math.max(
+        innerW / img.width,
+        innerH / img.height
+    );
 
 /*
     cropStrength:
-    0   = kein Cropping (contain)
-    1   = volles Cropping (cover)
+    0   = komplett sichtbar (contain)
+    1   = voll gefüllt (cover)
 
-    0.35 ist ein guter Mittelweg
+    0.75 = leichtes bis mittleres Cropping
 */
-const cropStrength = 0.35;
+const cropStrength = 0.75;
+
+const finalScale =
+    containScale +
+    (coverScale - containScale) *
+    cropStrength;
 
 const drawWidth =
-    containWidth +
-    (coverWidth - containWidth) *
-    cropStrength;
+    img.width * finalScale;
 
 const drawHeight =
-    containHeight +
-    (coverHeight - containHeight) *
-    cropStrength;
+    img.height * finalScale;
 
 const offsetX =
     (innerW - drawWidth) / 2;
