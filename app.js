@@ -33,16 +33,38 @@ const cardDesigns = {
         name: "Konfetti",
         theme: "birthday",
         photoCounts: [3, 4],
-        backgroundColor: "#fff4d6",
-        textColor: "#6b3200"
+
+        backgroundColor: "#fff7e8",
+        textColor: "#6b3200",
+        frameColor: "#ffffff",
+        frameBorderColor: "#f4c98b",
+
+        accentColor: "#ff8a65",
+        accentColor2: "#ffd54f",
+        accentColor3: "#7e57c2",
+        accentColor4: "#4db6ac",
+
+        dateBgColor: "#ffffff",
+        dateTextColor: "#6b3200"
     },
 
     birthdayParty: {
         name: "Party",
         theme: "birthday",
         photoCounts: [4],
-        backgroundColor: "#ffe8f2",
-        textColor: "#7a1748"
+
+        backgroundColor: "#34124d",
+        textColor: "#ffffff",
+        frameColor: "#ffffff",
+        frameBorderColor: "#ff98d0",
+
+        accentColor: "#ff4fa3",
+        accentColor2: "#ffd84d",
+        accentColor3: "#59d8ff",
+        accentColor4: "#7df58a",
+
+        dateBgColor: "#ffffff",
+        dateTextColor: "#34124d"
     }
 
 };
@@ -941,6 +963,351 @@ function updateSeriesDisplay() {
         settings.photoCount;
 }
 
+function drawRoundedRect(
+    ctx,
+    x,
+    y,
+    width,
+    height,
+    radius
+) {
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + width - radius, y);
+    ctx.quadraticCurveTo(
+        x + width,
+        y,
+        x + width,
+        y + radius
+    );
+    ctx.lineTo(
+        x + width,
+        y + height - radius
+    );
+    ctx.quadraticCurveTo(
+        x + width,
+        y + height,
+        x + width - radius,
+        y + height
+    );
+    ctx.lineTo(x + radius, y + height);
+    ctx.quadraticCurveTo(
+        x,
+        y + height,
+        x,
+        y + height - radius
+    );
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(
+        x,
+        y,
+        x + radius,
+        y
+    );
+    ctx.closePath();
+}
+
+function fillRoundedRect(
+    ctx,
+    x,
+    y,
+    width,
+    height,
+    radius,
+    color
+) {
+    ctx.save();
+    drawRoundedRect(
+        ctx,
+        x,
+        y,
+        width,
+        height,
+        radius
+    );
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.restore();
+}
+
+function strokeRoundedRect(
+    ctx,
+    x,
+    y,
+    width,
+    height,
+    radius,
+    color,
+    lineWidth = 4
+) {
+    ctx.save();
+    drawRoundedRect(
+        ctx,
+        x,
+        y,
+        width,
+        height,
+        radius
+    );
+    ctx.strokeStyle = color;
+    ctx.lineWidth = lineWidth;
+    ctx.stroke();
+    ctx.restore();
+}
+
+function drawConfettiDecoration(
+    ctx,
+    canvasWidth,
+    canvasHeight,
+    design
+) {
+    const confettiColors = [
+        design.accentColor,
+        design.accentColor2,
+        design.accentColor3,
+        design.accentColor4
+    ];
+
+    for (let i = 0; i < 90; i++) {
+
+        const x =
+            Math.random() * canvasWidth;
+
+        const y =
+            Math.random() * canvasHeight;
+
+        const size =
+            8 + Math.random() * 12;
+
+        const color =
+            confettiColors[
+                Math.floor(
+                    Math.random() *
+                    confettiColors.length
+                )
+            ];
+
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(Math.random() * Math.PI);
+
+        ctx.fillStyle = color;
+        ctx.fillRect(
+            -size / 2,
+            -size / 4,
+            size,
+            size / 2
+        );
+
+        ctx.restore();
+    }
+
+    for (let i = 0; i < 20; i++) {
+
+        const x =
+            40 + Math.random() *
+            (canvasWidth - 80);
+
+        const y =
+            110 + Math.random() * 70;
+
+        ctx.beginPath();
+        ctx.arc(
+            x,
+            y,
+            6 + Math.random() * 8,
+            0,
+            Math.PI * 2
+        );
+        ctx.fillStyle =
+            confettiColors[
+                Math.floor(
+                    Math.random() *
+                    confettiColors.length
+                )
+            ];
+        ctx.fill();
+    }
+}
+
+function drawPartyDecoration(
+    ctx,
+    canvasWidth,
+    canvasHeight,
+    design
+) {
+    const colors = [
+        design.accentColor,
+        design.accentColor2,
+        design.accentColor3,
+        design.accentColor4
+    ];
+
+    // Wimpelkette
+    const startX = 80;
+    const endX = canvasWidth - 80;
+    const topY = 110;
+
+    ctx.save();
+    ctx.strokeStyle = "rgba(255,255,255,0.6)";
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(startX, topY);
+    ctx.quadraticCurveTo(
+        canvasWidth / 2,
+        topY + 40,
+        endX,
+        topY
+    );
+    ctx.stroke();
+
+    const pennantCount = 10;
+    const spacing =
+        (endX - startX) / pennantCount;
+
+    for (let i = 0; i < pennantCount; i++) {
+
+        const px =
+            startX + i * spacing + spacing / 2;
+
+        const py =
+            topY + 8 + Math.sin(i) * 8;
+
+        ctx.beginPath();
+        ctx.moveTo(px - 18, py);
+        ctx.lineTo(px + 18, py);
+        ctx.lineTo(px, py + 35);
+        ctx.closePath();
+
+        ctx.fillStyle =
+            colors[i % colors.length];
+        ctx.fill();
+    }
+
+    ctx.restore();
+
+    // Kreise / Party-Dots im Hintergrund
+    for (let i = 0; i < 24; i++) {
+
+        const r =
+            16 + Math.random() * 26;
+
+        const x =
+            40 + Math.random() *
+            (canvasWidth - 80);
+
+        const y =
+            180 + Math.random() *
+            (canvasHeight - 260);
+
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fillStyle =
+            colors[
+                Math.floor(
+                    Math.random() *
+                    colors.length
+                )
+            ] + "33";
+        ctx.fill();
+    }
+}
+
+function drawPhotoFrame(
+    ctx,
+    img,
+    frame
+) {
+    const border = 14;
+    const radius = 22;
+
+    // Rahmen
+    fillRoundedRect(
+        ctx,
+        frame.x,
+        frame.y,
+        frame.w,
+        frame.h,
+        radius,
+        frame.frameColor
+    );
+
+    strokeRoundedRect(
+        ctx,
+        frame.x,
+        frame.y,
+        frame.w,
+        frame.h,
+        radius,
+        frame.frameBorderColor,
+        4
+    );
+
+    const innerX =
+        frame.x + border;
+    const innerY =
+        frame.y + border;
+    const innerW =
+        frame.w - border * 2;
+    const innerH =
+        frame.h - border * 2;
+
+    const imageRatio =
+        img.width / img.height;
+
+    const frameRatio =
+        innerW / innerH;
+
+    let drawWidth;
+    let drawHeight;
+    let offsetX;
+    let offsetY;
+
+    if (imageRatio > frameRatio) {
+
+        drawHeight = innerH;
+        drawWidth =
+            innerH * imageRatio;
+
+        offsetX =
+            (drawWidth - innerW) / 2;
+        offsetY = 0;
+
+    } else {
+
+        drawWidth = innerW;
+        drawHeight =
+            innerW / imageRatio;
+
+        offsetX = 0;
+        offsetY =
+            (drawHeight - innerH) / 2;
+    }
+
+    ctx.save();
+
+    drawRoundedRect(
+        ctx,
+        innerX,
+        innerY,
+        innerW,
+        innerH,
+        16
+    );
+
+    ctx.clip();
+
+    ctx.drawImage(
+        img,
+        innerX - offsetX,
+        innerY - offsetY,
+        drawWidth,
+        drawHeight
+    );
+
+    ctx.restore();
+}
+
 async function generateCollage() {
 
     const ctx =
@@ -950,7 +1317,14 @@ async function generateCollage() {
     collageCanvas.height = 800;
 
     const design =
-    cardDesigns[settings.cardDesign];
+        cardDesigns[settings.cardDesign];
+
+    ctx.clearRect(
+        0,
+        0,
+        collageCanvas.width,
+        collageCanvas.height
+    );
 
     ctx.fillStyle =
         design
@@ -962,35 +1336,69 @@ async function generateCollage() {
         0,
         collageCanvas.width,
         collageCanvas.height
-);
-    
+    );
+
+    // Hintergrund-Deko je nach Design
+    if (settings.cardDesign === "birthdayConfetti") {
+
+        drawConfettiDecoration(
+            ctx,
+            collageCanvas.width,
+            collageCanvas.height,
+            design
+        );
+
+    } else if (
+        settings.cardDesign === "birthdayParty"
+    ) {
+
+        drawPartyDecoration(
+            ctx,
+            collageCanvas.width,
+            collageCanvas.height,
+            design
+        );
+    }
+
+    // Titel-Banner
+    fillRoundedRect(
+        ctx,
+        160,
+        25,
+        880,
+        70,
+        28,
+        "rgba(255,255,255,0.85)"
+    );
+
     ctx.fillStyle =
         design
             ? design.textColor
             : "#000000";
 
     ctx.font =
-        "bold 50px Arial";
+        "bold 46px Arial";
 
     ctx.textAlign =
         "center";
 
+    ctx.textBaseline =
+        "middle";
+
     ctx.fillText(
-    settings.eventTitle,
-    collageCanvas.width / 2,
-    70
-);
+        settings.eventTitle,
+        collageCanvas.width / 2,
+        60
+    );
 
     const images = [];
 
     for (const photo of capturedPhotos) {
 
         const img = new Image();
-
         img.src = photo;
 
         await new Promise(resolve => {
-
             img.onload = resolve;
         });
 
@@ -1001,130 +1409,127 @@ async function generateCollage() {
 
     if (capturedPhotos.length === 3) {
 
-    // Layout für 3 Fotos:
-    // zwei Fotos oben, ein großes Foto unten
+        positions = [
+            {
+                x: 50,
+                y: 145,
+                w: 530,
+                h: 255
+            },
+            {
+                x: 620,
+                y: 145,
+                w: 530,
+                h: 255
+            },
+            {
+                x: 180,
+                y: 430,
+                w: 840,
+                h: 255
+            }
+        ];
 
-    positions = [
-        { x: 20,  y: 110, w: 560,  h: 300 },
-        { x: 620, y: 110, w: 560,  h: 300 },
+    } else if (
+        capturedPhotos.length === 4
+    ) {
 
-        { x: 20,  y: 450, w: 1160, h: 300 }
-    ];
-
-    } else if (capturedPhotos.length === 4) {
-
-    // Layout für 4 Fotos:
-    // klassisches 2x2-Raster
-
-    positions = [
-        { x: 20,  y: 110, w: 560, h: 300 },
-        { x: 620, y: 110, w: 560, h: 300 },
-
-        { x: 20,  y: 450, w: 560, h: 300 },
-        { x: 620, y: 450, w: 560, h: 300 }
-    ];
-}
+        positions = [
+            {
+                x: 50,
+                y: 145,
+                w: 530,
+                h: 255
+            },
+            {
+                x: 620,
+                y: 145,
+                w: 530,
+                h: 255
+            },
+            {
+                x: 50,
+                y: 430,
+                w: 530,
+                h: 255
+            },
+            {
+                x: 620,
+                y: 430,
+                w: 530,
+                h: 255
+            }
+        ];
+    }
 
     images.forEach((img, index) => {
 
-        if (positions[index]) {
+        if (!positions[index]) {
+            return;
+        }
 
-            const p =
-                positions[index];
+        const p = positions[index];
 
-    const imageRatio =
-        img.width / img.height;
-
-    const frameRatio =
-        p.w / p.h;
-
-    let drawWidth;
-    let drawHeight;
-    let offsetX;
-    let offsetY;
-
-    if (imageRatio > frameRatio) {
-
-        drawHeight = p.h;
-        drawWidth =
-            p.h * imageRatio;
-
-        offsetX =
-            (drawWidth - p.w) / 2;
-
-        offsetY = 0;
-
-    } else {
-
-        drawWidth = p.w;
-        drawHeight =
-            p.w / imageRatio;
-
-        offsetX = 0;
-
-        offsetY =
-            (drawHeight - p.h) / 2;
-    }
-
-    ctx.save();
-
-    ctx.beginPath();
-
-    ctx.rect(
-        p.x,
-        p.y,
-        p.w,
-        p.h
-    );
-
-    ctx.clip();
-
-    ctx.drawImage(
-        img,
-        p.x - offsetX,
-        p.y - offsetY,
-        drawWidth,
-        drawHeight
-    );
-
-    ctx.restore();
+        drawPhotoFrame(
+            ctx,
+            img,
+            {
+                x: p.x,
+                y: p.y,
+                w: p.w,
+                h: p.h,
+                frameColor:
+                    design.frameColor,
+                frameBorderColor:
+                    design.frameBorderColor
             }
-        });
+        );
+    });
 
-        const today =
+    const today =
         new Date();
 
-        const dateString =
-            today.toLocaleDateString(
+    const dateString =
+        today.toLocaleDateString(
             "de-DE"
         );
 
-        ctx.font =
-            "32px Arial";
+    fillRoundedRect(
+        ctx,
+        455,
+        722,
+        290,
+        46,
+        22,
+        design.dateBgColor
+    );
 
-        ctx.fillStyle =
-            "#000000";
+    ctx.fillStyle =
+        design.dateTextColor;
 
-        ctx.textAlign =
-            "center";
+    ctx.font =
+        "28px Arial";
 
-        ctx.fillText(
-            dateString,
-            collageCanvas.width / 2,
-            790
+    ctx.textAlign =
+        "center";
+    ctx.textBaseline =
+        "middle";
+
+    ctx.fillText(
+        dateString,
+        collageCanvas.width / 2,
+        745
+    );
+
+    collagePreview.src =
+        collageCanvas.toDataURL(
+            "image/jpeg",
+            0.95
         );
-    
-        collagePreview.src =
-            collageCanvas.toDataURL(
-                "image/jpeg",
-                0.95
-            );
 
-        collagePreview.style.display =
-            "block";
-
-    
-    }
+    collagePreview.style.display =
+        "block";
+}
 
 themeButtons.forEach(button => {
 
