@@ -15,313 +15,510 @@
 <body>
 
 <main>
-	
-	<div id="logoArea">
-    <div id="appLogo">📸 Photobooth</div>
-	</div>
-	
-	<div id="countdownOverlay"></div>
 
-	<div id="flashOverlay"></div>
+    <!-- =========================
+         STARTSEITE
+    ========================== -->
 
-	<h1 id="eventTitleDisplay">
-		    Photobooth
-	</h1>
-
-<div id="photoCountInfo">
-    Fotos pro Serie: 4
-</div>
-
-<div id="seriesProgress">
-    Foto 1 von 4
-</div>
-
-<div id="guestPhotoCountSelection">
-
-    <button
-        class="guestPhotoCountBtn"
-        data-count="2">
-        2 Fotos
-    </button>
-
-    <button
-        class="guestPhotoCountBtn"
-        data-count="3">
-        3 Fotos
-    </button>
-
-    <button
-        class="guestPhotoCountBtn"
-        data-count="4">
-        4 Fotos
-    </button>
-
-</div>
-	
-	<button id="startBoothBtn">
-  	  📸 Photobooth starten
-	</button>
-
-<div id="captureArea">
-
-    <div id="cameraContainer">
-        <video
-            id="video"
-            autoplay
-            playsinline
-            muted>
-        </video>
+    <div id="startScreen">
 
         <img
-            id="photoPreview"
-            alt="Vorschau"
-        >
-    </div>
-
-    <div id="captureControls">
-
-        <button id="captureBtn" class="squareActionBtn">
-            <span class="captureIcon">📸</span>
-            <span class="captureText">Aufnehmen</span>
-        </button>
-
-        <button id="retakeBtn" class="squareActionBtn">
-            <span class="captureIcon">🔄</span>
-            <span class="captureText">Nochmal</span>
-        </button>
-
-        <button id="nextBtn" class="squareActionBtn">
-            <span class="captureIcon">➡️</span>
-            <span class="captureText">Weiter</span>
-        </button>
-
-    </div>
-
-</div>
-
-	<canvas id="photoCanvas"></canvas>
-
-	<img id="photoPreview" alt="Vorschau">
-
-<canvas id="collageCanvas"></canvas>
-
-<div id="resultArea">
-
-    <img
-        id="collagePreview"
-        alt="Fotokarte"
-    >
-
-    <div id="photoActions">
-
-        <button
-            id="saveBtn"
-            class="squareActionBtn">
-            <span class="captureIcon">💾</span>
-            <span class="captureText">Speichern</span>
-        </button>
-
-        <button
-            id="printBtn"
-            class="squareActionBtn">
-            <span class="captureIcon">🖨️</span>
-            <span class="captureText">Drucken</span>
-        </button>
-
-        <button
-            id="newSeriesBtn"
-            class="squareActionBtn">
-            <span class="captureIcon">📸</span>
-            <span class="captureText">Neue Serie</span>
-        </button>
-
-    </div>
-
-</div>
-
-<div id="pinOverlay">
-
-    <div id="pinPanel">
-
-        <h2>🔐 Admin-Zugang</h2>
-
-        <input
-            id="adminPinInput"
-            type="password"
-            inputmode="numeric"
-            maxlength="4"
-            placeholder="PIN"
+            id="startLogo"
+            src="images/photobooth-logo.png"
+            alt="Photobooth"
         >
 
-        <div id="pinError">
-            PIN nicht korrekt
-        </div>
-
-        <div class="pinButtons">
-            <button id="pinCancelBtn">
-                Abbrechen
-            </button>
-
-            <button id="pinOkBtn">
-                Anmelden
-            </button>
-        </div>
+        <button id="startBoothBtn">
+            📸 Photobooth starten
+        </button>
 
     </div>
 
-</div>
-	
-	<div id="adminOverlay">
 
-    <div id="adminPanel">
+    <!-- =========================
+         PHOTOBOOTH
+    ========================== -->
 
-        <h2>⚙️ Adminbereich</h2>
+    <div id="boothScreen">
 
-        <p>
-            Photobooth-Einstellungen
-        </p>
+        <div id="logoArea">
+
+            <img
+                id="appLogo"
+                src="images/photobooth-icon.png"
+                alt="Photobooth"
+            >
+
+        </div>
 
 
-        <div class="adminSection">
+        <div id="countdownOverlay"></div>
 
-            <h3>🎭 Event</h3>
+        <div id="flashOverlay"></div>
 
-            <div id="themeSelection">
+
+        <h1 id="eventTitleDisplay">
+            Photobooth
+        </h1>
+
+
+        <div id="photoCountInfo">
+            Fotos pro Serie: 4
+        </div>
+
+
+        <div id="seriesProgress">
+            Foto 1 von 4
+        </div>
+
+
+        <div id="guestPhotoCountSelection">
+
+            <button
+                class="guestPhotoCountBtn"
+                data-count="2">
+                2 Fotos
+            </button>
+
+            <button
+                class="guestPhotoCountBtn"
+                data-count="3">
+                3 Fotos
+            </button>
+
+            <button
+                class="guestPhotoCountBtn"
+                data-count="4">
+                4 Fotos
+            </button>
+
+        </div>
+
+
+        <div id="captureArea">
+
+            <div id="cameraContainer">
+
+                <video
+                    id="video"
+                    autoplay
+                    playsinline
+                    muted>
+                </video>
+
+                <img
+                    id="photoPreview"
+                    alt="Vorschau"
+                >
+
+            </div>
+
+
+            <div id="captureControls">
 
                 <button
-                    class="themeBtn"
-                    data-theme="birthday">
-                    🎂 Geburtstag
+                    id="captureBtn"
+                    class="squareActionBtn">
+
+                    <span class="captureIcon">
+                        📸
+                    </span>
+
+                    <span class="captureText">
+                        Aufnehmen
+                    </span>
+
                 </button>
 
-                <button
-                    class="themeBtn"
-                    data-theme="wedding">
-                    💍 Hochzeit
-                </button>
 
                 <button
-                    class="themeBtn"
-                    data-theme="business">
-                    🏢 Firmenfeier
+                    id="retakeBtn"
+                    class="squareActionBtn">
+
+                    <span class="captureIcon">
+                        🔄
+                    </span>
+
+                    <span class="captureText">
+                        Nochmal
+                    </span>
+
+                </button>
+
+
+                <button
+                    id="nextBtn"
+                    class="squareActionBtn">
+
+                    <span class="captureIcon">
+                        ➡️
+                    </span>
+
+                    <span class="captureText">
+                        Weiter
+                    </span>
+
                 </button>
 
             </div>
 
-		<div class="adminSection">
-
-    			<h3>✏️ Titel</h3>
-
-    			<input
-        			id="eventTitleInput"
-        			type="text"
-        			value="Photobooth"
-        			maxlength="60"
-    			>
-
-			</div>
-			
         </div>
 
 
-        <div class="adminSection">
+        <canvas id="photoCanvas"></canvas>
 
-            <h3>📷 Anzahl der Fotos</h3>
+        <canvas id="collageCanvas"></canvas>
 
-			<div id="photoCountSelection">
-  	  			<button class="photoCountBtn" data-count="2">2 Fotos</button>
-			    <button class="photoCountBtn" data-count="3">3 Fotos</button>
-			    <button class="photoCountBtn" data-count="4">4 Fotos</button>
-			</div>
 
-        </div>
+        <div id="resultArea">
 
-        <div class="adminSection">
+            <img
+                id="collagePreview"
+                alt="Fotokarte"
+            >
 
-            <h3>🎨 Kartendesign</h3>
 
-            <div id="designSelection">
+            <div id="photoActions">
 
                 <button
-                    class="designBtn"
-                    data-design="birthdayConfetti">
-                    🎉 Konfetti
+                    id="saveBtn"
+                    class="squareActionBtn">
+
+                    <span class="captureIcon">
+                        💾
+                    </span>
+
+                    <span class="captureText">
+                        Speichern
+                    </span>
+
                 </button>
 
+
                 <button
-                    class="designBtn"
-                    data-design="birthdayParty">
-                    🥳 Party
+                    id="printBtn"
+                    class="squareActionBtn">
+
+                    <span class="captureIcon">
+                        🖨️
+                    </span>
+
+                    <span class="captureText">
+                        Drucken
+                    </span>
+
+                </button>
+
+
+                <button
+                    id="newSeriesBtn"
+                    class="squareActionBtn">
+
+                    <span class="captureIcon">
+                        📸
+                    </span>
+
+                    <span class="captureText">
+                        Neue Serie
+                    </span>
+
                 </button>
 
             </div>
-			        </div>
-		
-		<div class="adminSection">
 
-    <h3>⏱ Aufnahme</h3>
+        </div>
 
-    <div class="adminSettingRow">
-        <label for="countdownSelect">
-            Countdown
-        </label>
-
-        <select id="countdownSelect">
-            <option value="3">3 Sekunden</option>
-            <option value="5">5 Sekunden</option>
-            <option value="10">10 Sekunden</option>
-        </select>
     </div>
 
-    <div class="adminSettingRow">
-        <label>
+
+    <!-- =========================
+         PIN
+    ========================== -->
+
+    <div id="pinOverlay">
+
+        <div id="pinPanel">
+
+            <h2>
+                🔐 Admin-Zugang
+            </h2>
+
             <input
-                type="checkbox"
-                id="flashEnabled"
+                id="adminPinInput"
+                type="password"
+                inputmode="numeric"
+                maxlength="4"
+                placeholder="PIN"
             >
-            Bildschirmblitz
-        </label>
-    </div>
 
-    <div class="adminSettingRow">
-        <label>
-            <input
-                type="checkbox"
-                id="soundEnabled"
-            >
-            Auslöseton
-        </label>
-    </div>
-
-</div>
-
-<div class="adminSection">
-    <h3>🖥 Anzeige</h3>
-
-    <button id="restoreFullscreenBtn">
-        Vollbild wiederherstellen
-    </button>
-	
-	<button id="restartCameraBtn">
-        📷 Kamera neu starten
-    </button>
-
-    <button id="resetBoothBtn">
-        🔄 Photobooth zurücksetzen
-    </button>
-</div>
-		
+            <div id="pinError">
+                PIN nicht korrekt
+            </div>
 
 
+            <div class="pinButtons">
 
-        <button id="closeAdminBtn">
-            Einstellungen übernehmen
-        </button>
+                <button id="pinCancelBtn">
+                    Abbrechen
+                </button>
+
+                <button id="pinOkBtn">
+                    Anmelden
+                </button>
+
+            </div>
+
+        </div>
 
     </div>
 
-</div>
-	
+
+    <!-- =========================
+         ADMIN
+    ========================== -->
+
+    <div id="adminOverlay">
+
+        <div id="adminPanel">
+
+            <h2>
+                ⚙️ Adminbereich
+            </h2>
+
+            <p>
+                Photobooth-Einstellungen
+            </p>
+
+
+            <div class="adminSection">
+
+                <h3>
+                    🎭 Event
+                </h3>
+
+                <div id="themeSelection">
+
+                    <button
+                        class="themeBtn"
+                        data-theme="birthday">
+
+                        🎂 Geburtstag
+
+                    </button>
+
+
+                    <button
+                        class="themeBtn"
+                        data-theme="wedding">
+
+                        💍 Hochzeit
+
+                    </button>
+
+
+                    <button
+                        class="themeBtn"
+                        data-theme="business">
+
+                        🏢 Firmenfeier
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="adminSection">
+
+                <h3>
+                    ✏️ Titel
+                </h3>
+
+                <input
+                    id="eventTitleInput"
+                    type="text"
+                    value="Photobooth"
+                    maxlength="60"
+                >
+
+            </div>
+
+
+            <div class="adminSection">
+
+                <h3>
+                    📷 Anzahl der Fotos
+                </h3>
+
+                <div id="photoCountSelection">
+
+                    <button
+                        class="photoCountBtn"
+                        data-count="2">
+                        2 Fotos
+                    </button>
+
+                    <button
+                        class="photoCountBtn"
+                        data-count="3">
+                        3 Fotos
+                    </button>
+
+                    <button
+                        class="photoCountBtn"
+                        data-count="4">
+                        4 Fotos
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="adminSection">
+
+                <h3>
+                    🎨 Kartendesign
+                </h3>
+
+                <div id="designSelection">
+
+                    <button
+                        class="designBtn"
+                        data-design="birthdayConfetti">
+
+                        🎉 Konfetti
+
+                    </button>
+
+
+                    <button
+                        class="designBtn"
+                        data-design="birthdayParty">
+
+                        🥳 Party
+
+                    </button>
+
+
+                    <button
+                        class="designBtn"
+                        data-design="weddingElegant">
+
+                        💍 Elegant
+
+                    </button>
+
+
+                    <button
+                        class="designBtn"
+                        data-design="businessClean">
+
+                        🏢 Clean
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="adminSection">
+
+                <h3>
+                    ⏱ Aufnahme
+                </h3>
+
+
+                <div class="adminSettingRow">
+
+                    <label for="countdownSelect">
+                        Countdown
+                    </label>
+
+                    <select id="countdownSelect">
+
+                        <option value="3">
+                            3 Sekunden
+                        </option>
+
+                        <option value="5">
+                            5 Sekunden
+                        </option>
+
+                        <option value="10">
+                            10 Sekunden
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="adminSettingRow">
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            id="flashEnabled"
+                        >
+
+                        Bildschirmblitz
+
+                    </label>
+
+                </div>
+
+
+                <div class="adminSettingRow">
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            id="soundEnabled"
+                        >
+
+                        Auslöseton
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <div class="adminSection">
+
+                <h3>
+                    🖥 Anzeige
+                </h3>
+
+                <button id="restoreFullscreenBtn">
+                    Vollbild wiederherstellen
+                </button>
+
+                <button id="restartCameraBtn">
+                    📷 Kamera neu starten
+                </button>
+
+                <button id="resetBoothBtn">
+                    🔄 Photobooth zurücksetzen
+                </button>
+
+            </div>
+
+
+            <button id="closeAdminBtn">
+                Einstellungen übernehmen
+            </button>
+
+        </div>
+
+    </div>
+
 </main>
 	<script src="app.js"></script>
 		
