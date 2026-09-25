@@ -1271,7 +1271,7 @@ const coverScale =
 
     0.75 = leichtes bis mittleres Cropping
 */
-const cropStrength = 0.75;
+const cropStrength = 0.85;
 
 const finalScale =
     containScale +
