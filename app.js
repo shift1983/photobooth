@@ -458,6 +458,7 @@ function loadSettings() {
         }
 
         if (
+            savedSettings.photoCount === 2 ||
             savedSettings.photoCount === 3 ||
             savedSettings.photoCount === 4
         ) {
