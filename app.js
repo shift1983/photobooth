@@ -213,6 +213,21 @@ if ("serviceWorker" in navigator) {
    DOM-ELEMENTE
 ========================= */
 
+const startScreen =
+    document.getElementById(
+        "startScreen"
+    );
+
+const boothScreen =
+    document.getElementById(
+        "boothScreen"
+    );
+
+const startLogo =
+    document.getElementById(
+        "startLogo"
+    );
+
 const startBoothBtn =
     document.getElementById(
         "startBoothBtn"
@@ -960,13 +975,40 @@ startBoothBtn.addEventListener(
 
         await startCamera();
 
-        startBoothBtn
-            .style.display =
+
+        startScreen.style.display =
             "none";
 
-        captureBtn
-            .style.display =
+
+        boothScreen.style.display =
+            "block";
+
+
+        video.style.display =
+            "block";
+
+
+        captureArea.style.display =
+            "flex";
+
+
+        captureBtn.style.display =
             "inline-block";
+
+
+        guestPhotoCountSelection
+            .style.display =
+            "flex";
+
+
+        eventTitleDisplay
+            .style.display =
+            "block";
+
+
+        seriesProgress
+            .style.display =
+            "block";
     }
 );
 
@@ -3636,42 +3678,49 @@ designButtons.forEach(
    ADMIN LOGO LANGDRUCK
 ========================= */
 
-appLogo.addEventListener(
-    "mousedown",
-    startAdminPress
-);
+[
+    startLogo,
+    appLogo
+].forEach(
+    logo => {
 
+        if (!logo) {
+            return;
+        }
 
-appLogo.addEventListener(
-    "mouseup",
-    cancelAdminPress
-);
+        logo.addEventListener(
+            "mousedown",
+            startAdminPress
+        );
 
+        logo.addEventListener(
+            "mouseup",
+            cancelAdminPress
+        );
 
-appLogo.addEventListener(
-    "mouseleave",
-    cancelAdminPress
-);
+        logo.addEventListener(
+            "mouseleave",
+            cancelAdminPress
+        );
 
+        logo.addEventListener(
+            "touchstart",
+            startAdminPress,
+            {
+                passive: true
+            }
+        );
 
-appLogo.addEventListener(
-    "touchstart",
-    startAdminPress,
-    {
-        passive: true
+        logo.addEventListener(
+            "touchend",
+            cancelAdminPress
+        );
+
+        logo.addEventListener(
+            "touchcancel",
+            cancelAdminPress
+        );
     }
-);
-
-
-appLogo.addEventListener(
-    "touchend",
-    cancelAdminPress
-);
-
-
-appLogo.addEventListener(
-    "touchcancel",
-    cancelAdminPress
 );
 
 
@@ -3995,6 +4044,12 @@ function initializeApp() {
                 settings.cardDesign
         }
     );
+
+    startScreen.style.display =
+        "flex";
+
+    boothScreen.style.display =
+        "none";
 }
 
 
