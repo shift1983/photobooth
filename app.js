@@ -39,16 +39,16 @@ const cardDesigns = {
         frameColor: "#ffffff",
         frameBorderColor: "#f4c98b",
 
-            accentColors: [
-                "#ff8a65",
-                "#ffd54f",
-                "#7e57c2",
-                "#4db6ac",
-                "#ff6b6b",
-                "#4dabf7",
-                "#a9e34b",
-                "#f783ac"
-    ],
+        accentColors: [
+            "#ff8a65",
+            "#ffd54f",
+            "#7e57c2",
+            "#4db6ac",
+            "#ff6b6b",
+            "#4dabf7",
+            "#a9e34b",
+            "#f783ac"
+        ],
 
         dateBgColor: "rgba(255,255,255,0.85)",
         dateTextColor: "#6b3200",
@@ -57,86 +57,94 @@ const cardDesigns = {
             "bold 52px 'Comic Sans MS', 'Marker Felt', cursive"
     },
 
-birthdayParty: {
-    name: "Party",
-    theme: "birthday",
-    photoCounts: [2, 3, 4],
+    birthdayParty: {
+        name: "Party",
+        theme: "birthday",
+        photoCounts: [2, 3, 4],
 
-    backgroundColor: "#34124d",
-    textColor: "#ffffff",
+        backgroundColor: "#34124d",
+        textColor: "#ffffff",
 
-    frameColor: "#ffffff",
-    frameBorderColor: "#ff98d0",
+        frameColor: "#ffffff",
+        frameBorderColor: "#ff98d0",
 
-    accentColors: [
-        "#ff4fa3",
-        "#ffd84d",
-        "#59d8ff",
-        "#7df58a",
-        "#b388ff",
-        "#ff7b54",
-        "#00e5ff",
-        "#ff80ab"
-    ],
+        accentColors: [
+            "#ff4fa3",
+            "#ffd84d",
+            "#59d8ff",
+            "#7df58a",
+            "#b388ff",
+            "#ff7b54",
+            "#00e5ff",
+            "#ff80ab"
+        ],
 
-weddingElegant: {
-    name: "Elegant",
-    theme: "wedding",
-    photoCounts: [2, 3, 4],
+        dateBgColor: "rgba(255,255,255,0.9)",
+        dateTextColor: "#34124d",
 
-    backgroundColor: "#f8f4f1",
-    textColor: "#6b5964",
+        titleBgColor: "rgba(35, 10, 55, 0.78)",
 
-    frameColor: "#ffffff",
-    frameBorderColor: "#d8c6d3",
+        titleFont:
+            "bold 50px 'Comic Sans MS', 'Marker Felt', cursive"
+    },
 
-    accentColors: [
-        "#d8b4c6",
-        "#ead7df",
-        "#c9b6cf",
-        "#f1e6df",
-        "#b8c8bd",
-        "#e7d6c9"
-    ],
+    weddingElegant: {
+        name: "Elegant",
+        theme: "wedding",
+        photoCounts: [2, 3, 4],
 
-    dateBgColor: "rgba(255,255,255,0.88)",
-    dateTextColor: "#6b5964",
+        backgroundColor: "#f8f4f1",
+        textColor: "#6b5964",
 
-    titleBgColor: "rgba(255,255,255,0.72)",
+        frameColor: "#ffffff",
+        frameBorderColor: "#d8c6d3",
 
-    titleFont:
-        "italic 52px Georgia, 'Times New Roman', serif"
-},
+        accentColors: [
+            "#d8b4c6",
+            "#ead7df",
+            "#c9b6cf",
+            "#f1e6df",
+            "#b8c8bd",
+            "#e7d6c9"
+        ],
 
-businessClean: {
-    name: "Clean",
-    theme: "business",
-    photoCounts: [2, 3, 4],
+        dateBgColor: "rgba(255,255,255,0.88)",
+        dateTextColor: "#6b5964",
 
-    backgroundColor: "#172331",
-    textColor: "#ffffff",
+        titleBgColor: "rgba(255,255,255,0.72)",
 
-    frameColor: "#ffffff",
-    frameBorderColor: "#86a5bd",
+        titleFont:
+            "italic 52px Georgia, 'Times New Roman', serif"
+    },
 
-    accentColors: [
-        "#4f88b5",
-        "#79a6c7",
-        "#8dc6c3",
-        "#a8bdd0",
-        "#d4e2ec",
-        "#5f7f99"
-    ],
+    businessClean: {
+        name: "Clean",
+        theme: "business",
+        photoCounts: [2, 3, 4],
 
-    dateBgColor: "rgba(255,255,255,0.92)",
-    dateTextColor: "#172331",
+        backgroundColor: "#172331",
+        textColor: "#ffffff",
 
-    titleBgColor: "rgba(11,25,39,0.82)",
+        frameColor: "#ffffff",
+        frameBorderColor: "#86a5bd",
 
-    titleFont:
-        "bold 46px Arial, sans-serif"
-}
+        accentColors: [
+            "#4f88b5",
+            "#79a6c7",
+            "#8dc6c3",
+            "#a8bdd0",
+            "#d4e2ec",
+            "#5f7f99"
+        ],
 
+        dateBgColor: "rgba(255,255,255,0.92)",
+        dateTextColor: "#172331",
+
+        titleBgColor: "rgba(11,25,39,0.82)",
+
+        titleFont:
+            "bold 46px Arial, sans-serif"
+    }
 
 };
 
