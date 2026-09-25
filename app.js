@@ -2535,6 +2535,53 @@ function drawWeddingDecoration(
         }
     );
 
+    ctx.save();
+
+    ctx.strokeStyle =
+        "rgba(180,150,170,0.35)";
+
+    ctx.lineWidth =
+        3;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        40,
+        700
+    );
+
+    ctx.quadraticCurveTo(
+        200,
+        640,
+        330,
+        730
+    );
+
+    ctx.stroke();
+
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        canvasWidth -
+        40,
+        700
+    );
+
+    ctx.quadraticCurveTo(
+        canvasWidth -
+        200,
+        640,
+        canvasWidth -
+        330,
+        730
+    );
+
+    ctx.stroke();
+
+    ctx.restore();
+}
+
     function drawWeddingFloralDecoration(
     ctx,
     canvasWidth,
@@ -2799,54 +2846,6 @@ function drawWeddingDecoration(
 
     ctx.restore();
 }
-
-    ctx.save();
-
-    ctx.strokeStyle =
-        "rgba(180,150,170,0.35)";
-
-    ctx.lineWidth =
-        3;
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        40,
-        700
-    );
-
-    ctx.quadraticCurveTo(
-        200,
-        640,
-        330,
-        730
-    );
-
-    ctx.stroke();
-
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        canvasWidth -
-        40,
-        700
-    );
-
-    ctx.quadraticCurveTo(
-        canvasWidth -
-        200,
-        640,
-        canvasWidth -
-        330,
-        730
-    );
-
-    ctx.stroke();
-
-    ctx.restore();
-}
-
 
 /* =========================
    BUSINESS DESIGN
