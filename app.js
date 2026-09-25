@@ -57,33 +57,36 @@ const cardDesigns = {
             "bold 52px 'Comic Sans MS', 'Marker Felt', cursive"
     },
 
-    birthdayParty: {
-        name: "Party",
-        theme: "birthday",
-        photoCounts: [4],
+birthdayParty: {
+    name: "Party",
+    theme: "birthday",
+    photoCounts: [4],
 
-        backgroundColor: "#34124d",
-        textColor: "#ffffff",
-        frameColor: "#ffffff",
-        frameBorderColor: "#ff98d0",
+    backgroundColor: "#34124d",
+    textColor: "#ffffff",
 
-            accentColors: [
-                "#ff8a65",
-                "#ffd54f",
-                "#7e57c2",
-                "#4db6ac",
-                "#ff6b6b",
-                "#4dabf7",
-                "#a9e34b",
-                "#f783ac"
-        ],
+    frameColor: "#ffffff",
+    frameBorderColor: "#ff98d0",
 
-        dateBgColor: "rgba(255,255,255,0.9)",
-        dateTextColor: "#34124d",
+    accentColors: [
+        "#ff4fa3",
+        "#ffd84d",
+        "#59d8ff",
+        "#7df58a",
+        "#b388ff",
+        "#ff7b54",
+        "#00e5ff",
+        "#ff80ab"
+    ],
 
-        titleFont:
-            "bold 50px 'Comic Sans MS', 'Marker Felt', cursive"
-    }
+    dateBgColor: "rgba(255,255,255,0.9)",
+    dateTextColor: "#34124d",
+
+    titleBgColor: "rgba(35, 10, 55, 0.78)",
+
+    titleFont:
+        "bold 50px 'Comic Sans MS', 'Marker Felt', cursive"
+}
 
 };
 
@@ -1262,78 +1265,282 @@ function drawPartyDecoration(
     canvasHeight,
     design
 ) {
-    
-const colors =
-    design.accentColors;
+    const colors =
+        design.accentColors;
 
-    // Wimpelkette
-    const startX = 80;
-    const endX = canvasWidth - 80;
-    const topY = 110;
+    /*
+        Große halbtransparente Farbkreise
+        im Hintergrund
+    */
 
-    ctx.save();
-    ctx.strokeStyle = "rgba(255,255,255,0.6)";
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    ctx.moveTo(startX, topY);
-    ctx.quadraticCurveTo(
-        canvasWidth / 2,
-        topY + 40,
-        endX,
-        topY
-    );
-    ctx.stroke();
-
-    const pennantCount = 10;
-    const spacing =
-        (endX - startX) / pennantCount;
-
-    for (let i = 0; i < pennantCount; i++) {
-
-        const px =
-            startX + i * spacing + spacing / 2;
-
-        const py =
-            topY + 8 + Math.sin(i) * 8;
-
-        ctx.beginPath();
-        ctx.moveTo(px - 18, py);
-        ctx.lineTo(px + 18, py);
-        ctx.lineTo(px, py + 35);
-        ctx.closePath();
-
-        ctx.fillStyle =
-            colors[i % colors.length];
-        ctx.fill();
-    }
-
-    ctx.restore();
-
-    // Kreise / Party-Dots im Hintergrund
-    for (let i = 0; i < 24; i++) {
-
-        const r =
-            16 + Math.random() * 26;
+    for (let i = 0; i < 18; i++) {
 
         const x =
-            40 + Math.random() *
-            (canvasWidth - 80);
+            Math.random() * canvasWidth;
 
         const y =
-            180 + Math.random() *
-            (canvasHeight - 260);
+            Math.random() * canvasHeight;
 
-        ctx.beginPath();
-        ctx.arc(x, y, r, 0, Math.PI * 2);
-        ctx.fillStyle =
+        const radius =
+            25 + Math.random() * 55;
+
+        const color =
             colors[
                 Math.floor(
                     Math.random() *
                     colors.length
                 )
-            ] + "33";
+            ];
+
+        ctx.save();
+
+        ctx.globalAlpha = 0.12;
+
+        ctx.beginPath();
+
+        ctx.arc(
+            x,
+            y,
+            radius,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle = color;
+
+        ctx.fill();
+
+        ctx.restore();
+    }
+
+
+    /*
+        Wimpelkette oben
+    */
+
+    const startX = 60;
+    const endX = canvasWidth - 60;
+    const topY = 105;
+
+    ctx.save();
+
+    ctx.strokeStyle =
+        "rgba(255,255,255,0.65)";
+
+    ctx.lineWidth = 3;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        startX,
+        topY
+    );
+
+    ctx.quadraticCurveTo(
+        canvasWidth / 2,
+        topY + 35,
+        endX,
+        topY
+    );
+
+    ctx.stroke();
+
+    const pennantCount = 11;
+
+    const spacing =
+        (endX - startX) /
+        pennantCount;
+
+    for (
+        let i = 0;
+        i < pennantCount;
+        i++
+    ) {
+
+        const px =
+            startX +
+            i * spacing +
+            spacing / 2;
+
+        const py =
+            topY +
+            8 +
+            Math.sin(i) * 5;
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            px - 16,
+            py
+        );
+
+        ctx.lineTo(
+            px + 16,
+            py
+        );
+
+        ctx.lineTo(
+            px,
+            py + 30
+        );
+
+        ctx.closePath();
+
+        ctx.fillStyle =
+            colors[
+                i %
+                colors.length
+            ];
+
         ctx.fill();
     }
+
+    ctx.restore();
+
+
+    /*
+        Kleine Funkelsterne
+    */
+
+    for (let i = 0; i < 35; i++) {
+
+        const x =
+            40 +
+            Math.random() *
+            (canvasWidth - 80);
+
+        const y =
+            120 +
+            Math.random() *
+            (canvasHeight - 180);
+
+        const size =
+            4 +
+            Math.random() * 8;
+
+        const color =
+            colors[
+                Math.floor(
+                    Math.random() *
+                    colors.length
+                )
+            ];
+
+        ctx.save();
+
+        ctx.translate(
+            x,
+            y
+        );
+
+        ctx.strokeStyle =
+            color;
+
+        ctx.lineWidth = 3;
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            -size,
+            0
+        );
+
+        ctx.lineTo(
+            size,
+            0
+        );
+
+        ctx.moveTo(
+            0,
+            -size
+        );
+
+        ctx.lineTo(
+            0,
+            size
+        );
+
+        ctx.stroke();
+
+        ctx.restore();
+    }
+
+
+    /*
+        Luftschlangen
+    */
+
+    const streamers = [
+        {
+            x: 70,
+            y: 210,
+            color: colors[0]
+        },
+        {
+            x: 1120,
+            y: 230,
+            color: colors[2]
+        },
+        {
+            x: 90,
+            y: 620,
+            color: colors[4]
+        },
+        {
+            x: 1090,
+            y: 610,
+            color: colors[1]
+        }
+    ];
+
+    streamers.forEach(
+        streamer => {
+
+            ctx.save();
+
+            ctx.strokeStyle =
+                streamer.color;
+
+            ctx.lineWidth = 5;
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+                streamer.x,
+                streamer.y
+            );
+
+            for (
+                let i = 1;
+                i <= 5;
+                i++
+            ) {
+
+                ctx.quadraticCurveTo(
+
+                    streamer.x +
+                    i * 10,
+
+                    streamer.y +
+                    (
+                        i % 2 === 0
+                            ? 22
+                            : -22
+                    ),
+
+                    streamer.x +
+                    i * 20,
+
+                    streamer.y +
+                    i * 16
+                );
+            }
+
+            ctx.stroke();
+
+            ctx.restore();
+        }
+    );
 }
 
 function drawPhotoFrame(
@@ -1451,17 +1658,51 @@ async function generateCollage() {
         collageCanvas.height
     );
 
+if (
+    settings.cardDesign ===
+    "birthdayParty"
+) {
+
+    const gradient =
+        ctx.createLinearGradient(
+            0,
+            0,
+            collageCanvas.width,
+            collageCanvas.height
+        );
+
+    gradient.addColorStop(
+        0,
+        "#241038"
+    );
+
+    gradient.addColorStop(
+        0.5,
+        "#552060"
+    );
+
+    gradient.addColorStop(
+        1,
+        "#18102f"
+    );
+
+    ctx.fillStyle =
+        gradient;
+
+} else {
+
     ctx.fillStyle =
         design
             ? design.backgroundColor
             : "#ffffff";
+}
 
-    ctx.fillRect(
-        0,
-        0,
-        collageCanvas.width,
-        collageCanvas.height
-    );
+ctx.fillRect(
+    0,
+    0,
+    collageCanvas.width,
+    collageCanvas.height
+);
 
     // Hintergrund-Deko je nach Design
     if (settings.cardDesign === "birthdayConfetti") {
@@ -1486,15 +1727,21 @@ async function generateCollage() {
     }
 
     // Titel-Banner
-    fillRoundedRect(
-        ctx,
-        150,
-        20,
-        900,
-        78,
-        32,
-        "rgba(255,255,255,0.88)"
-    );
+const titleBackground =
+    settings.cardDesign ===
+    "birthdayParty"
+        ? design.titleBgColor
+        : "rgba(255,255,255,0.88)";
+
+fillRoundedRect(
+    ctx,
+    150,
+    20,
+    900,
+    78,
+    32,
+    titleBackground
+);
 
     strokeRoundedRect(
         ctx,
