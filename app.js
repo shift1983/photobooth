@@ -527,10 +527,7 @@ photoCountButtons.forEach(button => {
                     button.dataset.count
                 );
 
-            if (
-                newPhotoCount !== 3 &&
-                newPhotoCount !== 4
-            ) {
+            if (![2, 3, 4].includes(newPhotoCount)) {
                 return;
             }
 
