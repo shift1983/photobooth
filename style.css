@@ -728,10 +728,8 @@ body.business {
         height: 105mm !important;
 
         background: white !important;
-
         overflow: hidden !important;
     }
-
 
     main,
     #boothScreen {
@@ -742,22 +740,18 @@ body.business {
         padding: 0 !important;
 
         position: static !important;
-
         overflow: visible !important;
     }
-
 
     body * {
         visibility: hidden !important;
     }
-
 
     #resultArea,
     #resultArea *,
     #collagePreview {
         visibility: visible !important;
     }
-
 
     #resultArea {
         display: block !important;
@@ -778,7 +772,6 @@ body.business {
         z-index: 99999 !important;
     }
 
-
     #collagePreview {
         display: block !important;
 
@@ -802,7 +795,6 @@ body.business {
         box-shadow: none !important;
     }
 
-
     #photoActions,
     #logoArea,
     #eventTitleDisplay,
@@ -814,74 +806,7 @@ body.business {
 }
 
 
-    /* Alles zunächst unsichtbar */
-
-    body * {
-        visibility: hidden !important;
-    }
-
-
-    /* Nur Ergebnisbereich und Fotokarte sichtbar */
-
-    #resultArea,
-    #resultArea *,
-    #collagePreview {
-        visibility: visible !important;
-    }
-
-
-    /* Ergebnisbereich direkt auf die Druckseite legen */
-
-    #resultArea {
-        display: block !important;
-
-        position: absolute !important;
-
-        left: 0 !important;
-        top: 0 !important;
-
-        width: 147mm !important;
-        height: 104mm !important;
-
-        margin: 0 !important;
-        padding: 0 !important;
-
-        overflow: hidden !important;
-    }
-
-
-    /* Nur die Fotokarte drucken */
-
-    #collagePreview {
-        display: block !important;
-
-        position: absolute !important;
-
-        left: 0 !important;
-        top: 0 !important;
-
-        width: 147mm !important;
-        height: 104mm !important;
-
-        max-width: none !important;
-        max-height: none !important;
-
-        margin: 0 !important;
-        padding: 0 !important;
-
-        object-fit: contain !important;
-
-        border-radius: 0 !important;
-        box-shadow: none !important;
-    }
-
-
-    /* Buttons sicher ausblenden */
-
-    #photoActions {
-        display: none !important;
-    }
-}
+/* Aufnahmebutton beim Laden ausblenden */
 
 #captureBtn {
     display: none;
