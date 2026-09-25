@@ -117,6 +117,35 @@ const cardDesigns = {
             "italic 52px Georgia, 'Times New Roman', serif"
     },
 
+    weddingFloral: {
+        name: "Blüten",
+        theme: "wedding",
+        photoCounts: [2, 3, 4],
+
+        backgroundColor: "#fffaf7",
+        textColor: "#6f545d",
+
+        frameColor: "#ffffff",
+        frameBorderColor: "#d9b6bd",
+
+        accentColors: [
+            "#d9a6b0",
+            "#e8c7c5",
+            "#c8b7a6",
+            "#b8c8b0",
+            "#efd9c8",
+            "#cfae78"
+        ],
+
+        dateBgColor: "rgba(255,255,255,0.9)",
+        dateTextColor: "#6f545d",
+
+        titleBgColor: "rgba(255,250,247,0.82)",
+
+        titleFont:
+            "italic 52px Georgia, 'Times New Roman', serif"
+    },
+    
     businessClean: {
         name: "Clean",
         theme: "business",
@@ -2506,6 +2535,270 @@ function drawWeddingDecoration(
         }
     );
 
+    function drawWeddingFloralDecoration(
+    ctx,
+    canvasWidth,
+    canvasHeight,
+    design
+) {
+
+    const colors =
+        design.accentColors;
+
+
+    function drawLeaf(
+        x,
+        y,
+        angle,
+        size,
+        color
+    ) {
+
+        ctx.save();
+
+        ctx.translate(
+            x,
+            y
+        );
+
+        ctx.rotate(
+            angle
+        );
+
+        ctx.fillStyle =
+            color;
+
+        ctx.globalAlpha =
+            0.75;
+
+        ctx.beginPath();
+
+        ctx.ellipse(
+            0,
+            0,
+            size,
+            size * 0.45,
+            0,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+
+        ctx.restore();
+    }
+
+
+    function drawFlower(
+        x,
+        y,
+        size,
+        color
+    ) {
+
+        ctx.save();
+
+        ctx.translate(
+            x,
+            y
+        );
+
+        ctx.fillStyle =
+            color;
+
+        for (
+            let i = 0;
+            i < 6;
+            i++
+        ) {
+
+            const angle =
+                i *
+                Math.PI /
+                3;
+
+            const px =
+                Math.cos(angle) *
+                size;
+
+            const py =
+                Math.sin(angle) *
+                size;
+
+            ctx.beginPath();
+
+            ctx.arc(
+                px,
+                py,
+                size * 0.55,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fill();
+        }
+
+        ctx.fillStyle =
+            "#fff7df";
+
+        ctx.beginPath();
+
+        ctx.arc(
+            0,
+            0,
+            size * 0.4,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+
+        ctx.restore();
+    }
+
+
+    // links oben
+    drawLeaf(
+        70,
+        120,
+        -0.7,
+        34,
+        colors[3]
+    );
+
+    drawLeaf(
+        105,
+        90,
+        -0.2,
+        28,
+        colors[3]
+    );
+
+    drawFlower(
+        90,
+        115,
+        13,
+        colors[0]
+    );
+
+    drawFlower(
+        125,
+        145,
+        10,
+        colors[1]
+    );
+
+
+    // rechts oben
+    drawLeaf(
+        canvasWidth - 70,
+        120,
+        0.7,
+        34,
+        colors[3]
+    );
+
+    drawLeaf(
+        canvasWidth - 105,
+        90,
+        0.2,
+        28,
+        colors[3]
+    );
+
+    drawFlower(
+        canvasWidth - 90,
+        115,
+        13,
+        colors[0]
+    );
+
+    drawFlower(
+        canvasWidth - 125,
+        145,
+        10,
+        colors[1]
+    );
+
+
+    // links unten
+    drawLeaf(
+        80,
+        canvasHeight - 90,
+        0.6,
+        34,
+        colors[3]
+    );
+
+    drawFlower(
+        115,
+        canvasHeight - 85,
+        12,
+        colors[0]
+    );
+
+
+    // rechts unten
+    drawLeaf(
+        canvasWidth - 80,
+        canvasHeight - 90,
+        -0.6,
+        34,
+        colors[3]
+    );
+
+    drawFlower(
+        canvasWidth - 115,
+        canvasHeight - 85,
+        12,
+        colors[0]
+    );
+
+
+    // feine goldene Akzente
+    ctx.save();
+
+    ctx.strokeStyle =
+        "rgba(207,174,120,0.55)";
+
+    ctx.lineWidth =
+        2;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        55,
+        180
+    );
+
+    ctx.quadraticCurveTo(
+        180,
+        120,
+        280,
+        180
+    );
+
+    ctx.stroke();
+
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        canvasWidth - 55,
+        180
+    );
+
+    ctx.quadraticCurveTo(
+        canvasWidth - 180,
+        120,
+        canvasWidth - 280,
+        180
+    );
+
+    ctx.stroke();
+
+    ctx.restore();
+}
 
     ctx.save();
 
@@ -2976,6 +3269,36 @@ async function generateCollage() {
         ctx.fillStyle =
             gradient;
 
+} else if (
+    settings.cardDesign ===
+    "weddingFloral"
+) {
+
+    const gradient =
+        ctx.createLinearGradient(
+            0,
+            0,
+            collageCanvas.width,
+            collageCanvas.height
+        );
+
+    gradient.addColorStop(
+        0,
+        "#fffdfb"
+    );
+
+    gradient.addColorStop(
+        0.5,
+        "#f9ece8"
+    );
+
+    gradient.addColorStop(
+        1,
+        "#f2e5de"
+    );
+
+    ctx.fillStyle =
+        gradient;    
 
     } else if (
         settings.cardDesign ===
@@ -3067,6 +3390,17 @@ async function generateCollage() {
             design
         );
 
+        } else if (
+    settings.cardDesign ===
+    "weddingFloral"
+) {
+
+    drawWeddingFloralDecoration(
+        ctx,
+        collageCanvas.width,
+        collageCanvas.height,
+        design
+    );
 
     } else if (
         settings.cardDesign ===
