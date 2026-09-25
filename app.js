@@ -123,7 +123,7 @@ const cardDesigns = {
         photoCounts: [2, 3, 4],
 
         backgroundColor: "#fffaf7",
-        textColor: "#6f545d",
+        textColor: "#745a63",
 
         frameColor: "#ffffff",
         frameBorderColor: "#d9b6bd",
@@ -137,10 +137,10 @@ const cardDesigns = {
             "#cfae78"
         ],
 
-        dateBgColor: "rgba(255,255,255,0.9)",
-        dateTextColor: "#6f545d",
+        dateBgColor: "rgba(255,255,255,0.72)",
+        dateTextColor: "#7a646c",
 
-        titleBgColor: "rgba(255,250,247,0.82)",
+        titleBgColor: "rgba(255,252,249,0.72)",
 
         titleFont:
             "italic 52px Georgia, 'Times New Roman', serif"
@@ -2582,7 +2582,7 @@ function drawWeddingDecoration(
     ctx.restore();
 }
 
-    function drawWeddingFloralDecoration(
+function drawWeddingFloralDecoration(
     ctx,
     canvasWidth,
     canvasHeight,
@@ -2616,7 +2616,7 @@ function drawWeddingDecoration(
             color;
 
         ctx.globalAlpha =
-            0.75;
+            0.55;
 
         ctx.beginPath();
 
@@ -2624,7 +2624,7 @@ function drawWeddingDecoration(
             0,
             0,
             size,
-            size * 0.45,
+            size * 0.42,
             0,
             0,
             Math.PI * 2
@@ -2653,6 +2653,9 @@ function drawWeddingDecoration(
         ctx.fillStyle =
             color;
 
+        ctx.globalAlpha =
+            0.9;
+
         for (
             let i = 0;
             i < 6;
@@ -2677,7 +2680,7 @@ function drawWeddingDecoration(
             ctx.arc(
                 px,
                 py,
-                size * 0.55,
+                size * 0.52,
                 0,
                 Math.PI * 2
             );
@@ -2686,14 +2689,14 @@ function drawWeddingDecoration(
         }
 
         ctx.fillStyle =
-            "#fff7df";
+            "#fff7e8";
 
         ctx.beginPath();
 
         ctx.arc(
             0,
             0,
-            size * 0.4,
+            size * 0.34,
             0,
             Math.PI * 2
         );
@@ -2704,100 +2707,272 @@ function drawWeddingDecoration(
     }
 
 
-    // links oben
-    drawLeaf(
-        70,
-        120,
-        -0.7,
-        34,
-        colors[3]
+    function drawBranch(
+        startX,
+        startY,
+        cpX,
+        cpY,
+        endX,
+        endY
+    ) {
+
+        ctx.save();
+
+        ctx.strokeStyle =
+            "rgba(190, 165, 150, 0.42)";
+
+        ctx.lineWidth =
+            2;
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            startX,
+            startY
+        );
+
+        ctx.quadraticCurveTo(
+            cpX,
+            cpY,
+            endX,
+            endY
+        );
+
+        ctx.stroke();
+
+        ctx.restore();
+    }
+
+
+    function drawPetals(
+        count
+    ) {
+
+        for (
+            let i = 0;
+            i < count;
+            i++
+        ) {
+
+            const x =
+                70 +
+                Math.random() *
+                (canvasWidth - 140);
+
+            const y =
+                110 +
+                Math.random() *
+                (canvasHeight - 220);
+
+            const w =
+                7 +
+                Math.random() * 8;
+
+            const h =
+                4 +
+                Math.random() * 5;
+
+            const color =
+                colors[
+                    Math.floor(
+                        Math.random() *
+                        3
+                    )
+                ];
+
+            ctx.save();
+
+            ctx.translate(
+                x,
+                y
+            );
+
+            ctx.rotate(
+                Math.random() *
+                Math.PI
+            );
+
+            ctx.globalAlpha =
+                0.18;
+
+            ctx.fillStyle =
+                color;
+
+            ctx.beginPath();
+
+            ctx.ellipse(
+                0,
+                0,
+                w,
+                h,
+                0,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fill();
+
+            ctx.restore();
+        }
+    }
+
+
+    // dezente Blütenblätter im Hintergrund
+    drawPetals(26);
+
+
+    // geschwungene Zweige
+    drawBranch(
+        52, 182,
+        150, 118,
+        270, 190
     );
 
+    drawBranch(
+        canvasWidth - 52, 182,
+        canvasWidth - 150, 118,
+        canvasWidth - 270, 190
+    );
+
+    drawBranch(
+        70, canvasHeight - 120,
+        120, canvasHeight - 150,
+        175, canvasHeight - 110
+    );
+
+    drawBranch(
+        canvasWidth - 70, canvasHeight - 120,
+        canvasWidth - 120, canvasHeight - 150,
+        canvasWidth - 175, canvasHeight - 110
+    );
+
+
+    // links oben
     drawLeaf(
-        105,
-        90,
-        -0.2,
+        72,
+        126,
+        -0.7,
         28,
         colors[3]
     );
 
+    drawLeaf(
+        106,
+        98,
+        -0.15,
+        22,
+        colors[3]
+    );
+
+    drawLeaf(
+        138,
+        142,
+        0.35,
+        18,
+        colors[4]
+    );
+
     drawFlower(
-        90,
-        115,
-        13,
+        92,
+        118,
+        11,
         colors[0]
     );
 
     drawFlower(
-        125,
-        145,
-        10,
+        126,
+        146,
+        8,
         colors[1]
     );
 
 
     // rechts oben
     drawLeaf(
-        canvasWidth - 70,
-        120,
+        canvasWidth - 72,
+        126,
         0.7,
-        34,
-        colors[3]
-    );
-
-    drawLeaf(
-        canvasWidth - 105,
-        90,
-        0.2,
         28,
         colors[3]
     );
 
+    drawLeaf(
+        canvasWidth - 106,
+        98,
+        0.15,
+        22,
+        colors[3]
+    );
+
+    drawLeaf(
+        canvasWidth - 138,
+        142,
+        -0.35,
+        18,
+        colors[4]
+    );
+
     drawFlower(
-        canvasWidth - 90,
-        115,
-        13,
+        canvasWidth - 92,
+        118,
+        11,
         colors[0]
     );
 
     drawFlower(
-        canvasWidth - 125,
-        145,
-        10,
+        canvasWidth - 126,
+        146,
+        8,
         colors[1]
     );
 
 
     // links unten
     drawLeaf(
-        80,
-        canvasHeight - 90,
-        0.6,
-        34,
+        88,
+        canvasHeight - 96,
+        0.55,
+        28,
         colors[3]
     );
 
+    drawLeaf(
+        126,
+        canvasHeight - 120,
+        0.1,
+        20,
+        colors[4]
+    );
+
     drawFlower(
-        115,
-        canvasHeight - 85,
-        12,
+        116,
+        canvasHeight - 88,
+        10,
         colors[0]
     );
 
 
     // rechts unten
     drawLeaf(
-        canvasWidth - 80,
-        canvasHeight - 90,
-        -0.6,
-        34,
+        canvasWidth - 88,
+        canvasHeight - 96,
+        -0.55,
+        28,
         colors[3]
     );
 
+    drawLeaf(
+        canvasWidth - 126,
+        canvasHeight - 120,
+        -0.1,
+        20,
+        colors[4]
+    );
+
     drawFlower(
-        canvasWidth - 115,
-        canvasHeight - 85,
-        12,
+        canvasWidth - 116,
+        canvasHeight - 88,
+        10,
         colors[0]
     );
 
@@ -2806,40 +2981,39 @@ function drawWeddingDecoration(
     ctx.save();
 
     ctx.strokeStyle =
-        "rgba(207,174,120,0.55)";
+        "rgba(207,174,120,0.34)";
 
     ctx.lineWidth =
-        2;
+        1.8;
 
     ctx.beginPath();
 
     ctx.moveTo(
-        55,
-        180
+        62,
+        202
     );
 
     ctx.quadraticCurveTo(
-        180,
-        120,
-        280,
-        180
+        190,
+        145,
+        285,
+        198
     );
 
     ctx.stroke();
 
-
     ctx.beginPath();
 
     ctx.moveTo(
-        canvasWidth - 55,
-        180
+        canvasWidth - 62,
+        202
     );
 
     ctx.quadraticCurveTo(
-        canvasWidth - 180,
-        120,
-        canvasWidth - 280,
-        180
+        canvasWidth - 190,
+        145,
+        canvasWidth - 285,
+        198
     );
 
     ctx.stroke();
