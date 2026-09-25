@@ -255,6 +255,12 @@ const restartCameraBtn =
 const resetBoothBtn =
     document.getElementById("resetBoothBtn");
 
+const guestPhotoCountSelection =
+    document.getElementById("guestPhotoCountSelection");
+
+const guestPhotoCountButtons =
+    document.querySelectorAll(".guestPhotoCountBtn");
+
 let adminPressTimer = null;
 
 function startAdminPress() {
@@ -408,6 +414,35 @@ function updateActiveThemeButton() {
             button.classList.remove("active");
         }
     });
+}
+
+function updateGuestPhotoCountButtons() {
+
+    guestPhotoCountButtons.forEach(
+        button => {
+
+            const count =
+                Number(
+                    button.dataset.count
+                );
+
+            if (
+                count ===
+                settings.photoCount
+            ) {
+
+                button.classList.add(
+                    "active"
+                );
+
+            } else {
+
+                button.classList.remove(
+                    "active"
+                );
+            }
+        }
+    );
 }
 
 function saveSettings() {
@@ -640,6 +675,9 @@ startBoothBtn.addEventListener(
 
 async function capturePhoto() {
 
+    guestPhotoCountSelection.style.display =
+        "none";
+    
     countdownOverlay.style.display = "flex";
 
     for (
@@ -933,6 +971,43 @@ nextBtn.addEventListener(
     newSeriesBtn.style.display = "inline-block";
 
 }
+    }
+);
+
+guestPhotoCountButtons.forEach(
+    button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const newPhotoCount =
+                    Number(
+                        button.dataset.count
+                    );
+
+                if (
+                    ![2, 3, 4].includes(
+                        newPhotoCount
+                    )
+                ) {
+                    return;
+                }
+
+                settings.photoCount =
+                    newPhotoCount;
+
+                capturedPhotos = [];
+                currentPhoto = null;
+                currentPhotoIndex = 1;
+
+                updateSeriesDisplay();
+
+                updateGuestPhotoCountButtons();
+
+                updateDesignSelection();
+            }
+        );
     }
 );
 
@@ -2061,6 +2136,12 @@ async function resetPhotoBooth() {
 
     photoActions.style.display =
         "none";
+
+    guestPhotoCountSelection.style.display =
+        "flex";
+
+    updateGuestPhotoCountButtons();
+    
 }
 
 
@@ -2319,6 +2400,8 @@ function initializeApp() {
     updateActivePhotoCountButton();
 
     updateDesignSelection();
+
+    updateGuestPhotoCountButtons();
 }
 
 
