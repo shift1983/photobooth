@@ -3190,10 +3190,10 @@ async function generateCollage() {
             },
 
             {
-                x: 220,
-                y: 440,
-                w: 760,
-                h: 275
+                x: 170,
+                y: 435,
+                w: 700,
+                h: 295
             }
 
         ];
