@@ -3191,9 +3191,9 @@ async function generateCollage() {
 
             {
                 x: 170,
-                y: 435,
+                y: 450,
                 w: 700,
-                h: 295
+                h: 310
             }
 
         ];
