@@ -39,10 +39,16 @@ const cardDesigns = {
         frameColor: "#ffffff",
         frameBorderColor: "#f4c98b",
 
-        accentColor: "#ff8a65",
-        accentColor2: "#ffd54f",
-        accentColor3: "#7e57c2",
-        accentColor4: "#4db6ac",
+            accentColors: [
+                "#ff8a65",
+                "#ffd54f",
+                "#7e57c2",
+                "#4db6ac",
+                "#ff6b6b",
+                "#4dabf7",
+                "#a9e34b",
+                "#f783ac"
+    ],
 
         dateBgColor: "rgba(255,255,255,0.85)",
         dateTextColor: "#6b3200",
@@ -61,10 +67,16 @@ const cardDesigns = {
         frameColor: "#ffffff",
         frameBorderColor: "#ff98d0",
 
-        accentColor: "#ff4fa3",
-        accentColor2: "#ffd84d",
-        accentColor3: "#59d8ff",
-        accentColor4: "#7df58a",
+            accentColors: [
+                "#ff8a65",
+                "#ffd54f",
+                "#7e57c2",
+                "#4db6ac",
+                "#ff6b6b",
+                "#4dabf7",
+                "#a9e34b",
+                "#f783ac"
+        ],
 
         dateBgColor: "rgba(255,255,255,0.9)",
         dateTextColor: "#34124d",
@@ -1067,12 +1079,9 @@ function drawConfettiDecoration(
     canvasHeight,
     design
 ) {
-    const confettiColors = [
-        design.accentColor,
-        design.accentColor2,
-        design.accentColor3,
-        design.accentColor4
-    ];
+    
+const confettiColors =
+    design.accentColors;
 
     // Mehr Konfetti
     for (let i = 0; i < 160; i++) {
@@ -1181,11 +1190,11 @@ function drawConfettiDecoration(
 
     // vereinzelte Ballons
 const balloons = [
-    { x: 90,  y: 80, color: design.accentColor },
-    { x: 600, y: 375,  color: design.accentColor4 },
-    { x: 1110, y: 95, color: design.accentColor2 },
-    { x: 145, y: 550, color: design.accentColor3 },
-    { x: 1055, y: 590, color: design.accentColor5 }
+    { x: 90,  y: 80, color: design.accentColors[0] },
+    { x: 600, y: 375,  color: design.accentColors[4] },
+    { x: 1110, y: 95, color: design.accentColors[1] },
+    { x: 145, y: 550, color: design.accentColors[2] },
+    { x: 1055, y: 590, color: design.accentColors[5] }
 ];
 
     balloons.forEach(balloon => {
@@ -1253,12 +1262,9 @@ function drawPartyDecoration(
     canvasHeight,
     design
 ) {
-    const colors = [
-        design.accentColor,
-        design.accentColor2,
-        design.accentColor3,
-        design.accentColor4
-    ];
+    
+const colors =
+    design.accentColors;
 
     // Wimpelkette
     const startX = 80;
