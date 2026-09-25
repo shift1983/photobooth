@@ -3723,6 +3723,33 @@ designButtons.forEach(
     }
 );
 
+[
+    startLogo,
+    appLogo
+].forEach(
+    logo => {
+
+        if (!logo) {
+            return;
+        }
+
+        logo.addEventListener(
+            "contextmenu",
+            event => {
+
+                event.preventDefault();
+            }
+        );
+
+        logo.addEventListener(
+            "dragstart",
+            event => {
+
+                event.preventDefault();
+            }
+        );
+    }
+);
 
 /* =========================
    ADMIN SCHLIESSEN
