@@ -3876,8 +3876,8 @@ if (
     drawWeddingHeartMotif(
         ctx,
         titleX + titleW - 88,
-        titleY + titleH / 2 - 4,
-        0.82
+        titleY + titleH / 2 + 4,
+        0.98
     );
 }
 
