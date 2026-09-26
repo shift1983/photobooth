@@ -2469,70 +2469,82 @@ function drawWeddingDecoration(
     ctx.stroke();
 
 
-    // dezente Linien unten
-    ctx.strokeStyle =
-        "rgba(200,175,145,0.34)";
+ // kleine Akzentpunkte
+ctx.fillStyle =
+    "rgba(205,175,120,0.55)";
 
-    ctx.lineWidth =
-        1.5;
+[
+    [325, canvasHeight - 85],
+    [canvasWidth - 325, canvasHeight - 85]
+].forEach(
+    ([x, y]) => {
 
+        ctx.beginPath();
 
-    ctx.beginPath();
+        ctx.arc(
+            x,
+            y,
+            4,
+            0,
+            Math.PI * 2
+        );
 
-    ctx.moveTo(
-        85,
-        canvasHeight - 85
-    );
-
-    ctx.lineTo(
-        310,
-        canvasHeight - 85
-    );
-
-    ctx.stroke();
-
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        canvasWidth - 310,
-        canvasHeight - 85
-    );
-
-    ctx.lineTo(
-        canvasWidth - 85,
-        canvasHeight - 85
-    );
-
-    ctx.stroke();
+        ctx.fill();
+    }
+);
 
 
-    // kleine Akzentpunkte
-    ctx.fillStyle =
-        "rgba(205,175,120,0.55)";
+// HIER DIE BLASEN EINFÜGEN
 
-    [
-        [325, canvasHeight - 85],
-        [canvasWidth - 325, canvasHeight - 85]
-    ].forEach(
-        ([x, y]) => {
+const bubbles = [
+    {
+        x: 150,
+        y: canvasHeight - 110,
+        r: 42,
+        color: "rgba(216,180,198,0.12)"
+    },
+    {
+        x: 235,
+        y: canvasHeight - 70,
+        r: 28,
+        color: "rgba(201,182,207,0.12)"
+    },
+    {
+        x: canvasWidth - 155,
+        y: canvasHeight - 105,
+        r: 44,
+        color: "rgba(216,180,198,0.12)"
+    },
+    {
+        x: canvasWidth - 245,
+        y: canvasHeight - 65,
+        r: 30,
+        color: "rgba(201,182,207,0.12)"
+    }
+];
 
-            ctx.beginPath();
+bubbles.forEach(
+    bubble => {
 
-            ctx.arc(
-                x,
-                y,
-                4,
-                0,
-                Math.PI * 2
-            );
+        ctx.beginPath();
 
-            ctx.fill();
-        }
-    );
+        ctx.fillStyle =
+            bubble.color;
+
+        ctx.arc(
+            bubble.x,
+            bubble.y,
+            bubble.r,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+    }
+);
 
 
-    ctx.restore();
+ctx.restore();
 }
 function drawWeddingFloralDecoration(
     ctx,
