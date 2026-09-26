@@ -3728,36 +3728,12 @@ ctx.fillText(
 );
 
 
-// nur Floral bekommt Goldlinie + Ringe
+// nur Floral bekommt Ringe
+    
 if (
     settings.cardDesign ===
     "weddingFloral"
 ) {
-
-    ctx.save();
-
-    ctx.strokeStyle =
-        "rgba(207,174,120,0.55)";
-
-    ctx.lineWidth =
-        1.5;
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        titleX + 90,
-        titleY + titleH + 12
-    );
-
-    ctx.lineTo(
-        titleX + titleW - 90,
-        titleY + titleH + 12
-    );
-
-    ctx.stroke();
-
-    ctx.restore();
-
 
     drawWeddingRingMotif(
         ctx,
