@@ -3310,43 +3310,10 @@ ctx.lineTo(
 ctx.stroke();
 
 
-// untere Linie
+// untere Linie nur bei 2 oder 4 Fotos
 if (
-    settings.photoCount === 3
+    settings.photoCount !== 3
 ) {
-
-    // links vom unteren Bild
-    ctx.beginPath();
-
-    ctx.moveTo(
-        80,
-        bottomLineY
-    );
-
-    ctx.lineTo(
-        190,
-        bottomLineY
-    );
-
-    ctx.stroke();
-
-
-    // rechts vom unteren Bild
-    ctx.beginPath();
-
-    ctx.moveTo(
-        1010,
-        bottomLineY
-    );
-
-    ctx.lineTo(
-        1120,
-        bottomLineY
-    );
-
-    ctx.stroke();
-
-} else {
 
     ctx.beginPath();
 
@@ -3361,10 +3328,6 @@ if (
     );
 
     ctx.stroke();
-}
-
-ctx.restore();
-
 }
 
 
@@ -3500,42 +3463,25 @@ function drawBusinessPremiumDecoration(
     ctx.stroke();
 
 
-    // untere Linie: kürzer und auf Datumshöhe
-// untere Linie
+// untere Linie nur bei 2 oder 4 Fotos
 if (
-    settings.photoCount === 3
+    settings.photoCount !== 3
 ) {
 
-    // links vom unteren Bild
     ctx.beginPath();
 
     ctx.moveTo(
-        80,
+        bottomLineStartX,
         bottomLineY
     );
 
     ctx.lineTo(
-        190,
+        bottomLineEndX,
         bottomLineY
     );
 
     ctx.stroke();
-
-
-    // rechts vom unteren Bild
-    ctx.beginPath();
-
-    ctx.moveTo(
-        1010,
-        bottomLineY
-    );
-
-    ctx.lineTo(
-        1120,
-        bottomLineY
-    );
-
-    ctx.stroke();
+}
 
 } else {
 
