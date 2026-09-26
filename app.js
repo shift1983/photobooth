@@ -3486,22 +3486,6 @@ if (
     ctx.stroke();
 }
 
-} else {
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        bottomLineStartX,
-        bottomLineY
-    );
-
-    ctx.lineTo(
-        bottomLineEndX,
-        bottomLineY
-    );
-
-    ctx.stroke();
-
         
     // kurze goldene Akzentlinien
     ctx.strokeStyle =
