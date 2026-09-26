@@ -3346,7 +3346,6 @@ function drawBusinessPremiumDecoration(
 
 
     ctx.save();
-}
 
     // feine diagonale Linien im Hintergrund
     ctx.strokeStyle =
