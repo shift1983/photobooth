@@ -3450,42 +3450,6 @@ function drawBusinessPremiumDecoration(
     );
 
 
-    // feine Rahmenlinien oben und unten
-    ctx.strokeStyle =
-        "rgba(198,163,107,0.30)";
-
-    ctx.lineWidth =
-        2;
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        60,
-        108
-    );
-
-    ctx.lineTo(
-        canvasWidth - 60,
-        108
-    );
-
-    ctx.stroke();
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        60,
-        canvasHeight - 108
-    );
-
-    ctx.lineTo(
-        canvasWidth - 60,
-        canvasHeight - 108
-    );
-
-    ctx.stroke();
-
-
     // Positionen für die Linien
     const topLineY =
         126;
