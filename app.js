@@ -3285,18 +3285,16 @@ const bottomLineEndX =
     875;
 
 
-// feine Linien oben und unten
+// obere Linie
 ctx.strokeStyle =
-    "rgba(134,165,189,0.30)";
+    colors[1];
 
 ctx.globalAlpha =
-    1;
+    0.55;
 
 ctx.lineWidth =
-    2;
+    4;
 
-
-// obere Linie
 ctx.beginPath();
 
 ctx.moveTo(
@@ -3328,44 +3326,6 @@ ctx.lineTo(
 ctx.stroke();
 
 
-// kurze Akzentlinien
-ctx.strokeStyle =
-    "rgba(134,165,189,0.65)";
-
-ctx.lineWidth =
-    4;
-
-
-// oben links
-ctx.beginPath();
-
-ctx.moveTo(
-    95,
-    topLineY
-);
-
-ctx.lineTo(
-    205,
-    topLineY
-);
-
-ctx.stroke();
-
-
-// unten vor dem Datum
-ctx.beginPath();
-
-ctx.moveTo(
-    735,
-    bottomLineY
-);
-
-ctx.lineTo(
-    855,
-    bottomLineY
-);
-
-ctx.stroke();
 
 
 // kleine Akzentpunkte
