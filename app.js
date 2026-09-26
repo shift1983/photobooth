@@ -3270,48 +3270,133 @@ function drawBusinessDecoration(
     }
 
 
-    ctx.save();
+ctx.save();
 
-    ctx.strokeStyle =
-        colors[1];
+const topLineY =
+    126;
 
-    ctx.globalAlpha =
-        0.55;
+const bottomLineY =
+    749;
 
-    ctx.lineWidth =
-        4;
+const bottomLineStartX =
+    80;
 
-    ctx.beginPath();
-
-    ctx.moveTo(
-        50,
-        115
-    );
-
-    ctx.lineTo(
-        1150,
-        115
-    );
-
-    ctx.stroke();
+const bottomLineEndX =
+    875;
 
 
-    ctx.beginPath();
+// feine Linien oben und unten
+ctx.strokeStyle =
+    "rgba(134,165,189,0.30)";
 
-    ctx.moveTo(
-        50,
-        700
-    );
+ctx.globalAlpha =
+    1;
 
-    ctx.lineTo(
-        1150,
-        700
-    );
+ctx.lineWidth =
+    2;
 
-    ctx.stroke();
 
-    ctx.restore();
+// obere Linie
+ctx.beginPath();
 
+ctx.moveTo(
+    60,
+    topLineY
+);
+
+ctx.lineTo(
+    canvasWidth - 60,
+    topLineY
+);
+
+ctx.stroke();
+
+
+// untere Linie
+ctx.beginPath();
+
+ctx.moveTo(
+    bottomLineStartX,
+    bottomLineY
+);
+
+ctx.lineTo(
+    bottomLineEndX,
+    bottomLineY
+);
+
+ctx.stroke();
+
+
+// kurze Akzentlinien
+ctx.strokeStyle =
+    "rgba(134,165,189,0.65)";
+
+ctx.lineWidth =
+    4;
+
+
+// oben links
+ctx.beginPath();
+
+ctx.moveTo(
+    95,
+    topLineY
+);
+
+ctx.lineTo(
+    205,
+    topLineY
+);
+
+ctx.stroke();
+
+
+// unten vor dem Datum
+ctx.beginPath();
+
+ctx.moveTo(
+    735,
+    bottomLineY
+);
+
+ctx.lineTo(
+    855,
+    bottomLineY
+);
+
+ctx.stroke();
+
+
+// kleine Akzentpunkte
+ctx.fillStyle =
+    "rgba(134,165,189,0.75)";
+
+const dots = [
+    [230, topLineY],
+    [canvasWidth - 95, topLineY],
+    [95, bottomLineY],
+    [bottomLineEndX, bottomLineY]
+];
+
+dots.forEach(
+    ([x, y]) => {
+
+        ctx.beginPath();
+
+        ctx.arc(
+            x,
+            y,
+            4,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+    }
+);
+
+ctx.restore();
 
     for (
         let i = 0;
