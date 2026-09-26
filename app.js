@@ -3008,7 +3008,7 @@ function drawWeddingRingMotif(
 
     ctx.arc(
         centerX - 16 * scale,
-        centerY,
+        centerY + 4 * scale,
         18 * scale,
         0,
         Math.PI * 2
@@ -3021,7 +3021,7 @@ function drawWeddingRingMotif(
 
     ctx.arc(
         centerX + 10 * scale,
-        centerY,
+        centerY - 4 * scale,
         18 * scale,
         0,
         Math.PI * 2
