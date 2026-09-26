@@ -3355,6 +3355,242 @@ function drawBusinessDecoration(
     }
 }
 
+/* =========================
+   BUSINESS PREMIUM DESIGN
+========================= */
+
+function drawBusinessPremiumDecoration(
+    ctx,
+    canvasWidth,
+    canvasHeight,
+    design
+) {
+
+    const colors =
+        design.accentColors;
+
+
+    ctx.save();
+
+
+    // feine diagonale Linien im Hintergrund
+    ctx.strokeStyle =
+        "rgba(255,255,255,0.05)";
+
+    ctx.lineWidth =
+        2;
+
+    for (
+        let i = -200;
+        i < canvasWidth + 200;
+        i += 80
+    ) {
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            i,
+            0
+        );
+
+        ctx.lineTo(
+            i + 220,
+            canvasHeight
+        );
+
+        ctx.stroke();
+    }
+
+
+    // große transparente Flächen
+    const panels = [
+        {
+            x: 55,
+            y: 120,
+            w: 160,
+            h: 90,
+            color: "rgba(255,255,255,0.04)"
+        },
+        {
+            x: canvasWidth - 240,
+            y: 135,
+            w: 170,
+            h: 100,
+            color: "rgba(255,255,255,0.045)"
+        },
+        {
+            x: 80,
+            y: canvasHeight - 180,
+            w: 210,
+            h: 95,
+            color: "rgba(255,255,255,0.035)"
+        },
+        {
+            x: canvasWidth - 285,
+            y: canvasHeight - 195,
+            w: 220,
+            h: 110,
+            color: "rgba(255,255,255,0.04)"
+        }
+    ];
+
+    panels.forEach(
+        panel => {
+
+            ctx.fillStyle =
+                panel.color;
+
+            ctx.fillRect(
+                panel.x,
+                panel.y,
+                panel.w,
+                panel.h
+            );
+        }
+    );
+
+
+    // feine Rahmenlinien oben und unten
+    ctx.strokeStyle =
+        "rgba(198,163,107,0.30)";
+
+    ctx.lineWidth =
+        2;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        60,
+        108
+    );
+
+    ctx.lineTo(
+        canvasWidth - 60,
+        108
+    );
+
+    ctx.stroke();
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        60,
+        canvasHeight - 108
+    );
+
+    ctx.lineTo(
+        canvasWidth - 60,
+        canvasHeight - 108
+    );
+
+    ctx.stroke();
+
+
+    // kurze goldene Akzentlinien
+    ctx.strokeStyle =
+        "rgba(198,163,107,0.65)";
+
+    ctx.lineWidth =
+        4;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        95,
+        108
+    );
+
+    ctx.lineTo(
+        205,
+        108
+    );
+
+    ctx.stroke();
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        canvasWidth - 205,
+        canvasHeight - 108
+    );
+
+    ctx.lineTo(
+        canvasWidth - 95,
+        canvasHeight - 108
+    );
+
+    ctx.stroke();
+
+
+    // kleine Akzentpunkte
+    ctx.fillStyle =
+        "rgba(198,163,107,0.75)";
+
+    const dots = [
+        [230, 108],
+        [canvasWidth - 230, canvasHeight - 108],
+        [canvasWidth - 95, 108],
+        [95, canvasHeight - 108]
+    ];
+
+    dots.forEach(
+        ([x, y]) => {
+
+            ctx.beginPath();
+
+            ctx.arc(
+                x,
+                y,
+                4,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fill();
+        }
+    );
+
+
+    // dezente kleine Rechteckgruppen
+    const blocks = [
+        {
+            x: canvasWidth - 170,
+            y: 78
+        },
+        {
+            x: 85,
+            y: canvasHeight - 155
+        }
+    ];
+
+    blocks.forEach(
+        block => {
+
+            for (
+                let i = 0;
+                i < 3;
+                i++
+            ) {
+
+                ctx.fillStyle =
+                    i === 1
+                        ? "rgba(198,163,107,0.18)"
+                        : "rgba(255,255,255,0.06)";
+
+                ctx.fillRect(
+                    block.x + i * 18,
+                    block.y + i * 10,
+                    12,
+                    12
+                );
+            }
+        }
+    );
+
+
+    ctx.restore();
+}
+
 
 /* =========================
    FOTO-RAHMEN
@@ -3769,6 +4005,49 @@ async function generateCollage() {
         );
     }
 
+    } else if (
+        settings.cardDesign ===
+        "businessPremium"
+    ) {
+
+    drawBusinessPremiumDecoration(
+        ctx,
+        collageCanvas.width,
+        collageCanvas.height,
+        design
+    );
+}
+    
+    } else if (
+    settings.cardDesign ===
+    "businessPremium"
+) {
+
+    const gradient =
+        ctx.createLinearGradient(
+            0,
+            0,
+            collageCanvas.width,
+            collageCanvas.height
+        );
+
+    gradient.addColorStop(
+        0,
+        "#23262b"
+    );
+
+    gradient.addColorStop(
+        0.55,
+        "#353940"
+    );
+
+    gradient.addColorStop(
+        1,
+        "#1f2227"
+    );
+
+    ctx.fillStyle =
+        gradient;
 
     /* =========================
        TITEL-BANNER
