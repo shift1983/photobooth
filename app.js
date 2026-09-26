@@ -3498,7 +3498,6 @@ if (
     );
 
     ctx.stroke();
-}
 
         
     // kurze goldene Akzentlinien
