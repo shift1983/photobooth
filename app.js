@@ -4106,6 +4106,25 @@ if (
         1.5;
 }
 
+// Premium bekommt einen edleren,
+// etwas kantigeren Titelbereich
+if (
+    settings.cardDesign ===
+    "businessPremium"
+) {
+
+    titleX = 180;
+    titleY = 22;
+    titleW = 840;
+    titleH = 72;
+    titleRadius = 14;
+
+    titleBorderColor =
+        "rgba(198,163,107,0.78)";
+
+    titleBorderWidth =
+        2;
+}    
 
 fillRoundedRect(
     ctx,
@@ -4129,7 +4148,50 @@ strokeRoundedRect(
     titleBorderWidth
 );
 
+if (
+    settings.cardDesign ===
+    "businessPremium"
+) {
 
+    ctx.save();
+
+    ctx.fillStyle =
+        "rgba(198,163,107,0.85)";
+
+    // links
+    ctx.fillRect(
+        titleX + 24,
+        titleY + titleH / 2 - 3,
+        46,
+        6
+    );
+
+    ctx.fillRect(
+        titleX + 78,
+        titleY + titleH / 2 - 3,
+        8,
+        6
+    );
+
+
+    // rechts
+    ctx.fillRect(
+        titleX + titleW - 70,
+        titleY + titleH / 2 - 3,
+        46,
+        6
+    );
+
+    ctx.fillRect(
+        titleX + titleW - 86,
+        titleY + titleH / 2 - 3,
+        8,
+        6
+    );
+
+    ctx.restore();
+}
+    
 ctx.fillStyle =
     design.textColor ||
     "#000000";
