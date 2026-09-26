@@ -2986,7 +2986,7 @@ function drawWeddingFloralDecoration(
 }
 
 /* =========================
-   RING-MOTIV HOCHZEIT
+   RING- & HERZ-MOTIV HOCHZEIT
 ========================= */
 
 function drawWeddingRingMotif(
@@ -3045,6 +3045,130 @@ function drawWeddingRingMotif(
 
     ctx.fill();
 
+
+    ctx.restore();
+}
+
+function drawWeddingHeartMotif(
+    ctx,
+    centerX,
+    centerY,
+    scale = 1
+) {
+
+    function drawHeart(
+        x,
+        y,
+        size,
+        fillColor,
+        strokeColor
+    ) {
+
+        ctx.save();
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            x,
+            y + size * 0.3
+        );
+
+        ctx.bezierCurveTo(
+            x,
+            y,
+            x - size * 0.5,
+            y,
+            x - size * 0.5,
+            y + size * 0.3
+        );
+
+        ctx.bezierCurveTo(
+            x - size * 0.5,
+            y + size * 0.6,
+            x,
+            y + size * 0.8,
+            x,
+            y + size
+        );
+
+        ctx.bezierCurveTo(
+            x,
+            y + size * 0.8,
+            x + size * 0.5,
+            y + size * 0.6,
+            x + size * 0.5,
+            y + size * 0.3
+        );
+
+        ctx.bezierCurveTo(
+            x + size * 0.5,
+            y,
+            x,
+            y,
+            x,
+            y + size * 0.3
+        );
+
+        ctx.closePath();
+
+        ctx.fillStyle =
+            fillColor;
+
+        ctx.fill();
+
+        ctx.strokeStyle =
+            strokeColor;
+
+        ctx.lineWidth =
+            1.8 * scale;
+
+        ctx.stroke();
+
+        ctx.restore();
+    }
+
+
+    ctx.save();
+
+    drawHeart(
+        centerX - 12 * scale,
+        centerY - 16 * scale,
+        24 * scale,
+        "rgba(217,166,176,0.90)",
+        "rgba(190,135,150,0.70)"
+    );
+
+    drawHeart(
+        centerX + 10 * scale,
+        centerY - 22 * scale,
+        24 * scale,
+        "rgba(232,199,197,0.95)",
+        "rgba(190,150,160,0.65)"
+    );
+
+    // kleine Glanzpunkte
+    ctx.fillStyle =
+        "rgba(255,255,255,0.8)";
+
+    ctx.beginPath();
+    ctx.arc(
+        centerX - 18 * scale,
+        centerY - 7 * scale,
+        2.5 * scale,
+        0,
+        Math.PI * 2
+    );
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(
+        centerX + 5 * scale,
+        centerY - 12 * scale,
+        2.5 * scale,
+        0,
+        Math.PI * 2
+    );
+    ctx.fill();
 
     ctx.restore();
 }
@@ -3728,18 +3852,32 @@ ctx.fillText(
 );
 
 
-// nur Floral bekommt Ringe
+// Floral bekommt Herzen & Elegant Ringe
     
+if (
+    settings.cardDesign ===
+    "weddingElegant"
+) {
+
+    drawWeddingRingMotif(
+        ctx,
+        titleX + titleW - 88,
+        titleY + titleH / 2 + 1,
+        0.82
+    );
+}
+
+
 if (
     settings.cardDesign ===
     "weddingFloral"
 ) {
 
-    drawWeddingRingMotif(
+    drawWeddingHeartMotif(
         ctx,
-        titleX + titleW - 95,
-        titleY + titleH / 2 + 1,
-        0.85
+        titleX + titleW - 88,
+        titleY + titleH / 2 - 4,
+        0.82
     );
 }
 
