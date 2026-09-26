@@ -173,7 +173,36 @@ const cardDesigns = {
 
         titleFont:
             "bold 46px Arial, sans-serif"
-    }
+    },
+
+        businessPremium: {
+        name: "Premium",
+        theme: "business",
+        photoCounts: [2, 3, 4],
+
+        backgroundColor: "#2a2d32",
+        textColor: "#f4f4f4",
+
+        frameColor: "#ffffff",
+        frameBorderColor: "#b89a72",
+
+        accentColors: [
+            "#c6a36b",
+            "#9b7b55",
+            "#6f747a",
+            "#858b91",
+            "#d8d8d8",
+            "#40454b"
+    ],
+
+    dateBgColor: "rgba(255,255,255,0.90)",
+    dateTextColor: "#2a2d32",
+
+    titleBgColor: "rgba(28,31,35,0.84)",
+
+    titleFont:
+        "bold 46px Arial, sans-serif"
+}
 
 };
 
