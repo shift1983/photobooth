@@ -2375,186 +2375,118 @@ function drawWeddingDecoration(
     design
 ) {
 
-    const colors =
-        design.accentColors;
+    ctx.save();
 
 
-    for (
-        let i = 0;
-        i < 18;
-        i++
-    ) {
+    // sehr dezente Hintergrundpunkte
+    ctx.fillStyle =
+        "rgba(210,195,205,0.16)";
 
-        const x =
-            Math.random() *
-            canvasWidth;
-
-        const y =
-            Math.random() *
-            canvasHeight;
-
-        const radius =
-            20 +
-            Math.random() *
-            45;
-
-        ctx.save();
-
-        ctx.globalAlpha =
-            0.10;
-
-        ctx.beginPath();
-
-        ctx.arc(
-            x,
-            y,
-            radius,
-            0,
-            Math.PI * 2
-        );
-
-        ctx.fillStyle =
-            colors[
-                Math.floor(
-                    Math.random() *
-                    colors.length
-                )
-            ];
-
-        ctx.fill();
-
-        ctx.restore();
-    }
-
-
-    const flowers = [
-
-        {
-            x: 75,
-            y: 90
-        },
-
-        {
-            x: 110,
-            y: 115
-        },
-
-        {
-            x: 90,
-            y: 145
-        },
-
-        {
-            x: 1125,
-            y: 90
-        },
-
-        {
-            x: 1090,
-            y: 115
-        },
-
-        {
-            x: 1110,
-            y: 145
-        }
+    const dots = [
+        [90, 120, 16],
+        [160, 95, 11],
+        [canvasWidth - 90, 120, 16],
+        [canvasWidth - 160, 95, 11],
+        [110, canvasHeight - 95, 13],
+        [canvasWidth - 110, canvasHeight - 95, 13]
     ];
 
-
-    flowers.forEach(
-        (
-            flower,
-            index
-        ) => {
-
-            ctx.save();
-
-            ctx.fillStyle =
-                colors[
-                    index %
-                    colors.length
-                ];
-
-            for (
-                let petal = 0;
-                petal < 5;
-                petal++
-            ) {
-
-                const angle =
-                    petal *
-                    (
-                        Math.PI *
-                        2 /
-                        5
-                    );
-
-                const px =
-                    flower.x +
-                    Math.cos(
-                        angle
-                    ) *
-                    11;
-
-                const py =
-                    flower.y +
-                    Math.sin(
-                        angle
-                    ) *
-                    11;
-
-                ctx.beginPath();
-
-                ctx.arc(
-                    px,
-                    py,
-                    7,
-                    0,
-                    Math.PI * 2
-                );
-
-                ctx.fill();
-            }
-
-            ctx.fillStyle =
-                "#ffffff";
+    dots.forEach(
+        ([x, y, r]) => {
 
             ctx.beginPath();
 
             ctx.arc(
-                flower.x,
-                flower.y,
-                5,
+                x,
+                y,
+                r,
                 0,
                 Math.PI * 2
             );
 
             ctx.fill();
-
-            ctx.restore();
         }
     );
 
-    ctx.save();
 
+    // feine Bögen oben links
     ctx.strokeStyle =
-        "rgba(180,150,170,0.35)";
+        "rgba(185,160,175,0.42)";
 
     ctx.lineWidth =
-        3;
+        2;
+
+    ctx.beginPath();
+
+    ctx.arc(
+        130,
+        145,
+        90,
+        Math.PI * 1.08,
+        Math.PI * 1.85
+    );
+
+    ctx.stroke();
+
+
+    ctx.beginPath();
+
+    ctx.arc(
+        130,
+        145,
+        66,
+        Math.PI * 1.12,
+        Math.PI * 1.8
+    );
+
+    ctx.stroke();
+
+
+    // feine Bögen oben rechts
+    ctx.beginPath();
+
+    ctx.arc(
+        canvasWidth - 130,
+        145,
+        90,
+        Math.PI * 1.15,
+        Math.PI * 1.92
+    );
+
+    ctx.stroke();
+
+
+    ctx.beginPath();
+
+    ctx.arc(
+        canvasWidth - 130,
+        145,
+        66,
+        Math.PI * 1.2,
+        Math.PI * 1.88
+    );
+
+    ctx.stroke();
+
+
+    // dezente Linien unten
+    ctx.strokeStyle =
+        "rgba(200,175,145,0.34)";
+
+    ctx.lineWidth =
+        1.5;
+
 
     ctx.beginPath();
 
     ctx.moveTo(
-        40,
-        700
+        85,
+        canvasHeight - 85
     );
 
-    ctx.quadraticCurveTo(
-        200,
-        640,
-        330,
-        730
+    ctx.lineTo(
+        310,
+        canvasHeight - 85
     );
 
     ctx.stroke();
@@ -2563,25 +2495,45 @@ function drawWeddingDecoration(
     ctx.beginPath();
 
     ctx.moveTo(
-        canvasWidth -
-        40,
-        700
+        canvasWidth - 310,
+        canvasHeight - 85
     );
 
-    ctx.quadraticCurveTo(
-        canvasWidth -
-        200,
-        640,
-        canvasWidth -
-        330,
-        730
+    ctx.lineTo(
+        canvasWidth - 85,
+        canvasHeight - 85
     );
 
     ctx.stroke();
+
+
+    // kleine Akzentpunkte
+    ctx.fillStyle =
+        "rgba(205,175,120,0.55)";
+
+    [
+        [325, canvasHeight - 85],
+        [canvasWidth - 325, canvasHeight - 85]
+    ].forEach(
+        ([x, y]) => {
+
+            ctx.beginPath();
+
+            ctx.arc(
+                x,
+                y,
+                4,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fill();
+        }
+    );
+
 
     ctx.restore();
 }
-
 function drawWeddingFloralDecoration(
     ctx,
     canvasWidth,
