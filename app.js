@@ -3920,7 +3920,36 @@ async function generateCollage() {
 
         ctx.fillStyle =
             gradient;
+   } else if (
+        settings.cardDesign ===
+        "businessPremium"
+    ) {
 
+        const gradient =
+            ctx.createLinearGradient(
+                0,
+                0,
+                collageCanvas.width,
+                collageCanvas.height
+            );
+
+        gradient.addColorStop(
+            0,
+            "#23262b"
+        );
+
+        gradient.addColorStop(
+            0.55,
+            "#353940"
+        );
+
+        gradient.addColorStop(
+            1,
+            "#1f2227"
+        );
+
+        ctx.fillStyle =
+            gradient;
 
     } else {
 
@@ -4017,37 +4046,7 @@ async function generateCollage() {
         design
     );
 }
-    
-    } else if (
-    settings.cardDesign ===
-    "businessPremium"
-) {
 
-    const gradient =
-        ctx.createLinearGradient(
-            0,
-            0,
-            collageCanvas.width,
-            collageCanvas.height
-        );
-
-    gradient.addColorStop(
-        0,
-        "#23262b"
-    );
-
-    gradient.addColorStop(
-        0.55,
-        "#353940"
-    );
-
-    gradient.addColorStop(
-        1,
-        "#1f2227"
-    );
-
-    ctx.fillStyle =
-        gradient;
 
     /* =========================
        TITEL-BANNER
