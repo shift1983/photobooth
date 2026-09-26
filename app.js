@@ -3311,20 +3311,56 @@ ctx.stroke();
 
 
 // untere Linie
-ctx.beginPath();
+if (
+    settings.photoCount === 3
+) {
 
-ctx.moveTo(
-    bottomLineStartX,
-    bottomLineY
-);
+    // links vom unteren Bild
+    ctx.beginPath();
 
-ctx.lineTo(
-    bottomLineEndX,
-    bottomLineY
-);
+    ctx.moveTo(
+        80,
+        bottomLineY
+    );
 
-ctx.stroke();
+    ctx.lineTo(
+        190,
+        bottomLineY
+    );
 
+    ctx.stroke();
+
+
+    // rechts vom unteren Bild
+    ctx.beginPath();
+
+    ctx.moveTo(
+        1010,
+        bottomLineY
+    );
+
+    ctx.lineTo(
+        1120,
+        bottomLineY
+    );
+
+    ctx.stroke();
+
+} else {
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        bottomLineStartX,
+        bottomLineY
+    );
+
+    ctx.lineTo(
+        bottomLineEndX,
+        bottomLineY
+    );
+
+    ctx.stroke();
 
 ctx.restore();
 
@@ -3463,6 +3499,44 @@ function drawBusinessPremiumDecoration(
 
 
     // untere Linie: kürzer und auf Datumshöhe
+// untere Linie
+if (
+    settings.photoCount === 3
+) {
+
+    // links vom unteren Bild
+    ctx.beginPath();
+
+    ctx.moveTo(
+        80,
+        bottomLineY
+    );
+
+    ctx.lineTo(
+        190,
+        bottomLineY
+    );
+
+    ctx.stroke();
+
+
+    // rechts vom unteren Bild
+    ctx.beginPath();
+
+    ctx.moveTo(
+        1010,
+        bottomLineY
+    );
+
+    ctx.lineTo(
+        1120,
+        bottomLineY
+    );
+
+    ctx.stroke();
+
+} else {
+
     ctx.beginPath();
 
     ctx.moveTo(
@@ -3476,6 +3550,7 @@ function drawBusinessPremiumDecoration(
     );
 
     ctx.stroke();
+}
 
         
     // kurze goldene Akzentlinien
