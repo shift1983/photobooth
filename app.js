@@ -3639,7 +3639,28 @@ let titleBorderWidth =
     2;
 
 
-// Sonderstil nur für Wedding Floral
+// Elegant bekommt einen ruhigeren,
+// schmaleren Titelbereich
+if (
+    settings.cardDesign ===
+    "weddingElegant"
+) {
+
+    titleX = 245;
+    titleY = 24;
+    titleW = 710;
+    titleH = 68;
+    titleRadius = 28;
+
+    titleBorderColor =
+        "rgba(170,150,165,0.32)";
+
+    titleBorderWidth =
+        1;
+}
+
+
+// Floral bleibt romantischer
 if (
     settings.cardDesign ===
     "weddingFloral"
@@ -3686,15 +3707,19 @@ ctx.fillStyle =
     design.textColor ||
     "#000000";
 
+
 ctx.font =
     design.titleFont ||
     "bold 46px Arial";
 
+
 ctx.textAlign =
     "center";
 
+
 ctx.textBaseline =
     "middle";
+
 
 ctx.fillText(
     settings.eventTitle,
@@ -3703,13 +3728,12 @@ ctx.fillText(
 );
 
 
-// zusätzliche Veredelung nur für Wedding Floral
+// nur Floral bekommt Goldlinie + Ringe
 if (
     settings.cardDesign ===
     "weddingFloral"
 ) {
 
-    // feine Goldlinie unter dem Titel
     ctx.save();
 
     ctx.strokeStyle =
@@ -3735,7 +3759,6 @@ if (
     ctx.restore();
 
 
-    // Ring-Motiv
     drawWeddingRingMotif(
         ctx,
         titleX + titleW - 95,
