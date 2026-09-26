@@ -3486,6 +3486,60 @@ function drawBusinessPremiumDecoration(
     ctx.stroke();
 
 
+    // Positionen für die Linien
+    const topLineY =
+        126;
+
+    const bottomLineY =
+        749;
+
+    const bottomLineStartX =
+        80;
+
+    const bottomLineEndX =
+        875;
+
+
+    // feine Rahmenlinien oben und unten
+    ctx.strokeStyle =
+        "rgba(198,163,107,0.30)";
+    
+    ctx.lineWidth =
+        2;
+
+
+    // obere Linie
+    ctx.beginPath();
+
+    ctx.moveTo(
+        60,
+        topLineY
+    );
+
+    ctx.lineTo(
+        canvasWidth - 60,
+        topLineY
+    );
+
+    ctx.stroke();
+
+
+    // untere Linie: kürzer und auf Datumshöhe
+    ctx.beginPath();
+
+    ctx.moveTo(
+        bottomLineStartX,
+        bottomLineY
+    );
+
+    ctx.lineTo(
+        bottomLineEndX,
+        bottomLineY
+    );
+
+    ctx.stroke();
+
+        
     // kurze goldene Akzentlinien
     ctx.strokeStyle =
         "rgba(198,163,107,0.65)";
@@ -3493,30 +3547,34 @@ function drawBusinessPremiumDecoration(
     ctx.lineWidth =
         4;
 
+
+    // kurzer Goldakzent oben links
     ctx.beginPath();
 
     ctx.moveTo(
         95,
-        108
+        topLineY
     );
 
     ctx.lineTo(
         205,
-        108
+        topLineY
     );
 
     ctx.stroke();
 
+
+    // kurzer Goldakzent unten kurz vor dem Datum
     ctx.beginPath();
 
     ctx.moveTo(
-        canvasWidth - 205,
-        canvasHeight - 108
+        735,
+        bottomLineY
     );
 
     ctx.lineTo(
-        canvasWidth - 95,
-        canvasHeight - 108
+        855,
+        bottomLineY
     );
 
     ctx.stroke();
@@ -3527,10 +3585,10 @@ function drawBusinessPremiumDecoration(
         "rgba(198,163,107,0.75)";
 
     const dots = [
-        [230, 108],
-        [canvasWidth - 230, canvasHeight - 108],
-        [canvasWidth - 95, 108],
-        [95, canvasHeight - 108]
+        [230, topLineY],
+        [canvasWidth - 95, topLineY],
+        [95, bottomLineY],
+        [bottomLineEndX, bottomLineY]
     ];
 
     dots.forEach(
