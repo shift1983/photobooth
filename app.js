@@ -3328,6 +3328,8 @@ ctx.stroke();
 
 ctx.restore();
 
+}
+
 /* =========================
    BUSINESS PREMIUM DESIGN
 ========================= */
