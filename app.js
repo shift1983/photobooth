@@ -4032,7 +4032,7 @@ async function generateCollage() {
             collageCanvas.height,
             design
         );
-    }
+    
 
     } else if (
         settings.cardDesign ===
