@@ -97,33 +97,39 @@
         </div>
 
 
-        <div id="captureArea">
+		<div id="captureArea">
 
-            <div id="cameraContainer">
+ 		   <div id="cameraContainer">
 
-                <video
-                    id="video"
-                    autoplay
-                    playsinline
-                    muted>
-                </video>
+    		    <div id="videoWrapper">
 
-                <img
-                    id="photoPreview"
-                    alt="Vorschau"
-                >
+      		      <video
+      		          id="video"
+     		           autoplay
+      		          playsinline
+    		            muted>
+     		      </video>
 
-            </div>
+       		     <div id="cameraSafeArea">
 
-			<div id="cameraSafeArea">
-    			<div class="safeAreaLabel">
-        		Bitte innerhalb des Rahmens bleiben
-    			</div>
+         	       <div class="safeAreaLabel">
+     		          Bitte innerhalb des Rahmens bleiben
+    			   </div>
 
-    		<div class="safeAreaEyeLine"></div>
-		</div>
+          		      <div class="safeAreaEyeLine"></div>
 
-            <div id="captureControls">
+       			     </div>
+
+     			   </div>
+
+   			     <img
+     			       id="photoPreview"
+     			       alt="Vorschau"
+    			    >
+
+  			  </div>
+
+  			  <div id="captureControls">
 
                 <button
                     id="captureBtn"
