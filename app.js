@@ -491,6 +491,10 @@ const guestPhotoCountButtons =
         ".guestPhotoCountBtn"
     );
 
+const cameraSafeArea =
+    document.getElementById(
+        "cameraSafeArea"
+    );
 
 /* =========================
    ADMIN
@@ -1197,6 +1201,9 @@ async function capturePhoto() {
     video.style.display =
         "none";
 
+    cameraSafeArea.style.display =
+        "none";
+    
     preview.style.display =
         "block";
 
@@ -1259,6 +1266,9 @@ retakeBtn.addEventListener(
         video.style.display =
             "block";
 
+    cameraSafeArea.style.display =
+        "none";
+        
         retakeBtn.style.display =
             "none";
 
@@ -1433,6 +1443,9 @@ nextBtn.addEventListener(
             video.style.display =
                 "block";
 
+            cameraSafeArea.style.display =
+                "none";
+            
             retakeBtn.style.display =
                 "none";
 
@@ -4635,6 +4648,8 @@ async function resetPhotoBooth() {
     preview.style.display =
         "none";
 
+    cameraSafeArea.style.display =
+        "none";
 
     collagePreview
         .style.display =
