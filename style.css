@@ -227,18 +227,35 @@ button {
     margin: 0;
 }
 
+#videoWrapper {
+    position: relative;
+    display: inline-block;
+    line-height: 0;
+}
+
 #video {
-    width: 820px;
-    max-width: calc(100vw - 170px);
+    display: block;
+}
 
-    height: auto;
-    max-height: 68vh;
+#cameraSafeArea {
+    position: absolute;
 
-    border-radius: 12px;
+    left: 6%;
+    right: 6%;
+    top: 8%;
+    bottom: 8%;
 
-    transform: scaleX(-1);
+    border:
+        3px dashed
+        rgba(255, 255, 255, 0.65);
 
-    background: black;
+    border-radius: 22px;
+
+    pointer-events: none;
+
+    z-index: 10;
+
+    box-sizing: border-box;
 }
 
 #photoPreview {
@@ -267,27 +284,7 @@ button {
     position: relative;
 }
 
-#cameraSafeArea {
-    position: absolute;
 
-    left: 8%;
-    right: 8%;
-    top: 10%;
-    bottom: 10%;
-
-    border: 3px dashed rgba(255, 255, 255, 0.65);
-
-    border-radius: 22px;
-
-    pointer-events: none;
-
-    z-index: 10;
-
-    box-sizing: border-box;
-
-    box-shadow:
-        0 0 0 2px rgba(0, 0, 0, 0.12);
-}
 
 .safeAreaLabel {
     position: absolute;
