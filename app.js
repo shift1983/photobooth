@@ -526,6 +526,36 @@ const cameraSafeArea =
         "cameraSafeArea"
     );
 
+const emailBtn =
+    document.getElementById(
+        "emailBtn"
+    );
+
+const emailOverlay =
+    document.getElementById(
+        "emailOverlay"
+    );
+
+const guestEmailInput =
+    document.getElementById(
+        "guestEmailInput"
+    );
+
+const emailError =
+    document.getElementById(
+        "emailError"
+    );
+
+const emailCancelBtn =
+    document.getElementById(
+        "emailCancelBtn"
+    );
+
+const emailSaveBtn =
+    document.getElementById(
+        "emailSaveBtn"
+    );
+
 /* =========================
    ADMIN
 ========================= */
@@ -1544,6 +1574,39 @@ printBtn.addEventListener(
         window.print();
     }
 );
+
+
+/* =========================
+   E-MAIL OVERLAY
+========================= */
+
+emailBtn.addEventListener(
+    "click",
+    () => {
+
+        guestEmailInput.value =
+            "";
+
+        emailError.style.display =
+            "none";
+
+        emailOverlay.style.display =
+            "flex";
+
+        guestEmailInput.focus();
+    }
+);
+
+
+emailCancelBtn.addEventListener(
+    "click",
+    () => {
+
+        emailOverlay.style.display =
+            "none";
+    }
+);
+
 
 /* =========================
    WEITER / NÄCHSTES FOTO
