@@ -489,7 +489,7 @@ button {
     flex-direction: column;
     justify-content: center;
 
-    gap: 15px;
+    gap: 8px;
 
     margin: 0;
 }
@@ -510,8 +510,10 @@ button {
 }
 
 #resultArea .squareActionBtn {
-    width: 150px;
-    height: 150px;
+    width: 125px;
+    height: 125px;
+
+    padding: 10px;
 
     flex-shrink: 0;
 }
