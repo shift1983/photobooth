@@ -3709,7 +3709,7 @@ function drawPhotoFrame(
 
     offsetY =
         verticalOverflow *
-        0.40;
+        0.45;
     }
 
 
