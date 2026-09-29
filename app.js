@@ -40,6 +40,8 @@ const cardDesigns = {
         frameBorderColor: "#f4c98b",
         frameBorderWidth: 4,
         frameRadius: 24,
+        innerBorderWidth: 1.5,
+        innerBorderColor: "rgba(255,255,255,0.72)",
 
         accentColors: [
             "#ff8a65",
@@ -71,6 +73,8 @@ const cardDesigns = {
         frameBorderColor: "#ff98d0",
         frameBorderWidth: 5,
         frameRadius: 28,
+        innerBorderWidth: 1.8,
+        innerBorderColor: "rgba(255,255,255,0.78)",
 
         accentColors: [
             "#ff4fa3",
@@ -104,6 +108,8 @@ const cardDesigns = {
         frameBorderColor: "#d8c6d3",
         frameBorderWidth: 2,
         frameRadius: 20,
+        innerBorderWidth: 1.2,
+        innerBorderColor: "rgba(255,255,255,0.68)",
 
         accentColors: [
             "#d8b4c6",
@@ -135,6 +141,8 @@ const cardDesigns = {
         frameBorderColor: "#d9b6bd",
         frameBorderWidth: 3,
         frameRadius: 26,
+        innerBorderWidth: 1.4,
+        innerBorderColor: "rgba(255,255,255,0.72)",
 
         accentColors: [
             "#d9a6b0",
@@ -166,6 +174,8 @@ const cardDesigns = {
         frameBorderColor: "#86a5bd",
         frameBorderWidth: 3,
         frameRadius: 12,
+        innerBorderWidth: 1.1,
+        innerBorderColor: "rgba(255,255,255,0.60)",
 
         accentColors: [
             "#4f88b5",
@@ -197,6 +207,8 @@ const cardDesigns = {
         frameBorderColor: "#b89a72",
         frameBorderWidth: 3,
         frameRadius: 10,
+        innerBorderWidth: 1.2,
+        innerBorderColor: "rgba(255,255,255,0.58)",
 
         accentColors: [
             "#c6a36b",
@@ -3739,162 +3751,237 @@ if (
    FOTO-RAHMEN
 ========================= */
 
+function roundedRectPath(
+    ctx,
+    x,
+    y,
+    w,
+    h,
+    r
+) {
+
+    const radius = Math.min(
+        r,
+        w / 2,
+        h / 2
+    );
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        x + radius,
+        y
+    );
+
+    ctx.lineTo(
+        x + w - radius,
+        y
+    );
+
+    ctx.quadraticCurveTo(
+        x + w,
+        y,
+        x + w,
+        y + radius
+    );
+
+    ctx.lineTo(
+        x + w,
+        y + h - radius
+    );
+
+    ctx.quadraticCurveTo(
+        x + w,
+        y + h,
+        x + w - radius,
+        y + h
+    );
+
+    ctx.lineTo(
+        x + radius,
+        y + h
+    );
+
+    ctx.quadraticCurveTo(
+        x,
+        y + h,
+        x,
+        y + h - radius
+    );
+
+    ctx.lineTo(
+        x,
+        y + radius
+    );
+
+    ctx.quadraticCurveTo(
+        x,
+        y,
+        x + radius,
+        y
+    );
+
+    ctx.closePath();
+}
+
+
 function drawPhotoFrame(
     ctx,
     img,
     frame
 ) {
 
-    const border =
-        9;
-
-    const radius =
+    const outerRadius =
         frame.frameRadius || 22;
 
+    const borderWidth =
+        frame.frameBorderWidth || 4;
 
-ctx.save();
+    const padding =
+        frame.framePadding || 14;
 
-ctx.shadowColor =
-    "rgba(0, 0, 0, 0.22)";
+    const innerBorderWidth =
+        frame.innerBorderWidth || 1.5;
 
-ctx.shadowBlur =
-    14;
-
-ctx.shadowOffsetX =
-    0;
-
-ctx.shadowOffsetY =
-    6;
+    const innerBorderColor =
+        frame.innerBorderColor ||
+        "rgba(255,255,255,0.72)";
 
 
-fillRoundedRect(
-    ctx,
-    frame.x,
-    frame.y,
-    frame.w,
-    frame.h,
-    radius,
-    frame.frameColor
-);
+    const innerX =
+        frame.x + padding;
 
-ctx.restore();
+    const innerY =
+        frame.y + padding;
+
+    const innerW =
+        frame.w - padding * 2;
+
+    const innerH =
+        frame.h - padding * 2;
 
 
+    const innerRadius =
+        Math.max(
+            6,
+            outerRadius - padding * 0.55
+        );
+
+
+    // äußerer Rahmen mit Schatten
+    ctx.save();
+
+    ctx.shadowColor =
+        "rgba(0, 0, 0, 0.22)";
+
+    ctx.shadowBlur =
+        14;
+
+    ctx.shadowOffsetX =
+        0;
+
+    ctx.shadowOffsetY =
+        6;
+
+    fillRoundedRect(
+        ctx,
+        frame.x,
+        frame.y,
+        frame.w,
+        frame.h,
+        outerRadius,
+        frame.frameColor
+    );
+
+    ctx.restore();
+
+
+    // äußerer Rahmenrand
     strokeRoundedRect(
         ctx,
         frame.x,
         frame.y,
         frame.w,
         frame.h,
-        radius,
+        outerRadius,
         frame.frameBorderColor,
-        frame.frameBorderWidth || 4
+        borderWidth
     );
 
 
-    const innerX =
-        frame.x +
-        border;
-
-    const innerY =
-        frame.y +
-        border;
-
-    const innerW =
-        frame.w -
-        border * 2;
-
-    const innerH =
-        frame.h -
-        border * 2;
-
-
     const imageRatio =
-        img.width /
-        img.height;
+        img.width / img.height;
 
     const frameRatio =
-        innerW /
-        innerH;
-
+        innerW / innerH;
 
     let drawWidth;
     let drawHeight;
-    let offsetX;
-    let offsetY;
+    let offsetX = 0;
+    let offsetY = 0;
 
 
-    if (
-        imageRatio >
-        frameRatio
-    ) {
+    if (imageRatio > frameRatio) {
 
-        drawHeight =
-            innerH;
+        drawHeight = innerH;
 
         drawWidth =
-            innerH *
-            imageRatio;
+            innerH * imageRatio;
 
         offsetX =
-            (
-                drawWidth -
-                innerW
-            ) /
-            2;
-
-        offsetY =
-            0;
+            (drawWidth - innerW) / 2;
 
     } else {
 
-        drawWidth =
-            innerW;
+        drawWidth = innerW;
 
         drawHeight =
-            innerW /
-            imageRatio;
+            innerW / imageRatio;
 
-        offsetX =
-            0;
+        const verticalOverflow =
+            drawHeight - innerH;
 
-    const verticalOverflow =
-        drawHeight -
-        innerH;
-
-    offsetY =
-        verticalOverflow *
-        0.45;
+        offsetY =
+            verticalOverflow * 0.40;
     }
 
 
+    // Foto innerhalb eines passenden, abgerundeten Innenbereichs
     ctx.save();
 
-
-    drawRoundedRect(
+    roundedRectPath(
         ctx,
         innerX,
         innerY,
         innerW,
         innerH,
-        16
+        innerRadius
     );
 
     ctx.clip();
 
-
     ctx.drawImage(
         img,
-        innerX -
-            offsetX,
-        innerY -
-            offsetY,
+        innerX - offsetX,
+        innerY - offsetY,
         drawWidth,
         drawHeight
     );
 
-
     ctx.restore();
+
+
+    // feiner Innenrahmen
+    strokeRoundedRect(
+        ctx,
+        innerX,
+        innerY,
+        innerW,
+        innerH,
+        innerRadius,
+        innerBorderColor,
+        innerBorderWidth
+    );
 }
 
 /* =========================
@@ -4600,7 +4687,16 @@ if (
                         design.frameBorderWidth,
 
                     frameRadius:
-                        design.frameRadius
+                        design.frameRadius,
+
+                    framePadding:
+                        design.framePadding,
+
+                    innerBorderWidth:
+                        design.innerBorderWidth,
+
+                    innerBorderColor:
+                        design.innerBorderColor
                 }
             );
         }
