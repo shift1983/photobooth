@@ -1184,6 +1184,10 @@ function updateCameraSafeArea() {
 
 async function capturePhoto() {
 
+    captureArea.classList.add(
+        "shooting"
+    );
+
     updateCameraSafeArea();
 
     guestPhotoCountSelection
@@ -1303,6 +1307,10 @@ async function capturePhoto() {
     preview.src =
         imageData;
 
+    captureArea.classList.remove(
+        "shooting"
+    );
+    
     video.style.display =
         "none";
 
