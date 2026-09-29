@@ -904,3 +904,105 @@ body.business {
 #captureBtn {
     display: none;
 }
+
+/* =========================
+   E-MAIL OVERLAY
+   ========================= */
+
+#emailOverlay {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    background:
+        rgba(0, 0, 0, 0.85);
+
+    z-index: 5500;
+
+    align-items: center;
+    justify-content: center;
+}
+
+#emailPanel {
+    width:
+        min(460px, 88%);
+
+    background:
+        #ffffff;
+
+    color:
+        #222222;
+
+    padding:
+        30px;
+
+    border-radius:
+        20px;
+
+    text-align:
+        center;
+
+    box-shadow:
+        0 10px 35px
+        rgba(0, 0, 0, 0.35);
+}
+
+#emailPanel h2 {
+    margin-top: 0;
+}
+
+#guestEmailInput {
+    width: 100%;
+
+    padding:
+        14px 16px;
+
+    margin:
+        18px 0 10px;
+
+    font-size:
+        1.2rem;
+
+    border:
+        1px solid #bbbbbb;
+
+    border-radius:
+        10px;
+}
+
+#emailError {
+    display: none;
+
+    color:
+        #c00000;
+
+    font-weight:
+        bold;
+
+    margin:
+        8px 0;
+}
+
+.emailPrivacyInfo {
+    font-size:
+        0.9rem;
+
+    color:
+        #666666;
+
+    margin:
+        15px 0;
+}
+
+.emailButtons {
+    display: flex;
+
+    justify-content: center;
+
+    gap:
+        10px;
+
+    margin-top:
+        20px;
+}
