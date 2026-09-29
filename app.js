@@ -3703,12 +3703,13 @@ function drawPhotoFrame(
         offsetX =
             0;
 
-        offsetY =
-            (
-                drawHeight -
-                innerH
-            ) /
-            2;
+    const verticalOverflow =
+        drawHeight -
+        innerH;
+
+    offsetY =
+        verticalOverflow *
+        0.40;
     }
 
 
