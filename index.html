@@ -560,6 +560,59 @@
 
 </main>
 	<script src="app.js"></script>
-		
+
+	    <!-- =========================
+         EMAIL
+    	========================== -->
+
+<div id="emailOverlay">
+
+    <div id="emailPanel">
+
+        <h2>
+            Fotokarte per E-Mail
+        </h2>
+
+        <p>
+            Gib deine E-Mail-Adresse ein.
+            Die Fotokarte wird gespeichert
+            und kann später verschickt werden.
+        </p>
+
+        <input
+            id="guestEmailInput"
+            type="email"
+            placeholder="name@beispiel.de"
+            autocomplete="email"
+        >
+
+        <div
+            id="emailError">
+            Bitte eine gültige E-Mail-Adresse eingeben.
+        </div>
+
+        <p class="emailPrivacyInfo">
+            Die E-Mail-Adresse wird nur
+            für den Versand dieser Fotokarte verwendet.
+        </p>
+
+        <div class="emailButtons">
+
+            <button
+                id="emailCancelBtn">
+                Abbrechen
+            </button>
+
+            <button
+                id="emailSaveBtn">
+                Speichern
+            </button>
+
+        </div>
+
+    </div>
+
+</div>	
+	
 </body>
 </html>
