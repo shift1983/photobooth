@@ -4816,6 +4816,8 @@ async function resetPhotoBooth() {
     updateGuestPhotoCountButtons();
 
     updateActivePhotoCountButton();
+
+    updateCameraSafeArea();
 }
 
 
