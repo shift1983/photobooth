@@ -38,6 +38,7 @@ const cardDesigns = {
         textColor: "#6b3200",
         frameColor: "#ffffff",
         frameBorderColor: "#f4c98b",
+        frameBorderWidth: 4,
 
         accentColors: [
             "#ff8a65",
@@ -67,6 +68,7 @@ const cardDesigns = {
 
         frameColor: "#ffffff",
         frameBorderColor: "#ff98d0",
+        frameBorderWidth: 5,
 
         accentColors: [
             "#ff4fa3",
@@ -98,6 +100,7 @@ const cardDesigns = {
 
         frameColor: "#ffffff",
         frameBorderColor: "#d8c6d3",
+        frameBorderWidth: 2,
 
         accentColors: [
             "#d8b4c6",
@@ -127,6 +130,7 @@ const cardDesigns = {
 
         frameColor: "#ffffff",
         frameBorderColor: "#d9b6bd",
+        frameBorderWidth: 3,
 
         accentColors: [
             "#d9a6b0",
@@ -156,6 +160,7 @@ const cardDesigns = {
 
         frameColor: "#ffffff",
         frameBorderColor: "#86a5bd",
+        frameBorderWidth: 3,
 
         accentColors: [
             "#4f88b5",
@@ -185,6 +190,7 @@ const cardDesigns = {
 
         frameColor: "#ffffff",
         frameBorderColor: "#b89a72",
+        frameBorderWidth: 3,
 
         accentColors: [
             "#c6a36b",
@@ -3776,7 +3782,7 @@ ctx.restore();
         frame.h,
         radius,
         frame.frameBorderColor,
-        4
+        frame.frameBorderWidth || 4
     );
 
 
@@ -4582,7 +4588,10 @@ if (
                         design.frameColor,
 
                     frameBorderColor:
-                        design.frameBorderColor
+                        design.frameBorderColor,
+
+                    frameBorderWidth:
+                        design.frameBorderWidth
                 }
             );
         }
