@@ -481,7 +481,7 @@ button {
 }
 
 #resultArea #photoActions {
-    width: 150px;
+    width: 125px;
 
     flex-shrink: 0;
 
@@ -516,6 +516,14 @@ button {
     flex-shrink: 0;
 }
 
+#resultArea .squareActionBtn .captureIcon {
+    font-size: 2rem;
+    margin-bottom: 6px;
+}
+
+#resultArea .squareActionBtn .captureText {
+    font-size: 1rem;
+}
 
 /* =========================
    THEMEN
