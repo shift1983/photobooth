@@ -1074,6 +1074,35 @@ startBoothBtn.addEventListener(
     }
 );
 
+function updateCameraSafeArea() {
+
+    let aspectRatio = 500 / 275;
+
+    if (
+        settings.photoCount === 2
+    ) {
+
+        aspectRatio =
+            555 / 430;
+
+    } else if (
+        settings.photoCount === 3 &&
+        currentPhotoIndex === 3
+    ) {
+
+        aspectRatio =
+            700 / 325;
+    }
+
+    cameraSafeArea.style.aspectRatio =
+        aspectRatio;
+
+    cameraSafeArea.style.width =
+        "88%";
+
+    cameraSafeArea.style.height =
+        "auto";
+}
 
 /* =========================
    FOTO AUFNEHMEN
