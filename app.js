@@ -1011,6 +1011,13 @@ async function startCamera() {
             .style.display =
             "flex";
 
+
+        video.onloadedmetadata =
+            () => {
+
+                updateCameraSafeArea();
+            };
+
     } catch (error) {
 
         alert(
@@ -1076,32 +1083,99 @@ startBoothBtn.addEventListener(
 
 function updateCameraSafeArea() {
 
-    let aspectRatio = 500 / 275;
+    if (
+        !video ||
+        !cameraSafeArea
+    ) {
+        return;
+    }
 
+
+    const videoWidth =
+        video.clientWidth;
+
+    const videoHeight =
+        video.clientHeight;
+
+
+    if (
+        videoWidth === 0 ||
+        videoHeight === 0
+    ) {
+        return;
+    }
+
+
+    let targetRatio =
+        500 / 275;
+
+
+    // 2er-Layout
     if (
         settings.photoCount === 2
     ) {
 
-        aspectRatio =
+        targetRatio =
             555 / 430;
+    }
 
-    } else if (
+
+    // 3er-Layout:
+    // Foto 1 + 2 = 500 x 275
+    // Foto 3 = 700 x 325
+    if (
         settings.photoCount === 3 &&
         currentPhotoIndex === 3
     ) {
 
-        aspectRatio =
+        targetRatio =
             700 / 325;
     }
 
-    cameraSafeArea.style.aspectRatio =
-        aspectRatio;
+
+    const videoRatio =
+        videoWidth /
+        videoHeight;
+
+
+    let safeWidth;
+    let safeHeight;
+
+
+    if (
+        videoRatio >
+        targetRatio
+    ) {
+
+        // Video ist breiter als das spätere Foto.
+        // Links und rechts wird später abgeschnitten.
+
+        safeHeight =
+            videoHeight;
+
+        safeWidth =
+            safeHeight *
+            targetRatio;
+
+    } else {
+
+        // Video ist höher als das spätere Foto.
+        // Oben und unten wird später abgeschnitten.
+
+        safeWidth =
+            videoWidth;
+
+        safeHeight =
+            safeWidth /
+            targetRatio;
+    }
+
 
     cameraSafeArea.style.width =
-        "88%";
+        safeWidth + "px";
 
     cameraSafeArea.style.height =
-        "auto";
+        safeHeight + "px";
 }
 
 /* =========================
@@ -1109,6 +1183,8 @@ function updateCameraSafeArea() {
 ========================= */
 
 async function capturePhoto() {
+
+    updateCameraSafeArea();
 
     guestPhotoCountSelection
         .style.display =
