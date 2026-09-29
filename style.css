@@ -234,7 +234,18 @@ button {
 }
 
 #video {
+    width: 820px;
+    max-width: calc(100vw - 170px);
+    height: auto;
+    max-height: 68vh;
+    
     display: block;
+
+    border-radius: 12px;
+
+    transform: scaleX(-1);
+
+    background: black;
 }
 
 #cameraSafeArea {
