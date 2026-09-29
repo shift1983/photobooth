@@ -42,6 +42,7 @@ const cardDesigns = {
         frameRadius: 24,
         innerBorderWidth: 1.5,
         innerBorderColor: "rgba(255,255,255,0.72)",
+        framePadding: 11,
 
         accentColors: [
             "#ff8a65",
@@ -75,6 +76,7 @@ const cardDesigns = {
         frameRadius: 28,
         innerBorderWidth: 1.8,
         innerBorderColor: "rgba(255,255,255,0.78)",
+        framePadding: 12,
 
         accentColors: [
             "#ff4fa3",
@@ -110,6 +112,7 @@ const cardDesigns = {
         frameRadius: 20,
         innerBorderWidth: 1.2,
         innerBorderColor: "rgba(255,255,255,0.68)",
+        framePadding: 9,
 
         accentColors: [
             "#d8b4c6",
@@ -143,6 +146,7 @@ const cardDesigns = {
         frameRadius: 26,
         innerBorderWidth: 1.4,
         innerBorderColor: "rgba(255,255,255,0.72)",
+        framePadding: 10,
 
         accentColors: [
             "#d9a6b0",
@@ -176,6 +180,7 @@ const cardDesigns = {
         frameRadius: 12,
         innerBorderWidth: 1.1,
         innerBorderColor: "rgba(255,255,255,0.60)",
+        framePadding: 8,
 
         accentColors: [
             "#4f88b5",
@@ -209,6 +214,7 @@ const cardDesigns = {
         frameRadius: 10,
         innerBorderWidth: 1.2,
         innerBorderColor: "rgba(255,255,255,0.58)",
+        framePadding: 7,
 
         accentColors: [
             "#c6a36b",
