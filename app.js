@@ -1266,8 +1266,8 @@ retakeBtn.addEventListener(
         video.style.display =
             "block";
 
-    cameraSafeArea.style.display =
-        "none";
+        cameraSafeArea.style.display =
+            "block";
         
         retakeBtn.style.display =
             "none";
@@ -1444,7 +1444,7 @@ nextBtn.addEventListener(
                 "block";
 
             cameraSafeArea.style.display =
-                "none";
+                "block";
             
             retakeBtn.style.display =
                 "none";
@@ -4649,7 +4649,7 @@ async function resetPhotoBooth() {
         "none";
 
     cameraSafeArea.style.display =
-        "none";
+        "block";
 
     collagePreview
         .style.display =
