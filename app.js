@@ -39,6 +39,7 @@ const cardDesigns = {
         frameColor: "#ffffff",
         frameBorderColor: "#f4c98b",
         frameBorderWidth: 4,
+        frameRadius: 24,
 
         accentColors: [
             "#ff8a65",
@@ -69,6 +70,7 @@ const cardDesigns = {
         frameColor: "#ffffff",
         frameBorderColor: "#ff98d0",
         frameBorderWidth: 5,
+        frameRadius: 28,
 
         accentColors: [
             "#ff4fa3",
@@ -101,6 +103,7 @@ const cardDesigns = {
         frameColor: "#ffffff",
         frameBorderColor: "#d8c6d3",
         frameBorderWidth: 2,
+        frameRadius: 20,
 
         accentColors: [
             "#d8b4c6",
@@ -131,6 +134,7 @@ const cardDesigns = {
         frameColor: "#ffffff",
         frameBorderColor: "#d9b6bd",
         frameBorderWidth: 3,
+        frameRadius: 26,
 
         accentColors: [
             "#d9a6b0",
@@ -161,6 +165,7 @@ const cardDesigns = {
         frameColor: "#ffffff",
         frameBorderColor: "#86a5bd",
         frameBorderWidth: 3,
+        frameRadius: 12,
 
         accentColors: [
             "#4f88b5",
@@ -191,6 +196,7 @@ const cardDesigns = {
         frameColor: "#ffffff",
         frameBorderColor: "#b89a72",
         frameBorderWidth: 3,
+        frameRadius: 10,
 
         accentColors: [
             "#c6a36b",
@@ -3743,7 +3749,7 @@ function drawPhotoFrame(
         9;
 
     const radius =
-        22;
+        frame.frameRadius || 22;
 
 
 ctx.save();
@@ -4591,7 +4597,10 @@ if (
                         design.frameBorderColor,
 
                     frameBorderWidth:
-                        design.frameBorderWidth
+                        design.frameBorderWidth,
+
+                    frameRadius:
+                        design.frameRadius
                 }
             );
         }
