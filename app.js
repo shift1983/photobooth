@@ -3740,15 +3740,32 @@ function drawPhotoFrame(
         22;
 
 
-    fillRoundedRect(
-        ctx,
-        frame.x,
-        frame.y,
-        frame.w,
-        frame.h,
-        radius,
-        frame.frameColor
-    );
+ctx.save();
+
+ctx.shadowColor =
+    "rgba(0, 0, 0, 0.22)";
+
+ctx.shadowBlur =
+    14;
+
+ctx.shadowOffsetX =
+    0;
+
+ctx.shadowOffsetY =
+    6;
+
+
+fillRoundedRect(
+    ctx,
+    frame.x,
+    frame.y,
+    frame.w,
+    frame.h,
+    radius,
+    frame.frameColor
+);
+
+ctx.restore();
 
 
     strokeRoundedRect(
