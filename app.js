@@ -1288,6 +1288,50 @@ async function showEmailRequestList() {
    E-MAIL CSV EXPORT
 ========================= */
 
+function createEmailRequestsCsv(
+    requests
+) {
+
+    const csvRows = [
+        [
+            "E-Mail",
+            "Dateiname",
+            "Zeitpunkt"
+        ]
+    ];
+
+
+    requests.forEach(
+        request => {
+
+            csvRows.push(
+                [
+                    request.email,
+                    request.filename,
+                    request.timestamp
+                ]
+            );
+        }
+    );
+
+
+    return csvRows
+        .map(
+            row =>
+                row
+                    .map(
+                        value =>
+                            `"${String(value)
+                                .replace(
+                                    /"/g,
+                                    '""'
+                                )}"`
+                    )
+                    .join(";")
+        )
+        .join("\n");
+}
+
 async function exportEmailRequestsCsv() {
 
     try {
@@ -1307,47 +1351,10 @@ async function exportEmailRequestsCsv() {
             return;
         }
 
-
-        const csvRows = [
-            [
-                "E-Mail",
-                "Dateiname",
-                "Zeitpunkt"
-            ]
-        ];
-
-
-        requests.forEach(
-            request => {
-
-                csvRows.push(
-                    [
-                        request.email,
-                        request.filename,
-                        request.timestamp
-                    ]
-                );
-            }
-        );
-
-
-        const csvContent =
-            csvRows
-                .map(
-                    row =>
-                        row
-                            .map(
-                                value =>
-                                    `"${String(value)
-                                        .replace(
-                                            /"/g,
-                                            '""'
-                                        )}"`
-                            )
-                            .join(";")
-                )
-                .join("\n");
-
+const csvContent =
+    createEmailRequestsCsv(
+        requests
+    );
 
         const blob =
             new Blob(
@@ -1506,14 +1513,14 @@ deleteAllEmailRequestsBtn.addEventListener(
                 "<div>Keine Anfragen gespeichert.</div>";
 
 
-            if (
+/*            if (
                 emailRequestList.style.display ===
                 "block"
             ) {
 
                 emailRequestList.style.display =
                     "block";
-            }
+            }*/
 
 
             alert(
