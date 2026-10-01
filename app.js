@@ -3696,32 +3696,52 @@ function renderStickerEditor() {
             }
 
 
-            element.textContent =
-                sticker.emoji;
+const stickerPixelSize =
+    sticker.size *
+    stickerEditorImage.clientWidth;
 
 
-            element.style.left =
-                sticker.x * 100 + "%";
+element.style.left =
+    sticker.x * 100 + "%";
 
 
-            element.style.top =
-                sticker.y * 100 + "%";
+element.style.top =
+    sticker.y * 100 + "%";
 
 
-            element.style.fontSize =
-                (
-                    sticker.size *
-                    stickerEditorImage.clientWidth
-                ) +
-                "px";
+element.style.width =
+    stickerPixelSize + "px";
 
 
-            element.style.transform =
-                `translate(-50%, -50%) rotate(${sticker.rotation}deg)`;
+element.style.height =
+    stickerPixelSize + "px";
 
 
-            element.dataset.stickerId =
-                sticker.id;
+element.style.transform =
+    `translate(-50%, -50%) rotate(${sticker.rotation}deg)`;
+
+
+element.dataset.stickerId =
+    sticker.id;
+
+
+const image =
+    document.createElement(
+        "img"
+    );
+
+
+image.src =
+    sticker.src;
+
+
+image.alt =
+    "Sticker";
+
+
+element.appendChild(
+    image
+);
 
 
 element.addEventListener(
@@ -3818,8 +3838,8 @@ stickerChoices.forEach(
             "click",
             () => {
 
-                const emoji =
-                    button.dataset.sticker;
+                const stickerSrc =
+                    button.dataset.stickerSrc;
 
 
                 const sticker = {
@@ -3827,8 +3847,8 @@ stickerChoices.forEach(
                     id:
                         nextStickerId++,
 
-                    emoji:
-                        emoji,
+                    src:
+                        stickerSrc,
 
                     x:
                         0.5,
