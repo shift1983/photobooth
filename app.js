@@ -250,6 +250,12 @@ let selectedStickerId = null;
 
 let nextStickerId = 1;
 
+let activeStickerPointers =
+    new Map();
+
+let stickerGesture =
+    null;
+
 
 async function requestWakeLock() {
 
@@ -7374,12 +7380,6 @@ async function resetPhotoBooth() {
 
     nextStickerId =
         1;
-
-    let activeStickerPointers =
-        new Map();
-
-    let stickerGesture =
-        null;
     
     updateSeriesDisplay();
 
