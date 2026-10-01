@@ -874,6 +874,63 @@ async function getEmailRequests() {
    ADMIN E-MAIL-ANZEIGE
 ========================= */
 
+function downloadEmailPhoto(
+    request
+) {
+
+    if (
+        !request.imageBlob
+    ) {
+
+        alert(
+            "Für diese Anfrage ist keine Fotokarte gespeichert."
+        );
+
+        return;
+    }
+
+
+    const url =
+        URL.createObjectURL(
+            request.imageBlob
+        );
+
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+
+    link.href =
+        url;
+
+    link.download =
+        request.filename;
+
+
+    document.body.appendChild(
+        link
+    );
+
+    link.click();
+
+    document.body.removeChild(
+        link
+    );
+
+
+    setTimeout(
+        () => {
+
+            URL.revokeObjectURL(
+                url
+            );
+        },
+        1000
+    );
+}
+
 async function refreshEmailRequestCount() {
 
     try {
@@ -986,6 +1043,29 @@ async function showEmailRequestList() {
                         request.filename;
 
 
+                    const downloadBtn =
+                        document.createElement(
+                            "button"
+                        );
+
+                    downloadBtn.className =
+                        "emailPhotoDownloadBtn";
+
+                    downloadBtn.textContent =
+                        "📥 Fotokarte";
+
+
+                    downloadBtn.addEventListener(
+                        "click",
+                        () => {
+
+                            downloadEmailPhoto(
+                                request
+                            );
+                        }
+                    );
+
+
                     item.appendChild(
                         address
                     );
@@ -993,6 +1073,11 @@ async function showEmailRequestList() {
                     item.appendChild(
                         meta
                     );
+
+                    item.appendChild(
+                        downloadBtn
+                    );
+
 
                     emailRequestList.appendChild(
                         item
