@@ -557,6 +557,246 @@ const emailSaveBtn =
     );
 
 /* =========================
+   INDEXEDDB
+========================= */
+
+const PHOTOBOOTH_DB_NAME =
+    "photoboothDB";
+
+const PHOTOBOOTH_DB_VERSION =
+    1;
+
+const EMAIL_STORE_NAME =
+    "emailRequests";
+
+
+function openPhotoBoothDatabase() {
+
+    return new Promise(
+        (resolve, reject) => {
+
+            const request =
+                indexedDB.open(
+                    PHOTOBOOTH_DB_NAME,
+                    PHOTOBOOTH_DB_VERSION
+                );
+
+
+            request.onupgradeneeded =
+                event => {
+
+                    const database =
+                        event.target.result;
+
+                    if (
+                        !database.objectStoreNames
+                            .contains(
+                                EMAIL_STORE_NAME
+                            )
+                    ) {
+
+                        const store =
+                            database.createObjectStore(
+                                EMAIL_STORE_NAME,
+                                {
+                                    keyPath: "id",
+                                    autoIncrement: true
+                                }
+                            );
+
+                        store.createIndex(
+                            "email",
+                            "email",
+                            {
+                                unique: false
+                            }
+                        );
+
+                        store.createIndex(
+                            "timestamp",
+                            "timestamp",
+                            {
+                                unique: false
+                            }
+                        );
+                    }
+                };
+
+
+            request.onsuccess =
+                event => {
+
+                    resolve(
+                        event.target.result
+                    );
+                };
+
+
+            request.onerror =
+                event => {
+
+                    reject(
+                        event.target.error
+                    );
+                };
+        }
+    );
+}
+
+
+function canvasToJpegBlob() {
+
+    return new Promise(
+        (resolve, reject) => {
+
+            collageCanvas.toBlob(
+                blob => {
+
+                    if (!blob) {
+
+                        reject(
+                            new Error(
+                                "Fotokarte konnte nicht erstellt werden."
+                            )
+                        );
+
+                        return;
+                    }
+
+                    resolve(blob);
+                },
+                "image/jpeg",
+                0.95
+            );
+        }
+    );
+}
+
+
+async function saveEmailRequest(
+    email
+) {
+
+    const now =
+        new Date();
+
+    const year =
+        now.getFullYear();
+
+    const month =
+        String(
+            now.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
+        );
+
+    const day =
+        String(
+            now.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
+
+    const hours =
+        String(
+            now.getHours()
+        ).padStart(
+            2,
+            "0"
+        );
+
+    const minutes =
+        String(
+            now.getMinutes()
+        ).padStart(
+            2,
+            "0"
+        );
+
+    const seconds =
+        String(
+            now.getSeconds()
+        ).padStart(
+            2,
+            "0"
+        );
+
+    const fileName =
+        `Photobooth_${year}-${month}-${day}_${hours}-${minutes}-${seconds}.jpg`;
+
+
+    const imageBlob =
+        await canvasToJpegBlob();
+
+
+    const database =
+        await openPhotoBoothDatabase();
+
+
+    return new Promise(
+        (resolve, reject) => {
+
+            const transaction =
+                database.transaction(
+                    EMAIL_STORE_NAME,
+                    "readwrite"
+                );
+
+            const store =
+                transaction.objectStore(
+                    EMAIL_STORE_NAME
+                );
+
+
+            const request =
+                store.add(
+                    {
+                        email:
+                            email,
+
+                        filename:
+                            fileName,
+
+                        timestamp:
+                            now.toISOString(),
+
+                        imageBlob:
+                            imageBlob
+                    }
+                );
+
+
+            request.onsuccess =
+                () => {
+
+                    resolve(
+                        request.result
+                    );
+                };
+
+
+            request.onerror =
+                () => {
+
+                    reject(
+                        request.error
+                    );
+                };
+
+
+            transaction.oncomplete =
+                () => {
+
+                    database.close();
+                };
+        }
+    );
+}
+
+
+/* =========================
    ADMIN
 ========================= */
 
@@ -1620,7 +1860,7 @@ emailCancelBtn.addEventListener(
 
 emailSaveBtn.addEventListener(
     "click",
-    () => {
+    async () => {
 
         const email =
             guestEmailInput.value
@@ -1629,10 +1869,17 @@ emailSaveBtn.addEventListener(
         const emailPattern =
             /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
+
         if (
             email === "" ||
             !emailPattern.test(email)
         ) {
+
+            emailError.textContent =
+                "Bitte eine gültige E-Mail-Adresse eingeben.";
+
+            emailError.style.color =
+                "#c00000";
 
             emailError.style.display =
                 "block";
@@ -1642,99 +1889,82 @@ emailSaveBtn.addEventListener(
             return;
         }
 
+
         emailError.style.display =
             "none";
 
+        emailSaveBtn.disabled =
+            true;
 
-        /*
-            Fotokarte zwingend
-            lokal speichern
-        */
-
-        const fileName =
-            savePhotoCard();
-
-        if (!fileName) {
-
-            alert(
-                "Die Fotokarte konnte nicht gespeichert werden."
-            );
-
-            return;
-        }
-
-
-        /*
-            Vorhandene E-Mail-Anfragen
-            laden
-        */
-
-        let emailRequests = [];
 
         try {
 
-            const storedRequests =
-                localStorage.getItem(
-                    "photoboothEmailRequests"
-                );
+            await saveEmailRequest(
+                email
+            );
 
-            if (storedRequests) {
 
-                emailRequests =
-                    JSON.parse(
-                        storedRequests
-                    );
-            }
+            /*
+                Kurze Bestätigung
+                direkt im Overlay
+            */
+
+            emailError.textContent =
+                "✓ Fotokarte wurde gespeichert.";
+
+            emailError.style.color =
+                "#16803a";
+
+            emailError.style.display =
+                "block";
+
+
+            guestEmailInput.value =
+                "";
+
+
+            setTimeout(
+                () => {
+
+                    emailOverlay.style.display =
+                        "none";
+
+                    emailError.style.display =
+                        "none";
+
+                    emailError.style.color =
+                        "#c00000";
+
+                    emailError.textContent =
+                        "Bitte eine gültige E-Mail-Adresse eingeben.";
+
+                    emailSaveBtn.disabled =
+                        false;
+                },
+                1200
+            );
+
 
         } catch (error) {
 
             console.error(
-                "E-Mail-Liste konnte nicht geladen werden.",
+                "E-Mail-Anfrage konnte nicht gespeichert werden:",
                 error
             );
 
-            emailRequests = [];
+
+            emailError.textContent =
+                "Speichern fehlgeschlagen. Bitte erneut versuchen.";
+
+            emailError.style.color =
+                "#c00000";
+
+            emailError.style.display =
+                "block";
+
+            emailSaveBtn.disabled =
+                false;
         }
-
-
-        /*
-            Neue Anfrage speichern
-        */
-
-        emailRequests.push(
-            {
-                email:
-                    email,
-
-                filename:
-                    fileName,
-
-                timestamp:
-                    new Date()
-                        .toISOString()
-            }
-        );
-
-
-        localStorage.setItem(
-            "photoboothEmailRequests",
-            JSON.stringify(
-                emailRequests
-            )
-        );
-
-
-        emailOverlay.style.display =
-            "none";
-
-        guestEmailInput.value =
-            "";
-
-
-        alert(
-            "E-Mail-Adresse gespeichert.\n\n" +
-            "Die Fotokarte wurde ebenfalls gespeichert."
-        );
     }
 );
 
