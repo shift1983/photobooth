@@ -1053,3 +1053,10 @@ body.business {
     font-size: 0.85rem;
     color: #666666;
 }
+
+.emailPhotoDownloadBtn {
+    margin-top: 8px;
+    padding: 8px 12px;
+
+    font-size: 0.9rem;
+}
