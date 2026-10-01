@@ -239,7 +239,20 @@
 
 			    </button>
 
+				<button
+    				id="stickerBtn"
+    				class="squareActionBtn">
 
+    			<span class="captureIcon">
+        				✨
+    				</span>
+
+    <span class="captureText">
+        Sticker
+    </span>
+
+</button>
+				
 			    <button
    			     id="newSeriesBtn"
    			     class="squareActionBtn">
@@ -650,6 +663,106 @@
     </div>
 
 </div>	
+
+<!-- =========================
+     STICKER EDITOR
+========================== -->
+
+<div id="stickerEditorOverlay">
+
+    <div id="stickerEditorPanel">
+
+        <div id="stickerEditorHeader">
+
+            <h2>
+                ✨ Fotokarte verzieren
+            </h2>
+
+            <p>
+                Wähle einen Sticker aus.
+                Verschieben, Skalieren und Drehen
+                ergänzen wir im nächsten Schritt.
+            </p>
+
+        </div>
+
+
+        <div id="stickerEditorStage">
+
+            <img
+                id="stickerEditorImage"
+                alt="Fotokarte"
+            >
+
+            <div id="stickerLayer"></div>
+
+        </div>
+
+
+        <div id="stickerPalette">
+
+            <button class="stickerChoice" data-sticker="🎉">
+                🎉
+            </button>
+
+            <button class="stickerChoice" data-sticker="🥳">
+                🥳
+            </button>
+
+            <button class="stickerChoice" data-sticker="❤️">
+                ❤️
+            </button>
+
+            <button class="stickerChoice" data-sticker="⭐">
+                ⭐
+            </button>
+
+            <button class="stickerChoice" data-sticker="✨">
+                ✨
+            </button>
+
+            <button class="stickerChoice" data-sticker="🎂">
+                🎂
+            </button>
+
+            <button class="stickerChoice" data-sticker="💍">
+                💍
+            </button>
+
+            <button class="stickerChoice" data-sticker="🌸">
+                🌸
+            </button>
+
+            <button class="stickerChoice" data-sticker="😎">
+                😎
+            </button>
+
+            <button class="stickerChoice" data-sticker="📸">
+                📸
+            </button>
+
+        </div>
+
+
+        <div id="stickerEditorActions">
+
+            <button id="deleteSelectedStickerBtn">
+                🗑️ Sticker löschen
+            </button>
+
+            <button id="clearStickersBtn">
+                🧹 Alle entfernen
+            </button>
+
+            <button id="finishStickerEditorBtn">
+                ✓ Fertig
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 	
 		<script
   		  src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js">
