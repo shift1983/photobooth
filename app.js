@@ -571,6 +571,11 @@ const exportEmailRequestsBtn =
         "exportEmailRequestsBtn"
     );
 
+const exportAllEmailRequestsBtn =
+    document.getElementById(
+        "exportAllEmailRequestsBtn"
+    );
+
 const emailRequestList =
     document.getElementById(
         "emailRequestList"
@@ -1385,6 +1390,231 @@ exportEmailRequestsBtn.addEventListener(
     "click",
     exportEmailRequestsCsv
 );
+
+exportAllEmailRequestsBtn.addEventListener(
+    "click",
+    exportAllEmailRequests
+);
+
+/* =========================
+   KOMPLETTER E-MAIL-EXPORT
+========================= */
+
+async function exportAllEmailRequests() {
+
+    try {
+
+        const requests =
+            await getEmailRequests();
+
+
+        if (
+            requests.length === 0
+        ) {
+
+            alert(
+                "Es sind keine E-Mail-Anfragen gespeichert."
+            );
+
+            return;
+        }
+
+
+        if (
+            typeof JSZip ===
+            "undefined"
+        ) {
+
+            alert(
+                "ZIP-Export ist momentan nicht verfügbar."
+            );
+
+            console.error(
+                "JSZip wurde nicht geladen."
+            );
+
+            return;
+        }
+
+
+        exportAllEmailRequestsBtn.disabled =
+            true;
+
+        exportAllEmailRequestsBtn.textContent =
+            "⏳ Export wird erstellt...";
+
+
+        const zip =
+            new JSZip();
+
+
+        /*
+            CSV erzeugen
+        */
+
+        const csvRows = [
+            [
+                "E-Mail",
+                "Dateiname",
+                "Zeitpunkt"
+            ]
+        ];
+
+
+        requests.forEach(
+            request => {
+
+                csvRows.push(
+                    [
+                        request.email,
+                        request.filename,
+                        request.timestamp
+                    ]
+                );
+            }
+        );
+
+
+        const csvContent =
+            csvRows
+                .map(
+                    row =>
+                        row
+                            .map(
+                                value =>
+                                    `"${String(value)
+                                        .replace(
+                                            /"/g,
+                                            '""'
+                                        )}"`
+                            )
+                            .join(";")
+                )
+                .join("\n");
+
+
+        zip.file(
+            "E-Mail-Anfragen.csv",
+            "\uFEFF" + csvContent
+        );
+
+
+        /*
+            Ordner für Fotokarten
+        */
+
+        const photoFolder =
+            zip.folder(
+                "Fotokarten"
+            );
+
+
+        /*
+            Bilder hinzufügen
+        */
+
+        requests.forEach(
+            request => {
+
+                if (
+                    request.imageBlob
+                ) {
+
+                    photoFolder.file(
+                        request.filename,
+                        request.imageBlob
+                    );
+                }
+            }
+        );
+
+
+        /*
+            ZIP erzeugen
+        */
+
+        const zipBlob =
+            await zip.generateAsync(
+                {
+                    type: "blob"
+                }
+            );
+
+
+        const url =
+            URL.createObjectURL(
+                zipBlob
+            );
+
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+
+        const now =
+            new Date();
+
+        const date =
+            now
+                .toISOString()
+                .slice(
+                    0,
+                    10
+                );
+
+
+        link.href =
+            url;
+
+        link.download =
+            `Photobooth_E-Mail-Export_${date}.zip`;
+
+
+        document.body.appendChild(
+            link
+        );
+
+        link.click();
+
+        document.body.removeChild(
+            link
+        );
+
+
+        setTimeout(
+            () => {
+
+                URL.revokeObjectURL(
+                    url
+                );
+            },
+            1000
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Kompletter E-Mail-Export fehlgeschlagen:",
+            error
+        );
+
+
+        alert(
+            "Der komplette Export konnte nicht erstellt werden."
+        );
+
+    } finally {
+
+        exportAllEmailRequestsBtn.disabled =
+            false;
+
+        exportAllEmailRequestsBtn.textContent =
+            "📦 Alles exportieren";
+    }
+}
 
 /* =========================
    ADMIN
