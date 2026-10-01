@@ -1463,89 +1463,100 @@ retakeBtn.addEventListener(
 
 
 /* =========================
-   SPEICHERN
+   FOTOKARTE SPEICHERN
+========================= */
+
+function savePhotoCard() {
+
+    if (!collageCanvas) {
+        return null;
+    }
+
+    const now =
+        new Date();
+
+    const year =
+        now.getFullYear();
+
+    const month =
+        String(
+            now.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
+        );
+
+    const day =
+        String(
+            now.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
+
+    const hours =
+        String(
+            now.getHours()
+        ).padStart(
+            2,
+            "0"
+        );
+
+    const minutes =
+        String(
+            now.getMinutes()
+        ).padStart(
+            2,
+            "0"
+        );
+
+    const fileName =
+        `Photobooth_${year}-${month}-${day}_${hours}-${minutes}.jpg`;
+
+    const imageToSave =
+        collageCanvas.toDataURL(
+            "image/jpeg",
+            0.95
+        );
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+    link.href =
+        imageToSave;
+
+    link.download =
+        fileName;
+
+    document.body
+        .appendChild(
+            link
+        );
+
+    link.click();
+
+    document.body
+        .removeChild(
+            link
+        );
+
+    return fileName;
+}
+
+
+/* =========================
+   BUTTON: SPEICHERN
 ========================= */
 
 saveBtn.addEventListener(
     "click",
     () => {
 
-        if (!collageCanvas) {
-            return;
-        }
-
-        const now =
-            new Date();
-
-        const year =
-            now.getFullYear();
-
-        const month =
-            String(
-                now.getMonth() + 1
-            ).padStart(
-                2,
-                "0"
-            );
-
-        const day =
-            String(
-                now.getDate()
-            ).padStart(
-                2,
-                "0"
-            );
-
-        const hours =
-            String(
-                now.getHours()
-            ).padStart(
-                2,
-                "0"
-            );
-
-        const minutes =
-            String(
-                now.getMinutes()
-            ).padStart(
-                2,
-                "0"
-            );
-
-        const fileName =
-            `Photobooth_${year}-${month}-${day}_${hours}-${minutes}.jpg`;
-
-        const imageToSave =
-            collageCanvas.toDataURL(
-                "image/jpeg",
-                0.95
-            );
-
-        const link =
-            document.createElement(
-                "a"
-            );
-
-        link.href =
-            imageToSave;
-
-        link.download =
-            fileName;
-
-        document.body
-            .appendChild(
-                link
-            );
-
-        link.click();
-
-        document.body
-            .removeChild(
-                link
-            );
+        savePhotoCard();
     }
 );
-
 
 /* =========================
    FULLSCREEN
@@ -1607,6 +1618,123 @@ emailCancelBtn.addEventListener(
     }
 );
 
+emailSaveBtn.addEventListener(
+    "click",
+    () => {
+
+        const email =
+            guestEmailInput.value
+                .trim();
+
+        if (
+            !guestEmailInput
+                .checkValidity() ||
+            email === ""
+        ) {
+
+            emailError.style.display =
+                "block";
+
+            guestEmailInput.focus();
+
+            return;
+        }
+
+        emailError.style.display =
+            "none";
+
+
+        /*
+            Fotokarte zwingend
+            lokal speichern
+        */
+
+        const fileName =
+            savePhotoCard();
+
+        if (!fileName) {
+
+            alert(
+                "Die Fotokarte konnte nicht gespeichert werden."
+            );
+
+            return;
+        }
+
+
+        /*
+            Vorhandene E-Mail-Anfragen
+            laden
+        */
+
+        let emailRequests = [];
+
+        try {
+
+            const storedRequests =
+                localStorage.getItem(
+                    "photoboothEmailRequests"
+                );
+
+            if (storedRequests) {
+
+                emailRequests =
+                    JSON.parse(
+                        storedRequests
+                    );
+            }
+
+        } catch (error) {
+
+            console.error(
+                "E-Mail-Liste konnte nicht geladen werden.",
+                error
+            );
+
+            emailRequests = [];
+        }
+
+
+        /*
+            Neue Anfrage speichern
+        */
+
+        emailRequests.push(
+            {
+                email:
+                    email,
+
+                filename:
+                    fileName,
+
+                timestamp:
+                    new Date()
+                        .toISOString()
+            }
+        );
+
+
+        localStorage.setItem(
+            "photoboothEmailRequests",
+            JSON.stringify(
+                emailRequests
+            )
+        );
+
+
+        emailOverlay.style.display =
+            "none";
+
+        guestEmailInput.value =
+            "";
+
+
+        alert(
+            "E-Mail-Adresse gespeichert.\n\n" +
+            "Die Fotokarte wurde ebenfalls gespeichert."
+        );
+    }
+);
 
 /* =========================
    WEITER / NÄCHSTES FOTO
