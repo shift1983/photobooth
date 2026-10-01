@@ -546,11 +546,15 @@
  		       📋 Liste anzeigen
  		   </button>
 
- 		   <button id="exportEmailRequestsBtn">
-		        📄 CSV exportieren
-		    </button>
+			<button id="exportEmailRequestsBtn">
+ 			   📄 CSV exportieren
+			</button>
 
-		    <div id="emailRequestList"></div>
+			<button id="exportAllEmailRequestsBtn">
+			    📦 Alles exportieren
+			</button>
+
+			<div id="emailRequestList"></div>
 
 		</div>
 			
@@ -638,6 +642,12 @@
     </div>
 
 </div>	
+	
+		<script
+  		  src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js">
+		</script>
+
 		<script src="app.js"></script>
+
 </body>
 </html>
