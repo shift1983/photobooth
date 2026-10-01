@@ -244,6 +244,12 @@ let currentPhoto = null;
 
 let wakeLock = null;
 
+let photoCardStickers = [];
+
+let selectedStickerId = null;
+
+let nextStickerId = 1;
+
 
 async function requestWakeLock() {
 
@@ -591,7 +597,52 @@ const emailRequestList =
         "emailRequestList"
     );
 
+const stickerBtn =
+    document.getElementById(
+        "stickerBtn"
+    );
 
+
+const stickerEditorOverlay =
+    document.getElementById(
+        "stickerEditorOverlay"
+    );
+
+
+const stickerEditorImage =
+    document.getElementById(
+        "stickerEditorImage"
+    );
+
+
+const stickerLayer =
+    document.getElementById(
+        "stickerLayer"
+    );
+
+
+const stickerChoices =
+    document.querySelectorAll(
+        ".stickerChoice"
+    );
+
+
+const deleteSelectedStickerBtn =
+    document.getElementById(
+        "deleteSelectedStickerBtn"
+    );
+
+
+const clearStickersBtn =
+    document.getElementById(
+        "clearStickersBtn"
+    );
+
+
+const finishStickerEditorBtn =
+    document.getElementById(
+        "finishStickerEditorBtn"
+    );
 
 /* =========================
    INDEXEDDB
@@ -3006,6 +3057,243 @@ printBtn.addEventListener(
     }
 );
 
+/* =========================
+   STICKER EDITOR
+========================= */
+
+function renderStickerEditor() {
+
+    stickerLayer.innerHTML =
+        "";
+
+
+    photoCardStickers.forEach(
+        sticker => {
+
+            const element =
+                document.createElement(
+                    "div"
+                );
+
+
+            element.className =
+                "editorSticker";
+
+
+            if (
+                sticker.id ===
+                selectedStickerId
+            ) {
+
+                element.classList.add(
+                    "selected"
+                );
+            }
+
+
+            element.textContent =
+                sticker.emoji;
+
+
+            element.style.left =
+                sticker.x * 100 + "%";
+
+
+            element.style.top =
+                sticker.y * 100 + "%";
+
+
+            element.style.fontSize =
+                (
+                    sticker.size *
+                    stickerEditorImage.clientWidth
+                ) +
+                "px";
+
+
+            element.style.transform =
+                `translate(-50%, -50%) rotate(${sticker.rotation}deg)`;
+
+
+            element.dataset.stickerId =
+                sticker.id;
+
+
+            element.addEventListener(
+                "click",
+                event => {
+
+                    event.stopPropagation();
+
+
+                    selectedStickerId =
+                        sticker.id;
+
+
+                    renderStickerEditor();
+                }
+            );
+
+
+            stickerLayer.appendChild(
+                element
+            );
+        }
+    );
+}
+
+stickerBtn.addEventListener(
+    "click",
+    () => {
+
+        stickerEditorImage.src =
+            collagePreview.src;
+
+
+        stickerEditorOverlay
+            .style.display =
+            "flex";
+
+
+        selectedStickerId =
+            null;
+
+
+        requestAnimationFrame(
+            () => {
+
+                renderStickerEditor();
+            }
+        );
+    }
+);
+
+stickerChoices.forEach(
+    button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const emoji =
+                    button.dataset.sticker;
+
+
+                const sticker = {
+
+                    id:
+                        nextStickerId++,
+
+                    emoji:
+                        emoji,
+
+                    x:
+                        0.5,
+
+                    y:
+                        0.5,
+
+                    size:
+                        0.11,
+
+                    rotation:
+                        0
+                };
+
+
+                photoCardStickers.push(
+                    sticker
+                );
+
+
+                selectedStickerId =
+                    sticker.id;
+
+
+                renderStickerEditor();
+            }
+        );
+    }
+);
+
+deleteSelectedStickerBtn.addEventListener(
+    "click",
+    () => {
+
+        if (
+            selectedStickerId ===
+            null
+        ) {
+
+            return;
+        }
+
+
+        photoCardStickers =
+            photoCardStickers.filter(
+                sticker =>
+                    sticker.id !==
+                    selectedStickerId
+            );
+
+
+        selectedStickerId =
+            null;
+
+
+        renderStickerEditor();
+    }
+);
+
+clearStickersBtn.addEventListener(
+    "click",
+    () => {
+
+        if (
+            photoCardStickers.length ===
+            0
+        ) {
+
+            return;
+        }
+
+
+        const confirmed =
+            confirm(
+                "Alle Sticker von der Fotokarte entfernen?"
+            );
+
+
+        if (!confirmed) {
+            return;
+        }
+
+
+        photoCardStickers =
+            [];
+
+
+        selectedStickerId =
+            null;
+
+
+        renderStickerEditor();
+    }
+);
+
+finishStickerEditorBtn.addEventListener(
+    "click",
+    () => {
+
+        selectedStickerId =
+            null;
+
+
+        stickerEditorOverlay
+            .style.display =
+            "none";
+    }
+);
 
 /* =========================
    E-MAIL OVERLAY
@@ -6473,7 +6761,15 @@ async function resetPhotoBooth() {
     currentPhotoIndex =
         1;
 
+    photoCardStickers =
+        [];
 
+    selectedStickerId =
+        null;
+
+    nextStickerId =
+        1;
+    
     updateSeriesDisplay();
 
 
