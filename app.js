@@ -602,42 +602,30 @@ const stickerBtn =
         "stickerBtn"
     );
 
-
 const stickerEditorOverlay =
     document.getElementById(
         "stickerEditorOverlay"
     );
-
 
 const stickerEditorImage =
     document.getElementById(
         "stickerEditorImage"
     );
 
-
 const stickerLayer =
     document.getElementById(
         "stickerLayer"
     );
-
 
 const stickerChoices =
     document.querySelectorAll(
         ".stickerChoice"
     );
 
-
 const deleteSelectedStickerBtn =
     document.getElementById(
         "deleteSelectedStickerBtn"
     );
-
-
-const clearStickersBtn =
-    document.getElementById(
-        "clearStickersBtn"
-    );
-
 
 const finishStickerEditorBtn =
     document.getElementById(
@@ -3061,6 +3049,617 @@ printBtn.addEventListener(
    STICKER EDITOR
 ========================= */
 
+function clampStickerValue(
+    value,
+    min,
+    max
+) {
+
+    return Math.min(
+        max,
+        Math.max(
+            min,
+            value
+        )
+    );
+}
+
+
+function getPointerDistance(
+    pointerA,
+    pointerB
+) {
+
+    const dx =
+        pointerB.x -
+        pointerA.x;
+
+    const dy =
+        pointerB.y -
+        pointerA.y;
+
+
+    return Math.hypot(
+        dx,
+        dy
+    );
+}
+
+
+function getPointerAngle(
+    pointerA,
+    pointerB
+) {
+
+    return Math.atan2(
+        pointerB.y -
+            pointerA.y,
+
+        pointerB.x -
+            pointerA.x
+    );
+}
+
+
+function getPointerCenter(
+    pointerA,
+    pointerB
+) {
+
+    return {
+
+        x:
+            (
+                pointerA.x +
+                pointerB.x
+            ) / 2,
+
+        y:
+            (
+                pointerA.y +
+                pointerB.y
+            ) / 2
+    };
+}
+
+function selectEditorSticker(
+    stickerId
+) {
+
+    selectedStickerId =
+        stickerId;
+
+
+    document
+        .querySelectorAll(
+            ".editorSticker"
+        )
+        .forEach(
+            element => {
+
+                const elementId =
+                    Number(
+                        element.dataset
+                            .stickerId
+                    );
+
+
+                element.classList.toggle(
+                    "selected",
+                    elementId ===
+                        stickerId
+                );
+            }
+        );
+}
+
+function startStickerPointer(
+    event,
+    sticker,
+    element
+) {
+
+    event.preventDefault();
+
+    event.stopPropagation();
+
+
+    selectEditorSticker(
+        sticker.id
+    );
+
+
+    element.setPointerCapture(
+        event.pointerId
+    );
+
+
+    activeStickerPointers.set(
+        event.pointerId,
+        {
+            x:
+                event.clientX,
+
+            y:
+                event.clientY
+        }
+    );
+
+
+    const pointers =
+        Array.from(
+            activeStickerPointers
+                .values()
+        );
+
+
+    const stageRect =
+        stickerEditorImage
+            .getBoundingClientRect();
+
+
+    /*
+        EIN FINGER
+    */
+
+    if (
+        pointers.length === 1
+    ) {
+
+        stickerGesture = {
+
+            stickerId:
+                sticker.id,
+
+            mode:
+                "move",
+
+            startPointerX:
+                pointers[0].x,
+
+            startPointerY:
+                pointers[0].y,
+
+            startX:
+                sticker.x,
+
+            startY:
+                sticker.y,
+
+            stageWidth:
+                stageRect.width,
+
+            stageHeight:
+                stageRect.height
+        };
+
+
+        return;
+    }
+
+
+    /*
+        ZWEI FINGER
+    */
+
+    if (
+        pointers.length === 2
+    ) {
+
+        const pointerA =
+            pointers[0];
+
+        const pointerB =
+            pointers[1];
+
+
+        const center =
+            getPointerCenter(
+                pointerA,
+                pointerB
+            );
+
+
+        stickerGesture = {
+
+            stickerId:
+                sticker.id,
+
+            mode:
+                "transform",
+
+            startDistance:
+                getPointerDistance(
+                    pointerA,
+                    pointerB
+                ),
+
+            startAngle:
+                getPointerAngle(
+                    pointerA,
+                    pointerB
+                ),
+
+            startCenterX:
+                center.x,
+
+            startCenterY:
+                center.y,
+
+            startX:
+                sticker.x,
+
+            startY:
+                sticker.y,
+
+            startSize:
+                sticker.size,
+
+            startRotation:
+                sticker.rotation,
+
+            stageWidth:
+                stageRect.width,
+
+            stageHeight:
+                stageRect.height
+        };
+    }
+}
+
+function moveStickerPointer(
+    event,
+    sticker,
+    element
+) {
+
+    if (
+        !activeStickerPointers
+            .has(
+                event.pointerId
+            )
+    ) {
+
+        return;
+    }
+
+
+    event.preventDefault();
+
+
+    activeStickerPointers.set(
+        event.pointerId,
+        {
+            x:
+                event.clientX,
+
+            y:
+                event.clientY
+        }
+    );
+
+
+    if (
+        !stickerGesture ||
+        stickerGesture.stickerId !==
+            sticker.id
+    ) {
+
+        return;
+    }
+
+
+    const pointers =
+        Array.from(
+            activeStickerPointers
+                .values()
+        );
+
+
+    /*
+        EIN FINGER:
+        VERSCHIEBEN
+    */
+
+    if (
+        pointers.length === 1 &&
+        stickerGesture.mode ===
+            "move"
+    ) {
+
+        const pointer =
+            pointers[0];
+
+
+        const deltaX =
+            pointer.x -
+            stickerGesture
+                .startPointerX;
+
+        const deltaY =
+            pointer.y -
+            stickerGesture
+                .startPointerY;
+
+
+        sticker.x =
+            clampStickerValue(
+                stickerGesture.startX +
+                    deltaX /
+                    stickerGesture
+                        .stageWidth,
+                0.02,
+                0.98
+            );
+
+
+        sticker.y =
+            clampStickerValue(
+                stickerGesture.startY +
+                    deltaY /
+                    stickerGesture
+                        .stageHeight,
+                0.02,
+                0.98
+            );
+    }
+
+
+    /*
+        ZWEI FINGER:
+        BEWEGEN + SKALIEREN + DREHEN
+    */
+
+    if (
+        pointers.length === 2 &&
+        stickerGesture.mode ===
+            "transform"
+    ) {
+
+        const pointerA =
+            pointers[0];
+
+        const pointerB =
+            pointers[1];
+
+
+        const currentDistance =
+            getPointerDistance(
+                pointerA,
+                pointerB
+            );
+
+
+        const currentAngle =
+            getPointerAngle(
+                pointerA,
+                pointerB
+            );
+
+
+        const currentCenter =
+            getPointerCenter(
+                pointerA,
+                pointerB
+            );
+
+
+        /*
+            SKALIERUNG
+        */
+
+        if (
+            stickerGesture
+                .startDistance > 0
+        ) {
+
+            const scale =
+                currentDistance /
+                stickerGesture
+                    .startDistance;
+
+
+            sticker.size =
+                clampStickerValue(
+                    stickerGesture
+                        .startSize *
+                        scale,
+                    0.04,
+                    0.22
+                );
+        }
+
+
+        /*
+            DREHUNG
+        */
+
+        let angleDifference =
+            currentAngle -
+            stickerGesture
+                .startAngle;
+
+
+        /*
+            Winkelsprung bei +/- PI
+            verhindern
+        */
+
+        if (
+            angleDifference >
+            Math.PI
+        ) {
+
+            angleDifference -=
+                Math.PI * 2;
+        }
+
+
+        if (
+            angleDifference <
+            -Math.PI
+        ) {
+
+            angleDifference +=
+                Math.PI * 2;
+        }
+
+
+        sticker.rotation =
+            stickerGesture
+                .startRotation +
+            angleDifference *
+                180 /
+                Math.PI;
+
+
+        /*
+            ZWEI-FINGER-BEWEGUNG
+        */
+
+        const centerDeltaX =
+            currentCenter.x -
+            stickerGesture
+                .startCenterX;
+
+        const centerDeltaY =
+            currentCenter.y -
+            stickerGesture
+                .startCenterY;
+
+
+        sticker.x =
+            clampStickerValue(
+                stickerGesture.startX +
+                    centerDeltaX /
+                    stickerGesture
+                        .stageWidth,
+                0.02,
+                0.98
+            );
+
+
+        sticker.y =
+            clampStickerValue(
+                stickerGesture.startY +
+                    centerDeltaY /
+                    stickerGesture
+                        .stageHeight,
+                0.02,
+                0.98
+            );
+    }
+
+
+    /*
+        Nur diesen Sticker
+        visuell aktualisieren
+    */
+
+    element.style.left =
+        sticker.x * 100 + "%";
+
+
+    element.style.top =
+        sticker.y * 100 + "%";
+
+
+    element.style.fontSize =
+        (
+            sticker.size *
+            stickerEditorImage
+                .clientWidth
+        ) +
+        "px";
+
+
+    element.style.transform =
+        `translate(-50%, -50%) rotate(${sticker.rotation}deg)`;
+}
+
+function endStickerPointer(
+    event,
+    sticker
+) {
+
+    activeStickerPointers.delete(
+        event.pointerId
+    );
+
+
+    const pointers =
+        Array.from(
+            activeStickerPointers
+                .values()
+        );
+
+
+    /*
+        Kein Finger mehr:
+        Geste beendet
+    */
+
+    if (
+        pointers.length === 0
+    ) {
+
+        stickerGesture =
+            null;
+
+        return;
+    }
+
+
+    /*
+        Nach Zwei-Finger-Geste
+        bleibt noch ein Finger liegen.
+
+        Dann direkt eine neue
+        Ein-Finger-Bewegung starten.
+    */
+
+    if (
+        pointers.length === 1
+    ) {
+
+        const pointer =
+            pointers[0];
+
+
+        const stageRect =
+            stickerEditorImage
+                .getBoundingClientRect();
+
+
+        stickerGesture = {
+
+            stickerId:
+                sticker.id,
+
+            mode:
+                "move",
+
+            startPointerX:
+                pointer.x,
+
+            startPointerY:
+                pointer.y,
+
+            startX:
+                sticker.x,
+
+            startY:
+                sticker.y,
+
+            stageWidth:
+                stageRect.width,
+
+            stageHeight:
+                stageRect.height
+        };
+    }
+}
+
 function renderStickerEditor() {
 
     stickerLayer.innerHTML =
@@ -3119,20 +3718,54 @@ function renderStickerEditor() {
                 sticker.id;
 
 
-            element.addEventListener(
-                "click",
-                event => {
+element.addEventListener(
+    "pointerdown",
+    event => {
 
-                    event.stopPropagation();
+        startStickerPointer(
+            event,
+            sticker,
+            element
+        );
+    }
+);
 
 
-                    selectedStickerId =
-                        sticker.id;
+element.addEventListener(
+    "pointermove",
+    event => {
+
+        moveStickerPointer(
+            event,
+            sticker,
+            element
+        );
+    }
+);
 
 
-                    renderStickerEditor();
-                }
-            );
+element.addEventListener(
+    "pointerup",
+    event => {
+
+        endStickerPointer(
+            event,
+            sticker
+        );
+    }
+);
+
+
+element.addEventListener(
+    "pointercancel",
+    event => {
+
+        endStickerPointer(
+            event,
+            sticker
+        );
+    }
+);
 
 
             stickerLayer.appendChild(
@@ -3158,6 +3791,10 @@ stickerBtn.addEventListener(
         selectedStickerId =
             null;
 
+        activeStickerPointers.clear();
+
+        stickerGesture =
+            null;
 
         requestAnimationFrame(
             () => {
@@ -3245,42 +3882,6 @@ deleteSelectedStickerBtn.addEventListener(
     }
 );
 
-clearStickersBtn.addEventListener(
-    "click",
-    () => {
-
-        if (
-            photoCardStickers.length ===
-            0
-        ) {
-
-            return;
-        }
-
-
-        const confirmed =
-            confirm(
-                "Alle Sticker von der Fotokarte entfernen?"
-            );
-
-
-        if (!confirmed) {
-            return;
-        }
-
-
-        photoCardStickers =
-            [];
-
-
-        selectedStickerId =
-            null;
-
-
-        renderStickerEditor();
-    }
-);
-
 finishStickerEditorBtn.addEventListener(
     "click",
     () => {
@@ -3288,6 +3889,10 @@ finishStickerEditorBtn.addEventListener(
         selectedStickerId =
             null;
 
+        activeStickerPointers.clear();
+
+        stickerGesture =
+            null;
 
         stickerEditorOverlay
             .style.display =
@@ -6769,6 +7374,12 @@ async function resetPhotoBooth() {
 
     nextStickerId =
         1;
+
+    let activeStickerPointers =
+        new Map();
+
+    let stickerGesture =
+        null;
     
     updateSeriesDisplay();
 
