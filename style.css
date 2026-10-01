@@ -1070,3 +1070,30 @@ body.business {
 #deleteAllEmailRequestsBtn:hover {
     background: #8f1c13;
 }
+
+#storageStatus {
+    margin: 8px 0 16px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #f2f2f2;
+    color: #444444;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+#storageStatus.storageWarning {
+    background: #fff4cc;
+    color: #7a5900;
+}
+
+#storageStatus.storageDanger {
+    background: #ffe0cc;
+    color: #943d00;
+    font-weight: bold;
+}
+
+#storageStatus.storageCritical {
+    background: #ffd7d7;
+    color: #a00000;
+    font-weight: bold;
+}
