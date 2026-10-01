@@ -1060,3 +1060,13 @@ body.business {
 
     font-size: 0.9rem;
 }
+
+#deleteAllEmailRequestsBtn {
+    background: #b42318;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+#deleteAllEmailRequestsBtn:hover {
+    background: #8f1c13;
+}
