@@ -871,6 +871,64 @@ async function getEmailRequests() {
 }
 
 /* =========================
+   E-MAIL-ANFRAGE LÖSCHEN
+========================= */
+
+async function deleteEmailRequest(
+    id
+) {
+
+    const database =
+        await openPhotoBoothDatabase();
+
+
+    return new Promise(
+        (resolve, reject) => {
+
+            const transaction =
+                database.transaction(
+                    EMAIL_STORE_NAME,
+                    "readwrite"
+                );
+
+            const store =
+                transaction.objectStore(
+                    EMAIL_STORE_NAME
+                );
+
+
+            const request =
+                store.delete(
+                    id
+                );
+
+
+            request.onsuccess =
+                () => {
+
+                    resolve();
+                };
+
+
+            request.onerror =
+                () => {
+
+                    reject(
+                        request.error
+                    );
+                };
+
+
+            transaction.oncomplete =
+                () => {
+
+                    database.close();
+                };
+        }
+    );
+}
+
+/* =========================
    ADMIN E-MAIL-ANZEIGE
 ========================= */
 
@@ -1078,6 +1136,9 @@ async function showEmailRequestList() {
                         downloadBtn
                     );
 
+                    item.appendChild(
+                        deleteBtn
+                    );
 
                     emailRequestList.appendChild(
                         item
@@ -1085,6 +1146,60 @@ async function showEmailRequestList() {
                 }
             );
 
+        const deleteBtn =
+    document.createElement(
+        "button"
+    );
+
+deleteBtn.className =
+    "emailRequestDeleteBtn";
+
+deleteBtn.textContent =
+    "🗑️ Löschen";
+
+
+deleteBtn.addEventListener(
+    "click",
+    async () => {
+
+        const confirmed =
+            confirm(
+                "Diese E-Mail-Anfrage wirklich löschen?\n\n" +
+                request.email +
+                "\n" +
+                request.filename
+            );
+
+
+        if (!confirmed) {
+            return;
+        }
+
+
+        try {
+
+            await deleteEmailRequest(
+                request.id
+            );
+
+
+            await refreshEmailRequestCount();
+
+            await showEmailRequestList();
+
+        } catch (error) {
+
+            console.error(
+                "E-Mail-Anfrage konnte nicht gelöscht werden:",
+                error
+            );
+
+            alert(
+                "Die Anfrage konnte nicht gelöscht werden."
+            );
+        }
+    }
+);
 
         emailRequestList.style.display =
             "block";
