@@ -556,6 +556,31 @@ const emailSaveBtn =
         "emailSaveBtn"
     );
 
+const emailSaveBtn =
+    document.getElementById(
+        "emailSaveBtn"
+    );
+
+const emailRequestCount =
+    document.getElementById(
+        "emailRequestCount"
+    );
+
+const showEmailRequestsBtn =
+    document.getElementById(
+        "showEmailRequestsBtn"
+    );
+
+const exportEmailRequestsBtn =
+    document.getElementById(
+        "exportEmailRequestsBtn"
+    );
+
+const emailRequestList =
+    document.getElementById(
+        "emailRequestList"
+    );
+
 /* =========================
    INDEXEDDB
 ========================= */
@@ -795,6 +820,372 @@ async function saveEmailRequest(
     );
 }
 
+/* =========================
+   E-MAIL-ANFRAGEN LESEN
+========================= */
+
+async function getEmailRequests() {
+
+    const database =
+        await openPhotoBoothDatabase();
+
+
+    return new Promise(
+        (resolve, reject) => {
+
+            const transaction =
+                database.transaction(
+                    EMAIL_STORE_NAME,
+                    "readonly"
+                );
+
+            const store =
+                transaction.objectStore(
+                    EMAIL_STORE_NAME
+                );
+
+            const request =
+                store.getAll();
+
+
+            request.onsuccess =
+                () => {
+
+                    resolve(
+                        request.result
+                    );
+                };
+
+
+            request.onerror =
+                () => {
+
+                    reject(
+                        request.error
+                    );
+                };
+
+
+            transaction.oncomplete =
+                () => {
+
+                    database.close();
+                };
+        }
+    );
+}
+
+/* =========================
+   ADMIN E-MAIL-ANZEIGE
+========================= */
+
+async function refreshEmailRequestCount() {
+
+    try {
+
+        const requests =
+            await getEmailRequests();
+
+        const count =
+            requests.length;
+
+
+        emailRequestCount.textContent =
+            count === 1
+                ? "1 gespeicherte Anfrage"
+                : `${count} gespeicherte Anfragen`;
+
+    } catch (error) {
+
+        console.error(
+            "E-Mail-Anfragen konnten nicht gelesen werden:",
+            error
+        );
+
+        emailRequestCount.textContent =
+            "E-Mail-Anfragen konnten nicht geladen werden.";
+    }
+}
+
+
+async function showEmailRequestList() {
+
+    try {
+
+        const requests =
+            await getEmailRequests();
+
+
+        emailRequestList.innerHTML =
+            "";
+
+
+        if (
+            requests.length === 0
+        ) {
+
+            emailRequestList.innerHTML =
+                "<div>Keine Anfragen gespeichert.</div>";
+
+            emailRequestList.style.display =
+                "block";
+
+            return;
+        }
+
+
+        requests
+            .sort(
+                (a, b) =>
+                    new Date(
+                        b.timestamp
+                    ) -
+                    new Date(
+                        a.timestamp
+                    )
+            )
+            .forEach(
+                request => {
+
+                    const item =
+                        document.createElement(
+                            "div"
+                        );
+
+                    item.className =
+                        "emailRequestItem";
+
+
+                    const address =
+                        document.createElement(
+                            "div"
+                        );
+
+                    address.className =
+                        "emailRequestAddress";
+
+                    address.textContent =
+                        request.email;
+
+
+                    const meta =
+                        document.createElement(
+                            "div"
+                        );
+
+                    meta.className =
+                        "emailRequestMeta";
+
+
+                    const date =
+                        new Date(
+                            request.timestamp
+                        );
+
+
+                    meta.textContent =
+                        date.toLocaleString(
+                            "de-DE"
+                        ) +
+                        " · " +
+                        request.filename;
+
+
+                    item.appendChild(
+                        address
+                    );
+
+                    item.appendChild(
+                        meta
+                    );
+
+                    emailRequestList.appendChild(
+                        item
+                    );
+                }
+            );
+
+
+        emailRequestList.style.display =
+            "block";
+
+    } catch (error) {
+
+        console.error(
+            "E-Mail-Liste konnte nicht angezeigt werden:",
+            error
+        );
+    }
+}
+
+/* =========================
+   E-MAIL CSV EXPORT
+========================= */
+
+async function exportEmailRequestsCsv() {
+
+    try {
+
+        const requests =
+            await getEmailRequests();
+
+
+        if (
+            requests.length === 0
+        ) {
+
+            alert(
+                "Es sind keine E-Mail-Anfragen gespeichert."
+            );
+
+            return;
+        }
+
+
+        const csvRows = [
+            [
+                "E-Mail",
+                "Dateiname",
+                "Zeitpunkt"
+            ]
+        ];
+
+
+        requests.forEach(
+            request => {
+
+                csvRows.push(
+                    [
+                        request.email,
+                        request.filename,
+                        request.timestamp
+                    ]
+                );
+            }
+        );
+
+
+        const csvContent =
+            csvRows
+                .map(
+                    row =>
+                        row
+                            .map(
+                                value =>
+                                    `"${String(value)
+                                        .replace(
+                                            /"/g,
+                                            '""'
+                                        )}"`
+                            )
+                            .join(";")
+                )
+                .join("\n");
+
+
+        const blob =
+            new Blob(
+                [
+                    "\uFEFF",
+                    csvContent
+                ],
+                {
+                    type:
+                        "text/csv;charset=utf-8"
+                }
+            );
+
+
+        const url =
+            URL.createObjectURL(
+                blob
+            );
+
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+
+        const now =
+            new Date();
+
+        const date =
+            now
+                .toISOString()
+                .slice(
+                    0,
+                    10
+                );
+
+
+        link.href =
+            url;
+
+        link.download =
+            `Photobooth_E-Mail-Anfragen_${date}.csv`;
+
+
+        document.body.appendChild(
+            link
+        );
+
+        link.click();
+
+        document.body.removeChild(
+            link
+        );
+
+
+        URL.revokeObjectURL(
+            url
+        );
+
+    } catch (error) {
+
+        console.error(
+            "CSV-Export fehlgeschlagen:",
+            error
+        );
+
+        alert(
+            "Die E-Mail-Liste konnte nicht exportiert werden."
+        );
+    }
+}
+
+showEmailRequestsBtn.addEventListener(
+    "click",
+    async () => {
+
+        if (
+            emailRequestList.style.display ===
+            "block"
+        ) {
+
+            emailRequestList.style.display =
+                "none";
+
+            showEmailRequestsBtn.textContent =
+                "📋 Liste anzeigen";
+
+            return;
+        }
+
+
+        await showEmailRequestList();
+
+        showEmailRequestsBtn.textContent =
+            "📋 Liste ausblenden";
+    }
+);
+
+
+exportEmailRequestsBtn.addEventListener(
+    "click",
+    exportEmailRequestsCsv
+);
 
 /* =========================
    ADMIN
@@ -5716,6 +6107,14 @@ function checkAdminPin() {
 
         eventTitleInput.value =
             settings.eventTitle;
+
+        refreshEmailRequestCount();
+
+        emailRequestList.style.display =
+            "none";
+
+        showEmailRequestsBtn.textContent =
+            "📋 Liste anzeigen";
 
 
     } else {
