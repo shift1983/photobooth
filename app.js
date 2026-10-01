@@ -561,6 +561,11 @@ const emailRequestCount =
         "emailRequestCount"
     );
 
+const storageStatus =
+    document.getElementById(
+        "storageStatus"
+    );
+
 const showEmailRequestsBtn =
     document.getElementById(
         "showEmailRequestsBtn"
@@ -1084,6 +1089,226 @@ async function refreshEmailRequestCount() {
     }
 }
 
+function formatStorageSize(
+    bytes
+) {
+
+    if (
+        bytes < 1024 * 1024
+    ) {
+
+        return (
+            bytes / 1024
+        ).toFixed(1) + " KB";
+    }
+
+
+    if (
+        bytes < 1024 * 1024 * 1024
+    ) {
+
+        return (
+            bytes /
+            (1024 * 1024)
+        ).toFixed(1) + " MB";
+    }
+
+
+    return (
+        bytes /
+        (1024 * 1024 * 1024)
+    ).toFixed(2) + " GB";
+}
+
+async function refreshStorageStatus() {
+
+    try {
+
+        const requests =
+            await getEmailRequests();
+
+
+        /*
+            Größe aller gespeicherten
+            Fotokarten berechnen
+        */
+
+        let photoStorage =
+            0;
+
+
+        requests.forEach(
+            request => {
+
+                if (
+                    request.imageBlob
+                ) {
+
+                    photoStorage +=
+                        request.imageBlob.size;
+                }
+            }
+        );
+
+
+        const photoCount =
+            requests.length;
+
+
+        /*
+            Alte Warnklassen entfernen
+        */
+
+        storageStatus.classList.remove(
+            "storageWarning",
+            "storageDanger",
+            "storageCritical"
+        );
+
+
+        /*
+            Falls Browser keine
+            Speicher-Schätzung unterstützt
+        */
+
+        if (
+            !navigator.storage ||
+            !navigator.storage.estimate
+        ) {
+
+            storageStatus.textContent =
+                photoCount +
+                " Fotokarten · " +
+                formatStorageSize(
+                    photoStorage
+                ) +
+                " gespeichert";
+
+            return;
+        }
+
+
+        const estimate =
+            await navigator.storage
+                .estimate();
+
+
+        const usage =
+            estimate.usage || 0;
+
+        const quota =
+            estimate.quota || 0;
+
+
+        let percent =
+            0;
+
+
+        if (
+            quota > 0
+        ) {
+
+            percent =
+                usage /
+                quota *
+                100;
+        }
+
+
+        /*
+            Grundanzeige
+        */
+
+        let text =
+            photoCount +
+            " Fotokarten · " +
+            formatStorageSize(
+                photoStorage
+            ) +
+            " Fotokarten-Speicher";
+
+
+        if (
+            quota > 0
+        ) {
+
+            text +=
+                "\nApp-Speicher: " +
+                formatStorageSize(
+                    usage
+                ) +
+                " von " +
+                formatStorageSize(
+                    quota
+                ) +
+                " (" +
+                percent.toFixed(0) +
+                " %)";
+        }
+
+
+        /*
+            Warnstufen
+        */
+
+        if (
+            percent >= 90
+        ) {
+
+            storageStatus.classList.add(
+                "storageCritical"
+            );
+
+            text +=
+                "\n⚠️ Speicher fast voll. Exportieren und alte Anfragen löschen.";
+
+        } else if (
+            percent >= 80
+        ) {
+
+            storageStatus.classList.add(
+                "storageDanger"
+            );
+
+            text +=
+                "\n⚠️ Speicher wird knapp.";
+
+        } else if (
+            percent >= 60
+        ) {
+
+            storageStatus.classList.add(
+                "storageWarning"
+            );
+
+            text +=
+                "\nSpeicher wird voller.";
+        }
+
+
+        storageStatus.textContent =
+            text;
+
+
+        /*
+            Zeilenumbrüche anzeigen
+        */
+
+        storageStatus.style.whiteSpace =
+            "pre-line";
+
+
+    } catch (error) {
+
+        console.error(
+            "Speicherstatus konnte nicht gelesen werden:",
+            error
+        );
+
+        storageStatus.textContent =
+            "Speicherstatus konnte nicht ermittelt werden.";
+    }
+}
 
 async function showEmailRequestList() {
 
@@ -1229,7 +1454,7 @@ async function showEmailRequestList() {
 
 
                                 await refreshEmailRequestCount();
-
+                                await refreshStorageStatus();
                                 await showEmailRequestList();
 
                             } catch (error) {
@@ -1504,24 +1729,12 @@ deleteAllEmailRequestsBtn.addEventListener(
 
 
             await deleteAllEmailRequests();
-
-
             await refreshEmailRequestCount();
+            await refreshStorageStatus();
 
 
             emailRequestList.innerHTML =
                 "<div>Keine Anfragen gespeichert.</div>";
-
-
-/*            if (
-                emailRequestList.style.display ===
-                "block"
-            ) {
-
-                emailRequestList.style.display =
-                    "block";
-            }*/
-
 
             alert(
                 "Alle E-Mail-Anfragen wurden gelöscht."
@@ -2870,6 +3083,7 @@ emailSaveBtn.addEventListener(
                 email
             );
 
+            await refreshStorageStatus();
 
             /*
                 Kurze Bestätigung
@@ -6685,6 +6899,7 @@ function checkAdminPin() {
             settings.eventTitle;
 
         refreshEmailRequestCount();
+        refreshStorageStatus();
 
         emailRequestList.style.display =
             "none";
