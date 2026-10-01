@@ -1124,6 +1124,62 @@ async function showEmailRequestList() {
                     );
 
 
+                    const deleteBtn =
+                        document.createElement(
+                            "button"
+                        );
+
+                    deleteBtn.className =
+                        "emailRequestDeleteBtn";
+
+                    deleteBtn.textContent =
+                        "🗑️ Löschen";
+
+
+                    deleteBtn.addEventListener(
+                        "click",
+                        async () => {
+
+                            const confirmed =
+                                confirm(
+                                    "Diese E-Mail-Anfrage wirklich löschen?\n\n" +
+                                    request.email +
+                                    "\n" +
+                                    request.filename
+                                );
+
+
+                            if (!confirmed) {
+                                return;
+                            }
+
+
+                            try {
+
+                                await deleteEmailRequest(
+                                    request.id
+                                );
+
+
+                                await refreshEmailRequestCount();
+
+                                await showEmailRequestList();
+
+                            } catch (error) {
+
+                                console.error(
+                                    "E-Mail-Anfrage konnte nicht gelöscht werden:",
+                                    error
+                                );
+
+                                alert(
+                                    "Die Anfrage konnte nicht gelöscht werden."
+                                );
+                            }
+                        }
+                    );
+
+
                     item.appendChild(
                         address
                     );
@@ -1140,66 +1196,13 @@ async function showEmailRequestList() {
                         deleteBtn
                     );
 
+
                     emailRequestList.appendChild(
                         item
                     );
                 }
             );
 
-        const deleteBtn =
-    document.createElement(
-        "button"
-    );
-
-deleteBtn.className =
-    "emailRequestDeleteBtn";
-
-deleteBtn.textContent =
-    "🗑️ Löschen";
-
-
-deleteBtn.addEventListener(
-    "click",
-    async () => {
-
-        const confirmed =
-            confirm(
-                "Diese E-Mail-Anfrage wirklich löschen?\n\n" +
-                request.email +
-                "\n" +
-                request.filename
-            );
-
-
-        if (!confirmed) {
-            return;
-        }
-
-
-        try {
-
-            await deleteEmailRequest(
-                request.id
-            );
-
-
-            await refreshEmailRequestCount();
-
-            await showEmailRequestList();
-
-        } catch (error) {
-
-            console.error(
-                "E-Mail-Anfrage konnte nicht gelöscht werden:",
-                error
-            );
-
-            alert(
-                "Die Anfrage konnte nicht gelöscht werden."
-            );
-        }
-    }
-);
 
         emailRequestList.style.display =
             "block";
