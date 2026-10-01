@@ -1,4 +1,4 @@
-const settings = {
+    const settings = {
 
     theme: null,
     photoCount: 4,
@@ -1626,10 +1626,12 @@ emailSaveBtn.addEventListener(
             guestEmailInput.value
                 .trim();
 
+        const emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
         if (
-            !guestEmailInput
-                .checkValidity() ||
-            email === ""
+            email === "" ||
+            !emailPattern.test(email)
         ) {
 
             emailError.style.display =
