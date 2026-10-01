@@ -556,11 +556,6 @@ const emailSaveBtn =
         "emailSaveBtn"
     );
 
-const emailSaveBtn =
-    document.getElementById(
-        "emailSaveBtn"
-    );
-
 const emailRequestCount =
     document.getElementById(
         "emailRequestCount"
