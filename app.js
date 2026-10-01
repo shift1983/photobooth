@@ -576,10 +576,17 @@ const exportAllEmailRequestsBtn =
         "exportAllEmailRequestsBtn"
     );
 
+const deleteAllEmailRequestsBtn =
+    document.getElementById(
+        "deleteAllEmailRequestsBtn"
+    );
+
 const emailRequestList =
     document.getElementById(
         "emailRequestList"
     );
+
+
 
 /* =========================
    INDEXEDDB
@@ -906,6 +913,61 @@ async function deleteEmailRequest(
                 store.delete(
                     id
                 );
+
+
+            request.onsuccess =
+                () => {
+
+                    resolve();
+                };
+
+
+            request.onerror =
+                () => {
+
+                    reject(
+                        request.error
+                    );
+                };
+
+
+            transaction.oncomplete =
+                () => {
+
+                    database.close();
+                };
+        }
+    );
+}
+
+/* =========================
+   ALLE E-MAIL-ANFRAGEN LÖSCHEN
+========================= */
+
+async function deleteAllEmailRequests() {
+
+    const database =
+        await openPhotoBoothDatabase();
+
+
+    return new Promise(
+        (resolve, reject) => {
+
+            const transaction =
+                database.transaction(
+                    EMAIL_STORE_NAME,
+                    "readwrite"
+                );
+
+
+            const store =
+                transaction.objectStore(
+                    EMAIL_STORE_NAME
+                );
+
+
+            const request =
+                store.clear();
 
 
             request.onsuccess =
@@ -1394,6 +1456,84 @@ exportEmailRequestsBtn.addEventListener(
 exportAllEmailRequestsBtn.addEventListener(
     "click",
     exportAllEmailRequests
+);
+
+deleteAllEmailRequestsBtn.addEventListener(
+    "click",
+    async () => {
+
+        try {
+
+            const requests =
+                await getEmailRequests();
+
+
+            if (
+                requests.length === 0
+            ) {
+
+                alert(
+                    "Es sind keine E-Mail-Anfragen gespeichert."
+                );
+
+                return;
+            }
+
+
+            const confirmed =
+                confirm(
+                    "ACHTUNG!\n\n" +
+                    "Wirklich ALLE " +
+                    requests.length +
+                    " gespeicherten E-Mail-Anfragen löschen?\n\n" +
+                    "Dabei werden auch alle zugehörigen Fotokarten gelöscht.\n\n" +
+                    "Dieser Vorgang kann nicht rückgängig gemacht werden."
+                );
+
+
+            if (!confirmed) {
+                return;
+            }
+
+
+            await deleteAllEmailRequests();
+
+
+            await refreshEmailRequestCount();
+
+
+            emailRequestList.innerHTML =
+                "<div>Keine Anfragen gespeichert.</div>";
+
+
+            if (
+                emailRequestList.style.display ===
+                "block"
+            ) {
+
+                emailRequestList.style.display =
+                    "block";
+            }
+
+
+            alert(
+                "Alle E-Mail-Anfragen wurden gelöscht."
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Alle E-Mail-Anfragen konnten nicht gelöscht werden:",
+                error
+            );
+
+
+            alert(
+                "Die E-Mail-Anfragen konnten nicht gelöscht werden."
+            );
+        }
+    }
 );
 
 /* =========================
