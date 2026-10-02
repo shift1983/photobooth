@@ -3040,9 +3040,6 @@ saveBtn.addEventListener(
             true;
 
 
-        savePhotoCard();
-
-
         const originalText =
             saveBtn.innerHTML;
 
@@ -3054,13 +3051,23 @@ saveBtn.addEventListener(
         setTimeout(
             () => {
 
+                savePhotoCard();
+
+            },
+            100
+        );
+
+
+        setTimeout(
+            () => {
+
                 saveBtn.innerHTML =
                     originalText;
 
                 saveBtn.disabled =
                     false;
             },
-            1200
+            1800
         );
     }
 );
