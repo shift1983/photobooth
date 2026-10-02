@@ -1224,6 +1224,8 @@ body.business {
     border: 2px solid transparent;
 
     border-radius: 10px;
+
+    -webkit-touch-callout: none;
 }
 
 .editorSticker img {
@@ -1238,6 +1240,8 @@ body.business {
 
     user-select: none;
     -webkit-user-drag: none;
+
+    -webkit-touch-callout: none;
 }
 
 .editorSticker.selected {
