@@ -481,7 +481,7 @@ button {
 }
 
 #resultArea #photoActions {
-    width: 110px;
+    width: 120px;
 
     flex-shrink: 0;
 
@@ -510,7 +510,7 @@ button {
 }
 
 #resultArea .squareActionBtn {
-    width: 110px;
+    width: 120px;
     height: 110px;
 
     padding: 10px;
