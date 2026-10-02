@@ -3570,18 +3570,13 @@ element.style.top =
     sticker.y * 100 + "%";
 
 
-const stickerPixelSize =
-    sticker.size *
-    stickerEditorImage
-        .clientWidth;
-
-
-element.style.width =
-    stickerPixelSize + "px";
-
-
-element.style.height =
-    stickerPixelSize + "px";
+element.style.fontSize =
+    (
+        sticker.size *
+        stickerEditorImage
+            .clientWidth
+    ) +
+    "px";
 
 
 element.style.transform =
