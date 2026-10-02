@@ -4195,6 +4195,8 @@ stickerBtn.addEventListener(
     "click",
     () => {
 
+        await ensureFullscreen();
+        
         if (stickerBtn.disabled) {
             return;
         }
@@ -4574,16 +4576,22 @@ finishStickerEditorBtn.addEventListener(
 
 emailBtn.addEventListener(
     "click",
-    () => {
+    async () => {
+
+        await ensureFullscreen();
+
 
         guestEmailInput.value =
             "";
 
+
         emailError.style.display =
             "none";
 
+
         emailOverlay.style.display =
             "flex";
+
 
         guestEmailInput.focus();
     }
@@ -8684,6 +8692,30 @@ function initializeApp() {
 
     boothScreen.style.display =
         "none";
+}
+
+/* =========================
+   Fullscreen
+========================= */
+
+async function ensureFullscreen() {
+
+    if (
+        !document.fullscreenElement
+    ) {
+
+        try {
+
+            await enableFullscreen();
+
+        } catch (error) {
+
+            console.log(
+                "Vollbild konnte nicht aktiviert werden.",
+                error
+            );
+        }
+    }
 }
 
 
