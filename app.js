@@ -2614,7 +2614,7 @@ startBoothBtn.addEventListener(
 
         seriesProgress
             .style.display =
-            "block";
+            "none";
     }
 );
 
@@ -2730,6 +2730,12 @@ async function capturePhoto() {
     guestPhotoCountSelection
         .style.display =
         "none";
+
+
+    seriesProgress
+        .style.display =
+        "block";
+
 
     countdownOverlay
         .style.display =
@@ -8067,7 +8073,7 @@ async function resetPhotoBooth() {
 
     seriesProgress
         .style.display =
-        "block";
+        "none";
 
 
     video.style.display =
