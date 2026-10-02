@@ -655,6 +655,23 @@ const finishStickerEditorBtn =
         "finishStickerEditorBtn"
     );
 
+const idleWarningOverlay =
+    document.getElementById(
+        "idleWarningOverlay"
+    );
+
+
+const idleWarningCountdown =
+    document.getElementById(
+        "idleWarningCountdown"
+    );
+
+
+const idleContinueBtn =
+    document.getElementById(
+        "idleContinueBtn"
+    );
+
 /* =========================
    INDEXEDDB
 ========================= */
@@ -2788,6 +2805,210 @@ document.addEventListener(
     }
 );
 
+
+/* =========================
+   INAKTIVITÄTS-WARNUNG
+========================= */
+
+const IDLE_WARNING_DELAY =
+    180000;
+
+const IDLE_RESET_SECONDS =
+    15;
+
+let idleWarningTimer =
+    null;
+
+let idleCountdownTimer =
+    null;
+
+let idleSecondsRemaining =
+    IDLE_RESET_SECONDS;
+
+
+function hasActivePhotoSession() {
+
+    return (
+        capturedPhotos.length > 0 ||
+        currentPhoto !== null ||
+        resultArea.style.display ===
+            "flex"
+    );
+}
+
+
+function clearIdleWarningTimers() {
+
+    if (idleWarningTimer) {
+
+        clearTimeout(
+            idleWarningTimer
+        );
+
+        idleWarningTimer =
+            null;
+    }
+
+
+    if (idleCountdownTimer) {
+
+        clearInterval(
+            idleCountdownTimer
+        );
+
+        idleCountdownTimer =
+            null;
+    }
+}
+
+
+function hideIdleWarning() {
+
+    idleWarningOverlay.style.display =
+        "none";
+
+    idleSecondsRemaining =
+        IDLE_RESET_SECONDS;
+
+    idleWarningCountdown.textContent =
+        idleSecondsRemaining;
+}
+
+
+function resetIdleWarningTimer() {
+
+    clearIdleWarningTimers();
+
+
+    if (
+        idleWarningOverlay.style.display ===
+        "flex"
+    ) {
+        return;
+    }
+
+
+    if (
+        !hasActivePhotoSession()
+    ) {
+        return;
+    }
+
+
+    idleWarningTimer =
+        setTimeout(
+            showIdleWarning,
+            IDLE_WARNING_DELAY
+        );
+}
+
+
+function showIdleWarning() {
+
+    if (
+        !hasActivePhotoSession()
+    ) {
+        return;
+    }
+
+
+    idleSecondsRemaining =
+        IDLE_RESET_SECONDS;
+
+    idleWarningCountdown.textContent =
+        idleSecondsRemaining;
+
+
+    idleWarningOverlay.style.display =
+        "flex";
+
+
+    idleCountdownTimer =
+        setInterval(
+            async () => {
+
+                idleSecondsRemaining--;
+
+
+                idleWarningCountdown.textContent =
+                    idleSecondsRemaining;
+
+
+                if (
+                    idleSecondsRemaining <= 0
+                ) {
+
+                    clearIdleWarningTimers();
+
+                    hideIdleWarning();
+
+
+                    await resetPhotoBooth();
+
+
+                    screensaverOverlay.style.display =
+                        "flex";
+                }
+
+            },
+            1000
+        );
+}
+
+
+idleContinueBtn.addEventListener(
+    "click",
+    () => {
+
+        clearIdleWarningTimers();
+
+        hideIdleWarning();
+
+        resetIdleWarningTimer();
+    }
+);
+
+
+document.addEventListener(
+    "pointerdown",
+    event => {
+
+        if (
+            idleWarningOverlay.style.display ===
+            "flex"
+        ) {
+            return;
+        }
+
+
+        resetIdleWarningTimer();
+    },
+    {
+        passive: true
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    () => {
+
+        if (
+            idleWarningOverlay.style.display ===
+            "flex"
+        ) {
+            return;
+        }
+
+
+        resetIdleWarningTimer();
+    }
+);
+
+/* =========================
+   Kamera SafeArea
+========================= */
+
 function updateCameraSafeArea() {
 
     if (
@@ -3017,6 +3238,8 @@ async function capturePhoto() {
     currentPhoto =
         imageData;
 
+    resetIdleWarningTimer();
+    
     preview.src =
         imageData;
 
@@ -8209,6 +8432,10 @@ themeButtons.forEach(
 ========================= */
 
 async function resetPhotoBooth() {
+
+    clearIdleWarningTimers();
+
+    hideIdleWarning();
 
     capturedPhotos = [];
 
