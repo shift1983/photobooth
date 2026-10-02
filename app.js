@@ -253,6 +253,9 @@ let nextStickerId = 1;
 let activeStickerPointers =
     new Map();
 
+let printInProgress =
+    false;
+
 let stickerGesture =
     null;
 
@@ -2905,6 +2908,10 @@ function resetIdleWarningTimer() {
 
 function showIdleWarning() {
 
+    if (printInProgress) {
+    return;
+    }
+    
     if (
         !hasActivePhotoSession()
     ) {
@@ -3511,6 +3518,23 @@ printBtn.addEventListener(
             true;
 
 
+        printInProgress =
+            true;
+
+
+        clearIdleWarningTimers();
+
+        if (screensaverTimer) {
+
+            clearTimeout(
+                screensaverTimer
+            );
+
+            screensaverTimer =
+                null;
+        }
+
+
         printPhoto.src =
             collageCanvas.toDataURL(
                 "image/jpeg",
@@ -3529,6 +3553,20 @@ printBtn.addEventListener(
             },
             1000
         );
+    }
+);
+
+window.addEventListener(
+    "afterprint",
+    () => {
+
+        printInProgress =
+            false;
+
+
+        resetScreensaverTimer();
+
+        resetIdleWarningTimer();
     }
 );
 
