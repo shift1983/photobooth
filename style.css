@@ -1436,3 +1436,87 @@ body.business {
 
     opacity: 0.9;
 }
+
+/* =========================
+   INAKTIVITÄTS-WARNUNG
+========================= */
+
+#idleWarningOverlay {
+    display: flex;
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 9500;
+
+    background: rgba(0, 0, 0, 0.88);
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+
+#idleWarningPanel {
+    width: min(90vw, 520px);
+
+    padding: 32px;
+
+    border-radius: 22px;
+
+    background: #202020;
+    color: white;
+
+    text-align: center;
+
+    box-shadow:
+        0 10px 40px
+        rgba(0, 0, 0, 0.45);
+}
+
+
+#idleWarningIcon {
+    font-size: 3.5rem;
+
+    margin-bottom: 8px;
+}
+
+
+#idleWarningPanel h2 {
+    margin:
+        0 0 12px 0;
+
+    font-size: 2rem;
+}
+
+
+#idleWarningPanel p {
+    margin:
+        0 0 18px 0;
+
+    font-size: 1.15rem;
+    line-height: 1.4;
+
+    opacity: 0.9;
+}
+
+
+#idleWarningCountdown {
+    margin-bottom: 20px;
+
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+
+#idleContinueBtn {
+    min-width: 240px;
+
+    padding: 14px 24px;
+
+    font-size: 1.2rem;
+    font-weight: bold;
+
+    border-radius: 14px;
+}
