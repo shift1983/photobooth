@@ -1405,7 +1405,13 @@ body.business {
 
     z-index: 9000;
 
-    background: #242424;
+    background:
+    radial-gradient(
+        circle at center,
+        #2a2a2a 0%,
+        #1c1c1c 55%,
+        #181818 100%
+    );
 
     flex-direction: column;
     align-items: center;
