@@ -1297,3 +1297,73 @@ body.business {
 #stickerEditorActions button {
     min-width: 150px;
 }
+
+/* =========================
+   DRUCK
+========================= */
+
+#printArea {
+    display: none;
+}
+
+@page {
+    size: A6 landscape;
+    margin: 0;
+}
+
+@media print {
+
+    html,
+    body {
+        width: 148mm;
+        height: 105mm;
+
+        margin: 0;
+        padding: 0;
+
+        background: white;
+    }
+
+
+    body * {
+        visibility: hidden;
+    }
+
+
+    #printArea,
+    #printArea * {
+        visibility: visible;
+    }
+
+
+    #printArea {
+        display: flex;
+
+        position: absolute;
+        left: 0;
+        top: 0;
+
+        width: 148mm;
+        height: 105mm;
+
+        align-items: center;
+        justify-content: center;
+
+        overflow: hidden;
+
+        background: white;
+    }
+
+
+    #printPhoto {
+        display: block;
+
+        max-width: 148mm;
+        max-height: 105mm;
+
+        width: auto;
+        height: auto;
+
+        object-fit: contain;
+    }
+}
