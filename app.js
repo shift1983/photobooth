@@ -3166,7 +3166,6 @@ function startStickerPointer(
 ) {
 
     event.preventDefault();
-
     event.stopPropagation();
 
 
@@ -3175,9 +3174,19 @@ function startStickerPointer(
     );
 
 
-    element.setPointerCapture(
-        event.pointerId
-    );
+    try {
+
+        element.setPointerCapture(
+            event.pointerId
+        );
+
+    } catch (error) {
+
+        console.log(
+            "Pointer Capture nicht möglich:",
+            error
+        );
+    }
 
 
     activeStickerPointers.set(
@@ -3187,15 +3196,23 @@ function startStickerPointer(
                 event.clientX,
 
             y:
-                event.clientY
+                event.clientY,
+
+            stickerId:
+                sticker.id
         }
     );
 
 
-    const pointers =
+    const stickerPointers =
         Array.from(
             activeStickerPointers
                 .values()
+        )
+        .filter(
+            pointer =>
+                pointer.stickerId ===
+                sticker.id
         );
 
 
@@ -3209,8 +3226,12 @@ function startStickerPointer(
     */
 
     if (
-        pointers.length === 1
+        stickerPointers.length === 1
     ) {
+
+        const pointer =
+            stickerPointers[0];
+
 
         stickerGesture = {
 
@@ -3221,10 +3242,10 @@ function startStickerPointer(
                 "move",
 
             startPointerX:
-                pointers[0].x,
+                pointer.x,
 
             startPointerY:
-                pointers[0].y,
+                pointer.y,
 
             startX:
                 sticker.x,
@@ -3249,14 +3270,14 @@ function startStickerPointer(
     */
 
     if (
-        pointers.length === 2
+        stickerPointers.length === 2
     ) {
 
         const pointerA =
-            pointers[0];
+            stickerPointers[0];
 
         const pointerB =
-            pointers[1];
+            stickerPointers[1];
 
 
         const center =
@@ -3355,11 +3376,16 @@ function moveStickerPointer(
     }
 
 
-    const pointers =
-        Array.from(
-            activeStickerPointers
-                .values()
-        );
+const pointers =
+    Array.from(
+        activeStickerPointers
+            .values()
+    )
+    .filter(
+        pointer =>
+            pointer.stickerId ===
+            sticker.id
+    );
 
 
     /*
