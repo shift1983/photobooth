@@ -3820,6 +3820,269 @@ element.addEventListener(
     );
 }
 
+stickerEditorImage.addEventListener(
+    "pointerdown",
+    event => {
+
+        /*
+            Nur als zweiter Finger
+            einer bereits laufenden
+            Sticker-Geste verwenden.
+        */
+
+        if (
+            selectedStickerId === null ||
+            activeStickerPointers.size !== 1
+        ) {
+
+            return;
+        }
+
+
+        const sticker =
+            photoCardStickers.find(
+                item =>
+                    item.id ===
+                    selectedStickerId
+            );
+
+
+        if (!sticker) {
+            return;
+        }
+
+
+        const element =
+            document.querySelector(
+                `.editorSticker[data-sticker-id="${sticker.id}"]`
+            );
+
+
+        if (!element) {
+            return;
+        }
+
+
+        event.preventDefault();
+
+
+        try {
+
+            stickerEditorImage
+                .setPointerCapture(
+                    event.pointerId
+                );
+
+        } catch (error) {
+
+            console.log(
+                "Zweiter Pointer konnte nicht übernommen werden:",
+                error
+            );
+        }
+
+
+        activeStickerPointers.set(
+            event.pointerId,
+            {
+                x:
+                    event.clientX,
+
+                y:
+                    event.clientY
+            }
+        );
+
+
+        const pointers =
+            Array.from(
+                activeStickerPointers
+                    .values()
+            );
+
+
+        if (
+            pointers.length !== 2
+        ) {
+
+            return;
+        }
+
+
+        const pointerA =
+            pointers[0];
+
+        const pointerB =
+            pointers[1];
+
+
+        const center =
+            getPointerCenter(
+                pointerA,
+                pointerB
+            );
+
+
+        const stageRect =
+            stickerEditorImage
+                .getBoundingClientRect();
+
+
+        stickerGesture = {
+
+            stickerId:
+                sticker.id,
+
+            mode:
+                "transform",
+
+            startDistance:
+                getPointerDistance(
+                    pointerA,
+                    pointerB
+                ),
+
+            startAngle:
+                getPointerAngle(
+                    pointerA,
+                    pointerB
+                ),
+
+            startCenterX:
+                center.x,
+
+            startCenterY:
+                center.y,
+
+            startX:
+                sticker.x,
+
+            startY:
+                sticker.y,
+
+            startSize:
+                sticker.size,
+
+            startRotation:
+                sticker.rotation,
+
+            stageWidth:
+                stageRect.width,
+
+            stageHeight:
+                stageRect.height
+        };
+    }
+);
+
+
+stickerEditorImage.addEventListener(
+    "pointermove",
+    event => {
+
+        if (
+            !activeStickerPointers.has(
+                event.pointerId
+            )
+        ) {
+
+            return;
+        }
+
+
+        if (
+            !stickerGesture ||
+            stickerGesture.mode !==
+                "transform"
+        ) {
+
+            return;
+        }
+
+
+        const sticker =
+            photoCardStickers.find(
+                item =>
+                    item.id ===
+                    stickerGesture.stickerId
+            );
+
+
+        if (!sticker) {
+            return;
+        }
+
+
+        const element =
+            document.querySelector(
+                `.editorSticker[data-sticker-id="${sticker.id}"]`
+            );
+
+
+        if (!element) {
+            return;
+        }
+
+
+        moveStickerPointer(
+            event,
+            sticker,
+            element
+        );
+    }
+);
+
+
+function endStickerImagePointer(
+    event
+) {
+
+    if (
+        !activeStickerPointers.has(
+            event.pointerId
+        )
+    ) {
+
+        return;
+    }
+
+
+    const sticker =
+        photoCardStickers.find(
+            item =>
+                item.id ===
+                selectedStickerId
+        );
+
+
+    if (!sticker) {
+
+        activeStickerPointers.delete(
+            event.pointerId
+        );
+
+        return;
+    }
+
+
+    endStickerPointer(
+        event,
+        sticker
+    );
+}
+
+
+stickerEditorImage.addEventListener(
+    "pointerup",
+    endStickerImagePointer
+);
+
+
+stickerEditorImage.addEventListener(
+    "pointercancel",
+    endStickerImagePointer
+);
+
 stickerBtn.addEventListener(
     "click",
     () => {
