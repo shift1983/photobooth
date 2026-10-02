@@ -3838,6 +3838,28 @@ image.alt =
     "Sticker";
 
 
+image.draggable =
+    false;
+
+
+image.addEventListener(
+    "contextmenu",
+    event => {
+
+        event.preventDefault();
+    }
+);
+
+
+element.addEventListener(
+    "contextmenu",
+    event => {
+
+        event.preventDefault();
+    }
+);
+
+
 element.appendChild(
     image
 );
