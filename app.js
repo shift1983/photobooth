@@ -3562,26 +3562,30 @@ function moveStickerPointer(
         visuell aktualisieren
     */
 
-    element.style.left =
-        sticker.x * 100 + "%";
+element.style.left =
+    sticker.x * 100 + "%";
 
 
-    element.style.top =
-        sticker.y * 100 + "%";
+element.style.top =
+    sticker.y * 100 + "%";
 
 
-    element.style.fontSize =
-        (
-            sticker.size *
-            stickerEditorImage
-                .clientWidth
-        ) +
-        "px";
+const stickerPixelSize =
+    sticker.size *
+    stickerEditorImage
+        .clientWidth;
 
 
-    element.style.transform =
-        `translate(-50%, -50%) rotate(${sticker.rotation}deg)`;
-}
+element.style.width =
+    stickerPixelSize + "px";
+
+
+element.style.height =
+    stickerPixelSize + "px";
+
+
+element.style.transform =
+    `translate(-50%, -50%) rotate(${sticker.rotation}deg)`;
 
 function endStickerPointer(
     event,
