@@ -4193,7 +4193,7 @@ stickerEditorImage.addEventListener(
 
 stickerBtn.addEventListener(
     "click",
-    () => {
+    async () => {
 
         await ensureFullscreen();
         
