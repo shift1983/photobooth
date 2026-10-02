@@ -335,6 +335,11 @@ const startBoothBtn =
         "startBoothBtn"
     );
 
+const screensaverOverlay =
+    document.getElementById(
+        "screensaverOverlay"
+    );
+
 const video =
     document.getElementById(
         "video"
@@ -2590,10 +2595,14 @@ startBoothBtn.addEventListener(
             "block";
 
 
+        screensaverOverlay.style.display =
+            "flex";
+
+
         video.style.display =
             "block";
 
-
+        
         captureArea.style.display =
             "flex";
 
@@ -2614,6 +2623,15 @@ startBoothBtn.addEventListener(
 
         seriesProgress
             .style.display =
+            "none";
+    }
+);
+
+screensaverOverlay.addEventListener(
+    "click",
+    () => {
+
+        screensaverOverlay.style.display =
             "none";
     }
 );
