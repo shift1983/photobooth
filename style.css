@@ -169,10 +169,39 @@ button {
 
 #guestPhotoCountSelection {
     display: flex;
+
+    flex-direction: column;
+
     justify-content: center;
-    gap: 12px;
+    align-items: center;
+
+    gap: 10px;
 
     margin-bottom: 12px;
+}
+
+
+#guestPhotoCountTitle {
+    font-size: 1.25rem;
+    font-weight: bold;
+
+    margin-bottom: 4px;
+}
+
+
+#guestPhotoCountHint {
+    font-size: 1rem;
+
+    opacity: 0.85;
+}
+
+
+#guestPhotoCountButtons {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
 }
 
 .guestPhotoCountBtn {
