@@ -4296,7 +4296,7 @@ stickerChoices.forEach(
 
 deleteSelectedStickerBtn.addEventListener(
     "click",
-    () => {
+    async () => {
 
         if (
             selectedStickerId ===
