@@ -7811,7 +7811,8 @@ collagePreview.src =
 collagePreview.style.display =
     "block";
 
-
+}
+    
 /* =========================
    THEMEN-AUSWAHL
 ========================= */
