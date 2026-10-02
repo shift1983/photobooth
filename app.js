@@ -3031,7 +3031,37 @@ saveBtn.addEventListener(
     "click",
     () => {
 
+        if (saveBtn.disabled) {
+            return;
+        }
+
+
+        saveBtn.disabled =
+            true;
+
+
         savePhotoCard();
+
+
+        const originalText =
+            saveBtn.innerHTML;
+
+
+        saveBtn.innerHTML =
+            "✅ Gespeichert";
+
+
+        setTimeout(
+            () => {
+
+                saveBtn.innerHTML =
+                    originalText;
+
+                saveBtn.disabled =
+                    false;
+            },
+            1200
+        );
     }
 );
 
