@@ -262,6 +262,9 @@ let stickerGesture =
 let baseCollageDataUrl =
     null;
 
+let stickerEditorBeforeResult =
+    false;
+
 async function requestWakeLock() {
 
     try {
@@ -4628,6 +4631,9 @@ stickerBtn.addEventListener(
     "click",
     async () => {
 
+        stickerEditorBeforeResult =
+        false;
+        
         await ensureFullscreen();
         
         if (stickerBtn.disabled) {
@@ -4987,6 +4993,35 @@ finishStickerEditorBtn.addEventListener(
                 "none";
 
 
+            if (
+                stickerEditorBeforeResult
+            ) {
+
+                stickerEditorBeforeResult =
+                    false;
+
+
+                resultArea.style.display =
+                    "flex";
+    
+
+                photoActions.style.display =
+                    "flex";
+
+
+                saveBtn.style.display =
+                    "inline-block";
+
+
+                printBtn.style.display =
+                    "inline-block";
+
+
+                newSeriesBtn.style.display =
+                    "inline-block";
+            }
+
+
         } catch (error) {
 
             console.error(
@@ -5213,34 +5248,64 @@ nextBtn.addEventListener(
 
             await generateCollage();
 
+
             preview.style.display =
                 "none";
 
+
             captureArea.style.display =
                 "none";
+
 
             eventTitleDisplay
                 .style.display =
                 "none";
 
+
             seriesProgress
                 .style.display =
                 "none";
 
+
             resultArea.style.display =
-                "flex";
+                "none";
+
 
             photoActions.style.display =
+                "none";
+
+
+            stickerEditorBeforeResult =
+                true;
+
+
+            stickerEditorImage.src =
+                baseCollageDataUrl ||
+                collagePreview.src;
+
+
+            selectedStickerId =
+                null;
+
+
+            activeStickerPointers.clear();
+
+
+            stickerGesture =
+                null;
+
+
+            stickerEditorOverlay
+                .style.display =
                 "flex";
 
-            saveBtn.style.display =
-                "inline-block";
 
-            printBtn.style.display =
-                "inline-block";
+            requestAnimationFrame(
+                () => {
 
-            newSeriesBtn.style.display =
-                "inline-block";
+                    renderStickerEditor();
+                }
+            );
         }
     }
 );
