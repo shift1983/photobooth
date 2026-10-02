@@ -3096,9 +3096,18 @@ printBtn.addEventListener(
     "click",
     () => {
 
+        if (printBtn.disabled) {
+            return;
+        }
+
+
         if (!collageCanvas) {
             return;
         }
+
+
+        printBtn.disabled =
+            true;
 
 
         printPhoto.src =
@@ -3109,6 +3118,16 @@ printBtn.addEventListener(
 
 
         window.print();
+
+
+        setTimeout(
+            () => {
+
+                printBtn.disabled =
+                    false;
+            },
+            1000
+        );
     }
 );
 
@@ -4148,9 +4167,18 @@ stickerBtn.addEventListener(
     "click",
     () => {
 
-stickerEditorImage.src =
-    baseCollageDataUrl ||
-    collagePreview.src;
+        if (stickerBtn.disabled) {
+            return;
+        }
+
+
+        stickerBtn.disabled =
+            true;
+
+
+        stickerEditorImage.src =
+            baseCollageDataUrl ||
+            collagePreview.src;
 
 
         stickerEditorOverlay
@@ -4161,16 +4189,29 @@ stickerEditorImage.src =
         selectedStickerId =
             null;
 
+
         activeStickerPointers.clear();
+
 
         stickerGesture =
             null;
+
 
         requestAnimationFrame(
             () => {
 
                 renderStickerEditor();
             }
+        );
+
+
+        setTimeout(
+            () => {
+
+                stickerBtn.disabled =
+                    false;
+            },
+            500
         );
     }
 );
