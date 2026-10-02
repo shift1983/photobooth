@@ -2627,12 +2627,164 @@ startBoothBtn.addEventListener(
     }
 );
 
+/* =========================
+   BILDSCHIRMSCHONER
+========================= */
+
+const SCREENSAVER_DELAY =
+    90000;
+
+let screensaverTimer =
+    null;
+
+
+function canShowScreensaver() {
+
+    if (
+        boothScreen.style.display !==
+        "block"
+    ) {
+        return false;
+    }
+
+
+    if (
+        capturedPhotos.length > 0 ||
+        currentPhoto !== null
+    ) {
+        return false;
+    }
+
+
+    if (
+        resultArea.style.display ===
+        "flex"
+    ) {
+        return false;
+    }
+
+
+    if (
+        countdownOverlay.style.display ===
+        "flex"
+    ) {
+        return false;
+    }
+
+
+    if (
+        stickerEditorOverlay.style.display ===
+        "flex"
+    ) {
+        return false;
+    }
+
+
+    if (
+        emailOverlay.style.display ===
+        "flex"
+    ) {
+        return false;
+    }
+
+
+    if (
+        pinOverlay.style.display ===
+        "flex"
+    ) {
+        return false;
+    }
+
+
+    if (
+        adminOverlay.style.display ===
+        "flex"
+    ) {
+        return false;
+    }
+
+
+    return true;
+}
+
+
+function showScreensaver() {
+
+    if (
+        !canShowScreensaver()
+    ) {
+
+        resetScreensaverTimer();
+
+        return;
+    }
+
+
+    screensaverOverlay.style.display =
+        "flex";
+}
+
+
+function resetScreensaverTimer() {
+
+    if (screensaverTimer) {
+
+        clearTimeout(
+            screensaverTimer
+        );
+    }
+
+
+    screensaverTimer =
+        null;
+
+
+    if (
+        screensaverOverlay.style.display ===
+        "flex"
+    ) {
+        return;
+    }
+
+
+    screensaverTimer =
+        setTimeout(
+            showScreensaver,
+            SCREENSAVER_DELAY
+        );
+}
+
+
 screensaverOverlay.addEventListener(
     "click",
     () => {
 
         screensaverOverlay.style.display =
             "none";
+
+
+        resetScreensaverTimer();
+    }
+);
+
+
+document.addEventListener(
+    "pointerdown",
+    () => {
+
+        resetScreensaverTimer();
+    },
+    {
+        passive: true
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    () => {
+
+        resetScreensaverTimer();
     }
 );
 
