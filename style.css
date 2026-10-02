@@ -188,14 +188,6 @@ button {
     margin-bottom: 4px;
 }
 
-
-#guestPhotoCountHint {
-    font-size: 1rem;
-
-    opacity: 0.85;
-}
-
-
 #guestPhotoCountButtons {
     display: flex;
 
