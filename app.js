@@ -515,6 +515,16 @@ const printBtn =
         "printBtn"
     );
 
+const printArea =
+    document.getElementById(
+        "printArea"
+    );
+
+const printPhoto =
+    document.getElementById(
+        "printPhoto"
+    );
+
 const restartCameraBtn =
     document.getElementById(
         "restartCameraBtn"
@@ -3047,9 +3057,43 @@ restoreFullscreenBtn
 
 printBtn.addEventListener(
     "click",
-    () => {
+    async () => {
+
+        if (!collageCanvas) {
+            return;
+        }
+
+        printPhoto.src =
+            collageCanvas.toDataURL(
+                "image/jpeg",
+                0.95
+            );
 
         window.print();
+
+        setTimeout(
+            async () => {
+
+                if (
+                    !document.fullscreenElement
+                ) {
+
+                    try {
+
+                        await enableFullscreen();
+
+                    } catch (error) {
+
+                        console.log(
+                            "Vollbild konnte nach dem Drucken nicht automatisch wiederhergestellt werden.",
+                            error
+                        );
+                    }
+                }
+
+            },
+            500
+        );
     }
 );
 
