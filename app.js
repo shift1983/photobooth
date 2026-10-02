@@ -8077,18 +8077,35 @@ newSeriesBtn.addEventListener(
     "click",
     async () => {
 
-        if (
-            !document.fullscreenElement
-        ) {
-
-            await enableFullscreen();
+        if (newSeriesBtn.disabled) {
+            return;
         }
 
 
-        await requestWakeLock();
+        newSeriesBtn.disabled =
+            true;
 
 
-        resetPhotoBooth();
+        try {
+
+            if (
+                !document.fullscreenElement
+            ) {
+
+                await enableFullscreen();
+            }
+
+
+            await requestWakeLock();
+
+
+            await resetPhotoBooth();
+
+        } finally {
+
+            newSeriesBtn.disabled =
+                false;
+        }
     }
 );
 
