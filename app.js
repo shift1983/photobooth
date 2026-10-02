@@ -256,6 +256,8 @@ let activeStickerPointers =
 let stickerGesture =
     null;
 
+let baseCollageDataUrl =
+    null;
 
 async function requestWakeLock() {
 
@@ -4087,8 +4089,9 @@ stickerBtn.addEventListener(
     "click",
     () => {
 
-        stickerEditorImage.src =
-            collagePreview.src;
+stickerEditorImage.src =
+    baseCollageDataUrl ||
+    collagePreview.src;
 
 
         stickerEditorOverlay
@@ -4190,21 +4193,250 @@ deleteSelectedStickerBtn.addEventListener(
     }
 );
 
+function loadStickerImage(
+    src
+) {
+
+    return new Promise(
+        (resolve, reject) => {
+
+            const image =
+                new Image();
+
+
+            image.onload =
+                () => {
+                    resolve(image);
+                };
+
+
+            image.onerror =
+                () => {
+                    reject(
+                        new Error(
+                            "Sticker konnte nicht geladen werden: " +
+                            src
+                        )
+                    );
+                };
+
+
+            image.src =
+                src;
+        }
+    );
+}
+
+
+async function renderCollageWithStickers() {
+
+    if (!baseCollageDataUrl) {
+        return;
+    }
+
+
+    const ctx =
+        collageCanvas.getContext(
+            "2d"
+        );
+
+
+    /*
+        Zuerst immer wieder
+        die saubere Basis laden
+    */
+
+    const baseImage =
+        await loadStickerImage(
+            baseCollageDataUrl
+        );
+
+
+    ctx.clearRect(
+        0,
+        0,
+        collageCanvas.width,
+        collageCanvas.height
+    );
+
+
+    ctx.drawImage(
+        baseImage,
+        0,
+        0,
+        collageCanvas.width,
+        collageCanvas.height
+    );
+
+
+    /*
+        Danach alle Sticker
+        neu darüberzeichnen
+    */
+
+    for (
+        const sticker of
+        photoCardStickers
+    ) {
+
+        try {
+
+            const image =
+                await loadStickerImage(
+                    sticker.src
+                );
+
+
+            const centerX =
+                sticker.x *
+                collageCanvas.width;
+
+
+            const centerY =
+                sticker.y *
+                collageCanvas.height;
+
+
+            /*
+                sticker.size bezieht sich
+                auf die Breite der Fotokarte.
+            */
+
+            const boxSize =
+                sticker.size *
+                collageCanvas.width;
+
+
+            /*
+                Seitenverhältnis des PNG
+                erhalten
+            */
+
+            const imageRatio =
+                image.naturalWidth /
+                image.naturalHeight;
+
+
+            let drawWidth;
+            let drawHeight;
+
+
+            if (
+                imageRatio >= 1
+            ) {
+
+                drawWidth =
+                    boxSize;
+
+                drawHeight =
+                    boxSize /
+                    imageRatio;
+
+            } else {
+
+                drawHeight =
+                    boxSize;
+
+                drawWidth =
+                    boxSize *
+                    imageRatio;
+            }
+
+
+            ctx.save();
+
+
+            ctx.translate(
+                centerX,
+                centerY
+            );
+
+
+            ctx.rotate(
+                sticker.rotation *
+                Math.PI /
+                180
+            );
+
+
+            ctx.drawImage(
+                image,
+
+                -drawWidth / 2,
+                -drawHeight / 2,
+
+                drawWidth,
+                drawHeight
+            );
+
+
+            ctx.restore();
+
+        } catch (error) {
+
+            console.error(
+                "Sticker konnte nicht gezeichnet werden:",
+                sticker.src,
+                error
+            );
+        }
+    }
+
+
+    /*
+        Fertige Fotokarte
+        als Vorschau anzeigen
+    */
+
+    collagePreview.src =
+        collageCanvas.toDataURL(
+            "image/jpeg",
+            0.95
+        );
+}
+
 finishStickerEditorBtn.addEventListener(
     "click",
-    () => {
+    async () => {
 
-        selectedStickerId =
-            null;
+        finishStickerEditorBtn.disabled =
+            true;
 
-        activeStickerPointers.clear();
 
-        stickerGesture =
-            null;
+        try {
 
-        stickerEditorOverlay
-            .style.display =
-            "none";
+            await renderCollageWithStickers();
+
+
+            selectedStickerId =
+                null;
+
+
+            activeStickerPointers.clear();
+
+
+            stickerGesture =
+                null;
+
+
+            stickerEditorOverlay
+                .style.display =
+                "none";
+
+
+        } catch (error) {
+
+            console.error(
+                "Sticker konnten nicht übernommen werden:",
+                error
+            );
+
+
+        } finally {
+
+            finishStickerEditorBtn.disabled =
+                false;
+        }
     }
 );
 
@@ -7565,16 +7797,19 @@ if (
        VORSCHAU
     ========================= */
 
-    collagePreview.src =
-        collageCanvas.toDataURL(
-            "image/jpeg",
-            0.95
-        );
+baseCollageDataUrl =
+    collageCanvas.toDataURL(
+        "image/jpeg",
+        0.95
+    );
 
 
-    collagePreview.style.display =
-        "block";
-}
+collagePreview.src =
+    baseCollageDataUrl;
+
+
+collagePreview.style.display =
+    "block";
 
 
 /* =========================
@@ -7682,6 +7917,9 @@ async function resetPhotoBooth() {
 
     nextStickerId =
         1;
+
+    baseCollageDataUrl =
+    null;
     
     updateSeriesDisplay();
 
