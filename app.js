@@ -3189,31 +3189,23 @@ function startStickerPointer(
     }
 
 
-    activeStickerPointers.set(
-        event.pointerId,
-        {
-            x:
-                event.clientX,
+activeStickerPointers.set(
+    event.pointerId,
+    {
+        x:
+            event.clientX,
 
-            y:
-                event.clientY,
+        y:
+            event.clientY
+    }
+);
 
-            stickerId:
-                sticker.id
-        }
+
+const pointers =
+    Array.from(
+        activeStickerPointers
+            .values()
     );
-
-
-    const stickerPointers =
-        Array.from(
-            activeStickerPointers
-                .values()
-        )
-        .filter(
-            pointer =>
-                pointer.stickerId ===
-                sticker.id
-        );
 
 
     const stageRect =
@@ -3226,11 +3218,11 @@ function startStickerPointer(
     */
 
     if (
-        stickerPointers.length === 1
+        pointers.length === 1
     ) {
 
         const pointer =
-            stickerPointers[0];
+            pointers[0];
 
 
         stickerGesture = {
@@ -3270,14 +3262,14 @@ function startStickerPointer(
     */
 
     if (
-        stickerPointers.length === 2
+        pointers.length === 2
     ) {
 
         const pointerA =
-            stickerPointers[0];
+            pointers[0];
 
         const pointerB =
-            stickerPointers[1];
+            pointers[1];
 
 
         const center =
@@ -3354,16 +3346,16 @@ function moveStickerPointer(
     event.preventDefault();
 
 
-    activeStickerPointers.set(
-        event.pointerId,
-        {
-            x:
-                event.clientX,
+activeStickerPointers.set(
+    event.pointerId,
+    {
+        x:
+            event.clientX,
 
-            y:
-                event.clientY
-        }
-    );
+        y:
+            event.clientY
+    }
+);
 
 
     if (
@@ -3380,11 +3372,6 @@ const pointers =
     Array.from(
         activeStickerPointers
             .values()
-    )
-    .filter(
-        pointer =>
-            pointer.stickerId ===
-            sticker.id
     );
 
 
