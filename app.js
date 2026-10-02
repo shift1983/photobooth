@@ -8019,8 +8019,13 @@ async function resetPhotoBooth() {
     nextStickerId =
         1;
 
+    activeStickerPointers.clear();
+
+    stickerGesture =
+        null;
+
     baseCollageDataUrl =
-    null;
+        null;
     
     updateSeriesDisplay();
 
@@ -8057,6 +8062,17 @@ async function resetPhotoBooth() {
         .style.display =
         "none";
 
+    stickerEditorOverlay.style.display =
+        "none";
+
+    emailOverlay.style.display =
+        "none";
+
+    guestEmailInput.value =
+        "";
+
+    emailError.style.display =
+        "none";
 
     document
         .getElementById(
