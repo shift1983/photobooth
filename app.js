@@ -3035,8 +3035,10 @@ function savePhotoCard() {
 
 saveBtn.addEventListener(
     "click",
-    () => {
+    async () => {
 
+        await ensureFullscreen();
+        
         if (saveBtn.disabled) {
             return;
         }
