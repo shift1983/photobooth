@@ -1398,7 +1398,7 @@ body.business {
 ========================= */
 
 #screensaverOverlay {
-    display: flex;
+    display: none;
 
     position: fixed;
     inset: 0;
